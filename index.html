@@ -9,8 +9,8 @@
 body {
 margin: 0;
 font-family: Arial, sans-serif;
-background-color: #111;
-color: #fff;
+background-color: #121212;
+color: #ffffff;
 }
 header {
 padding: 20px;
@@ -57,20 +57,50 @@ transition: box-shadow 0.2s;
 box-shadow: 0 0 0 2px #aaa;
 }
 
-/* ✅ 바둑판식 그리드 */
-.container {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-gap: 16px;
-padding: 20px;
+  .thumbnail-grid {
+  display: grid;
+  gap: 10px;
+  padding: 10px;
 }
 
-@media (max-width: 600px) {
-.container {
-grid-template-columns: repeat(3, 1fr); /* 가로 3개 정도 */
-gap: 10px;
-padding: 10px;
+.thumbnail-grid .card {
+  display: block;
+  text-decoration: none;
+  background: #1e1e1e;
+  border-radius: 8px;
+  overflow: hidden;
+  color: white;
 }
+
+.thumbnail-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.thumbnail-grid .card-title {
+  padding: 8px;
+  font-size: 14px;
+  text-align: center;
+  background-color: #2b2b2b;
+}
+
+/* PC: 7개씩 */
+@media (min-width: 769px) {
+  .thumbnail-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+/* 모바일: 3개씩 */
+@media (max-width: 768px) {
+  .thumbnail-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
 
 
 .card-title {
@@ -159,7 +189,7 @@ class="search-input-btn"
 />
 </div>
 
-<div class="container" id="videoContainer">
+<div class="thumbnail-grid">
 <!-- 카드들 여기에 삽입됨 -->
 </div>
 
