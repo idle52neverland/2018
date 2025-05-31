@@ -189,28 +189,6 @@ fetch(`https://noembed.com/embed?url=${youtubeUrl}`)
       });
     }
   </script>
-  <script>
-  function createVideoCard(youtubeUrl, category) {
-    const videoId = youtubeUrl.split('v=')[1];
-    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-
-    fetch(`https://noembed.com/embed?url=${youtubeUrl}`)
-      .then(res => res.json())
-      .then(data => {
-        const container = document.getElementById('videoContainer');
-        const card = document.createElement('a');
-        card.className = 'card';
-        card.href = youtubeUrl;
-        card.target = '_blank';
-        card.setAttribute('data-category', category);
-        card.innerHTML = `
-          <img src="${thumbnailUrl}" />
-          <div class="card-title">${data.title}</div>
-        `;
-        container.appendChild(card);
-      });
-  }
-</script>
 
 </body>
 </html>
