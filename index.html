@@ -71,103 +71,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>영상 갤러리</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #fff;
-      color: #000;
-    }
+<style>
+  .category-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+  }
 
+  .category-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .category-btn:hover {
+    background-color: #d0d0d0;
+  }
+
+  .search-input-btn {
+    padding: 10px 16px;
+    border: 2px solid #888;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    background-color: white;
+    outline: none;
+    width: 160px;
+    transition: box-shadow 0.2s;
+  }
+
+  .search-input-btn:focus {
+    box-shadow: 0 0 0 2px #aaa;
+  }
+
+  /* 모바일 대응 */
+  @media (max-width: 600px) {
     .category-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding: 16px;
-      justify-content: center;
-      background-color: #f9f9f9;
+      flex-direction: column;
+      align-items: flex-start;
     }
 
-    .category-btn {
-      background-color: #e0e0e0;
-      color: #000;
-      border: none;
-      border-radius: 20px;
-      padding: 10px 16px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .category-btn:hover {
-      background-color: #d0d0d0;
-    }
-
-    .search-btn {
-      background-color: #ffffff;
-      border: 2px solid #ccc;
-      display: flex;
-      align-items: center;
-      padding: 10px 12px;
-      border-radius: 20px;
-      font-weight: bold;
-    }
-
-    .search-btn input {
-      border: none;
-      outline: none;
-      font-size: 16px;
-      margin-left: 8px;
-      background: transparent;
-      width: 150px;
-    }
-
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      padding: 16px;
-    }
-
-    .card {
-      text-decoration: none;
-      border-radius: 16px;
-      overflow: hidden;
-      background-color: #f2f2f2;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease;
-      color: #000;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-    }
-
-    .card img {
+    .search-input-btn {
       width: 100%;
-      height: auto;
-      display: block;
     }
+  }
+</style>
 
-    .card-title {
-      padding: 12px;
-      font-size: 16px;
-      font-weight: bold;
-    }
+  
 
-    @media (max-width: 600px) {
-      .category-btn, .search-btn {
-        font-size: 14px;
-        padding: 8px 12px;
-      }
 
-      .search-btn input {
-        width: 100px;
-      }
-    }
-  </style>
 </head>
 <body>
 
@@ -195,47 +155,29 @@
     <button class="category-btn" onclick="filterVideos('2025')">2025</button>
     <button class="category-btn" onclick="filterVideos('ETC')">ETC</button>
 <div class="search-btn">
-      🔍 <input type="text" id="searchInput" placeholder="제목 검색" oninput="searchTitles()">
-    </div>
-  </div>
-
-  <div class="card-container" id="videoContainer">
-    <a href="https://youtu.be/v99wxx_Dkj8" target="_blank" class="card" data-category="레코딩비하인드">
-      <img src="https://img.youtube.com/vi/v99wxx_Dkj8/hqdefault.jpg" alt="HWAA Chinese Ver.">
-      <div class="card-title">HWAA (Chinese Ver.) Recording Behind (2021-02-06)</div>
-    </a>
-    <a href="https://youtu.be/iMHWuh6tIT0?si=0xMlm4oGt3PZ3XS1" target="_blank" class="card" data-category="레코딩비하인드">
-      <img src="https://img.youtube.com/vi/iMHWuh6tIT0/hqdefault.jpg" alt="DESSERT Recording Behind">
-      <div class="card-title">DESSERT Recording Behind (2020-07-23)</div>
-    </a>
-    <!-- 추가 카드들 여기에 계속 추가 가능 -->
-  </div>
+ <input
+    type="text"
+    id="searchInput"
+    placeholder="🔍 제목 검색"
+    oninput="searchByTitle()"
+    class="search-input-btn"
+  />
+</div>
 <script>
-    function filterVideos(category) {
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card => {
-        if (category === 'all' || card.dataset.category === category) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
+  function searchByTitle() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const cards = document.querySelectorAll('.card');
 
-    function searchTitles() {
-      const input = document.getElementById('searchInput').value.toLowerCase();
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card => {
-        const title = card.querySelector('.card-title').innerText.toLowerCase();
-        if (title.includes(input)) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-  </script>
-
+    cards.forEach(card => {
+      const title = card.querySelector('.card-title').textContent.toLowerCase();
+      if (title.includes(input)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
 </body>
 </html>
 
