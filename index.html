@@ -74,6 +74,14 @@
   .card-title {
     font-size: 14px; /* 글씨 살짝 작게 */
   }
+  const youtubeUrl = "https://www.youtube.com/watch?v=abc123";
+
+fetch(`https://noembed.com/embed?url=${youtubeUrl}`)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data.title); // 영상 제목
+  });
+
 
   .category-btn {
     font-size: 14px;
@@ -181,6 +189,33 @@
       });
     }
   </script>
+  <script>
+  function createVideoCard(youtubeUrl, category) {
+    const videoId = youtubeUrl.split('v=')[1];
+    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+
+    fetch(`https://noembed.com/embed?url=${youtubeUrl}`)
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('videoContainer');
+        const card = document.createElement('a');
+        card.className = 'card';
+        card.href = youtubeUrl;
+        card.target = '_blank';
+        card.setAttribute('data-category', category);
+        card.innerHTML = `
+          <img src="${thumbnailUrl}" />
+          <div class="card-title">${data.title}</div>
+        `;
+        container.appendChild(card);
+      });
+  }
+
+  // 예시: 아래에 영상 링크 넣으면 카드 자동 생성됨
+  createVideoCard("https://www.youtube.com/watch?v=abc123", "MV");
+  createVideoCard("https://www.youtube.com/watch?v=xyz456", "SPECIAL CLIP");
+</script>
+
 </body>
 </html>
 
