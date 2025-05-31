@@ -65,6 +65,45 @@
 
 <body>
   <header>I-DLE 몰아보기</header>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>카테고리 바 예시</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .category-bar {
+      display: flex;
+      flex-wrap: wrap;          /* 줄바꿈 허용 */
+      gap: 10px;                /* 버튼 간격 */
+      justify-content: center;  /* 가운데 정렬 */
+      padding: 16px;
+      background-color: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 20px;
+      background-color: #eee;
+      font-size: 14px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 0.2s;
+    }
+
+    .category-btn:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
 
   <div class="category-bar">
     <button class="category-btn" onclick="filterVideos('all')">전체</button>
@@ -90,6 +129,16 @@
     <button class="category-btn" onclick="filterVideos('2025')">2025</button>
     <button class="category-btn" onclick="filterVideos('ETC')">ETC</button>
   </div>
+
+  <script>
+    function filterVideos(category) {
+      alert(`"${category}" 카테고리 필터링 실행됨`);
+    }
+  </script>
+
+</body>
+</html>
+
 
   <div class="container">
 <a href="https://youtu.be/hAONx6nuEgI" target="_blank" class="card" data-category="MV">
