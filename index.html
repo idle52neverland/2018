@@ -1,4 +1,61 @@
-<a href="video1.html">
-  <img src="https://via.placeholder.com/150" alt="영화1" />
-</a>
-<p>영화 제목1</p>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>qwerflix</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+    }
+    header {
+      padding: 20px;
+      background-color: #000;
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      padding: 20px;
+    }
+    .card {
+      background-color: #222;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s;
+      text-decoration: none;
+      color: white;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card img {
+      width: 100%;
+      display: block;
+    }
+    .card-title {
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <header>qwerflix</header>
+  <div class="container">
+    <a href="https://www.youtube.com/watch?v=abc123" target="_blank" class="card">
+      <img src="https://img.youtube.com/vi/abc123/hqdefault.jpg" alt="썸네일">
+      <div class="card-title">2024 콘서트 직캠</div>
+    </a>
+    <a href="https://www.youtube.com/watch?v=xyz789" target="_blank" class="card">
+      <img src="https://img.youtube.com/vi/xyz789/hqdefault.jpg" alt="썸네일">
+      <div class="card-title">비하인드 인터뷰</div>
+    </a>
+    <!-- 여기에 원하는 영상 계속 추가 가능 -->
+  </div>
+</body>
+</html>
