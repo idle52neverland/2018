@@ -37,7 +37,7 @@
     }
     .container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 16px;
       padding: 20px;
     }
@@ -68,57 +68,89 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>영상 갤러리</title>
-<style>
-  .category-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px;
-  }
-
-  .category-btn {
-    padding: 10px 16px;
-    border: none;
-    border-radius: 20px;
-    background-color: #f0f0f0;
-    font-size: 16px;
-    font-weight: bold;
-    color: black;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-
-  .category-btn:hover {
-    background-color: #d0d0d0;
-  }
-
-  .search-input-btn {
-    padding: 10px 16px;
-    border: 2px solid #888;
-    border-radius: 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    background-color: white;
-    outline: none;
-    width: 160px;
-    transition: box-shadow 0.2s;
-  }
-
-  .search-input-btn:focus {
-    box-shadow: 0 0 0 2px #aaa;
-  }
-
-</style>
-
-  
-
-
+  <title>I-DLE 몰아보기</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+    }
+    header {
+      padding: 20px;
+      background-color: #000;
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .category-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px;
+      justify-content: center;
+      background-color: #222;
+    }
+    .category-btn {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 20px;
+      background-color: #444;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .category-btn:hover {
+      background-color: #666;
+    }
+    .search-input-btn {
+      padding: 10px 16px;
+      border: 2px solid #888;
+      border-radius: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      background-color: white;
+      outline: none;
+      width: 160px;
+      transition: box-shadow 0.2s;
+    }
+    .search-input-btn:focus {
+      box-shadow: 0 0 0 2px #aaa;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      padding: 20px;
+    }
+    .card {
+      background-color: #222;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s;
+      text-decoration: none;
+      color: white;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card img {
+      width: 100%;
+      display: block;
+    }
+    .card-title {
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
+  <header>I-DLE 몰아보기</header>
 
   <div class="category-bar">
     <button class="category-btn" onclick="filterVideos('all')">전체</button>
@@ -143,32 +175,49 @@
     <button class="category-btn" onclick="filterVideos('2024')">2024</button>
     <button class="category-btn" onclick="filterVideos('2025')">2025</button>
     <button class="category-btn" onclick="filterVideos('ETC')">ETC</button>
-<div class="search-btn">
- <input
-    type="text"
-    id="searchInput"
-    placeholder="🔍 제목 검색"
-    oninput="searchByTitle()"
-    class="search-input-btn"
-  />
-</div>
-<script>
-  function searchByTitle() {
-    const input = document.getElementById('searchInput').value.toLowerCase();
-    const cards = document.querySelectorAll('.card');
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="🔍 제목 검색"
+      oninput="searchByTitle()"
+      class="search-input-btn"
+    />
+  </div>
 
-    cards.forEach(card => {
-      const title = card.querySelector('.card-title').textContent.toLowerCase();
-      if (title.includes(input)) {
-        card.style.display = 'block';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  }
-</script>
+  <div class="container" id="videoContainer">
+    <!-- 카드들 여기에 삽입됨 -->
+  </div>
+
+  <script>
+    function filterVideos(category) {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        if (category === 'all' || cardCategory === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function searchByTitle() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('.card');
+
+      cards.forEach(card => {
+        const title = card.querySelector('.card-title').textContent.toLowerCase();
+        if (title.includes(input)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
 </body>
 </html>
+
 
   <div class="container">
 <a href="https://youtu.be/hAONx6nuEgI" target="_blank" class="card" data-category="MV">
