@@ -4,6 +4,48 @@
   <meta charset="UTF-8">
   <title>(G)I-DLE 영상 모음 - 2025</title>
   <style>
+    /* 다크모드 배경 */
+body {
+  background-color: #121212; /* 진한 다크 배경 */
+  color: #eee; /* 텍스트 밝게 */
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* 썸네일 그리드 컨테이너 */
+.thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* PC: 7개 열 */
+  gap: 10px; /* 썸네일 사이 간격 */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* 썸네일 개별 아이템 */
+.thumbnail-grid video, 
+.thumbnail-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.7);
+  transition: transform 0.3s ease;
+}
+
+.thumbnail-grid video:hover,
+.thumbnail-grid img:hover {
+  transform: scale(1.05);
+}
+
+/* 모바일 화면 대응 - 3개 열 */
+@media (max-width: 768px) {
+  .thumbnail-grid {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 10px;
+  }
+}
+
     body {
       font-family: Arial, sans-serif;
     }
