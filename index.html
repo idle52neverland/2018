@@ -62,6 +62,21 @@
     }
   </style>
 </head>
+  <script>
+  function filterVideos(category) {
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+      const cardCategory = card.getAttribute('data-category');
+
+      if (category === 'all' || cardCategory === category) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
 <body>
   <header>I-DLE 몰아보기</header>
 
