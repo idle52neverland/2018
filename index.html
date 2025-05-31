@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -6,13 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>I-DLE 몰아보기</title>
 <style>
+  /* 기본 바디 스타일 */
   body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #121212; /* 다크모드 배경 */
-    color: #ffffff; /* 기본 텍스트 색상 */
+    background-color: #121212;
+    color: #ffffff;
   }
 
+  /* 링크 기본 스타일 */
   a {
     color: inherit;
     text-decoration: none;
@@ -26,6 +27,7 @@
     text-align: center;
   }
 
+  /* 카테고리 바 */
   .category-bar {
     display: flex;
     flex-wrap: wrap;
@@ -51,6 +53,7 @@
     background-color: #666;
   }
 
+  /* 검색창 */
   .search-input-btn {
     padding: 6px 12px;
     border: 2px solid #888;
@@ -63,20 +66,19 @@
     width: 130px;
     transition: box-shadow 0.2s;
   }
-
   .search-input-btn:focus {
     box-shadow: 0 0 0 2px #aaa;
   }
 
-  /* ✅ 썸네일 그리드 */
+  /* 썸네일 그리드 */
   .thumbnail-grid {
     display: grid;
     gap: 10px;
     padding: 10px;
+    grid-template-columns: repeat(7, 1fr); /* 기본 PC: 7열 */
   }
 
   .thumbnail-grid .card {
-    display: block;
     background: #1e1e1e;
     border-radius: 8px;
     overflow: hidden;
@@ -101,23 +103,16 @@
     font-size: 14px;
     text-align: center;
     background-color: #2b2b2b;
+    color: white; /* 글자색 흰색으로 강제 */
   }
 
-  /* ✅ PC: 가로 7개 */
-  @media (min-width: 769px) {
-    .thumbnail-grid {
-      grid-template-columns: repeat(7, 1fr);
-    }
-  }
-
-  /* ✅ 모바일: 가로 3개 */
+  /* 모바일: 768px 이하에서 3열로 변경 */
   @media (max-width: 768px) {
     .thumbnail-grid {
       grid-template-columns: repeat(3, 1fr);
     }
   }
 </style>
-
 </head>
 <body>
 
@@ -164,29 +159,14 @@ class="search-input-btn"
 
 <script>
 function filterVideos(category) {
-const cards = document.querySelectorAll('.card');
-cards.forEach(card => {
-const cardCategory = card.getAttribute('data-category');
-if (category === 'all' || cardCategory === category) {
-card.style.display = 'block';
-} else {
-card.style.display = 'none';
-}
-});
-}
-
-function searchByTitle() {
-const input = document.getElementById('searchInput').value.toLowerCase();
-const cards = document.querySelectorAll('.card');
-
-cards.forEach(card => {
-const title = card.querySelector('.card-title').textContent.toLowerCase();
-if (title.includes(input)) {
-card.style.display = 'block';
-} else {
-card.style.display = 'none';
-}
-});
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(card => {
+    if (category === 'all' || card.getAttribute('data-category') === category) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
 }
 </script>
 
