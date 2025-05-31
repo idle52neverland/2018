@@ -70,4 +70,45 @@
     <button class="category-btn" onclick="filterVideos('MV')">MV</button>
     <button class="category-btn" onclick="filterVideos('음방활동')">음방활동</button>
     <button class="category-btn" onclick="filterVideos('TV방송')">TV방송</button>
-    <button class="category-btn" onclick="filterVideos('유튜브예능'
+    <button class="category-btn" onclick="filterVideos('유튜브예능')">유튜브예능</button>
+    <button class="category-btn" onclick="filterVideos('ETC')">ETC</button>
+  </div>
+
+  <div class="container">
+    <a href="https://youtu.be/hAONx6nuEgI" target="_blank" class="card" data-category="MV">
+      <img src="https://img.youtube.com/vi/hAONx6nuEgI/hqdefault.jpg" alt="MV 썸네일">
+      <div class="card-title">MV 타이틀곡</div>
+    </a>
+    <a href="https://youtu.be/nUwSf-Szaws" target="_blank" class="card" data-category="음방활동">
+      <img src="https://img.youtube.com/vi/nUwSf-Szaws/hqdefault.jpg" alt="음방 썸네일">
+      <div class="card-title">음악방송 무대</div>
+    </a>
+    <a href="https://youtu.be/8bguFz5ns3w" target="_blank" class="card" data-category="TV방송">
+      <img src="https://img.youtube.com/vi/8bguFz5ns3w/hqdefault.jpg" alt="TV 썸네일">
+      <div class="card-title">TV 예능 출연</div>
+    </a>
+    <a href="https://youtu.be/Ly5SxYH5OhI" target="_blank" class="card" data-category="유튜브예능">
+      <img src="https://img.youtube.com/vi/Ly5SxYH5OhI/hqdefault.jpg" alt="유튜브예능 썸네일">
+      <div class="card-title">유튜브 예능</div>
+    </a>
+    <a href="https://youtu.be/rnHFWKdFl2c" target="_blank" class="card" data-category="ETC">
+      <img src="https://img.youtube.com/vi/rnHFWKdFl2c/hqdefault.jpg" alt="ETC 썸네일">
+      <div class="card-title">기타 인터뷰</div>
+    </a>
+  </div>
+
+  <script>
+    function filterVideos(category) {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        const videoCategory = card.getAttribute('data-category');
+        if (category === 'all' || videoCategory === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
