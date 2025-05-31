@@ -69,39 +69,103 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>카테고리 바</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>영상 갤러리</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #000;
     }
 
     .category-bar {
       display: flex;
-      flex-wrap: wrap;           /* 줄바꿈 허용 */
-      gap: 14px;                 /* 버튼 간격 */
-      justify-content: center;   /* 가운데 정렬 */
-      padding: 20px;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 16px;
+      justify-content: center;
       background-color: #f9f9f9;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
     .category-btn {
-      padding: 12px 24px;        /* ✅ 버튼 넓이 증가 */
+      background-color: #e0e0e0;
+      color: #000;
       border: none;
-      border-radius: 24px;
-      background-color: #eee;
-      font-size: 16px;           /* ✅ 글씨 크기 증가 */
-      font-weight: bold;         /* ✅ 글씨 굵게 */
-      color: #000;               /* ✅ 글씨색 검정 */
+      border-radius: 20px;
+      padding: 10px 16px;
+      font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
-      white-space: nowrap;
-      transition: background-color 0.2s;
+      transition: background-color 0.3s;
     }
 
     .category-btn:hover {
-      background-color: #ddd;
+      background-color: #d0d0d0;
+    }
+
+    .search-btn {
+      background-color: #ffffff;
+      border: 2px solid #ccc;
+      display: flex;
+      align-items: center;
+      padding: 10px 12px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    .search-btn input {
+      border: none;
+      outline: none;
+      font-size: 16px;
+      margin-left: 8px;
+      background: transparent;
+      width: 150px;
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      padding: 16px;
+    }
+
+    .card {
+      text-decoration: none;
+      border-radius: 16px;
+      overflow: hidden;
+      background-color: #f2f2f2;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+      color: #000;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .card-title {
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .category-btn, .search-btn {
+        font-size: 14px;
+        padding: 8px 12px;
+      }
+
+      .search-btn input {
+        width: 100px;
+      }
     }
   </style>
 </head>
@@ -130,29 +194,47 @@
     <button class="category-btn" onclick="filterVideos('2024')">2024</button>
     <button class="category-btn" onclick="filterVideos('2025')">2025</button>
     <button class="category-btn" onclick="filterVideos('ETC')">ETC</button>
-  <input
-    type="text"
-    id="searchInput"
-    placeholder="🔍 제목 검색"
-    oninput="searchByTitle()"
-    class="search-input-btn"
-  />
-</div>
-<script>
-  function searchByTitle() {
-    const input = document.getElementById('searchInput').value.toLowerCase();
-    const cards = document.querySelectorAll('.card');
+<div class="search-btn">
+      🔍 <input type="text" id="searchInput" placeholder="제목 검색" oninput="searchTitles()">
+    </div>
+  </div>
 
-    cards.forEach(card => {
-      const title = card.querySelector('.card-title').textContent.toLowerCase();
-      if (title.includes(input)) {
-        card.style.display = 'block';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  }
-</script>
+  <div class="card-container" id="videoContainer">
+    <a href="https://youtu.be/v99wxx_Dkj8" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/v99wxx_Dkj8/hqdefault.jpg" alt="HWAA Chinese Ver.">
+      <div class="card-title">HWAA (Chinese Ver.) Recording Behind (2021-02-06)</div>
+    </a>
+    <a href="https://youtu.be/iMHWuh6tIT0?si=0xMlm4oGt3PZ3XS1" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/iMHWuh6tIT0/hqdefault.jpg" alt="DESSERT Recording Behind">
+      <div class="card-title">DESSERT Recording Behind (2020-07-23)</div>
+    </a>
+    <!-- 추가 카드들 여기에 계속 추가 가능 -->
+  </div>
+<script>
+    function filterVideos(category) {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function searchTitles() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        const title = card.querySelector('.card-title').innerText.toLowerCase();
+        if (title.includes(input)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
 
 </body>
 </html>
