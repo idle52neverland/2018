@@ -70,7 +70,6 @@
 <head>
   <meta charset="UTF-8">
   <title>카테고리 바</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 모바일 대응 -->
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -79,23 +78,23 @@
 
     .category-bar {
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-      padding: 16px;
+      flex-wrap: wrap;           /* 줄바꿈 허용 */
+      gap: 14px;                 /* 버튼 간격 */
+      justify-content: center;   /* 가운데 정렬 */
+      padding: 20px;
       background-color: #f9f9f9;
       border-radius: 12px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
     .category-btn {
-      padding: 12px 20px;
+      padding: 12px 24px;        /* ✅ 버튼 넓이 증가 */
       border: none;
       border-radius: 24px;
       background-color: #eee;
-      font-size: 16px;
-      font-weight: bold;
-      color: #000;
+      font-size: 16px;           /* ✅ 글씨 크기 증가 */
+      font-weight: bold;         /* ✅ 글씨 굵게 */
+      color: #000;               /* ✅ 글씨색 검정 */
       cursor: pointer;
       white-space: nowrap;
       transition: background-color 0.2s;
@@ -103,26 +102,6 @@
 
     .category-btn:hover {
       background-color: #ddd;
-    }
-
-    /* ✅ 모바일 대응 */
-    @media (max-width: 768px) {
-      .category-bar {
-        gap: 10px;
-        padding: 12px;
-      }
-
-      .category-btn {
-        padding: 10px 16px;
-        font-size: 14px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .category-btn {
-        font-size: 13px;
-        padding: 8px 14px;
-      }
     }
   </style>
 </head>
@@ -161,7 +140,6 @@
 
 </body>
 </html>
-
 
   <div class="container">
 <a href="https://youtu.be/hAONx6nuEgI" target="_blank" class="card" data-category="MV">
