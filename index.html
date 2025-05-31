@@ -6,132 +6,118 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>I-DLE 몰아보기</title>
 <style>
-body {
-margin: 0;
-font-family: Arial, sans-serif;
-background-color: #121212;
-color: #ffffff;
-}
-header {
-padding: 20px;
-background-color: #000;
-font-size: 28px;
-font-weight: bold;
-text-align: center;
-}
-.category-bar {
-display: flex;
-flex-wrap: wrap;
-gap: 10px;
-padding: 10px;
-justify-content: center;
-background-color: #222;
-}
-.category-btn {
-padding: 10px 16px;
-border: none;
-border-radius: 20px;
-background-color: #444;
-font-size: 16px;
-font-weight: bold;
-color: white;
-cursor: pointer;
-transition: background-color 0.2s;
-}
-.category-btn:hover {
-background-color: #666;
-}
-.search-input-btn {
-padding: 10px 16px;
-border: 2px solid #888;
-border-radius: 20px;
-font-size: 16px;
-font-weight: bold;
-color: #333;
-background-color: white;
-outline: none;
-width: 160px;
-transition: box-shadow 0.2s;
-}
-.search-input-btn:focus {
-box-shadow: 0 0 0 2px #aaa;
-}
-
-  .thumbnail-grid {
-  display: grid;
-  gap: 10px;
-  padding: 10px;
-}
-
-.thumbnail-grid .card {
-  display: block;
-  text-decoration: none;
-  background: #1e1e1e;
-  border-radius: 8px;
-  overflow: hidden;
-  color: white;
-}
-
-.thumbnail-grid img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-}
-
-.thumbnail-grid .card-title {
-  padding: 8px;
-  font-size: 14px;
-  text-align: center;
-  background-color: #2b2b2b;
-}
-
-/* PC: 7개씩 */
-@media (min-width: 769px) {
-  .thumbnail-grid {
-    grid-template-columns: repeat(7, 1fr);
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212; /* 다크모드 배경 */
+    color: #ffffff; /* 기본 텍스트 색상 */
   }
-}
 
-/* 모바일: 3개씩 */
-@media (max-width: 768px) {
-  .thumbnail-grid {
-    grid-template-columns: repeat(3, 1fr);
+  a {
+    color: inherit;
+    text-decoration: none;
   }
-}
 
+  header {
+    padding: 20px;
+    background-color: #000;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+  }
 
+  .category-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    justify-content: center;
+    background-color: #222;
+  }
 
+  .category-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 20px;
+    background-color: #444;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
 
-.card-title {
-font-size: 14px; /* 글씨 살짝 작게 */
-}
-const youtubeUrl = "https://www.youtube.com/watch?v=abc123";
+  .category-btn:hover {
+    background-color: #666;
+  }
 
-fetch(`https://noembed.com/embed?url=${youtubeUrl}`)
-.then(response => response.json())
-.then(data => {
-console.log(data.title); // 영상 제목
-});
+  .search-input-btn {
+    padding: 6px 12px;
+    border: 2px solid #888;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    background-color: white;
+    outline: none;
+    width: 130px;
+    transition: box-shadow 0.2s;
+  }
 
+  .search-input-btn:focus {
+    box-shadow: 0 0 0 2px #aaa;
+  }
 
-.category-btn {
-font-size: 14px;
-padding: 6px 12px;
-}
+  /* ✅ 썸네일 그리드 */
+  .thumbnail-grid {
+    display: grid;
+    gap: 10px;
+    padding: 10px;
+  }
 
-.search-input-btn {
-font-size: 14px;
-padding: 6px 12px;
-width: 130px;
-}
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
+  .thumbnail-grid .card {
+    display: block;
+    background: #1e1e1e;
+    border-radius: 8px;
+    overflow: hidden;
+    color: white;
+    text-decoration: none;
+    transition: transform 0.3s;
+  }
 
+  .thumbnail-grid .card:hover {
+    transform: scale(1.03);
+  }
+
+  .thumbnail-grid img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .thumbnail-grid .card-title {
+    padding: 8px;
+    font-size: 14px;
+    text-align: center;
+    background-color: #2b2b2b;
+  }
+
+  /* ✅ PC: 가로 7개 */
+  @media (min-width: 769px) {
+    .thumbnail-grid {
+      grid-template-columns: repeat(7, 1fr);
+    }
+  }
+
+  /* ✅ 모바일: 가로 3개 */
+  @media (max-width: 768px) {
+    .thumbnail-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
 </style>
+
 </head>
 <body>
 
