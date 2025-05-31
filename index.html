@@ -130,13 +130,29 @@
     <button class="category-btn" onclick="filterVideos('2024')">2024</button>
     <button class="category-btn" onclick="filterVideos('2025')">2025</button>
     <button class="category-btn" onclick="filterVideos('ETC')">ETC</button>
-  </div>
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="🔍 제목 검색"
+    oninput="searchByTitle()"
+    class="search-input-btn"
+  />
+</div>
+<script>
+  function searchByTitle() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const cards = document.querySelectorAll('.card');
 
-  <script>
-    function filterVideos(category) {
-      alert(`"${category}" 카테고리 필터링 실행됨`);
-    }
-  </script>
+    cards.forEach(card => {
+      const title = card.querySelector('.card-title').textContent.toLowerCase();
+      if (title.includes(input)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
 
 </body>
 </html>
