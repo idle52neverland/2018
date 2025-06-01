@@ -65,12 +65,24 @@
     }
   </style>
   <script>
+    let currentCategory = '';
     function showFilters(category) {
+      currentCategory = category;
       const filters = document.getElementById('subFilters');
       const categoryBar = document.getElementById('categoryBar');
       if (filters && categoryBar) {
         filters.style.display = 'flex';
         categoryBar.classList.add('category-bar-hidden');
+        history.pushState({ category }, '', `#${category}`);
+      }
+    }
+
+    window.onpopstate = function(event) {
+      const filters = document.getElementById('subFilters');
+      const categoryBar = document.getElementById('categoryBar');
+      if (filters && categoryBar) {
+        filters.style.display = 'none';
+        categoryBar.classList.remove('category-bar-hidden');
       }
     }
   </script>
