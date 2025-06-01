@@ -19,12 +19,17 @@
     }
     .category-bar {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
       gap: 10px;
       padding: 20px;
       max-width: 1200px;
       margin: 0 auto;
+    }
+    .category-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
     }
     .category-btn {
       padding: 10px 20px;
@@ -44,28 +49,27 @@
     .category-btn:hover {
       background-color: #ff4da6;
     }
-
-    @media (min-width: 1024px) {
-      .category-bar {
-        flex-wrap: nowrap;
-        flex-direction: column;
-        align-items: center;
-      }
-      .category-row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-        margin-bottom: 10px;
-      }
+    .search-input {
+      padding: 10px 16px;
+      border-radius: 20px;
+      border: 2px solid #444;
+      outline: none;
+      font-size: 14px;
+      background-color: #fff;
+      color: #333;
+      margin-top: 10px;
     }
-
+    .search-input::placeholder {
+      color: #888;
+    }
     @media (max-width: 600px) {
       .category-bar {
-        flex-direction: column;
         align-items: center;
       }
       .category-btn {
+        width: 90%;
+      }
+      .search-input {
         width: 90%;
       }
     }
@@ -79,6 +83,8 @@
       <a class="category-btn" href="#">LIVE / COVER SONG / DANCE</a>
       <a class="category-btn" href="#">MUSIC SHOW PERFORMANCE</a>
       <a class="category-btn" href="#">FESTIVAL / EVENT STAGE</a>
+    </div>
+    <div class="category-row">
       <a class="category-btn" href="#">FANCAM & STAGE FOCUS</a>
       <a class="category-btn" href="#">RECORDING / STUDIO BEHIND</a>
       <a class="category-btn" href="#">DANCE PRACTICE / FANCHANT</a>
@@ -89,10 +95,13 @@
       <a class="category-btn" href="#">REALITY (Original Content)</a>
       <a class="category-btn" href="#">RADIO / PODCAST</a>
       <a class="category-btn" href="#">LIVE STREAM</a>
-      <a class="category-btn" href="#">JACKET / PHOTO SHOOT / INTERVIEW</a>
+    </div>
+    <div class="category-row">
+      <a class="category-btn" href="#">MAGAZINE & INTERVIEW</a>
       <a class="category-btn" href="#">BEHIND CLIPS</a>
       <a class="category-btn" href="#">CHALLENGE</a>
       <a class="category-btn" href="#">ETC</a>
+      <input type="text" class="search-input" placeholder="Search" />
     </div>
   </div>
 </body>
