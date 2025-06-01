@@ -3,94 +3,106 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YOUTUBE CONTENTS</title>
+  <title>I-DLE 몰아보기</title>
   <style>
     body {
       margin: 0;
       font-family: 'Helvetica Neue', sans-serif;
       background-color: #111;
       color: #fff;
-    }
-    header {
       text-align: center;
-      padding: 30px 20px 20px;
     }
     h1 {
-      font-size: 24px;
-      margin-bottom: 20px;
+      padding: 30px 0 20px;
+      font-size: 28px;
+      color: #fff;
     }
-    .sub-category-bar {
+    .category-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .category-row {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
-      margin-bottom: 30px;
     }
     .category-btn {
-      padding: 8px 16px;
+      padding: 10px 20px;
       background-color: #333;
       border-radius: 20px;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
       color: #fff;
       cursor: pointer;
       border: none;
       transition: background-color 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      max-width: 100%;
+      text-align: center;
     }
     .category-btn:hover {
       background-color: #ff4da6;
     }
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      padding: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
+    .search-input {
+      padding: 10px 16px;
+      border-radius: 20px;
+      border: 2px solid #444;
+      outline: none;
+      font-size: 14px;
+      background-color: #fff;
+      color: #333;
+      margin-top: 10px;
     }
-    @media (min-width: 1024px) {
-      .grid-container {
-        grid-template-columns: repeat(5, 1fr);
-      }
+    .search-input::placeholder {
+      color: #888;
     }
     @media (max-width: 600px) {
-      .grid-container {
-        grid-template-columns: repeat(3, 1fr);
-        padding: 10px;
-        gap: 10px;
+      .category-bar {
+        align-items: center;
       }
-    }
-    .video-card {
-      background-color: #222;
-      border-radius: 10px;
-      overflow: hidden;
-      text-align: center;
-    }
-    .video-card img {
-      width: 100%;
-      display: block;
-    }
-    .video-title {
-      font-size: 14px;
-      padding: 10px;
-      color: #eee;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      .category-btn {
+        width: 90%;
+      }
+      .search-input {
+        width: 90%;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>YOUTUBE CONTENTS</h1>
-    <div class="sub-category-bar">
-      <!-- 소카테고리 버튼은 이후 추가 예정 -->
+  <h1>I-DLE 몰아보기</h1>
+  <div class="category-bar">
+    <div class="category-row">
+      <a class="category-btn" href="#">MV & SPECIAL CLIP</a>
+      <a class="category-btn" href="#">LIVE / COVER SONG / DANCE</a>
+      <a class="category-btn" href="#">MUSIC SHOW PERFORMANCE</a>
+      <a class="category-btn" href="#">FESTIVAL / EVENT STAGE</a>
     </div>
-  </header>
-  <main>
-    <div class="grid-container">
-      <!-- 영상 카드들은 이후 추가 예정 -->
+    <div class="category-row">
+      <a class="category-btn" href="#">FANCAM & STAGE FOCUS</a>
+      <a class="category-btn" href="#">RECORDING / STUDIO BEHIND</a>
+      <a class="category-btn" href="#">DANCE PRACTICE / FANCHANT</a>
     </div>
-  </main>
+    <div class="category-row">
+      <a class="category-btn" href="#">TV SHOW</a>
+      <a class="category-btn" href="#">YOUTUBE CONTENTS</a>
+      <a class="category-btn" href="#">REALITY (Original Content)</a>
+      <a class="category-btn" href="#">RADIO / PODCAST</a>
+      <a class="category-btn" href="#">LIVE STREAM</a>
+    </div>
+    <div class="category-row">
+      <a class="category-btn" href="#">JACKET / PHOTO SHOOT / INTERVIEW</a>
+      <a class="category-btn" href="#">BEHIND CLIPS</a>
+      <a class="category-btn" href="#">CHALLENGE</a>
+      <a class="category-btn" href="#">ETC</a>
+      <input type="text" class="search-input" placeholder="Search" />
+    </div>
+  </div>
 </body>
 </html>
