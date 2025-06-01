@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>I-DLE 몰아보기</title>
   <style>
     body {
@@ -88,6 +88,9 @@
     .category-bar-hidden {
       display: none;
     }
+    .social-icons.hidden {
+      display: none;
+    }
     .category-row {
       display: flex;
       flex-wrap: wrap;
@@ -113,9 +116,13 @@
       currentCategory = category;
       const filters = document.getElementById('subFilters');
       const categoryBar = document.getElementById('categoryBar');
-      if (filters && categoryBar) {
+      const title = document.getElementById('mainTitle');
+      const icons = document.querySelector('.social-icons');
+      if (filters && categoryBar && title && icons) {
         filters.style.display = 'flex';
         categoryBar.classList.add('category-bar-hidden');
+        title.innerText = category;
+        icons.classList.add('hidden');
         history.pushState({ category }, '', `#${category}`);
       }
     }
@@ -123,32 +130,37 @@
     window.onpopstate = function(event) {
       const filters = document.getElementById('subFilters');
       const categoryBar = document.getElementById('categoryBar');
-      if (filters && categoryBar) {
+      const title = document.getElementById('mainTitle');
+      const icons = document.querySelector('.social-icons');
+      if (filters && categoryBar && title && icons) {
         filters.style.display = 'none';
         categoryBar.classList.remove('category-bar-hidden');
+        title.innerText = 'I-DLE 몰아보기';
+        icons.classList.remove('hidden');
       }
     }
   </script>
 </head>
 <body>
-  <h1>I-DLE 몰아보기</h1>
+  <h1 id="mainTitle">I-DLE 몰아보기</h1>
   <div class="social-icons">
     <a href="https://www.youtube.com/@official_i_dle" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" />
     </a>
     <a href="https://x.com/official_i_dle" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X">
+      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X" />
     </a>
     <a href="https://instagram.com/i_dle_official" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram">
+      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram" />
     </a>
     <a href="https://tiktok.com/@official_i_dle" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
+      <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" />
     </a>
     <a href="https://weverse.io/i-dle" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/3669/3669986.png" alt="Weverse">
+      <img src="https://cdn-icons-png.flaticon.com/512/3669/3669986.png" alt="Weverse" />
     </a>
   </div>
+
   <div id="categoryBar">
     <div class="category-row">
       <button class="category-btn" onclick="showFilters('MV')">MV & SPECIAL CLIP</button>
@@ -176,6 +188,7 @@
     </div>
     <input type="text" id="searchInput" class="search-input" placeholder="search" />
   </div>
+
   <div class="sub-filters" id="subFilters">
     <div class="filter-group">
       <button class="filter-btn" onclick="filterVideos('year','2018')">2018</button>
