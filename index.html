@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>I-DLE 몰아보기</title>
   <style>
     body {
@@ -10,160 +10,78 @@
       font-family: 'Helvetica Neue', sans-serif;
       background-color: #111;
       color: #fff;
-    }
-
-    header {
-      padding: 30px 20px 20px;
       text-align: center;
     }
-
     h1 {
+      padding: 30px 0 20px;
       font-size: 28px;
-      margin-bottom: 20px;
       color: #fff;
     }
-
     .category-bar {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
-      margin-bottom: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-
     .category-btn {
-      padding: 8px 16px;
+      padding: 10px 20px;
       background-color: #333;
       border-radius: 20px;
       font-size: 14px;
       font-weight: 600;
       color: #fff;
       cursor: pointer;
-      white-space: nowrap;
       border: none;
       transition: background-color 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      max-width: 100%;
+      text-align: center;
     }
-
     .category-btn:hover {
       background-color: #ff4da6;
     }
 
-    .search-wrapper {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 30px;
-    }
-
-    .search-input {
-      width: 220px;
-      padding: 10px 16px;
-      border-radius: 20px;
-      border: 2px solid #444;
-      outline: none;
-      font-size: 14px;
-      background-color: #fff;
-      color: #333;
-    }
-
-    .search-input::placeholder {
-      color: #888;
-    }
-
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      padding: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .video-card {
-      background-color: #222;
-      border-radius: 10px;
-      overflow: hidden;
-      text-align: center;
-    }
-
-    .video-card img {
-      width: 100%;
-      display: block;
-    }
-
-    .video-title {
-      font-size: 14px;
-      padding: 10px;
-      color: #eee;
-    }
-
     @media (min-width: 1024px) {
-      .grid-container {
-        grid-template-columns: repeat(5, 1fr);
+      .category-btn:nth-child(n+8) {
+        flex-basis: 100%; /* TV SHOW부터 줄바꿈 */
       }
     }
 
     @media (max-width: 600px) {
-      .grid-container {
-        grid-template-columns: repeat(3, 1fr);
-        padding: 10px;
-        gap: 10px;
+      .category-bar {
+        flex-direction: column;
+        align-items: center;
       }
-
-      .video-title {
-        font-size: 13px;
-      }
-
-      .search-input {
-        width: 160px;
-        font-size: 13px;
-      }
-
       .category-btn {
-        font-size: 13px;
-        padding: 6px 12px;
+        width: 90%;
       }
     }
   </style>
 </head>
 <body>
-
-  <header>
-    <h1>I-DLE 몰아보기</h1>
-
-    <div class="category-bar">
-      <button class="category-btn" onclick="filterVideos('MV & SPECIAL CLIP')">MV & SPECIAL CLIP</button>
-      <button class="category-btn" onclick="filterVideos('LIVE / COVER SONG / DANCE')">LIVE / COVER SONG / DANCE</button>
-      <button class="category-btn" onclick="filterVideos('MUSIC SHOW PERFORMANCE')">MUSIC SHOW PERFORMANCE</button>
-      <button class="category-btn" onclick="filterVideos('FESTIVAL / EVENT STAGE')">FESTIVAL / EVENT STAGE</button>
-      <button class="category-btn" onclick="filterVideos('DANCE PRACTICE / FANCHANT')">DANCE PRACTICE / FANCHANT</button>
-      <button class="category-btn" onclick="filterVideos('RECORDING / STUDIO BEHIND')">RECORDING / STUDIO BEHIND</button>
-      <button class="category-btn" onclick="filterVideos('TV SHOW')">TV SHOW</button>
-      <button class="category-btn" onclick="filterVideos('YOUTUBE CONTENTS')">YOUTUBE CONTENTS</button>
-      <button class="category-btn" onclick="filterVideos('RADIO / PODCAST')">RADIO / PODCAST</button>
-      <button class="category-btn" onclick="filterVideos('REALITY')">REALITY</button>
-      <button class="category-btn" onclick="filterVideos('LIVE STREAM')">LIVE STREAM</button>
-      <button class="category-btn" onclick="filterVideos('JACKET / INTERVIEW')">JACKET / INTERVIEW</button>
-      <button class="category-btn" onclick="filterVideos('CHALLENGE')">CHALLENGE</button>
-      <button class="category-btn" onclick="filterVideos('ETC')">ETC</button>
-    </div>
-
-    <div class="search-wrapper">
-      <input type="text" class="search-input" placeholder="search">
-    </div>
-  </header>
-
-  <main>
-    <div class="grid-container">
-      <div class="video-card">
-        <img src="https://i.ytimg.com/vi/abc123/hqdefault.jpg" alt="썸네일" />
-        <div class="video-title">민니 - Good Thing (2025-05-19)</div>
-      </div>
-      <div class="video-card">
-        <img src="https://i.ytimg.com/vi/def456/hqdefault.jpg" alt="썸네일" />
-        <div class="video-title">민니 - Girlfriend (2025-05-09)</div>
-      </div>
-    </div>
-  </main>
-
+  <h1>I-DLE 몰아보기</h1>
+  <div class="category-bar">
+    <a class="category-btn" href="#">MV & SPECIAL CLIP</a>
+    <a class="category-btn" href="#">LIVE / COVER SONG / DANCE</a>
+    <a class="category-btn" href="#">MUSIC SHOW PERFORMANCE</a>
+    <a class="category-btn" href="#">FESTIVAL / EVENT STAGE</a>
+    <a class="category-btn" href="#">FANCAM & STAGE FOCUS</a>
+    <a class="category-btn" href="#">RECORDING / STUDIO BEHIND</a>
+    <a class="category-btn" href="#">DANCE PRACTICE / FANCHANT</a>
+    <a class="category-btn" href="#">TV SHOW</a>
+    <a class="category-btn" href="#">YOUTUBE CONTENTS</a>
+    <a class="category-btn" href="#">REALITY (Original Content)</a>
+    <a class="category-btn" href="#">RADIO / PODCAST</a>
+    <a class="category-btn" href="#">LIVE STREAM</a>
+    <a class="category-btn" href="#">JACKET / PHOTO SHOOT / INTERVIEW</a>
+    <a class="category-btn" href="#">BEHIND CLIPS</a>
+    <a class="category-btn" href="#">CHALLENGE</a>
+    <a class="category-btn" href="#">ETC</a>
+  </div>
 </body>
 </html>
+
