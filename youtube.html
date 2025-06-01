@@ -48,18 +48,6 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-    @media (min-width: 1024px) {
-      .grid-container {
-        grid-template-columns: repeat(5, 1fr);
-      }
-    }
-    @media (max-width: 600px) {
-      .grid-container {
-        grid-template-columns: repeat(3, 1fr);
-        padding: 10px;
-        gap: 10px;
-      }
-    }
     .video-card {
       background-color: #222;
       border-radius: 10px;
@@ -78,19 +66,58 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    @media (min-width: 1024px) {
+      .grid-container {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+    @media (max-width: 600px) {
+      .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 10px;
+        gap: 10px;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>YOUTUBE CONTENTS</h1>
     <div class="sub-category-bar">
-      <!-- 소카테고리 버튼은 이후 추가 예정 -->
+      <button class="category-btn" onclick="filterByYear('2018')">2018</button>
+      <button class="category-btn" onclick="filterByYear('2019')">2019</button>
+      <button class="category-btn" onclick="filterByYear('2020')">2020</button>
+      <button class="category-btn" onclick="filterByYear('2021')">2021</button>
+      <button class="category-btn" onclick="filterByYear('2022')">2022</button>
+      <button class="category-btn" onclick="filterByYear('2023')">2023</button>
+      <button class="category-btn" onclick="filterByYear('2024')">2024</button>
+      <button class="category-btn" onclick="filterByYear('2025')">2025</button>
     </div>
   </header>
   <main>
     <div class="grid-container">
-      <!-- 영상 카드들은 이후 추가 예정 -->
+      <div class="video-card" data-year="2022">
+        <img src="https://img.youtube.com/vi/abc123/hqdefault.jpg" alt="썸네일" />
+        <div class="video-title">민니 - Good Thing (2022-05-19)</div>
+      </div>
+      <div class="video-card" data-year="2023">
+        <img src="https://img.youtube.com/vi/def456/hqdefault.jpg" alt="썸네일" />
+        <div class="video-title">민니 - Girlfriend (2023-05-09)</div>
+      </div>
+      <div class="video-card" data-year="2024">
+        <img src="https://img.youtube.com/vi/ghi789/hqdefault.jpg" alt="썸네일" />
+        <div class="video-title">소연 - Fire (2024-03-15)</div>
+      </div>
     </div>
   </main>
+  <script>
+    function filterByYear(year) {
+      const cards = document.querySelectorAll('.video-card');
+      cards.forEach(card => {
+        card.style.display = card.dataset.year === year ? 'block' : 'none';
+      });
+    }
+  </script>
 </body>
 </html>
+
