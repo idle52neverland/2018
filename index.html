@@ -1,4 +1,3 @@
-<!-- ✅ index.html 복구 및 보완 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -13,29 +12,11 @@
       color: #fff;
       text-align: center;
     }
-    .header-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      padding: 30px 0 20px;
-    }
     h1 {
+      padding: 30px 0 20px;
       font-size: 28px;
       color: #fff;
       cursor: pointer;
-      margin: 0;
-    }
-    .social-icons a {
-      margin: 0 4px;
-      display: inline-block;
-    }
-    .social-icons img {
-      width: 24px;
-      height: 24px;
-      vertical-align: middle;
-      filter: brightness(0) invert(1);
     }
     .category-bar {
       display: flex;
@@ -156,25 +137,131 @@
   </style>
 </head>
 <body>
-  <div class="header-container">
-    <h1 onclick="goHome()">I-DLE 몰아보기</h1>
-    <div class="social-icons">
-      <a href="https://www.youtube.com/@official_i_dle" target="_blank" title="YouTube">
-        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" />
-      </a>
-      <a href="https://x.com/official_i_dle" target="_blank" title="X (Twitter)">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X" />
-      </a>
-      <a href="https://www.instagram.com/i_dle_official" target="_blank" title="Instagram">
-        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram" />
-      </a>
-      <a href="https://www.tiktok.com/@official_i_dle" target="_blank" title="TikTok">
-        <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" />
-      </a>
-      <a href="https://weverse.io/i-dle" target="_blank" title="Weverse">
-        <img src="https://cdn-icons-png.flaticon.com/512/3669/3669986.png" alt="Weverse" />
+  <h1 onclick="goHome()">I-DLE 몰아보기</h1>
+
+  <div class="category-bar" id="categoryBar">
+    <div class="category-row">
+      <button class="category-btn" onclick="showFilters('MV')">MV & SPECIAL CLIP</button>
+      <button class="category-btn" onclick="showFilters('LIVE')">LIVE / COVER SONG / DANCE</button>
+      <button class="category-btn" onclick="showFilters('MUSIC')">MUSIC SHOW PERFORMANCE</button>
+      <button class="category-btn" onclick="showFilters('FESTIVAL')">FESTIVAL / EVENT STAGE</button>
+    </div>
+    <div class="category-row">
+      <button class="category-btn" onclick="showFilters('FANCAM')">FANCAM & STAGE FOCUS</button>
+      <button class="category-btn" onclick="showFilters('RECORDING')">RECORDING / STUDIO BEHIND</button>
+      <button class="category-btn" onclick="showFilters('PRACTICE')">DANCE PRACTICE / FANCHANT</button>
+    </div>
+    <div class="category-row">
+      <button class="category-btn" onclick="showFilters('TV')">TV SHOW</button>
+      <button class="category-btn" onclick="showFilters('YOUTUBE')">YOUTUBE CONTENTS</button>
+      <button class="category-btn" onclick="showFilters('REALITY')">REALITY (Original Content)</button>
+      <button class="category-btn" onclick="showFilters('RADIO')">RADIO / PODCAST</button>
+      <button class="category-btn" onclick="showFilters('LIVE_STREAM')">LIVE STREAM</button>
+    </div>
+    <div class="category-row">
+      <button class="category-btn" onclick="showFilters('INTERVIEW')">MAGAZINE INTERVIEW</button>
+      <button class="category-btn" onclick="showFilters('BEHIND')">BEHIND CLIPS</button>
+      <button class="category-btn" onclick="showFilters('CHALLENGE')">CHALLENGE</button>
+      <button class="category-btn" onclick="showFilters('ETC')">ETC</button>
+    </div>
+    <input type="text" id="searchInput" class="search-input" placeholder="search" />
+  </div>
+
+  <div class="sub-filters" id="subFilters">
+    <div class="filter-group">
+      <button class="filter-btn" onclick="filterVideos('year','2018')">2018</button>
+      <button class="filter-btn" onclick="filterVideos('year','2019')">2019</button>
+      <button class="filter-btn" onclick="filterVideos('year','2020')">2020</button>
+      <button class="filter-btn" onclick="filterVideos('year','2021')">2021</button>
+      <button class="filter-btn" onclick="filterVideos('year','2022')">2022</button>
+      <button class="filter-btn" onclick="filterVideos('year','2023')">2023</button>
+      <button class="filter-btn" onclick="filterVideos('year','2024')">2024</button>
+      <button class="filter-btn" onclick="filterVideos('year','2025')">2025</button>
+      <button class="filter-btn" onclick="filterVideos('member','미연')">미연</button>
+      <button class="filter-btn" onclick="filterVideos('member','민니')">민니</button>
+      <button class="filter-btn" onclick="filterVideos('member','소연')">소연</button>
+      <button class="filter-btn" onclick="filterVideos('member','우기')">우기</button>
+      <button class="filter-btn" onclick="filterVideos('member','슈화')">슈화</button>
+    </div>
+    <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" />
+  </div>
+
+  <div class="video-container" id="videoContainer">
+    <div class="video-card" data-category="RADIO" data-year="2025" data-member="소연">
+      <a href="https://www.youtube.com/watch?v=HFYobCvufa8" target="_blank">
+        <img src="https://img.youtube.com/vi/HFYobCvufa8/hqdefault.jpg" alt="전소연의 스페셜 라디오 인터뷰" />
+        <div class="video-title">전소연의 스페셜 라디오 인터뷰</div>
       </a>
     </div>
   </div>
 
-<!-- 나머지 내용은 그대로 유지 -->
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const subSearchInput = document.getElementById('subSearchInput');
+    const videoContainer = document.getElementById('videoContainer');
+    const subFilters = document.getElementById('subFilters');
+    const categoryBar = document.getElementById('categoryBar');
+    let currentCategory = '';
+
+    function showFilters(category) {
+      currentCategory = category;
+      subFilters.classList.add('active');
+      categoryBar.classList.add('hidden');
+      filterByCategory();
+      history.pushState({ category }, '', `#${category}`); // 뒤로가기 기록 추가
+    }
+
+    window.onpopstate = () => {
+      goHome();
+    }
+
+    function goHome() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      subFilters.classList.remove('active');
+      categoryBar.classList.remove('hidden');
+      const videos = document.querySelectorAll('.video-card');
+      videos.forEach(card => {
+        card.style.display = '';
+      });
+      searchInput.value = '';
+      subSearchInput.value = '';
+    }
+
+    function filterByCategory() {
+      const cards = document.querySelectorAll('.video-card');
+      cards.forEach(card => {
+        const category = card.dataset.category;
+        card.style.display = category === currentCategory ? '' : 'none';
+      });
+    }
+
+    searchInput?.addEventListener('input', () => {
+      const keyword = searchInput.value.toLowerCase();
+      const videos = document.querySelectorAll('.video-card');
+      videos.forEach(card => {
+        const title = card.innerText.toLowerCase();
+        card.style.display = title.includes(keyword) ? '' : 'none';
+      });
+    });
+
+    subSearchInput?.addEventListener('input', () => {
+      const keyword = subSearchInput.value.toLowerCase();
+      const cards = document.querySelectorAll('.video-card');
+      cards.forEach(card => {
+        const title = card.innerText.toLowerCase();
+        const category = card.dataset.category;
+        card.style.display = category === currentCategory && title.includes(keyword) ? '' : 'none';
+      });
+    });
+
+    function filterVideos(type, value) {
+      const cards = document.querySelectorAll('.video-card');
+      cards.forEach(card => {
+        const data = card.dataset[type];
+        const category = card.dataset.category;
+        card.style.display = data && data.includes(value) && category === currentCategory ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
