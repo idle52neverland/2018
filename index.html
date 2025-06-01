@@ -12,7 +12,7 @@
       color: #fff;
       text-align: center;
     }
-    h1 {
+    #currentCategoryTitle {
       padding: 30px 0 10px;
       font-size: 28px;
       color: #fff;
@@ -45,17 +45,6 @@
     }
     .search-input::placeholder {
       color: #888;
-    }
-    .social-icons {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      margin: 0 20px 10px;
-    }
-    .social-icons a img {
-      width: 24px;
-      height: 24px;
-      filter: brightness(0) invert(1);
     }
     .sub-filters {
       display: none;
@@ -113,9 +102,11 @@
       currentCategory = category;
       const filters = document.getElementById('subFilters');
       const categoryBar = document.getElementById('categoryBar');
-      if (filters && categoryBar) {
+      const currentCategoryTitle = document.getElementById('currentCategoryTitle');
+      if (filters && categoryBar && currentCategoryTitle) {
         filters.style.display = 'flex';
         categoryBar.classList.add('category-bar-hidden');
+        currentCategoryTitle.innerText = category;
         history.pushState({ category }, '', `#${category}`);
       }
     }
@@ -123,32 +114,17 @@
     window.onpopstate = function(event) {
       const filters = document.getElementById('subFilters');
       const categoryBar = document.getElementById('categoryBar');
-      if (filters && categoryBar) {
+      const currentCategoryTitle = document.getElementById('currentCategoryTitle');
+      if (filters && categoryBar && currentCategoryTitle) {
         filters.style.display = 'none';
         categoryBar.classList.remove('category-bar-hidden');
+        currentCategoryTitle.innerText = '';
       }
     }
   </script>
 </head>
 <body>
-  <h1>I-DLE 몰아보기</h1>
-  <div class="social-icons">
-    <a href="https://www.youtube.com/@official_i_dle" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
-    </a>
-    <a href="https://x.com/official_i_dle" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X">
-    </a>
-    <a href="https://instagram.com/i_dle_official" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram">
-    </a>
-    <a href="https://tiktok.com/@official_i_dle" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
-    </a>
-    <a href="https://weverse.io/i-dle" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/3669/3669986.png" alt="Weverse">
-    </a>
-  </div>
+  <div id="currentCategoryTitle"></div>
   <div id="categoryBar">
     <div class="category-row">
       <button class="category-btn" onclick="showFilters('MV')">MV & SPECIAL CLIP</button>
