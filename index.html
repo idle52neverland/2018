@@ -225,12 +225,24 @@
       <button class="filter-btn" onclick="filterVideos('member','슈화')">슈화</button>
     </div>
     <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" />
-    <div class="video-grid">
-    <a href="https://www.youtube.com/watch?v=ISsi7sLXI8g" target="_blank" class="card" data-category="소연,2021,RADIO">
-      <img src="https://img.youtube.com/vi/ISsi7sLXI8g/hqdefault.jpg" alt="전소연 (JEON SOYEON) - 'BEAM BEAM' Official Music Video">
-      <div class="card-title">전소연 (JEON SOYEON) - 'BEAM BEAM' Official Music Video (2021-07-05)</div>
-    </a>
   </div>
+<!-- 백업 2번 카드 생성 기능 시작 -->
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  const savedKey = localStorage.getItem('youtubeApiKey');
+  if (savedKey) {
+    document.getElementById('apiKey').value = savedKey;
+  }
+});
+</script>
+<div id="cardGenerator">
+  <label>API 키 입력:</label>
+  <input id="apiKey" placeholder="Your API Key" oninput="localStorage.setItem('youtubeApiKey', this.value)" value="">
+  <label>유튜브 링크 또는 재생목록 주소:</label>
+  <textarea id="youtubeUrls">https://www.youtube.com/playlist?list=PL3pU53Jxx_sZhZLkGitD4r1wUNCh5iwUe</textarea>
+  <button onclick="generateCards()">카드 생성</button>
+  <textarea id="output" readonly placeholder="생성된 HTML이 여기에 표시됩니다."></textarea>
 </div>
+<!-- 백업 2번 카드 생성 기능 끝 -->
 </body>
 </html>
