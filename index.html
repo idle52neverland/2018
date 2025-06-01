@@ -20,7 +20,7 @@
     h1 {
       font-size: 28px;
       margin-bottom: 20px;
-      color: #fff; /* 핑크 제거, 흰색으로 변경 */
+      color: #fff;
     }
 
     .category-bar {
@@ -69,7 +69,6 @@
       color: #888;
     }
 
-    /* 썸네일 그리드 */
     .grid-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -97,7 +96,6 @@
       color: #eee;
     }
 
-    /* PC에서는 5개, 모바일에서는 3개 */
     @media (min-width: 1024px) {
       .grid-container {
         grid-template-columns: repeat(5, 1fr);
@@ -133,47 +131,19 @@
     <h1>I-DLE 몰아보기</h1>
 
     <div class="category-bar">
-<button class="category-btn" onclick="filterVideos('MV & SPECIAL CLIP')">
-  <img src="icons/mv.png" class="category-icon" alt="MV"> MV & SPECIAL CLIP
-</button>
-<button class="category-btn" onclick="filterVideos('LIVE / COVER SONG / DANCE')">
-  <img src="icons/mic.png" class="category-icon" alt="Live"> LIVE / COVER SONG / DANCE
-</button>
-<button class="category-btn" onclick="filterVideos('MUSIC SHOW PERFORMANCE')">
-  <img src="icons/stage.png" class="category-icon" alt="Music Show"> MUSIC SHOW PERFORMANCE
-</button>
-<button class="category-btn" onclick="filterVideos('FESTIVAL / EVENT STAGE')">
-  <img src="icons/festival.png" class="category-icon" alt="Festival"> FESTIVAL / EVENT STAGE
-</button>
-<button class="category-btn" onclick="filterVideos('DANCE PRACTICE / FANCHANT')">
-  <img src="icons/dance.png" class="category-icon" alt="Dance"> DANCE PRACTICE / FANCHANT
-</button>
-<button class="category-btn" onclick="filterVideos('RECORDING / STUDIO BEHIND')">
-  <img src="icons/headphones.png" class="category-icon" alt="Recording"> RECORDING / STUDIO BEHIND
-</button>
-<button class="category-btn" onclick="filterVideos('TV SHOW')">
-  <img src="icons/tv.png" class="category-icon" alt="TV Show"> TV SHOW
-</button>
-<button class="category-btn" onclick="filterVideos('YOUTUBE CONTENTS')">
-  <img src="icons/youtube.png" class="category-icon" alt="YouTube"> YOUTUBE CONTENTS
-</button>
-<button class="category-btn" onclick="filterVideos('RADIO / PODCAST')">
-  <img src="icons/radio.png" class="category-icon" alt="Radio"> RADIO / PODCAST
-</button>
-<button class="category-btn" onclick="filterVideos('REALITY')">
-  <img src="icons/reality.png" class="category-icon" alt="Reality"> REALITY
-</button>
-<button class="category-btn" onclick="filterVideos('LIVE STREAM')">
-  <img src="icons/live.png" class="category-icon" alt="Live Stream"> LIVE STREAM
-</button>
-<button class="category-btn" onclick="filterVideos('JACKET / INTERVIEW')">
-  <img src="icons/camera.png" class="category-icon" alt="Jacket"> JACKET / INTERVIEW
-</button>
-<button class="category-btn" onclick="filterVideos('SPECIAL / EVENT')">
-  <img src="icons/star.png" class="category-icon" alt="Special"> SPECIAL / EVENT
-</button>
-
-
+      <button class="category-btn" onclick="filterVideos('MV & SPECIAL CLIP')">🎬 MV & SPECIAL CLIP</button>
+      <button class="category-btn" onclick="filterVideos('LIVE / COVER SONG / DANCE')">🎤 LIVE / COVER SONG / DANCE</button>
+      <button class="category-btn" onclick="filterVideos('MUSIC SHOW PERFORMANCE')">📺 MUSIC SHOW PERFORMANCE</button>
+      <button class="category-btn" onclick="filterVideos('FESTIVAL / EVENT STAGE')">🎪 FESTIVAL / EVENT STAGE</button>
+      <button class="category-btn" onclick="filterVideos('DANCE PRACTICE / FANCHANT')">💃 DANCE PRACTICE / FANCHANT</button>
+      <button class="category-btn" onclick="filterVideos('RECORDING / STUDIO BEHIND')">🎧 RECORDING / STUDIO BEHIND</button>
+      <button class="category-btn" onclick="filterVideos('TV SHOW')">📺 TV SHOW</button>
+      <button class="category-btn" onclick="filterVideos('YOUTUBE CONTENTS')">📹 YOUTUBE CONTENTS</button>
+      <button class="category-btn" onclick="filterVideos('RADIO / PODCAST')">📻 RADIO / PODCAST</button>
+      <button class="category-btn" onclick="filterVideos('REALITY')">🎥 REALITY</button>
+      <button class="category-btn" onclick="filterVideos('LIVE STREAM')">🔴 LIVE STREAM</button>
+      <button class="category-btn" onclick="filterVideos('JACKET / INTERVIEW')">📸 JACKET / INTERVIEW</button>
+      <button class="category-btn" onclick="filterVideos('SPECIAL / EVENT')">✨ SPECIAL / EVENT</button>
     </div>
 
     <div class="search-wrapper">
@@ -183,7 +153,6 @@
 
   <main>
     <div class="grid-container">
-      <!-- 썸네일 카드 예시 -->
       <div class="video-card">
         <img src="https://i.ytimg.com/vi/abc123/hqdefault.jpg" alt="썸네일" />
         <div class="video-title">민니 - Good Thing (2025-05-19)</div>
@@ -192,7 +161,6 @@
         <img src="https://i.ytimg.com/vi/def456/hqdefault.jpg" alt="썸네일" />
         <div class="video-title">민니 - Girlfriend (2025-05-09)</div>
       </div>
-      <!-- 필요하면 더 추가 -->
     </div>
   </main>
 
