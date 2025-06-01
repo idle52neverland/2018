@@ -1,4 +1,3 @@
-<!-- ✅ index.html 복구 및 보완 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -209,6 +208,11 @@
       subFilters.classList.add('active');
       categoryBar.classList.add('hidden');
       filterByCategory();
+      history.pushState({ category }, '', `#${category}`); // 뒤로가기 기록 추가
+    }
+
+    window.onpopstate = () => {
+      goHome();
     }
 
     function goHome() {
