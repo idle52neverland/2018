@@ -2,21 +2,15 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>I-DLE 몰아보기</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #121212;
-      color: #ffffff;
+      background-color: #111;
+      color: #fff;
     }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
     header {
       padding: 20px;
       background-color: #000;
@@ -24,12 +18,6 @@
       font-weight: bold;
       text-align: center;
     }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
     .category-bar {
       display: flex;
       flex-wrap: wrap;
@@ -38,601 +26,625 @@
       justify-content: center;
       background-color: #222;
     }
-
     .category-btn {
-      padding: 6px 12px;
+      padding: 10px 16px;
       border: none;
       border-radius: 20px;
       background-color: #444;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: bold;
       color: white;
       cursor: pointer;
       transition: background-color 0.2s;
     }
-
     .category-btn:hover {
       background-color: #666;
     }
-
     .search-input-btn {
-      padding: 6px 12px;
+      padding: 10px 16px;
       border: 2px solid #888;
       border-radius: 20px;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: bold;
       color: #333;
       background-color: white;
       outline: none;
-      width: 130px;
+      width: 160px;
       transition: box-shadow 0.2s;
     }
-
     .search-input-btn:focus {
       box-shadow: 0 0 0 2px #aaa;
     }
 
-    .thumbnail-grid {
-      display: grid;
-      gap: 10px;
-      padding: 10px;
-    }
+    /* ✅ 바둑판식 그리드 */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  padding: 20px;
+}
 
-    @media (min-width: 769px) {
-      .thumbnail-grid {
-        grid-template-columns: repeat(7, 1fr);
-      }
-    }
+@media (max-width: 600px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr); /* 가로 3개 정도 */
+    gap: 10px;
+    padding: 10px;
+  }
 
-    @media (max-width: 768px) {
-      .thumbnail-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
+  .card-title {
+    font-size: 14px; /* 글씨 살짝 작게 */
+  }
+  const youtubeUrl = "https://www.youtube.com/watch?v=abc123";
+
+fetch(`https://noembed.com/embed?url=${youtubeUrl}`)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data.title); // 영상 제목
+  });
+
+
+  .category-btn {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  .search-input-btn {
+    font-size: 14px;
+    padding: 6px 12px;
+    width: 130px;
+  }
+}
+
+
 
     .card {
-      display: block;
-      background: #1e1e1e;
-      border-radius: 8px;
+      background-color: #222;
+      border-radius: 10px;
       overflow: hidden;
-      color: white;
-      text-decoration: none;
       transition: transform 0.3s;
+      text-decoration: none;
+      color: white;
     }
-
     .card:hover {
-      transform: scale(1.03);
+      transform: scale(1.05);
     }
-
     .card img {
-      width: 100% !important;
-      height: auto !important;
+      width: 100%;
       display: block;
-      object-fit: cover;
     }
-
     .card-title {
-      padding: 8px;
-      font-size: 14px;
-      text-align: center;
-      background-color: #2b2b2b;
+      padding: 10px;
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
-  <header>I-DLE 몰아보기</header>
 
-  <div class="container">
-    <div class="category-bar">
-      <button class="category-btn" onclick="filterVideos('all')">전체</button>
-      <button class="category-btn" onclick="filterVideos('MV & SPECIAL CLIP')">MV & SPECIAL CLIP</button>
-      <button class="category-btn" onclick="filterVideos('커버곡')">커버곡</button>
-      <button class="category-btn" onclick="filterVideos('자컨')">자컨</button>
-      <button class="category-btn" onclick="filterVideos('레코딩비하인드')">레코딩 비하인드</button>
-      <button class="category-btn" onclick="filterVideos('TV방송')">TV방송</button>
-      <button class="category-btn" onclick="filterVideos('유튜브')">유튜브</button>
-      <button class="category-btn" onclick="filterVideos('라디오')">라디오</button>
-      <button class="category-btn" onclick="filterVideos('음방활동')">음방활동</button>
-      <button class="category-btn" onclick="filterVideos('축제행사')">축제행사</button>
-      <button class="category-btn" onclick="filterVideos('응원법&안무')">응원법&안무</button>
-      <button class="category-btn" onclick="filterVideos('화보인터뷰')">화보인터뷰</button>
+<header>I-DLE 몰아보기</header>
 
-      <div style="flex-basis: 100%; height: 0;"></div>
 
-      <button class="category-btn" onclick="filterVideos('2018')">2018</button>
-      <button class="category-btn" onclick="filterVideos('2019')">2019</button>
-      <button class="category-btn" onclick="filterVideos('2020')">2020</button>
-      <button class="category-btn" onclick="filterVideos('2021')">2021</button>
-      <button class="category-btn" onclick="filterVideos('2022')">2022</button>
-      <button class="category-btn" onclick="filterVideos('2023')">2023</button>
-      <button class="category-btn" onclick="filterVideos('2024')">2024</button>
-      <button class="category-btn" onclick="filterVideos('2025')">2025</button>
-      <button class="category-btn" onclick="filterVideos('ETC')">ETC</button>
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="🔍 제목 검색"
-        oninput="searchByTitle()"
-        class="search-input-btn"
-      />
-    </div>
+  <div class="category-bar">
+    <button class="category-btn" onclick="filterVideos('all')">전체</button>
+    <button class="category-btn" onclick="filterVideos('MV')">MV</button>
+    <button class="category-btn" onclick="filterVideos('SPECIAL CLIP')">SPECIAL CLIP</button>
+    <button class="category-btn" onclick="filterVideos('커버곡')">커버곡</button>
+    <button class="category-btn" onclick="filterVideos('자컨')">자컨</button>
+    <button class="category-btn" onclick="filterVideos('레코딩비하인드')">레코딩 비하인드</button>
+    <button class="category-btn" onclick="filterVideos('TV방송')">TV방송</button>
+    <button class="category-btn" onclick="filterVideos('유튜브')">유튜브</button>
+    <button class="category-btn" onclick="filterVideos('라디오')">라디오</button>
+    <button class="category-btn" onclick="filterVideos('음방활동')">음방활동</button>
+    <button class="category-btn" onclick="filterVideos('축제행사')">축제행사</button>
+    <button class="category-btn" onclick="filterVideos('응원법&안무')">응원법&안무</button>
+    <button class="category-btn" onclick="filterVideos('화보인터뷰')">화보인터뷰</button>
 
-   <div class="thumbnail-grid">
-      <a href="https://youtu.be/hAONx6nuEgI" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-        <img src="https://img.youtube.com/vi/hAONx6nuEgI/hqdefault.jpg" alt="Good Thing 썸네일" />
-        <div class="card-title">Good Thing (2025-05-19)</div>
-      </a>
-      <!-- 다른 카드들 여기에 추가 -->
-    </div>
+    <div style="flex-basis: 100%; height: 0;"></div>
+
+    <button class="category-btn" onclick="filterVideos('2018')">2018</button>
+    <button class="category-btn" onclick="filterVideos('2019')">2019</button>
+    <button class="category-btn" onclick="filterVideos('2020')">2020</button>
+    <button class="category-btn" onclick="filterVideos('2021')">2021</button>
+    <button class="category-btn" onclick="filterVideos('2022')">2022</button>
+    <button class="category-btn" onclick="filterVideos('2023')">2023</button>
+    <button class="category-btn" onclick="filterVideos('2024')">2024</button>
+    <button class="category-btn" onclick="filterVideos('2025')">2025</button>
+    <button class="category-btn" onclick="filterVideos('ETC')">ETC</button>
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="🔍 제목 검색"
+      oninput="searchByTitle()"
+      class="search-input-btn"
+    />
   </div>
 
-  <script>
+  <div class="container" id="videoContainer">
+    <!-- 카드들 여기에 삽입됨 -->
+  </div>
+
+ <script>
     function filterVideos(category) {
       const cards = document.querySelectorAll('.card');
       cards.forEach(card => {
         const cardCategory = card.getAttribute('data-category');
-        card.style.display = (category === 'all' || cardCategory === category) ? 'block' : 'none';
+        if (category === 'all' || cardCategory === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
       });
     }
 
     function searchByTitle() {
       const input = document.getElementById('searchInput').value.toLowerCase();
       const cards = document.querySelectorAll('.card');
+
       cards.forEach(card => {
         const title = card.querySelector('.card-title').textContent.toLowerCase();
-        card.style.display = title.includes(input) ? 'block' : 'none';
+        if (title.includes(input)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
       });
     }
   </script>
+
 </body>
 </html>
 
 
-
-
-<div class="container">
-<a href="https://youtu.be/hAONx6nuEgI" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/hAONx6nuEgI/hqdefault.jpg" alt="Good Thing 썸네일">
-<div class="card-title">Good Thing (2025-05-19)</div>
+  <div class="container">
+<a href="https://youtu.be/hAONx6nuEgI" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/hAONx6nuEgI/hqdefault.jpg" alt="Good Thing 썸네일">
+  <div class="card-title">Good Thing (2025-05-19)</div>
 </a>
-<a href="https://youtu.be/zKfs2EM8LQ4" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/zKfs2EM8LQ4/hqdefault.jpg" alt="Girlfriend 썸네일">
-<div class="card-title">Girlfriend (2025-05-09)</div>
+<a href="https://youtu.be/zKfs2EM8LQ4" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/zKfs2EM8LQ4/hqdefault.jpg" alt="Girlfriend 썸네일">
+  <div class="card-title">Girlfriend (2025-05-09)</div>
 </a>
-<a href="https://youtu.be/EfZcXlPbCso" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/EfZcXlPbCso/hqdefault.jpg" alt="숨 썸네일">
-<div class="card-title">민니 - 숨(언슬전OST) (2025-04-26)</div>
+<a href="https://youtu.be/EfZcXlPbCso" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/EfZcXlPbCso/hqdefault.jpg" alt="숨 썸네일">
+  <div class="card-title">민니(MINNIE) - 숨(언슬전OST) (2025-04-26)</div>
 </a>
-<a class="card" href="https://youtu.be/OAISVzre8QQ" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/OAISVzre8QQ/hqdefault.jpg" />
-<div class="card-title">민니 - Draw the Moon(달이 그려지다) 괴력난신OST / 2025-03-21</div>
+<a class="card" href="https://youtu.be/OAISVzre8QQ" target="_blank" data-category="MV">
+  <img src="https://img.youtube.com/vi/OAISVzre8QQ/hqdefault.jpg" />
+  <div class="card-title">민니 - Draw the Moon(달이 그려지다) 괴력난신OST / 2025-03-21</div>
 </a>
-<a class="card" href="https://youtu.be/FyuPYjmPjrE" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/FyuPYjmPjrE/hqdefault.jpg" />
-<div class="card-title">민니 - 'Valentine’s Dream' (SPECIAL CLIP) / 2025-02-14</div>
+<a class="card" href="https://youtu.be/FyuPYjmPjrE" target="_blank" data-category="MV">
+  <img src="https://img.youtube.com/vi/FyuPYjmPjrE/hqdefault.jpg" />
+  <div class="card-title">민니 - 'Valentine’s Dream' (SPECIAL CLIP) / 2025-02-14</div>
 </a>
-<a class="card" href="https://youtu.be/jRkUik5EJwU" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/jRkUik5EJwU/hqdefault.jpg" />
-<div class="card-title">민니 - 'Cherry Sky' (SPECIAL CLIP) / 2025-02-03</div>
+<a class="card" href="https://youtu.be/jRkUik5EJwU" target="_blank" data-category="MV">
+  <img src="https://img.youtube.com/vi/jRkUik5EJwU/hqdefault.jpg" />
+  <div class="card-title">민니 - 'Cherry Sky' (SPECIAL CLIP) / 2025-02-03</div>
 </a>
-<a class="card" href="https://youtu.be/-pKYsndlSXE" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/-pKYsndlSXE/hqdefault.jpg" />
-<div class="card-title">민니 - 'Obsession (Feat. TEN of WayV)' (SPECIAL CLIP) / 2025-01-28</div>
+<a class="card" href="https://youtu.be/-pKYsndlSXE" target="_blank" data-category="MV">
+  <img src="https://img.youtube.com/vi/-pKYsndlSXE/hqdefault.jpg" />
+  <div class="card-title">민니 - 'Obsession (Feat. TEN of WayV)' (SPECIAL CLIP) / 2025-01-28</div>
 </a>
-<a class="card" href="https://youtu.be/3J_Ev390Q9Q" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/3J_Ev390Q9Q/hqdefault.jpg" />
-<div class="card-title">민니 - Answer (나의 완벽한 비서 OST) / 2025-01-26</div>
+<a class="card" href="https://youtu.be/3J_Ev390Q9Q" target="_blank" data-category="MV">
+  <img src="https://img.youtube.com/vi/3J_Ev390Q9Q/hqdefault.jpg" />
+  <div class="card-title">민니 - Answer (나의 완벽한 비서 OST) / 2025-01-26</div>
 </a>
-<a href="https://youtu.be/UTHqh7Vpa64" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/UTHqh7Vpa64/hqdefault.jpg" alt="HER 썸네일">
-<div class="card-title">민니 - HER (2025-01-21)</div>
+<a href="https://youtu.be/UTHqh7Vpa64" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/UTHqh7Vpa64/hqdefault.jpg" alt="HER 썸네일">
+  <div class="card-title">민니(MINNIE) - HER (2025-01-21)</div>
 </a>
-<a href="https://youtu.be/8KpvPHcXr1c" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/8KpvPHcXr1c/hqdefault.jpg" alt="Blind Eyes Red 썸네일">
-<div class="card-title">민니 - Blind Eyes Red (2025-01-07)</div>
+<a href="https://youtu.be/8KpvPHcXr1c" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/8KpvPHcXr1c/hqdefault.jpg" alt="Blind Eyes Red 썸네일">
+  <div class="card-title">민니(MINNIE) - Blind Eyes Red (2025-01-07)</div>
 </a>
-<a class="card" href="https://youtu.be/zkR3SAMLGno" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/zkR3SAMLGno/hqdefault.jpg" />
-<div class="card-title">미연 - 'Sky Walking' (SPECIAL CLIP) / 2024-12-19</div>
+<a class="card" href="https://youtu.be/zkR3SAMLGno" target="_blank" data-category="MV">
+  <img src="https://img.youtube.com/vi/zkR3SAMLGno/hqdefault.jpg" />
+  <div class="card-title">미연 - 'Sky Walking' (SPECIAL CLIP) / 2024-12-19</div>
 </a>
-<a class="card" href="https://youtu.be/Ubz6C2t_FFM" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/Ubz6C2t_FFM/hqdefault.jpg" />
-<div class="card-title">우기 - 'Radio (Dum-Dum)' SPECIAL CLIP / 2024-09-23</div>
+<a class="card" href="https://youtu.be/Ubz6C2t_FFM" target="_blank" data-category="MV">
+  <img src="https://img.youtube.com/vi/Ubz6C2t_FFM/hqdefault.jpg" />
+  <div class="card-title">우기 - 'Radio (Dum-Dum)' SPECIAL CLIP / 2024-09-23</div>
 </a>
-<a class="card" href="https://youtu.be/_s4PlNvJnDQ" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/_s4PlNvJnDQ/hqdefault.jpg" />
-<div class="card-title">'Neverland' (SPECIAL CLIP) / 2024-08-11</div>
+<a class="card" href="https://youtu.be/_s4PlNvJnDQ" target="_blank" data-category="MV">
+  <img src="https://img.youtube.com/vi/_s4PlNvJnDQ/hqdefault.jpg" />
+  <div class="card-title">'Neverland' (SPECIAL CLIP) / 2024-08-11</div>
 </a>
-<a class="card" href="https://youtu.be/nlkPoTADrdM?si=7bdt2_PNY__HcVs5" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/nlkPoTADrdM/hqdefault.jpg" />
-<div class="card-title">Last Forever (LIVE CLIP) / 2024-07-29</div>
+  <a class="card" href="https://youtu.be/nlkPoTADrdM?si=7bdt2_PNY__HcVs5" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/nlkPoTADrdM/hqdefault.jpg" />
+  <div class="card-title">Last Forever (LIVE CLIP) / 2024-07-29</div>
 </a>
-<a class="card" href="https://youtu.be/Zf3nEwaWLpA" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/Zf3nEwaWLpA/hqdefault.jpg" />
-<div class="card-title">'Bloom' (SPECIAL CLIP) / 2024-08-05</div>
+<a class="card" href="https://youtu.be/Zf3nEwaWLpA" target="_blank" data-category="MV">
+  <img src="https://img.youtube.com/vi/Zf3nEwaWLpA/hqdefault.jpg" />
+  <div class="card-title">'Bloom' (SPECIAL CLIP) / 2024-08-05</div>
 </a>
-<a href="https://youtu.be/rTKqSmX9XhQ" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/rTKqSmX9XhQ/hqdefault.jpg" alt="Klaxon 썸네일">
-<div class="card-title">클락션 (Klaxon) (2024-07-08)</div>
+<a href="https://youtu.be/rTKqSmX9XhQ" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/rTKqSmX9XhQ/hqdefault.jpg" alt="Klaxon 썸네일">
+  <div class="card-title">클락션 (Klaxon) (2024-07-08)</div>
 </a>
-<a class="card" href="https://youtu.be/uSddv1T7Byg?si=tTYdkE7KLS01EvOR" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/uSddv1T7Byg/hqdefault.jpg" />
-<div class="card-title">우기 - Everytime (With MINNIE) (SPECIAL CLIP) / 2024-05-08</div>
+<a class="card" href="https://youtu.be/uSddv1T7Byg?si=tTYdkE7KLS01EvOR" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/uSddv1T7Byg/hqdefault.jpg" />
+  <div class="card-title">우기 - Everytime (With MINNIE) (SPECIAL CLIP) / 2024-05-08</div>
 </a>
-<a class="card" href="https://youtu.be/6FvfiaskXbQ?si=xxL9T7xedn73RmpS" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/6FvfiaskXbQ/hqdefault.jpg" />
-<div class="card-title">우기 - Red Rover (LIVE CLIP) / 2024-04-30</div>
+<a class="card" href="https://youtu.be/6FvfiaskXbQ?si=xxL9T7xedn73RmpS" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/6FvfiaskXbQ/hqdefault.jpg" />
+  <div class="card-title">우기 - Red Rover (LIVE CLIP) / 2024-04-30</div>
 </a>
-<a href="https://youtu.be/UqJIBItJeyg" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/UqJIBItJeyg/hqdefault.jpg" alt="FREAK 썸네일">
-<div class="card-title">우기 - FREAK (2024-04-23)</div>
+<a href="https://youtu.be/UqJIBItJeyg" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/UqJIBItJeyg/hqdefault.jpg" alt="FREAK 썸네일">
+  <div class="card-title">우기(YUQI) - FREAK (2024-04-23)</div>
 </a>
-<a class="card" href="https://youtu.be/_lQxaYmt0DQ?si=2107dnNm_NL-AME2" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/_lQxaYmt0DQ/hqdefault.jpg" />
-<div class="card-title">민니 - 꿈결같아서 (선재 업고 튀어 OST) / 2024-04-17</div>
+<a class="card" href="https://youtu.be/_lQxaYmt0DQ?si=2107dnNm_NL-AME2" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/_lQxaYmt0DQ/hqdefault.jpg" />
+  <div class="card-title">민니 - 꿈결같아서 (선재 업고 튀어 OST) / 2024-04-17</div>
 </a>
-<a class="card" href="https://youtu.be/fEOaSMFIeIY?si=qtGOgAYI7Xt3eTic" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/fEOaSMFIeIY/hqdefault.jpg" />
-<div class="card-title">우기 - Could It Be (Lyric Video) / 2024-04-06</div>
+<a class="card" href="https://youtu.be/fEOaSMFIeIY?si=qtGOgAYI7Xt3eTic" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/fEOaSMFIeIY/hqdefault.jpg" />
+  <div class="card-title">우기 - Could It Be (Lyric Video) / 2024-04-06</div>
 </a>
-<a href="https://youtu.be/ZqU4oTDy3XE" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/ZqU4oTDy3XE/hqdefault.jpg" alt="Could It Be 썸네일">
-<div class="card-title">우기 - Could It Be (2024-04-05)</div>
+<a href="https://youtu.be/ZqU4oTDy3XE" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/ZqU4oTDy3XE/hqdefault.jpg" alt="Could It Be 썸네일">
+  <div class="card-title">우기(YUQI) - Could It Be (2024-04-05)</div>
 </a>
-<a class="card" href="https://youtu.be/ATK7gAaZTOM?si=23SfM8HmD_Q76jib" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/ATK7gAaZTOM/hqdefault.jpg" />
-<div class="card-title">나는 아픈 건 딱 질색이니까 (Fate) (LIVE CLIP) / 2024-03-13</div>
+<a class="card" href="https://youtu.be/ATK7gAaZTOM?si=23SfM8HmD_Q76jib" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/ATK7gAaZTOM/hqdefault.jpg" />
+  <div class="card-title">나는 아픈 건 딱 질색이니까 (Fate) (LIVE CLIP) / 2024-03-13</div>
 </a>
-<a href="https://youtu.be/KAymeaEyPr8" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/KAymeaEyPr8/hqdefault.jpg" alt="Revenge 썸네일">
-<div class="card-title">Revenge (2024-02-16)</div>
+<a href="https://youtu.be/KAymeaEyPr8" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/KAymeaEyPr8/hqdefault.jpg" alt="Revenge 썸네일">
+  <div class="card-title">Revenge (2024-02-16)</div>
 </a>
-<a href="https://youtu.be/6f3RzjXPQwA" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/6f3RzjXPQwA/hqdefault.jpg" alt="Super Lady 썸네일">
-<div class="card-title">Super Lady (2024-01-29)</div>
+<a href="https://youtu.be/6f3RzjXPQwA" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/6f3RzjXPQwA/hqdefault.jpg" alt="Super Lady 썸네일">
+  <div class="card-title">Super Lady (2024-01-29)</div>
 </a>
-<a href="https://youtu.be/baaNwRAhHBo" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/baaNwRAhHBo/hqdefault.jpg" alt="Wife 썸네일">
-<div class="card-title">Wife (2024-01-22)</div>
+<a href="https://youtu.be/baaNwRAhHBo" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/baaNwRAhHBo/hqdefault.jpg" alt="Wife 썸네일">
+  <div class="card-title">Wife (2024-01-22)</div>
 </a>
-<a href="https://youtu.be/N68rwFjyinI" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/N68rwFjyinI/hqdefault.jpg" alt="NOBODY 썸네일">
-<div class="card-title">소연X윈터X리즈 - NOBODY (2023-11-16)</div>
+<a href="https://youtu.be/N68rwFjyinI" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/N68rwFjyinI/hqdefault.jpg" alt="NOBODY 썸네일">
+  <div class="card-title">소연X윈터X리즈 - NOBODY (2023-11-16)</div>
 </a>
-<a class="card" href="https://youtu.be/C5VwU4rdeHU?si=lJgwAnUARyjot4y5" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/C5VwU4rdeHU/hqdefault.jpg" />
-<div class="card-title">민니 - 타이밍 (Timing) (오늘도 사랑스럽개 OST) / 2023-11-15</div>
+<a class="card" href="https://youtu.be/C5VwU4rdeHU?si=lJgwAnUARyjot4y5" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/C5VwU4rdeHU/hqdefault.jpg" />
+  <div class="card-title">민니 - 타이밍 (Timing) (오늘도 사랑스럽개 OST) / 2023-11-15</div>
 </a>
-<a class="card" href="https://youtu.be/vTX54zOmoiY?si=lCdmsLsZoqMNXEuQ" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/vTX54zOmoiY/hqdefault.jpg" />
-<div class="card-title">로꼬 - NOT OK (Feat. 민니) / 2023-10-24</div>
+<a class="card" href="https://youtu.be/vTX54zOmoiY?si=lCdmsLsZoqMNXEuQ" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/vTX54zOmoiY/hqdefault.jpg" />
+  <div class="card-title">로꼬 - NOT OK (Feat. 민니) / 2023-10-24</div>
 </a>
-<a href="https://youtu.be/Iewisp9KYRw" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/Iewisp9KYRw/hqdefault.jpg" alt="I Want That 썸네일">
-<div class="card-title">I Want That (2023-10-06)</div>
+<a href="https://youtu.be/Iewisp9KYRw" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/Iewisp9KYRw/hqdefault.jpg" alt="I Want That 썸네일">
+  <div class="card-title">I Want That (2023-10-06)</div>
 </a>
-<a href="https://youtu.be/bKLTsAy9ig4" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/bKLTsAy9ig4/hqdefault.jpg" alt="I'm OK 썸네일">
-<div class="card-title">소연 - 아무너케(I'm OK) (2023-08-23)</div>
+<a href="https://youtu.be/bKLTsAy9ig4" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/bKLTsAy9ig4/hqdefault.jpg" alt="I'm OK 썸네일">
+  <div class="card-title">소연(SOYEON) - 아무너케(I'm OK) (2023-08-23)</div>
 </a>
-<a class="card" href="https://youtu.be/CdSWl1tU_pk?si=zwrheHfm_VGfHzZZ" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/CdSWl1tU_pk/hqdefault.jpg" />
-<div class="card-title">미연 - 달빛에 그려지는 (연인 OST) / 2023-08-21</div>
+<a class="card" href="https://youtu.be/CdSWl1tU_pk?si=zwrheHfm_VGfHzZZ" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/CdSWl1tU_pk/hqdefault.jpg" />
+  <div class="card-title">미연 - 달빛에 그려지는 (연인 OST) / 2023-08-21</div>
 </a>
-<a href="https://youtu.be/pCh3Kp6qxo8" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/pCh3Kp6qxo8/hqdefault.jpg" alt="I DO 썸네일">
-<div class="card-title">I DO (2023-07-14)</div>
+<a href="https://youtu.be/pCh3Kp6qxo8" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/pCh3Kp6qxo8/hqdefault.jpg" alt="I DO 썸네일">
+  <div class="card-title">I DO (2023-07-14)</div>
 </a>
-<a class="card" href="https://youtu.be/PITjb4VZHpQ?si=W-T1wnGf14LCbgVC" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/PITjb4VZHpQ/hqdefault.jpg" />
-<div class="card-title">Allergy (LIVE CLIP) / 2023-05-29</div>
+<a class="card" href="https://youtu.be/PITjb4VZHpQ?si=W-T1wnGf14LCbgVC" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/PITjb4VZHpQ/hqdefault.jpg" />
+  <div class="card-title">Allergy (LIVE CLIP) / 2023-05-29</div>
 </a>
-<a href="https://youtu.be/7HDeem-JaSY" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/7HDeem-JaSY/hqdefault.jpg" alt="Queencard 썸네일">
-<div class="card-title">퀸카 (Queencard) (2023-05-15)</div>
+<a href="https://youtu.be/7HDeem-JaSY" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/7HDeem-JaSY/hqdefault.jpg" alt="Queencard 썸네일">
+  <div class="card-title">퀸카 (Queencard) (2023-05-15)</div>
 </a>
-<a href="https://youtu.be/XZaBkbvteBc" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/XZaBkbvteBc/hqdefault.jpg" alt="Allergy 썸네일">
-<div class="card-title">Allergy (2023-05-10)</div>
+<a href="https://youtu.be/XZaBkbvteBc" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/XZaBkbvteBc/hqdefault.jpg" alt="Allergy 썸네일">
+  <div class="card-title">Allergy (2023-05-10)</div>
 </a>
-<a class="card" href="https://youtu.be/dy3GaMa-j_c?si=wrWqNI4xo7FA8krm" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/dy3GaMa-j_c/hqdefault.jpg" />
-<div class="card-title">민니 - X-RATED - PINK YOUR MOMENT / 2023-04-26</div>
+<a class="card" href="https://youtu.be/dy3GaMa-j_c?si=wrWqNI4xo7FA8krm" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/dy3GaMa-j_c/hqdefault.jpg" />
+  <div class="card-title">민니 - X-RATED - PINK YOUR MOMENT / 2023-04-26</div>
 </a>
-<a class="card" href="https://youtu.be/jrt4iWhofPA?si=NZ949GMVEQ9mxOcT" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/jrt4iWhofPA/hqdefault.jpg" />
-<div class="card-title">Anne-Marie, 민니 - Expectations / 2023-03-09</div>
+<a class="card" href="https://youtu.be/jrt4iWhofPA?si=NZ949GMVEQ9mxOcT" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/jrt4iWhofPA/hqdefault.jpg" />
+  <div class="card-title">Anne-Marie, 민니 - Expectations / 2023-03-09</div>
 </a>
-<a href="https://youtu.be/qRrV31S7oO0" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/qRrV31S7oO0/hqdefault.jpg" alt="Nxde Remix 썸네일">
-<div class="card-title">Nxde (Steve Aoki Remix) (2022-12-16)</div>
+<a href="https://youtu.be/qRrV31S7oO0" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/qRrV31S7oO0/hqdefault.jpg" alt="Nxde Remix 썸네일">
+  <div class="card-title">Nxde (Steve Aoki Remix) (2022-12-16)</div>
 </a>
-<a class="card" href="https://youtu.be/9p51YpIa0Ss?si=qiM862L1XCNUnIGE" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/9p51YpIa0Ss/hqdefault.jpg" />
-<div class="card-title">미연, 우기 - Sweet Dream (연애대전 OST) / 2023-02-06</div>
+<a class="card" href="https://youtu.be/9p51YpIa0Ss?si=qiM862L1XCNUnIGE" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/9p51YpIa0Ss/hqdefault.jpg" />
+  <div class="card-title">미연, 우기 - Sweet Dream (연애대전 OST) / 2023-02-06</div>
 </a>
-<a class="card" href="https://youtu.be/NPrqmhdrjjI?si=19-55wuU8FRA68St" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/NPrqmhdrjjI/hqdefault.jpg" />
-<div class="card-title">민니 - In The Novel (LIVE CLIP) 모든 게 착각이었다 OST / 2023-01-26</div>
+<a class="card" href="https://youtu.be/NPrqmhdrjjI?si=19-55wuU8FRA68St" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/NPrqmhdrjjI/hqdefault.jpg" />
+  <div class="card-title">민니 - In The Novel (LIVE CLIP) 모든 게 착각이었다 OST / 2023-01-26</div>
 </a>
-<a class="card" href="https://youtu.be/rpqDryIMU9Q?si=TRJX0T1RNn_-f641" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/rpqDryIMU9Q/hqdefault.jpg" />
-<div class="card-title">(Feat. 소연) - SUPERCARRY 롤 음악 - 리그 오브 레전드 / 2023-01-06</div>
+<a class="card" href="https://youtu.be/rpqDryIMU9Q?si=TRJX0T1RNn_-f641" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/rpqDryIMU9Q/hqdefault.jpg" />
+  <div class="card-title">(Feat. 소연) - SUPERCARRY 롤 음악 - 리그 오브 레전드 / 2023-01-06</div>
 </a>
-<a class="card" href="https://youtu.be/bjFMG8BT144?si=P7N5pLnIqZZ6gR5s" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/bjFMG8BT144/hqdefault.jpg" />
-<div class="card-title">Change (LIVE CLIP) / 2022-11-11</div>
+<a class="card" href="https://youtu.be/bjFMG8BT144?si=P7N5pLnIqZZ6gR5s" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/bjFMG8BT144/hqdefault.jpg" />
+  <div class="card-title">Change (LIVE CLIP) / 2022-11-11</div>
 </a>
-<a class="card" href="https://youtu.be/a6Y1GX7wDnA?si=_jr2KwDOQc7jfy40" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/a6Y1GX7wDnA/hqdefault.jpg" />
-<div class="card-title">LOVE (Music Clip) / 2022-11-06</div>
+<a class="card" href="https://youtu.be/a6Y1GX7wDnA?si=_jr2KwDOQc7jfy40" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/a6Y1GX7wDnA/hqdefault.jpg" />
+  <div class="card-title">LOVE (Music Clip) / 2022-11-06</div>
 </a>
-<a href="https://youtu.be/fCO7f0SmrDc" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/fCO7f0SmrDc/hqdefault.jpg" alt="Nxde 썸네일">
-<div class="card-title">Nxde (2022-10-17)</div>
+<a href="https://youtu.be/fCO7f0SmrDc" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/fCO7f0SmrDc/hqdefault.jpg" alt="Nxde 썸네일">
+  <div class="card-title">Nxde (2022-10-17)</div>
 </a>
-<a class="card" href="https://youtu.be/AA8amPGXhKw?si=m4eCPzxC8Br39aB1" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/AA8amPGXhKw/hqdefault.jpg" />
-<div class="card-title">민니 - HWAA (Wan Thong Rai Jai ver.) 웹툰 MV / 2022-07-17</div>
+<a class="card" href="https://youtu.be/AA8amPGXhKw?si=m4eCPzxC8Br39aB1" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/AA8amPGXhKw/hqdefault.jpg" />
+  <div class="card-title">민니 - HWAA (Wan Thong Rai Jai ver.) 웹툰 MV / 2022-07-17</div>
 </a>
-<a class="card" href="https://youtu.be/rsgyQYs4C8A?si=IIXUJioxOUziMqcv" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/rsgyQYs4C8A/hqdefault.jpg" />
-<div class="card-title">민니 - 너의 하루를 묻고 싶어 (링크 OST) / 2022-06-21</div>
+<a class="card" href="https://youtu.be/rsgyQYs4C8A?si=IIXUJioxOUziMqcv" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/rsgyQYs4C8A/hqdefault.jpg" />
+  <div class="card-title">민니 - 너의 하루를 묻고 싶어 (링크 OST) / 2022-06-21</div>
 </a>
-<a href="https://youtu.be/35lirBqwgTs" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/35lirBqwgTs/hqdefault.jpg" alt="Drive 썸네일">
-<div class="card-title">미연 - Drive (2022-04-27)</div>
+<a href="https://youtu.be/35lirBqwgTs" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/35lirBqwgTs/hqdefault.jpg" alt="Drive 썸네일">
+  <div class="card-title">미연(MIYEON) - Drive (2022-04-27)</div>
 </a>
-<a class="card" href="https://youtu.be/SuMnpTc8zoU?si=EqDugqqC153qq0jI" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/SuMnpTc8zoU/hqdefault.jpg" />
-<div class="card-title">'말리지 마' (LIVE CLIP) / 2022-04-07</div>
+<a class="card" href="https://youtu.be/SuMnpTc8zoU?si=EqDugqqC153qq0jI" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/SuMnpTc8zoU/hqdefault.jpg" />
+  <div class="card-title">'말리지 마' (LIVE CLIP) / 2022-04-07</div>
 </a>
-<a class="card" href="https://youtu.be/KIQncyxUwnQ?si=KXL6ZLLaTqlaGSnn" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/KIQncyxUwnQ/hqdefault.jpg" />
-<div class="card-title">미연 - Drive (LIVE CLIP) / 2022-04-27</div>
+<a class="card" href="https://youtu.be/KIQncyxUwnQ?si=KXL6ZLLaTqlaGSnn" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/KIQncyxUwnQ/hqdefault.jpg" />
+  <div class="card-title">미연 - Drive (LIVE CLIP) / 2022-04-27</div>
 </a>
-<a href="https://youtu.be/Jh4QFaPmdss" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/Jh4QFaPmdss/hqdefault.jpg" alt="TOMBOY 썸네일">
-<div class="card-title">TOMBOY (2022-03-14)</div>
+<a href="https://youtu.be/Jh4QFaPmdss" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/Jh4QFaPmdss/hqdefault.jpg" alt="TOMBOY 썸네일">
+  <div class="card-title">TOMBOY (2022-03-14)</div>
 </a>
-<a class="card" href="https://youtu.be/qIyXFwnGy_I?si=8GRw4_mtIEK8C8pm" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/qIyXFwnGy_I/hqdefault.jpg" />
-<div class="card-title">라비(RAVI) - '애니(feat.소연)' / 2021-12-07</div>
+<a class="card" href="https://youtu.be/qIyXFwnGy_I?si=8GRw4_mtIEK8C8pm" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/qIyXFwnGy_I/hqdefault.jpg" />
+  <div class="card-title">라비(RAVI) - '애니(feat.소연)' / 2021-12-07</div>
 </a>
-<a class="card" href="https://youtu.be/l3pXHJTmpqU?si=DlhJ1S341KsZzSCW" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/l3pXHJTmpqU/hqdefault.jpg" />
-<div class="card-title">DONGHAE 동해 - Blue Moon (Feat. 미연) Live Video / 2021-10-16</div>
+<a class="card" href="https://youtu.be/l3pXHJTmpqU?si=DlhJ1S341KsZzSCW" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/l3pXHJTmpqU/hqdefault.jpg" />
+  <div class="card-title">DONGHAE 동해 - Blue Moon (Feat. 미연) Live Video / 2021-10-16</div>
 </a>
-<a class="card" href="https://youtu.be/yQ_YZGrsx6M?si=GzCmRRaZ4NXF-uT0" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/yQ_YZGrsx6M/hqdefault.jpg" />
-  <div class="card-title">전소연(Feat. 비비(BIBI) 이영지) - Is this bad b****** number? / 2021-07-06</div>
-  </a>
-<a href="https://youtu.be/MqzX9JAZ08U" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/MqzX9JAZ08U/hqdefault.jpg" alt="삠삠 썸네일">
-<div class="card-title">소연 - 삠삠 (BEAM BEAM) (2021-07-05)</div>
+<a class="card" href="https://youtu.be/yQ_YZGrsx6M?si=GzCmRRaZ4NXF-uT0" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/yQ_YZGrsx6M/hqdefault.jpg" />
+  <div class="card-title">전소연(Feat. 비비(BIBI), 이영지) - Is this bad b****** number? / 2021-07-06</div>
 </a>
-<a class="card" href="https://youtu.be/hWiJ_SW0R_Q?si=rDxTLVMoGKxfK8mU" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/hWiJ_SW0R_Q/hqdefault.jpg" />
-<div class="card-title">미연 - 너는 나의 숨이였다 (SPECIAL CLIP) / 2021-05-28</div>
+<a href="https://youtu.be/MqzX9JAZ08U" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/MqzX9JAZ08U/hqdefault.jpg" alt="삠삠 썸네일">
+  <div class="card-title">소연(SOYEON) - 삠삠 (BEAM BEAM) (2021-07-05)</div>
 </a>
-<a href="https://youtu.be/AE8yKldv_oo" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/AE8yKldv_oo/hqdefault.jpg" alt="Bonnie & Clyde 썸네일">
-<div class="card-title">우기 - Bonnie & Clyde (2021-05-21)</div>
+<a class="card" href="https://youtu.be/hWiJ_SW0R_Q?si=rDxTLVMoGKxfK8mU" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/hWiJ_SW0R_Q/hqdefault.jpg" />
+  <div class="card-title">미연 - 너는 나의 숨이였다 (SPECIAL CLIP) / 2021-05-28</div>
 </a>
-<a href="https://youtu.be/wxDHQT0iBKM" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/wxDHQT0iBKM/hqdefault.jpg" alt="Giant 썸네일">
-<div class="card-title">우기 - Giant (2021-05-13)</div>
+<a href="https://youtu.be/AE8yKldv_oo" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/AE8yKldv_oo/hqdefault.jpg" alt="Bonnie & Clyde 썸네일">
+  <div class="card-title">우기(YUQI) - Bonnie & Clyde (2021-05-21)</div>
 </a>
-<a class="card" href="https://youtu.be/U6DG3TBcV6s?si=ASU8aZ09-lmaHniy" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/U6DG3TBcV6s/hqdefault.jpg" />
-<div class="card-title">'Last Dance (Prod. GroovyRoom)' / 2021-04-29</div>
+<a href="https://youtu.be/wxDHQT0iBKM" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/wxDHQT0iBKM/hqdefault.jpg" alt="Giant 썸네일">
+  <div class="card-title">우기(YUQI) - Giant (2021-05-13)</div>
 </a>
-<a href="https://youtu.be/P62kgQCuxGE" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/P62kgQCuxGE/hqdefault.jpg" alt="HWAA 리믹스 썸네일">
-<div class="card-title">HWAA (Remix) (2021-02-05)</div>
-@@ -452,7 +452,7 @@
+<a class="card" href="https://youtu.be/U6DG3TBcV6s?si=ASU8aZ09-lmaHniy" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/U6DG3TBcV6s/hqdefault.jpg" />
+  <div class="card-title">'Last Dance (Prod. GroovyRoom)' / 2021-04-29</div>
 </a>
-<a class="card" href="https://youtu.be/RkID8_gnTxw?si=qNsCjDfi2Sg8S_uX" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/RkID8_gnTxw/hqdefault.jpg" />
+<a href="https://youtu.be/P62kgQCuxGE" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/P62kgQCuxGE/hqdefault.jpg" alt="HWAA 리믹스 썸네일">
+  <div class="card-title">HWAA (Remix) (2021-02-05)</div>
+</a>
+<a href="https://youtu.be/z3szNvgQxHo" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/z3szNvgQxHo/hqdefault.jpg" alt="화 썸네일">
+  <div class="card-title">화(火花)(HWAA) (2021-01-11)</div>
+</a>
+<a href="https://youtu.be/KmPX5XwV9lk" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/KmPX5XwV9lk/hqdefault.jpg" alt="My Destiny 썸네일">
+  <div class="card-title">미연 - My Destiny(구미호뎐OST) (2020-11-26)</div>
+</a>
+<a class="card" href="https://youtu.be/602Esq9_2G0?si=SnaGtM6soNHXWKHY" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/602Esq9_2G0/hqdefault.jpg" />
+  <div class="card-title">미연, 민니 - We Already Fell In Love (도도솔솔라라솔 OST) / 2020-10-15</div>
+</a>
+<a class="card" href="https://youtu.be/LV36habZYuE?si=FFk4CHzk9kSMQ1s3" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/LV36habZYuE/hqdefault.jpg" />
+  <div class="card-title">민니 - Getaway (나의 위험한 아내 OST) / 2020-10-11</div>
+</a>
+<a class="card" href="https://youtu.be/RkID8_gnTxw?si=qNsCjDfi2Sg8S_uX" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/RkID8_gnTxw/hqdefault.jpg" />
   <div class="card-title">K/DA - THE BADDEST (Feat.미연,소연,Bea Miller, Wolftyla) / 2020-08-28</div>
- 
 </a>
-<a class="card" href="https://youtu.be/u7wSlAgEcvg?si=IGYZA2OvDakt06Px" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/u7wSlAgEcvg/hqdefault.jpg" />
-@@ -521,125 +521,125 @@
+<a class="card" href="https://youtu.be/u7wSlAgEcvg?si=IGYZA2OvDakt06Px" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/u7wSlAgEcvg/hqdefault.jpg" />
+  <div class="card-title">「Oh my god」(Japanese ver.) / 2020-08-19</div>
 </a>
-<a class="card" href="https://youtu.be/UOxkGD8qRB4?si=VVfDtwXwD7L-ddOs" target="_blank" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/UOxkGD8qRB4/hqdefault.jpg" />
-  <div class="card-title">K/DA - POP/STARS (ft.미연,소연, Madison Beer, Jaira Burns) / 2018-11-03</div>
- </a>
-<a href="https://youtu.be/KR5CtMLuiqQ" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/KR5CtMLuiqQ/hqdefault.jpg" alt="Wow Thing 썸네일">
-<div class="card-title">소연X슬기X청하X신비 - Wow Thing (2018-09-28)</div>
-</a>    
-<a href="https://youtu.be/OKNXn2qCEws" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/OKNXn2qCEws/hqdefault.jpg" alt="한(一) 썸네일">
-<div class="card-title">한(一)(HANN) (2018-08-14)</div>
+<a href="https://youtu.be/HPQ5mqovXHo" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/HPQ5mqovXHo/hqdefault.jpg" alt="덤디덤디 썸네일">
+  <div class="card-title">덤디덤디 (DUMDi DUMDi) (2020-08-03)</div>
 </a>
-<a href="https://youtu.be/p4RIhcY7V3c" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/p4RIhcY7V3c/hqdefault.jpg" alt="LATATA 썸네일">
-<div class="card-title">LATATA (2018-05-02)</div>
+<a href="https://youtu.be/4VmLuWDkHYQ" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/4VmLuWDkHYQ/hqdefault.jpg" alt="DESSERT 썸네일">
+  <div class="card-title">효연(Feat.소연) - DESSERT (2020-07-22)</div>
 </a>
-<a href="https://youtu.be/b01dBTBzyz0" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/b01dBTBzyz0/hqdefault.jpg" alt="Idle song 썸네일">
-<div class="card-title">소연 - Idle song (2018-02-28)</div>
+<a class="card" href="https://youtu.be/ZlKoeJ3xlx4?si=5c6lzE9yZDqkjbeV" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/ZlKoeJ3xlx4/hqdefault.jpg" />
+  <div class="card-title">'i'M THE TREND' (SPECIAL CLIP) / 2020-07-07</div>
 </a>
-<a href="https://youtu.be/FJ8kJdTYj1o" target="_blank" class="card" data-category="MV & SPECIAL CLIP">
-<img src="https://img.youtube.com/vi/FJ8kJdTYj1o/hqdefault.jpg" alt="Jelly 썸네일">
-<div class="card-title">소연 - Jelly (2017-11-05)</div>
+<a class="card" href="https://youtu.be/UR-1Tgx1MeA?si=_m8AEmO7VNpNcVXr" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/UR-1Tgx1MeA/hqdefault.jpg" />
+  <div class="card-title">'Oh my god (English Ver.)' Lyric Video / 2020-04-17</div>
 </a>
-<a href="https://youtu.be/Ly5SxYH5OhI" target="_blank" class="card" data-category="레코딩비하인드">
-<img src="https://img.youtube.com/vi/Ly5SxYH5OhI/hqdefault.jpg" alt="Good Thing">
-<div class="card-title">Good Thing Recording Behind (2025-05-27)</div>
+<a class="card" href="https://youtu.be/TzepUKHa9lg?si=jhTfwmuBPDlTov1j" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/TzepUKHa9lg/hqdefault.jpg" />
+  <div class="card-title">'사랑해(Luv U)' Lyric Video / 2020-04-10</div>
 </a>
-<a href="https://youtu.be/eOFfOLZOp0M" target="_blank" class="card" data-category="레코딩비하인드">
-<img src="https://img.youtube.com/vi/eOFfOLZOp0M/hqdefault.jpg" alt="민니 숨">
-<div class="card-title">민니 - 숨 (언슬전 OST) Recording Behind (2025-04-26)</div>
+<a href="https://youtu.be/om3n2ni8luE" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/om3n2ni8luE/hqdefault.jpg" alt="Oh my god 썸네일">
+  <div class="card-title">Oh my god (2020-04-06)</div>
 </a>
-<a href="https://youtu.be/yvWNj1E872g" target="_blank" class="card" data-category="레코딩비하인드">
-<img src="https://img.youtube.com/vi/yvWNj1E872g/hqdefault.jpg" alt="MINNIE HER 앨범">
-<div class="card-title">민니 - HER 앨범 수록곡 Recording Behind (2025-02-17)</div>
+<a href="https://youtu.be/6oanIo_2Z4Q" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/6oanIo_2Z4Q/hqdefault.jpg" alt="LION 썸네일">
+  <div class="card-title">LION (2019-11-04)</div>
 </a>
-<a href="https://youtu.be/HKzKcnEx9Bk" target="_blank" class="card" data-category="레코딩비하인드">
-<img src="https://img.youtube.com/vi/HKzKcnEx9Bk/hqdefault.jpg" alt="MINNIE HER">
-<div class="card-title">민니 - HER Recording Behind (2025-02-01)</div>
+<a class="card" href="https://youtu.be/-kVhMnKuk_A?si=OiNAWCuBJN_ONlAc" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/-kVhMnKuk_A/hqdefault.jpg" />
+  <div class="card-title">WENGIE(Feat.MINNIE) - EMPIRE / 2019-10-18</div>
 </a>
-<a href="https://youtu.be/s_CQvOpX9FY" target="_blank" class="card" data-category="레코딩비하인드">
-<img src="https://img.youtube.com/vi/s_CQvOpX9FY/hqdefault.jpg" alt="소연 맑음">
-<div class="card-title">소연 - 내 이름 맑음 Recording Behind (2024-09-26)</div>
+<a class="card" href="https://youtu.be/lGuPDlo2Ols?si=1EdvcHmcXPBgHNEy" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/lGuPDlo2Ols/hqdefault.jpg" />
+  <div class="card-title">WENGIE(Feat.MINNIE) - EMPIRE (Korean Version) / 2019-10-17</div>
 </a>
-<a href="https://youtu.be/8u9879OGO14" target="_blank" class="card" data-category="레코딩비하인드">
-<img src="https://img.youtube.com/vi/8u9879OGO14/hqdefault.jpg" alt="Neverland">
-<div class="card-title">Neverland Recording Behind (2024-08-06)</div>
-</a>
-<a href="https://youtu.be/dTAvYoKt6M4" target="_blank" class="card" data-category="레코딩비하인드">
-<img src="https://img.youtube.com/vi/dTAvYoKt6M4/hqdefault.jpg" alt="Bloom">
-<div class="card-title">Bloom Recording Behind (2024-08-02)</div>
-</a>
-<a href="https://youtu.be/ioWv9shT4lU" target="_blank" class="card" data-category="레코딩비하인드">
-<img src="https://img.youtube.com/vi/ioWv9shT4lU/hqdefault.jpg" alt="Klaxon">
-<div class="card-title">클락션 (Klaxon) Recording Behind (2024-07-17)</div>
-</a>
-<a href="https://youtu.be/n2Q4qN7kjGM" target="_blank" class="card" data-category="레코딩비하인드">
-<img src="https://img.youtube.com/vi/n2Q4qN7kjGM/hqdefault.jpg" alt="Everytime">
-<div class="card-title">우기 민니 - Everytime Recording Behind (2024-05-17)</div>
-</a>
-<a href="https://youtu.be/nYUetCEWXVE" target="_blank" class="card" data-category="레코딩비하인드">
-<img src="https://img.youtube.com/vi/nYUetCEWXVE/hqdefault.jpg" alt="FREAK">
-<div class="card-title">우기 - FREAK Recording Behind (2024-05-01)</div>
-</a>
-<a href="https://youtu.be/u_rl0JqSGVY" target="_blank" class="card" data-category="레코딩비하인드">
-<img src="https://img.youtube.com/vi/u_rl0JqSGVY/hqdefault.jpg" alt="Super Lady">
-<div class="card-title">Super Lady Recording Behind (2024-02-11)</div>
-</a>
-<a href="https://youtu.be/_5EOmPP9qwM" target="_blank" class="card" data-category="레코딩비하인드">
-<img src="https://img.youtube.com/vi/_5EOmPP9qwM/hqdefault.jpg" alt="Paradise">
-<div class="card-title">Paradise & 어린 어른 Recording Behind (2023-06-16)</div>
-</a>
-<a href="https://youtu.be/wg7AL7inFTE" target="_blank" class="card" data-category="레코딩비하인드">
-<img src="https://img.youtube.com/vi/wg7AL7inFTE/hqdefault.jpg" alt="퀸카">
-<div class="card-title">퀸카 (Queencard) Recording Behind (2023-05-26)</div>
-</a>
-<a href="https://youtu.be/17I_MiCA9HQ" target="_blank" class="card" data-category="레코딩비하인드">
-<img src="https://img.youtube.com/vi/17I_MiCA9HQ/hqdefault.jpg" alt="민니 Expectations">
-<div class="card-title">민니 - Expectations Recording Behind (2023-03-20)</div>
-</a>
-<a href="https://youtu.be/F8p3RR37naI" target="_blank" class="card" data-category="레코딩비하인드">
-<img src="https://img.youtube.com/vi/F8p3RR37naI/hqdefault.jpg" alt="Nxde">
-<div class="card-title">Nxde - Recording Behind (2022-12-23)</div>
-</a>
-<a href="https://youtu.be/yiRVcOu6Y6Y" target="_blank" class="card" data-category="레코딩비하인드">
-<img src="https://img.youtube.com/vi/yiRVcOu6Y6Y/hqdefault.jpg" alt="미연">
-<div class="card-title">미연 - 너는 나의 숨이었다 Recording Behind  (2021-05-28)</div>
-</a>
-<a href="https://youtu.be/v99wxx_Dkj8" target="_blank" class="card" data-category="레코딩비하인드">
-<img src="https://img.youtube.com/vi/v99wxx_Dkj8/hqdefault.jpg" alt="HWAA Chinese Ver.">
-<div class="card-title">HWAA (Chinese Ver.) Recording Behind (2021-02-06)</div>
-</a>
- <div class="thumbnail-grid">
-  <a href="https://youtu.be/sJFegjopCRA" target="_blank" class="card" data-category="2025">
-    <img src="https://img.youtube.com/vi/sJFegjopCRA/hqdefault.jpg" alt="조현아의 평범한 목요일 밤 ep.11 -미연 우기 썸네일">
-    <div class="card-title">조현아의 평범한 목요일 밤 ep.11-미연 우기 (2025-05-29)</div>
-  </a>
-  <a href="https://youtu.be/3SS8xwX3FHI" target="_blank" class="card" data-category="2025">
-    <img src="https://img.youtube.com/vi/3SS8xwX3FHI/hqdefault.jpg" alt="티파니의 얼굴보고 얘기해 ep.09 - 민니 썸네일">
-    <div class="card-title">티파니의 얼굴보고 얘기해 ep.09-민니 (2025-05-28)</div>
-  </a>
-  <a href="https://youtu.be/1QwRnpTX5vo" target="_blank" class="card" data-category="2025">
-    <img src="https://img.youtube.com/vi/1QwRnpTX5vo/hqdefault.jpg" alt="릴레이댄스 비하인드 썸네일">
-    <div class="card-title">릴레이댄스 비하인드(2025-05-27)</div>
-  </a>
-  <a href="https://youtu.be/141b1bB22h8" target="_blank" class="card" data-category="2025">
-    <img src="https://img.youtube.com/vi/141b1bB22h8/hqdefault.jpg" alt="런닝맨 ep.753 - 미연 소연 썸네일">
-    <div class="card-title">런닝맨 ep.753-미연 소연 (2025-05-26)</div>
-  </a>
-  <a href="https://youtu.be/YouyFmKwGz8" target="_blank" class="card" data-category="2025">
-    <img src="https://img.youtube.com/vi/YouyFmKwGz8/hqdefault.jpg" alt="개그콘서트 심곡파출소 - 우기 썸네일">
-    <div class="card-title">개그콘서트 심곡파출소-우기 (2025-05-25)</div>
-  </a>
-  <a href="https://youtu.be/gyy645RzBBA" target="_blank" class="card" data-category="2025">
-    <img src="https://img.youtube.com/vi/gyy645RzBBA/hqdefault.jpg" alt="미연zip (단체) 썸네일">
-    <div class="card-title">미연zip (단체) (2025-05-25)</div>
-  </a>
-  <a href="https://youtu.be/EDDO1Ip_Glw" target="_blank" class="card" data-category="2025">
-    <img src="https://img.youtube.com/vi/EDDO1Ip_Glw/hqdefault.jpg" alt="집대성 ep.58 - 미연 소연 썸네일">
-    <div class="card-title">집대성 ep.58-미연 소연 (2025-05-23)</div>
-  </a>
-  <a href="https://youtu.be/gecnUpw9sAk" target="_blank" class="card" data-category="2025">
-    <img src="https://img.youtube.com/vi/gecnUpw9sAk/hqdefault.jpg" alt="할명수 ep.237 (단체) 썸네일">
-    <div class="card-title">할명수 ep.237(단체) (2025-05-23)</div>
-  </a>
-  <a href="https://youtu.be/a4kO0Mk8BkI" target="_blank" class="card" data-category="2025">
-    <img src="https://img.youtube.com/vi/a4kO0Mk8BkI/hqdefault.jpg" alt="민주의 핑크 캐비닛 EP.22 - 슈화 썸네일">
-    <div class="card-title">민주의 핑크 캐비닛 EP.22-슈화 (2025-05-22)</div>
-  </a>
-  <a href="https://youtu.be/37Bf68jEZew" target="_blank" class="card" data-category="2025">
-    <img src="https://img.youtube.com/vi/37Bf68jEZew/hqdefault.jpg" alt="정용화의 엘피룸 EP.07 - 미연 썸네일">
-    <div class="card-title">정용화의 엘피룸 EP.07-미연 (2025-05-22)</div>
-  </a>
-  <a href="https://youtu.be/WE4LU1ks8u4" target="_blank" class="card" data-category="2025">
-    <img src="https://img.youtube.com/vi/WE4LU1ks8u4/hqdefault.jpg" alt="아이유의 팔레트🎨] '아이'들 (With i-dle) Ep.33 (단체) 썸네일">
-    <div class="card-title">아이유의 팔레트🎨] '아이'들 (With i-dle) Ep.33 (단체) (2025-05-22)</div>
-  </a>
-  <a href="https://youtu.be/iJkVKzTeVZA" target="_blank" class="card" data-category="2025">
-    <img src="https://img.youtube.com/vi/iJkVKzTeVZA/hqdefault.jpg" alt="임슬옹의 걸스옹탑 ep.06 - 미연 썸네일">
-    <div class="card-title">임슬옹의 걸스옹탑 ep.06-미연 (2025-05-21)</div>
-  </a>
-  <a href="https://youtu.be/6AnMTINzL4g" target="_blank" class="card" data-category="2025">
-    <img src="https://img.youtube.com/vi/6AnMTINzL4g/hqdefault.jpg" alt="낭만의 외노자 EP.5 - 민니 썸네일">
-    <div class="card-title">낭만의 외노자 EP.5-민니 (2025-05-21)</div>
-  </a>
-  <a href="https://youtu.be/NS5YovKgcco" target="_blank" class="card" data-category="2025">
-    <img src="https://img.youtube.com/vi/NS5YovKgcco/hqdefault.jpg" alt="[전참시 ep.347] - (단체) 민니 하우스 최초 공개🏠 서로 견제했던 연습생 시절 에피소드부터 재계약 비하인드까지 다 얘기하는 아이들 썸네일">
-    <div class="card-title">[전참시 ep.347]-(단체) 민니 하우스 최초 공개🏠 서로 견제했던 연습생 시절 에피소드부터 재계약 비하인드까지 다 얘기하는 아이들 (2025-05-17)</div>
-  </a>
-  <a href="https://youtu.be/RugCavy2gXM" target="_blank" class="card" data-category="2025">
-    <img src="https://img.youtube.com/vi/RugCavy2gXM/hqdefault.jpg" alt="[전참시 ep.347] - (단체) 완전체 재계약 후 1인 1매니저로 바뀐 아이들의 5인 5색 시끌벅적 출근길 썸네일">
-    <div class="card-title">[전참시 ep.347]-(단체) 완전체 재계약 후 1인 1매니저로 바뀐 아이들의 5인 5색 시끌벅적 출근길 (2025-05-17)</div>
-  </a>
-</div>
 
-<a href="https://youtu.be/nUwSf-Szaws" target="_blank" class="card" data-category="음방활동">
-<img src="https://img.youtube.com/vi/nUwSf-Szaws/hqdefault.jpg" alt="음방 썸네일">
-<div class="card-title">음악방송 무대</div>
+<a href="https://youtu.be/ypNJMDlJvY4" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/ypNJMDlJvY4/hqdefault.jpg" alt="LATATA 일본어 썸네일">
+  <div class="card-title">LATATA (JP Ver.) (2019-07-12)</div>
 </a>
-<a href="https://youtu.be/8bguFz5ns3w" target="_blank" class="card" data-category="TV방송">
-<img src="https://img.youtube.com/vi/8bguFz5ns3w/hqdefault.jpg" alt="TV 썸네일">
-<div class="card-title">TV 예능 출연</div>
+<a href="https://youtu.be/I66oFXdf0KU" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/I66oFXdf0KU/hqdefault.jpg" alt="Uh-Oh 썸네일">
+  <div class="card-title">Uh-Oh (2019-06-26)</div>
 </a>
-<a href="https://youtu.be/Ly5SxYH5OhI" target="_blank" class="card" data-category="유튜브예능">
-<img src="https://img.youtube.com/vi/Ly5SxYH5OhI/hqdefault.jpg" alt="유튜브예능 썸네일">
-<div class="card-title">유튜브 예능</div>
+<a class="card" href="https://youtu.be/0Hk8qGSoHnA?si=f00Z4FeH9RacFx5u" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/0Hk8qGSoHnA/hqdefault.jpg" />
+  <div class="card-title">소연 - '애정결핍(The loveless)' Drawing Video (미발매) / 2019-06-08</div>
 </a>
-<a href="https://youtu.be/rnHFWKdFl2c" target="_blank" class="card" data-category="ETC">
-<img src="https://img.youtube.com/vi/rnHFWKdFl2c/hqdefault.jpg" alt="ETC 썸네일">
-<div class="card-title">기타 인터뷰</div>
+<a href="https://youtu.be/AkcCCaDUyaU" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/AkcCCaDUyaU/hqdefault.jpg" alt="Help Me 썸네일">
+  <div class="card-title">Help Me(그녀의 사생활OST) (2019-04-11)</div>
 </a>
-</div>
+<a class="card" href="https://youtu.be/_E5JtAcc3cY?si=8wwQpCEiQCNILQIS" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/_E5JtAcc3cY/hqdefault.jpg" />
+  <div class="card-title">KEY 키 - 'I Wanna Be (Feat. 소연)' / 2019-03-04</div>
+</a>
+<a href="https://youtu.be/2cevbhEqQF4" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/2cevbhEqQF4/hqdefault.jpg" alt="Senorita 썸네일">
+  <div class="card-title">Senorita (2019-02-26)</div>
+</a>
+<a class="card" href="https://youtu.be/UOxkGD8qRB4?si=VVfDtwXwD7L-ddOs" target="_blank" data-category="mv">
+  <img src="https://img.youtube.com/vi/UOxkGD8qRB4/hqdefault.jpg" />
+  <div class="card-title">K/DA - POP/STARS (ft.미연,소연, Madison Beer, Jaira Burns) / 2018-11-03</div>
+</a>
+<a href="https://youtu.be/KR5CtMLuiqQ" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/KR5CtMLuiqQ/hqdefault.jpg" alt="Wow Thing 썸네일">
+  <div class="card-title">소연X슬기X청하X신비 - Wow Thing (2018-09-28)</div>
+</a>    
+<a href="https://youtu.be/OKNXn2qCEws" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/OKNXn2qCEws/hqdefault.jpg" alt="한(一) 썸네일">
+  <div class="card-title">한(一)(HANN) (2018-08-14)</div>
+</a>
+<a href="https://youtu.be/p4RIhcY7V3c" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/p4RIhcY7V3c/hqdefault.jpg" alt="LATATA 썸네일">
+  <div class="card-title">LATATA (2018-05-02)</div>
+</a>
+<a href="https://youtu.be/b01dBTBzyz0" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/b01dBTBzyz0/hqdefault.jpg" alt="Idle song 썸네일">
+  <div class="card-title">소연(SOYEON) - Idle song (2018-02-28)</div>
+</a>
+<a href="https://youtu.be/FJ8kJdTYj1o" target="_blank" class="card" data-category="MV">
+  <img src="https://img.youtube.com/vi/FJ8kJdTYj1o/hqdefault.jpg" alt="Jelly 썸네일">
+  <div class="card-title">소연(SOYEON) - Jelly (2017-11-05)</div>
+</a>
+    <a href="https://youtu.be/Ly5SxYH5OhI" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/Ly5SxYH5OhI/hqdefault.jpg" alt="Good Thing">
+      <div class="card-title">Good Thing Recording Behind (2025-05-27)</div>
+    </a>
+    <a href="https://youtu.be/eOFfOLZOp0M" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/eOFfOLZOp0M/hqdefault.jpg" alt="민니 숨">
+      <div class="card-title">민니 - 숨 (언슬전 OST) Recording Behind (2025-04-26)</div>
+    </a>
+    <a href="https://youtu.be/yvWNj1E872g" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/yvWNj1E872g/hqdefault.jpg" alt="MINNIE HER 앨범">
+      <div class="card-title">민니 - HER 앨범 수록곡 Recording Behind (2025-02-17)</div>
+    </a>
+    <a href="https://youtu.be/HKzKcnEx9Bk" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/HKzKcnEx9Bk/hqdefault.jpg" alt="MINNIE HER">
+      <div class="card-title">민니 - HER Recording Behind (2025-02-01)</div>
+    </a>
+    <a href="https://youtu.be/s_CQvOpX9FY" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/s_CQvOpX9FY/hqdefault.jpg" alt="소연 맑음">
+      <div class="card-title">소연 - 내 이름 맑음 Recording Behind (2024-09-26)</div>
+    </a>
+    <a href="https://youtu.be/8u9879OGO14" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/8u9879OGO14/hqdefault.jpg" alt="Neverland">
+      <div class="card-title">Neverland Recording Behind (2024-08-06)</div>
+    </a>
+    <a href="https://youtu.be/dTAvYoKt6M4" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/dTAvYoKt6M4/hqdefault.jpg" alt="Bloom">
+      <div class="card-title">Bloom Recording Behind (2024-08-02)</div>
+    </a>
+    <a href="https://youtu.be/ioWv9shT4lU" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/ioWv9shT4lU/hqdefault.jpg" alt="Klaxon">
+      <div class="card-title">클락션 (Klaxon) Recording Behind (2024-07-17)</div>
+    </a>
+    <a href="https://youtu.be/n2Q4qN7kjGM" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/n2Q4qN7kjGM/hqdefault.jpg" alt="Everytime">
+      <div class="card-title">우기&민니 - Everytime Recording Behind (2024-05-17)</div>
+    </a>
+    <a href="https://youtu.be/nYUetCEWXVE" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/nYUetCEWXVE/hqdefault.jpg" alt="FREAK">
+      <div class="card-title">우기 - FREAK Recording Behind (2024-05-01)</div>
+    </a>
+    <a href="https://youtu.be/u_rl0JqSGVY" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/u_rl0JqSGVY/hqdefault.jpg" alt="Super Lady">
+      <div class="card-title">Super Lady Recording Behind (2024-02-11)</div>
+    </a>
+    <a href="https://youtu.be/_5EOmPP9qwM" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/_5EOmPP9qwM/hqdefault.jpg" alt="Paradise">
+      <div class="card-title">Paradise & 어린 어른 Recording Behind (2023-06-16)</div>
+    </a>
+    <a href="https://youtu.be/wg7AL7inFTE" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/wg7AL7inFTE/hqdefault.jpg" alt="퀸카">
+      <div class="card-title">퀸카 (Queencard) Recording Behind (2023-05-26)</div>
+    </a>
+    <a href="https://youtu.be/17I_MiCA9HQ" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/17I_MiCA9HQ/hqdefault.jpg" alt="민니 Expectations">
+      <div class="card-title">민니 - Expectations Recording Behind (2023-03-20)</div>
+    </a>
+    <a href="https://youtu.be/F8p3RR37naI" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/F8p3RR37naI/hqdefault.jpg" alt="Nxde">
+      <div class="card-title">Nxde - Recording Behind (2022-12-23)</div>
+    </a>
+    <a href="https://youtu.be/yiRVcOu6Y6Y" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/yiRVcOu6Y6Y/hqdefault.jpg" alt="미연">
+      <div class="card-title">미연 - 너는 나의 숨이었다 Recording Behind  (2021-05-28)</div>
+    </a>
+        <a href="https://youtu.be/v99wxx_Dkj8" target="_blank" class="card" data-category="레코딩비하인드">
+      <img src="https://img.youtube.com/vi/v99wxx_Dkj8/hqdefault.jpg" alt="HWAA Chinese Ver.">
+      <div class="card-title">HWAA (Chinese Ver.) Recording Behind (2021-02-06)</div>
+    </a>
+    <a href="https://youtu.be/iMHWuh6tIT0?si=0xMlm4oGt3PZ3XS1" target="_blank" class="card" data-category="레코딩비하인드 2020">
+  <img src="https://img.youtube.com/vi/iMHWuh6tIT0/hqdefault.jpg" alt="효연(Feat.소연) - ‘DESSERT' recording (소연cut)">
+  <div class="card-title">효연(Feat.소연) - ‘DESSERT' recording (소연cut) (2020-07-23)</div>
+</a>
+    <a href="https://youtu.be/nUwSf-Szaws" target="_blank" class="card" data-category="음방활동">
+      <img src="https://img.youtube.com/vi/nUwSf-Szaws/hqdefault.jpg" alt="음방 썸네일">
+      <div class="card-title">음악방송 무대</div>
+    </a>
+    <a href="https://youtu.be/8bguFz5ns3w" target="_blank" class="card" data-category="TV방송">
+      <img src="https://img.youtube.com/vi/8bguFz5ns3w/hqdefault.jpg" alt="TV 썸네일">
+      <div class="card-title">TV 예능 출연</div>
+    </a>
+    <a href="https://youtu.be/Ly5SxYH5OhI" target="_blank" class="card" data-category="유튜브예능">
+      <img src="https://img.youtube.com/vi/Ly5SxYH5OhI/hqdefault.jpg" alt="유튜브예능 썸네일">
+      <div class="card-title">유튜브 예능</div>
+    </a>
+    <a href="https://youtu.be/rnHFWKdFl2c" target="_blank" class="card" data-category="ETC">
+      <img src="https://img.youtube.com/vi/rnHFWKdFl2c/hqdefault.jpg" alt="ETC 썸네일">
+      <div class="card-title">기타 인터뷰</div>
+    </a>
+  </div>
 <script>
-function filterVideos(category) {
-const cards = document.querySelectorAll('.card');
-cards.forEach(card => {
-const cardCategory = card.getAttribute('data-category');
-if (category === 'all' || cardCategory === category) {
-card.style.display = 'block';
-} else {
-card.style.display = 'none';
-}
-});
-}
+  function filterVideos(category) {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+      const cardCategory = card.getAttribute('data-category');
+      if (category === 'all' || cardCategory === category) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
