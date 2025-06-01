@@ -17,6 +17,7 @@
       padding: 30px 0 20px;
       font-size: 28px;
       color: #fff;
+      cursor: pointer;
     }
     .category-bar {
       display: flex;
@@ -25,6 +26,9 @@
       padding: 20px;
       max-width: 1200px;
       margin: 0 auto;
+    }
+    .category-bar.hidden {
+      display: none;
     }
     .category-row {
       display: flex;
@@ -128,31 +132,31 @@
   </style>
 </head>
 <body>
-  <h1>I-DLE 몰아보기</h1>
-  <div class="category-bar">
+  <h1 onclick="goHome()">I-DLE 몰아보기</h1>
+  <div class="category-bar" id="categoryBar">
     <div class="category-row">
-      <button class="category-btn" onclick="showFilters('category')">MV & SPECIAL CLIP</button>
-      <button class="category-btn" onclick="showFilters('category')">LIVE / COVER SONG / DANCE</button>
-      <button class="category-btn" onclick="showFilters('category')">MUSIC SHOW PERFORMANCE</button>
-      <button class="category-btn" onclick="showFilters('category')">FESTIVAL / EVENT STAGE</button>
+      <button class="category-btn" onclick="showFilters('MV & SPECIAL CLIP')">MV & SPECIAL CLIP</button>
+      <button class="category-btn" onclick="showFilters('LIVE / COVER SONG / DANCE')">LIVE / COVER SONG / DANCE</button>
+      <button class="category-btn" onclick="showFilters('MUSIC SHOW PERFORMANCE')">MUSIC SHOW PERFORMANCE</button>
+      <button class="category-btn" onclick="showFilters('FESTIVAL / EVENT STAGE')">FESTIVAL / EVENT STAGE</button>
     </div>
     <div class="category-row">
-      <button class="category-btn" onclick="showFilters('category')">FANCAM & STAGE FOCUS</button>
-      <button class="category-btn" onclick="showFilters('category')">RECORDING / STUDIO BEHIND</button>
-      <button class="category-btn" onclick="showFilters('category')">DANCE PRACTICE / FANCHANT</button>
+      <button class="category-btn" onclick="showFilters('FANCAM & STAGE FOCUS')">FANCAM & STAGE FOCUS</button>
+      <button class="category-btn" onclick="showFilters('RECORDING / STUDIO BEHIND')">RECORDING / STUDIO BEHIND</button>
+      <button class="category-btn" onclick="showFilters('DANCE PRACTICE / FANCHANT')">DANCE PRACTICE / FANCHANT</button>
     </div>
     <div class="category-row">
-      <button class="category-btn" onclick="showFilters('category')">TV SHOW</button>
-      <button class="category-btn" onclick="showFilters('category')">YOUTUBE CONTENTS</button>
-      <button class="category-btn" onclick="showFilters('category')">REALITY (Original Content)</button>
-      <button class="category-btn" onclick="showFilters('category')">RADIO / PODCAST</button>
-      <button class="category-btn" onclick="showFilters('category')">LIVE STREAM</button>
+      <button class="category-btn" onclick="showFilters('TV SHOW')">TV SHOW</button>
+      <button class="category-btn" onclick="showFilters('YOUTUBE CONTENTS')">YOUTUBE CONTENTS</button>
+      <button class="category-btn" onclick="showFilters('REALITY (Original Content)')">REALITY (Original Content)</button>
+      <button class="category-btn" onclick="showFilters('RADIO / PODCAST')">RADIO / PODCAST</button>
+      <button class="category-btn" onclick="showFilters('LIVE STREAM')">LIVE STREAM</button>
     </div>
     <div class="category-row">
-      <button class="category-btn" onclick="showFilters('category')">JACKET / PHOTO SHOOT / INTERVIEW</button>
-      <button class="category-btn" onclick="showFilters('category')">BEHIND CLIPS</button>
-      <button class="category-btn" onclick="showFilters('category')">CHALLENGE</button>
-      <button class="category-btn" onclick="showFilters('category')">ETC</button>
+      <button class="category-btn" onclick="showFilters('JACKET / PHOTO SHOOT / INTERVIEW')">JACKET / PHOTO SHOOT / INTERVIEW</button>
+      <button class="category-btn" onclick="showFilters('BEHIND CLIPS')">BEHIND CLIPS</button>
+      <button class="category-btn" onclick="showFilters('CHALLENGE')">CHALLENGE</button>
+      <button class="category-btn" onclick="showFilters('ETC')">ETC</button>
       <input type="text" class="search-input" id="searchInput" placeholder="Search" />
     </div>
   </div>
@@ -181,9 +185,16 @@
     const searchInput = document.getElementById('searchInput');
     const videoContainer = document.getElementById('videoContainer');
     const subFilters = document.getElementById('subFilters');
+    const categoryBar = document.getElementById('categoryBar');
 
     function showFilters(category) {
-      subFilters.classList.toggle('active');
+      subFilters.classList.add('active');
+      categoryBar.classList.add('hidden');
+    }
+
+    function goHome() {
+      subFilters.classList.remove('active');
+      categoryBar.classList.remove('hidden');
     }
 
     searchInput.addEventListener('input', () => {
