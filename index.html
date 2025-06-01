@@ -64,12 +64,15 @@
       color: #888;
     }
     .sub-filters {
-      display: flex;
+      display: none;
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
       margin: 20px auto;
       max-width: 1000px;
+    }
+    .sub-filters.active {
+      display: flex;
     }
     .sub-filters .filter-btn {
       padding: 8px 14px;
@@ -128,33 +131,33 @@
   <h1>I-DLE 몰아보기</h1>
   <div class="category-bar">
     <div class="category-row">
-      <a class="category-btn" href="#">MV & SPECIAL CLIP</a>
-      <a class="category-btn" href="#">LIVE / COVER SONG / DANCE</a>
-      <a class="category-btn" href="#">MUSIC SHOW PERFORMANCE</a>
-      <a class="category-btn" href="#">FESTIVAL / EVENT STAGE</a>
+      <button class="category-btn" onclick="showFilters('category')">MV & SPECIAL CLIP</button>
+      <button class="category-btn" onclick="showFilters('category')">LIVE / COVER SONG / DANCE</button>
+      <button class="category-btn" onclick="showFilters('category')">MUSIC SHOW PERFORMANCE</button>
+      <button class="category-btn" onclick="showFilters('category')">FESTIVAL / EVENT STAGE</button>
     </div>
     <div class="category-row">
-      <a class="category-btn" href="#">FANCAM & STAGE FOCUS</a>
-      <a class="category-btn" href="#">RECORDING / STUDIO BEHIND</a>
-      <a class="category-btn" href="#">DANCE PRACTICE / FANCHANT</a>
+      <button class="category-btn" onclick="showFilters('category')">FANCAM & STAGE FOCUS</button>
+      <button class="category-btn" onclick="showFilters('category')">RECORDING / STUDIO BEHIND</button>
+      <button class="category-btn" onclick="showFilters('category')">DANCE PRACTICE / FANCHANT</button>
     </div>
     <div class="category-row">
-      <a class="category-btn" href="#">TV SHOW</a>
-      <a class="category-btn" href="#">YOUTUBE CONTENTS</a>
-      <a class="category-btn" href="#">REALITY (Original Content)</a>
-      <a class="category-btn" href="#">RADIO / PODCAST</a>
-      <a class="category-btn" href="#">LIVE STREAM</a>
+      <button class="category-btn" onclick="showFilters('category')">TV SHOW</button>
+      <button class="category-btn" onclick="showFilters('category')">YOUTUBE CONTENTS</button>
+      <button class="category-btn" onclick="showFilters('category')">REALITY (Original Content)</button>
+      <button class="category-btn" onclick="showFilters('category')">RADIO / PODCAST</button>
+      <button class="category-btn" onclick="showFilters('category')">LIVE STREAM</button>
     </div>
     <div class="category-row">
-      <a class="category-btn" href="#">JACKET / PHOTO SHOOT / INTERVIEW</a>
-      <a class="category-btn" href="#">BEHIND CLIPS</a>
-      <a class="category-btn" href="#">CHALLENGE</a>
-      <a class="category-btn" href="#">ETC</a>
+      <button class="category-btn" onclick="showFilters('category')">JACKET / PHOTO SHOOT / INTERVIEW</button>
+      <button class="category-btn" onclick="showFilters('category')">BEHIND CLIPS</button>
+      <button class="category-btn" onclick="showFilters('category')">CHALLENGE</button>
+      <button class="category-btn" onclick="showFilters('category')">ETC</button>
       <input type="text" class="search-input" id="searchInput" placeholder="Search" />
     </div>
   </div>
 
-  <div class="sub-filters">
+  <div class="sub-filters" id="subFilters">
     <button class="filter-btn" onclick="filterVideos('year', '2018')">2018</button>
     <button class="filter-btn" onclick="filterVideos('year', '2019')">2019</button>
     <button class="filter-btn" onclick="filterVideos('year', '2020')">2020</button>
@@ -171,29 +174,17 @@
   </div>
 
   <div class="video-container" id="videoContainer">
-    <div class="video-card" data-year="2025" data-member="소연">
-      <a href="https://www.youtube.com/watch?v=HFYobCvufa8" target="_blank">
-        <img src="https://img.youtube.com/vi/HFYobCvufa8/hqdefault.jpg" alt="[전소연] 소연의 컬투쇼 출연 영상" />
-        <div class="video-title">[전소연] 소연의 컬투쇼 출연 영상</div>
-      </a>
-    </div>
-    <div class="video-card" data-year="2025" data-member="소연">
-      <a href="https://www.youtube.com/watch?v=XhO80sPC0u8" target="_blank">
-        <img src="https://img.youtube.com/vi/XhO80sPC0u8/hqdefault.jpg" alt="[전소연] MBC 라디오 방송 출연" />
-        <div class="video-title">[전소연] MBC 라디오 방송 출연</div>
-      </a>
-    </div>
-    <div class="video-card" data-year="2025" data-member="소연">
-      <a href="https://www.youtube.com/watch?v=TLO_rkq7gBc" target="_blank">
-        <img src="https://img.youtube.com/vi/TLO_rkq7gBc/hqdefault.jpg" alt="[전소연] SBS 파워FM 인터뷰" />
-        <div class="video-title">[전소연] SBS 파워FM 인터뷰</div>
-      </a>
-    </div>
+    <!-- Video cards here -->
   </div>
 
   <script>
     const searchInput = document.getElementById('searchInput');
     const videoContainer = document.getElementById('videoContainer');
+    const subFilters = document.getElementById('subFilters');
+
+    function showFilters(category) {
+      subFilters.classList.toggle('active');
+    }
 
     searchInput.addEventListener('input', () => {
       const keyword = searchInput.value.toLowerCase();
