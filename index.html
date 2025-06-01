@@ -1,4 +1,4 @@
-<!-- ✅ index.html -->
+<!-- ✅ index.html 복구 및 보완 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -133,16 +133,58 @@
 </head>
 <body>
   <h1 onclick="goHome()">I-DLE 몰아보기</h1>
+
   <div class="category-bar" id="categoryBar">
-    <!-- category buttons here (unchanged) -->
+    <div class="category-row">
+      <button class="category-btn" onclick="showFilters('MV')">MV & SPECIAL CLIP</button>
+      <button class="category-btn" onclick="showFilters('LIVE')">LIVE / COVER SONG / DANCE</button>
+      <button class="category-btn" onclick="showFilters('MUSIC')">MUSIC SHOW PERFORMANCE</button>
+      <button class="category-btn" onclick="showFilters('FESTIVAL')">FESTIVAL / EVENT STAGE</button>
+    </div>
+    <div class="category-row">
+      <button class="category-btn" onclick="showFilters('FANCAM')">FANCAM & STAGE FOCUS</button>
+      <button class="category-btn" onclick="showFilters('RECORDING')">RECORDING / STUDIO BEHIND</button>
+      <button class="category-btn" onclick="showFilters('PRACTICE')">DANCE PRACTICE / FANCHANT</button>
+    </div>
+    <div class="category-row">
+      <button class="category-btn" onclick="showFilters('TV')">TV SHOW</button>
+      <button class="category-btn" onclick="showFilters('YOUTUBE')">YOUTUBE CONTENTS</button>
+      <button class="category-btn" onclick="showFilters('REALITY')">REALITY (Original Content)</button>
+      <button class="category-btn" onclick="showFilters('RADIO')">RADIO / PODCAST</button>
+      <button class="category-btn" onclick="showFilters('LIVE_STREAM')">LIVE STREAM</button>
+    </div>
+    <div class="category-row">
+      <button class="category-btn" onclick="showFilters('INTERVIEW')">JACKET / PHOTO SHOOT / INTERVIEW</button>
+      <button class="category-btn" onclick="showFilters('BEHIND')">BEHIND CLIPS</button>
+      <button class="category-btn" onclick="showFilters('CHALLENGE')">CHALLENGE</button>
+      <button class="category-btn" onclick="showFilters('ETC')">ETC</button>
+    </div>
+    <input type="text" id="searchInput" class="search-input" placeholder="search" />
   </div>
 
   <div class="sub-filters" id="subFilters">
-    <!-- sub filters here (unchanged) -->
+    <button class="filter-btn" onclick="filterVideos('year','2018')">2018</button>
+    <button class="filter-btn" onclick="filterVideos('year','2019')">2019</button>
+    <button class="filter-btn" onclick="filterVideos('year','2020')">2020</button>
+    <button class="filter-btn" onclick="filterVideos('year','2021')">2021</button>
+    <button class="filter-btn" onclick="filterVideos('year','2022')">2022</button>
+    <button class="filter-btn" onclick="filterVideos('year','2023')">2023</button>
+    <button class="filter-btn" onclick="filterVideos('year','2024')">2024</button>
+    <button class="filter-btn" onclick="filterVideos('year','2025')">2025</button>
+    <button class="filter-btn" onclick="filterVideos('member','미연')">미연</button>
+    <button class="filter-btn" onclick="filterVideos('member','민니')">민니</button>
+    <button class="filter-btn" onclick="filterVideos('member','소연')">소연</button>
+    <button class="filter-btn" onclick="filterVideos('member','우기')">우기</button>
+    <button class="filter-btn" onclick="filterVideos('member','슈화')">슈화</button>
   </div>
 
   <div class="video-container" id="videoContainer">
-    <!-- Video cards here -->
+    <div class="video-card" data-category="RADIO" data-year="2025" data-member="소연">
+      <a href="https://www.youtube.com/watch?v=HFYobCvufa8" target="_blank">
+        <img src="https://img.youtube.com/vi/HFYobCvufa8/hqdefault.jpg" alt="전소연의 스페셜 라디오 인터뷰" />
+        <div class="video-title">전소연의 스페셜 라디오 인터뷰</div>
+      </a>
+    </div>
   </div>
 
   <script>
