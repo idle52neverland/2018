@@ -62,6 +62,26 @@
     .search-input::placeholder {
       color: #888;
     }
+    .sub-filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px auto;
+      max-width: 1000px;
+    }
+    .sub-filters .filter-btn {
+      padding: 8px 14px;
+      background-color: #222;
+      border: none;
+      border-radius: 16px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .filter-btn:hover {
+      background-color: #ff4da6;
+    }
     @media (max-width: 600px) {
       .category-bar {
         align-items: center;
@@ -91,7 +111,7 @@
     </div>
     <div class="category-row">
       <a class="category-btn" href="#">TV SHOW</a>
-      <a class="category-btn" href="youtube.html">YOUTUBE CONTENTS</a>
+      <a class="category-btn" href="#">YOUTUBE CONTENTS</a>
       <a class="category-btn" href="#">REALITY (Original Content)</a>
       <a class="category-btn" href="#">RADIO / PODCAST</a>
       <a class="category-btn" href="#">LIVE STREAM</a>
@@ -104,5 +124,24 @@
       <input type="text" class="search-input" placeholder="Search" />
     </div>
   </div>
+
+  <div class="sub-filters">
+    <!-- 연도 필터 -->
+    <button class="filter-btn">2018</button>
+    <button class="filter-btn">2019</button>
+    <button class="filter-btn">2020</button>
+    <button class="filter-btn">2021</button>
+    <button class="filter-btn">2022</button>
+    <button class="filter-btn">2023</button>
+    <button class="filter-btn">2024</button>
+    <button class="filter-btn">2025</button>
+    <!-- 멤버 필터 -->
+    <button class="filter-btn">미연</button>
+    <button class="filter-btn">민니</button>
+    <button class="filter-btn">소연</button>
+    <button class="filter-btn">우기</button>
+    <button class="filter-btn">슈화</button>
+  </div>
 </body>
 </html>
+
