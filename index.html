@@ -60,12 +60,17 @@
     .sub-filters {
       display: none;
     }
+    .category-bar-hidden {
+      display: none;
+    }
   </style>
   <script>
     function showFilters(category) {
       const filters = document.getElementById('subFilters');
-      if (filters) {
+      const categoryBar = document.getElementById('categoryBar');
+      if (filters && categoryBar) {
         filters.style.display = 'flex';
+        categoryBar.classList.add('category-bar-hidden');
       }
     }
   </script>
@@ -92,7 +97,6 @@
 
   <!-- 기존 콘텐츠 시작 -->
   <div id="categoryBar">
-    <input type="text" id="searchInput" class="search-input" placeholder="search" />
     <div class="category-row">
       <button class="category-btn" onclick="showFilters('MV')">MV & SPECIAL CLIP</button>
       <button class="category-btn" onclick="showFilters('LIVE')">LIVE / COVER SONG / DANCE</button>
@@ -117,6 +121,7 @@
       <button class="category-btn" onclick="showFilters('CHALLENGE')">CHALLENGE</button>
       <button class="category-btn" onclick="showFilters('ETC')">ETC</button>
     </div>
+    <input type="text" id="searchInput" class="search-input" placeholder="search" />
   </div>
   <!-- 기존 콘텐츠 끝 -->
 
