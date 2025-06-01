@@ -55,11 +55,11 @@
       background-color: #ff4da6;
     }
     .search-input {
-      padding: 10px 16px;
+      padding: 6px 12px;
       border-radius: 20px;
       border: 2px solid #444;
       outline: none;
-      font-size: 14px;
+      font-size: 13px;
       background-color: #fff;
       color: #333;
       margin-top: 10px;
@@ -169,7 +169,6 @@
   </div>
 
   <div class="sub-filters" id="subFilters">
-    <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" />
     <div class="filter-group">
       <button class="filter-btn" onclick="filterVideos('year','2018')">2018</button>
       <button class="filter-btn" onclick="filterVideos('year','2019')">2019</button>
@@ -185,6 +184,7 @@
       <button class="filter-btn" onclick="filterVideos('member','우기')">우기</button>
       <button class="filter-btn" onclick="filterVideos('member','슈화')">슈화</button>
     </div>
+    <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" />
   </div>
 
   <div class="video-container" id="videoContainer">
