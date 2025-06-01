@@ -12,7 +12,7 @@
       color: #fff;
       text-align: center;
     }
-    #currentCategoryTitle {
+    h1 {
       padding: 30px 0 10px;
       font-size: 28px;
       color: #fff;
@@ -51,9 +51,6 @@
       justify-content: flex-end;
       gap: 10px;
       margin: 0 20px 10px;
-    }
-    .social-icons.hidden {
-      display: none;
     }
     .social-icons a img {
       width: 24px;
@@ -116,13 +113,9 @@
       currentCategory = category;
       const filters = document.getElementById('subFilters');
       const categoryBar = document.getElementById('categoryBar');
-      const currentCategoryTitle = document.getElementById('currentCategoryTitle');
-      const socialIcons = document.querySelector('.social-icons');
-      if (filters && categoryBar && currentCategoryTitle && socialIcons) {
+      if (filters && categoryBar) {
         filters.style.display = 'flex';
         categoryBar.classList.add('category-bar-hidden');
-        currentCategoryTitle.innerText = category;
-        socialIcons.classList.add('hidden');
         history.pushState({ category }, '', `#${category}`);
       }
     }
@@ -130,23 +123,15 @@
     window.onpopstate = function(event) {
       const filters = document.getElementById('subFilters');
       const categoryBar = document.getElementById('categoryBar');
-      const currentCategoryTitle = document.getElementById('currentCategoryTitle');
-      const socialIcons = document.querySelector('.social-icons');
-      if (filters && categoryBar && currentCategoryTitle && socialIcons) {
+      if (filters && categoryBar) {
         filters.style.display = 'none';
         categoryBar.classList.remove('category-bar-hidden');
-        currentCategoryTitle.innerText = 'I-DLE 몰아보기';
-        socialIcons.classList.remove('hidden');
       }
-    }
-
-    window.onload = function () {
-      const title = document.getElementById('currentCategoryTitle');
-      if (title) title.innerText = 'I-DLE 몰아보기';
     }
   </script>
 </head>
 <body>
+  <h1>I-DLE 몰아보기</h1>
   <div class="social-icons">
     <a href="https://www.youtube.com/@official_i_dle" target="_blank">
       <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
@@ -164,7 +149,6 @@
       <img src="https://cdn-icons-png.flaticon.com/512/3669/3669986.png" alt="Weverse">
     </a>
   </div>
-  <div id="currentCategoryTitle"></div>
   <div id="categoryBar">
     <div class="category-row">
       <button class="category-btn" onclick="showFilters('MV')">MV & SPECIAL CLIP</button>
@@ -191,6 +175,26 @@
       <button class="category-btn" onclick="showFilters('ETC')">ETC</button>
     </div>
     <input type="text" id="searchInput" class="search-input" placeholder="search" />
+  </div>
+  <div class="sub-filters" id="subFilters">
+    <div class="filter-group">
+      <button class="filter-btn" onclick="filterVideos('year','2018')">2018</button>
+      <button class="filter-btn" onclick="filterVideos('year','2019')">2019</button>
+      <button class="filter-btn" onclick="filterVideos('year','2020')">2020</button>
+      <button class="filter-btn" onclick="filterVideos('year','2021')">2021</button>
+      <button class="filter-btn" onclick="filterVideos('year','2022')">2022</button>
+      <button class="filter-btn" onclick="filterVideos('year','2023')">2023</button>
+      <button class="filter-btn" onclick="filterVideos('year','2024')">2024</button>
+      <button class="filter-btn" onclick="filterVideos('year','2025')">2025</button>
+    </div>
+    <div class="filter-group">
+      <button class="filter-btn" onclick="filterVideos('member','미연')">미연</button>
+      <button class="filter-btn" onclick="filterVideos('member','민니')">민니</button>
+      <button class="filter-btn" onclick="filterVideos('member','소연')">소연</button>
+      <button class="filter-btn" onclick="filterVideos('member','우기')">우기</button>
+      <button class="filter-btn" onclick="filterVideos('member','슈화')">슈화</button>
+    </div>
+    <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" />
   </div>
 </body>
 </html>
