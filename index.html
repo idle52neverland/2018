@@ -131,8 +131,6 @@
   </script>
 </head>
 <body>
-<!-- 이하 동일 -->
-
   <h1>I-DLE 몰아보기</h1>
   <div class="social-icons">
     <a href="https://www.youtube.com/@official_i_dle" target="_blank">
@@ -151,8 +149,6 @@
       <img src="https://cdn-icons-png.flaticon.com/512/3669/3669986.png" alt="Weverse">
     </a>
   </div>
-
-  <!-- 기존 콘텐츠 시작 -->
   <div id="categoryBar">
     <div class="category-row">
       <button class="category-btn" onclick="showFilters('MV')">MV & SPECIAL CLIP</button>
@@ -180,9 +176,7 @@
     </div>
     <input type="text" id="searchInput" class="search-input" placeholder="search" />
   </div>
-  <!-- 기존 콘텐츠 끝 -->
-
-  <div class="sub-filters" id="subFilters" style="flex-direction: column; align-items: center; gap: 10px; margin: 20px auto; max-width: 1000px;">
+  <div class="sub-filters" id="subFilters">
     <div class="filter-group">
       <button class="filter-btn" onclick="filterVideos('year','2018')">2018</button>
       <button class="filter-btn" onclick="filterVideos('year','2019')">2019</button>
@@ -192,6 +186,8 @@
       <button class="filter-btn" onclick="filterVideos('year','2023')">2023</button>
       <button class="filter-btn" onclick="filterVideos('year','2024')">2024</button>
       <button class="filter-btn" onclick="filterVideos('year','2025')">2025</button>
+    </div>
+    <div class="filter-group">
       <button class="filter-btn" onclick="filterVideos('member','미연')">미연</button>
       <button class="filter-btn" onclick="filterVideos('member','민니')">민니</button>
       <button class="filter-btn" onclick="filterVideos('member','소연')">소연</button>
