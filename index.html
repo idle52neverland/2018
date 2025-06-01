@@ -1,3 +1,4 @@
+<!-- ✅ index.html -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -82,6 +83,31 @@
     .filter-btn:hover {
       background-color: #ff4da6;
     }
+    .video-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .video-card {
+      background-color: #222;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .video-card img {
+      width: 100%;
+      display: block;
+    }
+    .video-title {
+      font-size: 14px;
+      padding: 10px;
+      color: #eee;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     @media (max-width: 600px) {
       .category-bar {
         align-items: center;
@@ -91,6 +117,9 @@
       }
       .search-input {
         width: 90%;
+      }
+      .video-container {
+        grid-template-columns: repeat(3, 1fr);
       }
     }
   </style>
@@ -121,27 +150,67 @@
       <a class="category-btn" href="#">BEHIND CLIPS</a>
       <a class="category-btn" href="#">CHALLENGE</a>
       <a class="category-btn" href="#">ETC</a>
-      <input type="text" class="search-input" placeholder="Search" />
+      <input type="text" class="search-input" id="searchInput" placeholder="Search" />
     </div>
   </div>
 
   <div class="sub-filters">
-    <!-- 연도 필터 -->
-    <button class="filter-btn">2018</button>
-    <button class="filter-btn">2019</button>
-    <button class="filter-btn">2020</button>
-    <button class="filter-btn">2021</button>
-    <button class="filter-btn">2022</button>
-    <button class="filter-btn">2023</button>
-    <button class="filter-btn">2024</button>
-    <button class="filter-btn">2025</button>
-    <!-- 멤버 필터 -->
-    <button class="filter-btn">미연</button>
-    <button class="filter-btn">민니</button>
-    <button class="filter-btn">소연</button>
-    <button class="filter-btn">우기</button>
-    <button class="filter-btn">슈화</button>
+    <button class="filter-btn" onclick="filterVideos('year', '2018')">2018</button>
+    <button class="filter-btn" onclick="filterVideos('year', '2019')">2019</button>
+    <button class="filter-btn" onclick="filterVideos('year', '2020')">2020</button>
+    <button class="filter-btn" onclick="filterVideos('year', '2021')">2021</button>
+    <button class="filter-btn" onclick="filterVideos('year', '2022')">2022</button>
+    <button class="filter-btn" onclick="filterVideos('year', '2023')">2023</button>
+    <button class="filter-btn" onclick="filterVideos('year', '2024')">2024</button>
+    <button class="filter-btn" onclick="filterVideos('year', '2025')">2025</button>
+    <button class="filter-btn" onclick="filterVideos('member', '미연')">미연</button>
+    <button class="filter-btn" onclick="filterVideos('member', '민니')">민니</button>
+    <button class="filter-btn" onclick="filterVideos('member', '소연')">소연</button>
+    <button class="filter-btn" onclick="filterVideos('member', '우기')">우기</button>
+    <button class="filter-btn" onclick="filterVideos('member', '슈화')">슈화</button>
   </div>
+
+  <div class="video-container" id="videoContainer">
+    <div class="video-card" data-year="2025" data-member="소연">
+      <a href="https://www.youtube.com/watch?v=HFYobCvufa8" target="_blank">
+        <img src="https://img.youtube.com/vi/HFYobCvufa8/hqdefault.jpg" alt="[전소연] 소연의 컬투쇼 출연 영상" />
+        <div class="video-title">[전소연] 소연의 컬투쇼 출연 영상</div>
+      </a>
+    </div>
+    <div class="video-card" data-year="2025" data-member="소연">
+      <a href="https://www.youtube.com/watch?v=XhO80sPC0u8" target="_blank">
+        <img src="https://img.youtube.com/vi/XhO80sPC0u8/hqdefault.jpg" alt="[전소연] MBC 라디오 방송 출연" />
+        <div class="video-title">[전소연] MBC 라디오 방송 출연</div>
+      </a>
+    </div>
+    <div class="video-card" data-year="2025" data-member="소연">
+      <a href="https://www.youtube.com/watch?v=TLO_rkq7gBc" target="_blank">
+        <img src="https://img.youtube.com/vi/TLO_rkq7gBc/hqdefault.jpg" alt="[전소연] SBS 파워FM 인터뷰" />
+        <div class="video-title">[전소연] SBS 파워FM 인터뷰</div>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const videoContainer = document.getElementById('videoContainer');
+
+    searchInput.addEventListener('input', () => {
+      const keyword = searchInput.value.toLowerCase();
+      const videos = document.querySelectorAll('.video-card');
+      videos.forEach(card => {
+        const title = card.innerText.toLowerCase();
+        card.style.display = title.includes(keyword) ? '' : 'none';
+      });
+    });
+
+    function filterVideos(type, value) {
+      const cards = document.querySelectorAll('.video-card');
+      cards.forEach(card => {
+        const data = card.dataset[type];
+        card.style.display = data && data.includes(value) ? '' : 'none';
+      });
+    }
+  </script>
 </body>
 </html>
-
