@@ -188,6 +188,7 @@
         const match = card.dataset[type] === value;
         card.style.display = match ? 'block' : 'none';
       });
+      history.pushState({ category: currentCategory, filterType: type, filterValue: value }, '', '');
     }
 
     function filterBySearch(term) {
@@ -203,6 +204,7 @@
         });
         container.style.display = searchTriggered && anyVisible ? 'flex' : 'none';
       });
+      history.pushState({ search: term }, '', '');
     }
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -216,12 +218,18 @@
           const title = card.querySelector('.card-title').textContent.toLowerCase();
           card.style.display = title.includes(term) ? 'block' : 'none';
         });
+        history.pushState({ category: currentCategory, search: term }, '', '');
       });
     });
 
     window.onpopstate = function (e) {
       if (e.state && e.state.category) {
         showFilters(e.state.category);
+        if (e.state.filterType && e.state.filterValue) {
+          filterVideos(e.state.filterType, e.state.filterValue);
+        } else if (e.state.search) {
+          filterBySearch(e.state.search);
+        }
       } else {
         document.getElementById('subFilters').style.display = 'none';
         document.getElementById('categoryBar').classList.remove('category-bar-hidden');
@@ -235,7 +243,8 @@
   </script>
 </head>
 <body>
-  <!-- body 내용은 그대로 유지됨 -->
+
+
 
 
   <h1 id="mainTitle">I-DLE 몰아보기</h1>
