@@ -214,12 +214,14 @@
         container.style.display = 'none';
       });
     };
-    window.addEventListener('DOMContentLoaded', () => {
+   window.addEventListener('DOMContentLoaded', () => {
   if (location.hash) {
     history.replaceState({}, '', location.pathname);
   }
+  document.querySelectorAll('.card-container').forEach(container => {
+    container.style.display = 'none';
+  });
 });
-
   </script>
 </head>
 <body>
