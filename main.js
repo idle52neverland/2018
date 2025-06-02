@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
   const loadHTML = async (id, file) => {
     const res = await fetch(file);
@@ -12,6 +13,14 @@ document.addEventListener("DOMContentLoaded", () => {
   loadHTML("categoryBar", "category.html");
   loadHTML("subFilters", "filters.html");
   loadHTML("cardContainer", "cards.html");
+
+  // filters.html 로딩 완료 후 해시 처리
+  document.addEventListener("filtersLoaded", () => {
+    if (location.hash && location.hash.length > 1) {
+      const hash = location.hash.substring(1); // #TV → TV
+      showFilters(hash);
+    }
+  });
 
   // 검색 버튼 클릭 이벤트
   window.triggerSubSearch = function () {
@@ -30,7 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.showFilters = function(code) {
     currentCategory = code;
-    document.getElementById('subFilters').style.display = 'flex';
+    const subFilters = document.getElementById('subFilters');
+    if (subFilters) subFilters.style.display = 'flex';
     document.getElementById('categoryBar').classList.add('category-bar-hidden');
     document.getElementById('mainTitle').textContent = code;
     document.querySelector('.social-icons').classList.add('hidden');
