@@ -182,7 +182,7 @@
       });
       const container = document.querySelector(`.card-container[data-category="${code}"]`);
       if (container) sortCardsByDate(container);
-      if (!skipHistory) history.replaceState({ category: code }, '', `#${code}`);
+      if (!skipHistory) history.pushState({ category: code }, '', `#${code}`);
     }
 
     function filterVideos(type, value) {
@@ -255,8 +255,6 @@
   </script>
 </head>
 <body>
-
-
 
 
 
