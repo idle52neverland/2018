@@ -53,17 +53,14 @@
       color: #888;
     }
     .nav-btn {
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #fff;
-      background-color: #555;
+      background: none;
       border: none;
       cursor: pointer;
     }
-    .nav-btn:hover {
-      background-color: #ff4da6;
+    .nav-btn img {
+      width: 24px;
+      height: 24px;
+      filter: brightness(0) invert(1);
     }
     .social-icons {
       display: flex;
@@ -239,9 +236,19 @@
       document.getElementById('categoryBar').classList.remove('category-bar-hidden');
       document.getElementById('mainTitle').textContent = 'I-DLE 몰아보기';
       document.querySelector('.social-icons').classList.remove('hidden');
+
       document.querySelectorAll('.card-container').forEach(container => {
         container.style.display = 'none';
+        container.querySelectorAll('.card').forEach(card => {
+          card.style.display = 'block';
+        });
       });
+
+      const subSearchInput = document.getElementById('subSearchInput');
+      if (subSearchInput) subSearchInput.value = '';
+
+      searchTriggered = false;
+
       history.pushState({}, '', '/');
     }
 
@@ -324,7 +331,7 @@
 <div class="sub-filters" id="subFilters">
   <div class="search-bar">
     <button class="nav-btn" onclick="goBackToCategories()">
-      <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="뒤로가기" style="width:20px; height:20px; filter: brightness(0) invert(1); vertical-align: middle;">
+      <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="뒤로가기">
     </button>
     <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" />
   </div>
@@ -348,7 +355,6 @@
     <button class="filter-btn" onclick="filterVideos('member','아이들')">아이들</button>
   </div>
 </div>
-
 
   
 
