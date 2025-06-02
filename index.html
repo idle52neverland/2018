@@ -34,40 +34,17 @@
     .filter-btn:hover {
       background-color: #ff4da6;
     }
-    .search-bar {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 10px;
-    }
     .search-input {
-      padding: 8px 12px;
-      font-size: 14px;
-      border: 2px solid #1abc9c;
-      border-right: none;
-      border-radius: 30px 0 0 30px;
-      outline: none;
-      width: 250px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 2px solid #444;
+      font-size: 13px;
       background-color: #fff;
       color: #333;
+      margin-top: 10px;
     }
     .search-input::placeholder {
-      color: #aaa;
-    }
-    .search-btn {
-      padding: 7px 14px;
-      background-color: #1abc9c;
-      border: none;
-      border-radius: 0 30px 30px 0;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .search-btn img {
-      width: 18px;
-      height: 18px;
-      filter: brightness(0) invert(1);
+      color: #888;
     }
     .social-icons {
       display: flex;
@@ -161,33 +138,123 @@
     }
   </style>
   <script>
-    // script는 그대로 유지
+    let currentCategory = '';
+    let searchTriggered = false;
+
+    const categoryNames = {
+      MV: "MV & SPECIAL CLIP",
+      LIVE: "LIVE / COVER SONG / DANCE",
+      MUSIC: "MUSIC SHOW PERFORMANCE",
+      FESTIVAL: "FESTIVAL / EVENT STAGE",
+      FANCAM: "FANCAM & STAGE FOCUS",
+      RECORDING: "RECORDING / STUDIO BEHIND",
+      PRACTICE: "DANCE PRACTICE / FANCHANT",
+      TV: "TV SHOW",
+      YOUTUBE: "YOUTUBE CONTENTS",
+      REALITY: "REALITY (Original Content)",
+      RADIO: "RADIO / PODCAST",
+      LIVE_STREAM: "LIVE STREAM",
+      INTERVIEW: "MAGAZINE INTERVIEW",
+      BEHIND: "BEHIND CLIPS",
+      CHALLENGE: "CHALLENGE",
+      ETC: "ETC"
+    };
+
+    function extractDate(text) {
+      const match = text.match(/\((\d{4})-(\d{2})-(\d{2})\)/);
+      return match ? new Date(match[1], match[2] - 1, match[3]) : new Date(0);
+    }
+
+    function sortCardsByDate(container) {
+      const cards = Array.from(container.querySelectorAll('.card'));
+      cards.sort((a, b) => extractDate(b.querySelector('.card-title').textContent) - extractDate(a.querySelector('.card-title').textContent));
+      cards.forEach(card => container.appendChild(card));
+    }
+
+    function showFilters(code, skipHistory = false) {
+      currentCategory = code;
+      document.getElementById('subFilters').style.display = 'flex';
+      document.getElementById('categoryBar').classList.add('category-bar-hidden');
+      document.getElementById('mainTitle').textContent = categoryNames[code] || code;
+      document.querySelector('.social-icons').classList.add('hidden');
+      document.querySelectorAll('.card-container').forEach(container => {
+        container.style.display = container.dataset.category === code ? 'flex' : 'none';
+      });
+      const container = document.querySelector(`.card-container[data-category="${code}"]`);
+      if (container) sortCardsByDate(container);
+      if (!skipHistory) history.pushState({ category: code }, '', `#${code}`);
+    }
+
+    function filterVideos(type, value) {
+      const container = document.querySelector(`.card-container[data-category="${currentCategory}"]`);
+      const cards = Array.from(container.querySelectorAll('.card'));
+      cards.forEach(card => {
+        const match = card.dataset[type] === value;
+        card.style.display = match ? 'block' : 'none';
+      });
+      history.pushState({ category: currentCategory, filterType: type, filterValue: value }, '', '');
+    }
+
+    function filterBySearch(term) {
+      searchTriggered = term.trim() !== '';
+      const searchTerm = term.toLowerCase();
+      document.querySelectorAll('.card-container').forEach(container => {
+        let anyVisible = false;
+        container.querySelectorAll('.card').forEach(card => {
+          const title = card.querySelector('.card-title').textContent.toLowerCase();
+          const match = title.includes(searchTerm);
+          card.style.display = match ? 'block' : 'none';
+          if (match) anyVisible = true;
+        });
+        container.style.display = searchTriggered && anyVisible ? 'flex' : 'none';
+      });
+      history.pushState({ search: term }, '', '');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = location.hash.replace('#', '');
+      if (hash && categoryNames[hash]) {
+        showFilters(hash, true);
+      }
+      document.getElementById('searchInput').addEventListener('input', (e) => {
+        filterBySearch(e.target.value);
+      });
+      document.getElementById('subSearchInput').addEventListener('input', (e) => {
+        const container = document.querySelector(`.card-container[data-category="${currentCategory}"]`);
+        const term = e.target.value.toLowerCase();
+        container.querySelectorAll('.card').forEach(card => {
+          const title = card.querySelector('.card-title').textContent.toLowerCase();
+          card.style.display = title.includes(term) ? 'block' : 'none';
+        });
+        history.pushState({ category: currentCategory, search: term }, '', '');
+      });
+    });
+
+    window.onpopstate = function (e) {
+      const hash = location.hash.replace('#', '');
+      if (e.state && e.state.category) {
+        showFilters(e.state.category, true);
+        if (e.state.filterType && e.state.filterValue) {
+          filterVideos(e.state.filterType, e.state.filterValue);
+        } else if (e.state.search) {
+          filterBySearch(e.state.search);
+        }
+      } else if (hash && categoryNames[hash]) {
+        showFilters(hash, true);
+      } else {
+        document.getElementById('subFilters').style.display = 'none';
+        document.getElementById('categoryBar').classList.remove('category-bar-hidden');
+        document.getElementById('mainTitle').textContent = 'I-DLE 몰아보기';
+        document.querySelector('.social-icons').classList.remove('hidden');
+        document.querySelectorAll('.card-container').forEach(container => {
+          container.style.display = searchTriggered ? container.style.display : 'none';
+        });
+        history.replaceState({}, '', '/');
+      }
+    };
   </script>
 </head>
 <body>
-
-<h1 id="mainTitle">I-DLE 몰아보기</h1>
-<div class="social-icons">
-  <!-- 기존 SNS 링크들 -->
-</div>
-
-<div id="categoryBar">
-  <div class="category-row">
-    <!-- 카테고리 버튼들 -->
-  </div>
-  <!-- 검색창 -->
-  <div class="search-bar">
-    <input type="text" id="searchInput" class="search-input" placeholder="검색어를 입력해 주세요.">
-    <button class="search-btn" onclick="filterBySearch(document.getElementById('searchInput').value)">
-      <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="검색">
-    </button>
-  </div>
-</div>
-
-<!-- 이하 생략된 콘텐츠는 기존대로 유지 -->
-
-</body>
-</html>
 
 
 
