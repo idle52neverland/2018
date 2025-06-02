@@ -181,8 +181,16 @@
       const noResult = document.getElementById('noResultMessage');
 
       if (!query) {
-        noResult.style.display = 'none';
-        return;
+         cards.forEach(card => {
+    card.style.display = 'block';
+    card.style.visibility = 'visible';
+    card.style.opacity = '1';
+    card.style.position = 'relative';
+  });
+    cards.forEach(card => card.style.display = 'block');
+    container.style.display = 'flex';
+    noResult.style.display = 'none';
+    return;
       }
 
       const cards = Array.from(document.querySelectorAll(`${containerSelector} .card`));
