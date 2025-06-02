@@ -214,6 +214,12 @@
         container.style.display = 'none';
       });
     };
+    window.addEventListener('DOMContentLoaded', () => {
+  if (location.hash) {
+    history.replaceState({}, '', location.pathname);
+  }
+});
+
   </script>
 </head>
 <body>
