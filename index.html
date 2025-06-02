@@ -31,7 +31,8 @@
       display: inline-block;
     }
     .category-btn:hover,
-    .filter-btn:hover {
+    .filter-btn:hover,
+    .search-button:hover {
       background-color: #ff4da6;
     }
     .search-input {
@@ -45,6 +46,17 @@
     }
     .search-input::placeholder {
       color: #888;
+    }
+    .search-button {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: none;
+      background-color: #333;
+      color: #fff;
+      font-size: 13px;
+      margin-top: 10px;
+      margin-left: 5px;
+      cursor: pointer;
     }
     .social-icons {
       display: flex;
@@ -166,32 +178,24 @@
       });
     }
 
-    function filterBySearch(term) {
-      const searchTerm = term.toLowerCase();
-      document.querySelectorAll('.card-container').forEach(container => {
-        let anyVisible = false;
-        container.querySelectorAll('.card').forEach(card => {
-          const title = card.querySelector('.card-title').textContent.toLowerCase();
-          const match = title.includes(searchTerm);
-          card.style.display = match ? 'block' : 'none';
-          if (match) anyVisible = true;
-        });
-        container.style.display = anyVisible ? 'flex' : 'none';
+    function filterSubSearch() {
+      const container = document.querySelector(`.card-container[data-category="${currentCategory}"]`);
+      const term = document.getElementById('subSearchInput').value.toLowerCase();
+      container.querySelectorAll('.card').forEach(card => {
+        const title = card.querySelector('.card-title').textContent.toLowerCase();
+        card.style.display = title.includes(term) ? 'block' : 'none';
       });
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('searchInput').addEventListener('input', (e) => {
-        filterBySearch(e.target.value);
-      });
-      document.getElementById('subSearchInput').addEventListener('input', (e) => {
-        const container = document.querySelector(`.card-container[data-category="${currentCategory}"]`);
-        const term = e.target.value.toLowerCase();
-        container.querySelectorAll('.card').forEach(card => {
-          const title = card.querySelector('.card-title').textContent.toLowerCase();
-          card.style.display = title.includes(term) ? 'block' : 'none';
-        });
-      });
+      const searchInput = document.getElementById('searchInput');
+      if (searchInput) {
+        searchInput.remove();
+      }
+      const searchButton = document.getElementById('subSearchButton');
+      if (searchButton) {
+        searchButton.addEventListener('click', filterSubSearch);
+      }
     });
 
     window.onpopstate = function () {
