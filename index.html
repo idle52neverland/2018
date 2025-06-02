@@ -208,18 +208,9 @@
     noResult.style.display = 'none';
   } else {
   cards.forEach(card => {
-    card.style.display = 'block';
-    card.style.visibility = 'visible';
-    card.style.opacity = '1';
-    card.style.position = 'relative';
-    card.style.transform = 'scale(1)';
-    card.style.zIndex = '1';
-  });
-  container.style.display = 'flex';
-  container.style.flexWrap = 'wrap';
-  container.style.justifyContent = 'flex-start';
-  container.style.alignItems = 'stretch';
-  container.style.gap = '16px';
+  card.removeAttribute('style');
+});
+  container.removeAttribute('style');
   noResult.style.display = 'none';
   return;
   }
@@ -348,7 +339,7 @@
     <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" />
   </div>
 
-  <div class="card-container" data-category="RADIO">
+    <div class="card-container" data-category="RADIO">
   <a href="https://www.youtube.com/watch?v=ISsi7sLXI8g" target="_blank" class="card" data-category="RADIO" data-member="아이들" data-year="2025">
   <img src="https://i.ytimg.com/vi/ISsi7sLXI8g/hqdefault.jpg" alt="아이들 - 이은지의 가요광장">
   <div class="card-title">[이은지의 가요광장]  with 아이들  | KBS 250520(화) 방송 (2025-05-30)</div>
