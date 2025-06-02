@@ -100,18 +100,17 @@
     }
     .card-container {
       display: none;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
       margin: 20px auto;
       max-width: 1200px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
     }
     .card {
       background-color: #222;
       border-radius: 12px;
       overflow: hidden;
       text-align: left;
-      width: 300px;
       transition: transform 0.2s;
     }
     .card img {
@@ -127,7 +126,15 @@
     .card:hover {
       transform: scale(1.03);
     }
+    @media (min-width: 601px) {
+      .card-container {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
     @media (max-width: 600px) {
+      .card-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
       .category-row {
         flex-direction: column;
         align-items: center;
@@ -160,6 +167,16 @@
       'ETC': 'ETC'
     };
 
+    function sortCardsByDate(container) {
+      const cards = Array.from(container.querySelectorAll('.card'));
+      cards.sort((a, b) => {
+        const dateA = a.querySelector('.card-title')?.textContent?.match(/\((\d{4}-\d{2}-\d{2})\)/);
+        const dateB = b.querySelector('.card-title')?.textContent?.match(/\((\d{4}-\d{2}-\d{2})\)/);
+        return new Date(dateB?.[1]) - new Date(dateA?.[1]);
+      });
+      cards.forEach(card => container.appendChild(card));
+    }
+
     function showFilters(code) {
       currentCategory = code;
       document.getElementById('subFilters').style.display = 'flex';
@@ -167,7 +184,13 @@
       document.getElementById('mainTitle').textContent = categoryNames[code] || code;
       document.querySelector('.social-icons').classList.add('hidden');
       document.querySelectorAll('.card-container').forEach(container => {
-        container.style.display = container.dataset.category === code ? 'flex' : 'none';
+        if (container.dataset.category === code) {
+          container.style.display = 'grid';
+          sortCardsByDate(container);
+          container.querySelectorAll('.card').forEach(card => card.style.display = 'block');
+        } else {
+          container.style.display = 'none';
+        }
       });
       history.pushState({ category: code }, '', `#${code}`);
     }
@@ -178,6 +201,8 @@
         const match = card.dataset[type] === value;
         card.style.display = match ? 'block' : 'none';
       });
+      const container = document.querySelector(`.card-container[data-category="${currentCategory}"]`);
+      sortCardsByDate(container);
     }
 
     window.onpopstate = function () {
@@ -192,6 +217,7 @@
   </script>
 </head>
 <body>
+
   <h1 id="mainTitle">I-DLE 몰아보기</h1>
   <div class="social-icons">
     <a href="https://www.youtube.com/@official_i_dle" target="_blank">
