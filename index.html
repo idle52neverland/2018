@@ -109,9 +109,13 @@
       padding: 10px;
       font-size: 14px;
       color: #fff;
+      text-decoration: none;
     }
     .card:hover {
       transform: scale(1.03);
+    }
+    a.card {
+      text-decoration: none;
     }
     @media (max-width: 600px) {
       .category-row {
@@ -127,6 +131,7 @@
   </style>
   <script>
     let currentCategory = '';
+    let searchTriggered = false;
 
     const categoryNames = {
       MV: "MV & SPECIAL CLIP",
@@ -186,6 +191,7 @@
     }
 
     function filterBySearch(term) {
+      searchTriggered = term.trim() !== '';
       const searchTerm = term.toLowerCase();
       document.querySelectorAll('.card-container').forEach(container => {
         let anyVisible = false;
@@ -195,7 +201,7 @@
           card.style.display = match ? 'block' : 'none';
           if (match) anyVisible = true;
         });
-        container.style.display = anyVisible ? 'flex' : 'none';
+        container.style.display = searchTriggered && anyVisible ? 'flex' : 'none';
       });
     }
 
@@ -213,18 +219,24 @@
       });
     });
 
-    window.onpopstate = function () {
-      document.getElementById('subFilters').style.display = 'none';
-      document.getElementById('categoryBar').classList.remove('category-bar-hidden');
-      document.getElementById('mainTitle').textContent = 'I-DLE 몰아보기';
-      document.querySelector('.social-icons').classList.remove('hidden');
-      document.querySelectorAll('.card-container').forEach(container => {
-        container.style.display = 'none';
-      });
+    window.onpopstate = function (e) {
+      if (e.state && e.state.category) {
+        showFilters(e.state.category);
+      } else {
+        document.getElementById('subFilters').style.display = 'none';
+        document.getElementById('categoryBar').classList.remove('category-bar-hidden');
+        document.getElementById('mainTitle').textContent = 'I-DLE 몰아보기';
+        document.querySelector('.social-icons').classList.remove('hidden');
+        document.querySelectorAll('.card-container').forEach(container => {
+          container.style.display = searchTriggered ? container.style.display : 'none';
+        });
+      }
     };
   </script>
 </head>
 <body>
+  <!-- body 내용은 그대로 유지됨 -->
+
 
   <h1 id="mainTitle">I-DLE 몰아보기</h1>
   <div class="social-icons">
@@ -293,6 +305,10 @@
     </div>
     <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" />
   </div>
+
+  
+
+  
 <div class="card-container" data-category="RADIO">
   <a href="https://www.youtube.com/watch?v=ISsi7sLXI8g" target="_blank" class="card" data-category="RADIO" data-member="아이들" data-year="2025">
   <img src="https://i.ytimg.com/vi/ISsi7sLXI8g/hqdefault.jpg" alt="아이들 - 이은지의 가요광장">
