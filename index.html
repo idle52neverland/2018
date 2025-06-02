@@ -34,6 +34,13 @@
     .filter-btn:hover {
       background-color: #ff4da6;
     }
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
     .search-input {
       padding: 6px 12px;
       border-radius: 20px;
@@ -41,10 +48,22 @@
       font-size: 13px;
       background-color: #fff;
       color: #333;
-      margin-top: 10px;
     }
     .search-input::placeholder {
       color: #888;
+    }
+    .nav-btn {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      background-color: #555;
+      border: none;
+      cursor: pointer;
+    }
+    .nav-btn:hover {
+      background-color: #ff4da6;
     }
     .social-icons {
       display: flex;
@@ -135,6 +154,10 @@
       .card {
         width: calc(50% - 8px);
       }
+      .search-bar {
+        flex-direction: column;
+        gap: 8px;
+      }
     }
   </style>
   <script>
@@ -211,6 +234,17 @@
       history.pushState({ search: term }, '', '');
     }
 
+    function goBackToCategories() {
+      document.getElementById('subFilters').style.display = 'none';
+      document.getElementById('categoryBar').classList.remove('category-bar-hidden');
+      document.getElementById('mainTitle').textContent = 'I-DLE 몰아보기';
+      document.querySelector('.social-icons').classList.remove('hidden');
+      document.querySelectorAll('.card-container').forEach(container => {
+        container.style.display = 'none';
+      });
+      history.pushState({}, '', '/');
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       const hash = location.hash.replace('#', '');
       if (hash && categoryNames[hash]) {
@@ -239,26 +273,13 @@
         } else if (e.state.search) {
           filterBySearch(e.state.search);
         }
-      } else if (hash && categoryNames[hash]) {
-        showFilters(hash, true);
       } else {
-        document.getElementById('subFilters').style.display = 'none';
-        document.getElementById('categoryBar').classList.remove('category-bar-hidden');
-        document.getElementById('mainTitle').textContent = 'I-DLE 몰아보기';
-        document.querySelector('.social-icons').classList.remove('hidden');
-        document.querySelectorAll('.card-container').forEach(container => {
-          container.style.display = searchTriggered ? container.style.display : 'none';
-        });
-        history.replaceState({}, '', '/');
+        goBackToCategories();
       }
     };
   </script>
 </head>
 <body>
-
-
-  
-
 
 <h1 id="mainTitle">I-DLE 몰아보기</h1>
 <div class="social-icons">
@@ -306,8 +327,11 @@
   </div>
   <div class="search-bar">
     <input type="text" id="searchInput" class="search-input" placeholder="search">
+    <button class="nav-btn" onclick="goBackToCategories()">뒤로가기</button>
+    <button class="nav-btn" onclick="window.location.href = '/'">홈</button>
   </div>
 </div>
+  
 <div class="sub-filters" id="subFilters">
   <div class="filter-group">
     <button class="filter-btn" onclick="filterVideos('year','2025')">2025</button>
