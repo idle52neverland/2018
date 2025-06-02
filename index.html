@@ -98,23 +98,34 @@
       gap: 12px;
       margin-bottom: 10px;
     }
+    .card-container {
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin: 20px auto;
+      max-width: 1200px;
+    }
     .card {
-      display: inline-block;
-      width: 300px;
-      margin: 10px;
-      background: #222;
-      border-radius: 10px;
+      background-color: #222;
+      border-radius: 12px;
       overflow: hidden;
       text-align: left;
-      text-decoration: none;
-      color: #fff;
+      width: 300px;
+      transition: transform 0.2s;
     }
     .card img {
       width: 100%;
+      height: auto;
+      display: block;
     }
     .card-title {
       padding: 10px;
       font-size: 14px;
+      color: #fff;
+    }
+    .card:hover {
+      transform: scale(1.03);
     }
     @media (max-width: 600px) {
       .category-row {
@@ -151,79 +162,33 @@
 
     function showFilters(code) {
       currentCategory = code;
-      const filters = document.getElementById('subFilters');
-      const categoryBar = document.getElementById('categoryBar');
-      const title = document.getElementById('mainTitle');
-      const icons = document.querySelector('.social-icons');
-      if (filters && categoryBar && title && icons) {
-        filters.style.display = 'flex';
-        categoryBar.classList.add('category-bar-hidden');
-        title.textContent = categoryNames[code] || code;
-        icons.classList.add('hidden');
-        history.pushState({ category: code }, '', `#${code}`);
-        filterVideos('category', code);
-      }
+      document.getElementById('subFilters').style.display = 'flex';
+      document.getElementById('categoryBar').classList.add('category-bar-hidden');
+      document.getElementById('mainTitle').textContent = categoryNames[code] || code;
+      document.querySelector('.social-icons').classList.add('hidden');
+      document.querySelectorAll('.card-container').forEach(container => {
+        container.style.display = container.dataset.category === code ? 'flex' : 'none';
+      });
+      history.pushState({ category: code }, '', `#${code}`);
     }
 
     function filterVideos(type, value) {
-      const cards = document.querySelectorAll('.card');
+      const cards = document.querySelectorAll(`.card-container[data-category="${currentCategory}"] .card`);
       cards.forEach(card => {
-        if (card.dataset[type] && card.dataset[type].includes(value)) {
-          card.style.display = 'inline-block';
-        } else {
-          card.style.display = 'none';
-        }
+        const match = card.dataset[type] === value;
+        card.style.display = match ? 'block' : 'none';
       });
     }
 
     window.onpopstate = function () {
-      const filters = document.getElementById('subFilters');
-      const categoryBar = document.getElementById('categoryBar');
-      const title = document.getElementById('mainTitle');
-      const icons = document.querySelector('.social-icons');
-      if (filters && categoryBar && title && icons) {
-        filters.style.display = 'none';
-        categoryBar.classList.remove('category-bar-hidden');
-        title.textContent = 'I-DLE 몰아보기';
-        icons.classList.remove('hidden');
-      }
+      document.getElementById('subFilters').style.display = 'none';
+      document.getElementById('categoryBar').classList.remove('category-bar-hidden');
+      document.getElementById('mainTitle').textContent = 'I-DLE 몰아보기';
+      document.querySelector('.social-icons').classList.remove('hidden');
+      document.querySelectorAll('.card-container').forEach(container => {
+        container.style.display = 'none';
+      });
     };
-
-    const youtubeData = [
-      {
-        "title": "[FULL] 함께해서 더 배로 즐거웠던 시간💖 아이들(여자)아이들, 짜짜즈(ZO ZAZZ) 보는 라디오 | 두시탈출 컬투쇼 | 250527",
-        "videoId": "o9Shq4el_0S",
-        "date": "2025-05-30T19:21:22Z",
-        "thumbnail": "https://i.ytimg.com/vi/o9Shq4el_0S/hqdefault.jpg"
-      },
-      {
-        "title": "[FULL] 모든 것을 쏟아낸다💦 오롯이 아이라는 이름으로 빛날 눈금치🌟아이들 미연&우기🌟와 함께하는 브카🎧💜 | 이석훈의 브런치카페",
-        "videoId": "4-jhQXdvL2s",
-        "date": "2025-05-30T19:21:51Z",
-        "thumbnail": "https://i.ytimg.com/vi/4-jhQXdvL2s/hqdefault.jpg"
-      }
-    ];
-
-    function renderYouTubeCards(data) {
-      const container = document.getElementById('cardContainer');
-      container.innerHTML = data.map(item => {
-        const memberMatch = item.title.match(/미연|민니|소연|우기|슈화/g);
-        const member = memberMatch ? memberMatch.join(', ') : '아이들';
-        const year = item.date.slice(0, 4);
-        const dateStr = item.date.slice(0, 10);
-        return `
-          <a href="https://www.youtube.com/watch?v=${item.videoId}" target="_blank" class="card"
-             data-category="YOUTUBE" data-member="${member}" data-year="${year}">
-            <img src="${item.thumbnail}" alt="${member} 영상">
-            <div class="card-title">${item.title} (${dateStr})</div>
-          </a>
-        `;
-      }).join('');
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      renderYouTubeCards(youtubeData);
-    });
   </script>
 </head>
 <body>
@@ -290,8 +255,7 @@
       <button class="filter-btn" onclick="filterVideos('member','우기')">우기</button>
       <button class="filter-btn" onclick="filterVideos('member','슈화')">슈화</button>
     </div>
-    <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" oninput="searchWithinCategory()" />
+    <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" />
   </div>
-  <div id="cardContainer"></div>
 </body>
 </html>
