@@ -21,9 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
         cards.forEach(card => container.appendChild(card));
       }
 
-      // 모든 카드 컨테이너 최신순 정렬 및 보이게
+      // 모든 카드 컨테이너 최신순 정렬
       document.querySelectorAll(".card-container").forEach(container => {
-        container.style.display = "flex";
         sortCardsByDate(container);
       });
 
