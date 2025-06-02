@@ -176,21 +176,59 @@
     }
 
     function searchCards(input, containerSelector) {
-      const query = input.value.trim().toLowerCase();
-      document.querySelectorAll('.card-container').forEach(c => c.style.display = 'none');
-      const noResult = document.getElementById('noResultMessage');
+  const query = input.value.trim().toLowerCase();
+  const noResult = document.getElementById('noResultMessage');
+  const container = document.querySelector(containerSelector);
+  const cards = Array.from(container.querySelectorAll('.card'));
 
-      if (!query) {
-         cards.forEach(card => {
+  if (!query) {
+    cards.forEach(card => {
     card.style.display = 'block';
     card.style.visibility = 'visible';
     card.style.opacity = '1';
     card.style.position = 'relative';
   });
+    
     container.style.display = 'flex';
     noResult.style.display = 'none';
     return;
-      }
+  }
+
+  document.querySelectorAll('.card-container').forEach(c => c.style.display = 'none');
+  let matchedCards = cards.filter(card =>
+    card.querySelector('.card-title').textContent.toLowerCase().includes(query)
+  );
+
+  matchedCards.sort((a, b) => b.dataset.year.localeCompare(a.dataset.year));
+  cards.forEach(card => (card.style.display = 'none'));
+  matchedCards.forEach(card => (card.style.display = 'block'));
+
+  if (matchedCards.length > 0) {
+    container.style.display = 'flex';
+    noResult.style.display = 'none';
+  } else {
+  cards.forEach(card => {
+    card.style.display = 'block';
+    card.style.visibility = 'visible';
+    card.style.opacity = '1';
+    card.style.position = 'relative';
+    card.style.transform = 'scale(1)';
+    card.style.zIndex = '1';
+  });
+  container.style.display = 'flex';
+  container.style.flexWrap = 'wrap';
+  container.style.justifyContent = 'flex-start';
+  container.style.alignItems = 'stretch';
+  container.style.gap = '16px';
+  noResult.style.display = 'none';
+  return;
+  }
+
+  /* 기존 noResult 처리 제거됨 */
+  //
+    noResult.style.display = 'block';
+  }
+}
 
       const cards = Array.from(document.querySelectorAll(`${containerSelector} .card`));
       let matchedCards = cards.filter(card =>
@@ -310,41 +348,12 @@
     <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" />
   </div>
 
- <div class="card-container" data-category="RADIO">
-  <a href="https://www.youtube.com/watch?v=ISsi7sLXI8g" target="_blank" class="card" data-category="RADIO" data-member="아이들" data-year="2025">
-  <img src="https://i.ytimg.com/vi/ISsi7sLXI8g/hqdefault.jpg" alt="아이들 - 이은지의 가요광장">
-  <div class="card-title">[이은지의 가요광장]  with 아이들  | KBS 250520(화) 방송 (2025-05-30)</div>
-</a>
-
-<a href="https://www.youtube.com/watch?v=AKbHvJDWLC8" target="_blank" class="card" data-category="RADIO" data-member="민니" data-year="2025">
-  <img src="https://i.ytimg.com/vi/AKbHvJDWLC8/hqdefault.jpg" alt="민니 - 이은지의 가요광장">
-  <div class="card-title">이은지의 가요광장 with 민니((여자)아이들) KBS 250130(목) 방송 (2025-05-30)</div>
-</a>
-
-<a href="https://www.youtube.com/watch?v=jsr9XqQh-C8" target="_blank" class="card" data-category="RADIO" data-member="민니" data-year="2025">
-  <img src="https://i.ytimg.com/vi/jsr9XqQh-C8/hqdefault.jpg" alt="민니 - 영스트리트">
-  <div class="card-title">[FULL] Cause I’m HER!!💗 다른 누구도 아닌 솔로가수 민니(MINNIE) 보는 라디오 | 웬디의 영스트리트 | 250127 (2025-05-30)</div>
-</a>
-
-<a href="https://www.youtube.com/watch?v=5rLPgvdUnJ4" target="_blank" class="card" data-category="RADIO" data-member="민니" data-year="2025">
-  <img src="https://i.ytimg.com/vi/5rLPgvdUnJ4/hqdefault.jpg" alt="민니 - 컬투쇼">
-  <div class="card-title">[FULL] who shot ya?🔫 내 심장을 저격한 민니(MINNIE) 보는 라디오 | 두시탈출 컬투쇼 | 250126 (2025-05-30)</div>
-</a>
-
-<a href="https://www.youtube.com/watch?v=OorZpjSm7QE" target="_blank" class="card" data-category="RADIO" data-member="민니" data-year="2025">
-  <img src="https://i.ytimg.com/vi/OorZpjSm7QE/hqdefault.jpg" alt="민니 - 볼륨 초대석">
-  <div class="card-title">볼륨 초대석 : 최효정의 비밀정원 with 민니 (MINNIE) full ver. / [오마이걸 효정의 볼륨을 높여요] | KBS 250123 방송 (2025-05-30)</div>
-</a>
-
-<a href="https://www.youtube.com/watch?v=inaLcT_gOS8" target="_blank" class="card" data-category="RADIO" data-member="아이들" data-year="2025">
-  <img src="https://i.ytimg.com/vi/inaLcT_gOS8/hqdefault.jpg" alt="아이들 - 컬투쇼">
-  <div class="card-title">[FULL] 함께해서 두 배로 즐거웠던 시간🥳 아이들(idle), 조째즈(ZO ZAZZ) 보는 라디오 | 두시탈출 컬투쇼 | 250527 (2025-05-30)</div>
-</a>
-
-</div>
-</body>
-</html>
-
+  <div class="card-container" data-category="RADIO">
+    <a href="https://www.youtube.com/watch?v=ISsi7sLXI8g" target="_blank" class="card" data-category="RADIO" data-member="아이들" data-year="2025">
+      <img src="https://i.ytimg.com/vi/ISsi7sLXI8g/hqdefault.jpg" alt="아이들 - 이은지의 가요광장">
+      <div class="card-title">[이은지의 가요광장] with 아이들 | KBS 250520(화) 방송 (2025-05-30)</div>
+    </a>
+  </div>
 
   <p id="noResultMessage">검색 결과가 없습니다.</p>
 </body>
