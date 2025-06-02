@@ -186,27 +186,29 @@
       }
 
       document.getElementById('searchInput').addEventListener('input', function () {
-        const keyword = this.value.toLowerCase();
+        const keyword = this.value.trim().toLowerCase();
         document.querySelectorAll('.card-container').forEach(container => {
-          const matches = Array.from(container.querySelectorAll('.card')).filter(card => card.querySelector('.card-title').textContent.toLowerCase().includes(keyword));
-          matches.sort((a, b) => b.querySelector('.card-title').textContent.localeCompare(a.querySelector('.card-title').textContent));
+          const cards = Array.from(container.querySelectorAll('.card'));
+          const filtered = cards.filter(card => card.querySelector('.card-title').textContent.toLowerCase().includes(keyword));
+          filtered.sort((a, b) => b.querySelector('.card-title').textContent.localeCompare(a.querySelector('.card-title').textContent));
           container.innerHTML = '';
-          matches.forEach(card => container.appendChild(card));
-          container.style.display = matches.length ? 'grid' : 'none';
+          filtered.forEach(card => container.appendChild(card));
+          container.style.display = filtered.length > 0 ? 'grid' : 'none';
         });
       });
 
       document.getElementById('subSearchInput').addEventListener('input', function () {
-        const keyword = this.value.toLowerCase();
+        const keyword = this.value.trim().toLowerCase();
         const container = document.querySelector(`.card-container[data-category="${currentCategory}"]`);
-        const matches = Array.from(container.querySelectorAll('.card')).filter(card => card.querySelector('.card-title').textContent.toLowerCase().includes(keyword));
-        matches.sort((a, b) => b.querySelector('.card-title').textContent.localeCompare(a.querySelector('.card-title').textContent));
+        const cards = Array.from(container.querySelectorAll('.card'));
+        const filtered = cards.filter(card => card.querySelector('.card-title').textContent.toLowerCase().includes(keyword));
+        filtered.sort((a, b) => b.querySelector('.card-title').textContent.localeCompare(a.querySelector('.card-title').textContent));
         container.innerHTML = '';
-        matches.forEach(card => container.appendChild(card));
+        filtered.forEach(card => container.appendChild(card));
       });
     });
 
-    window.onpopstate = function (event) {
+          window.onpopstate = function (event) {
       if (event.state && event.state.category) {
         showFilters(event.state.category);
       } else {
