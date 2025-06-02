@@ -17,7 +17,7 @@
       font-size: 28px;
       color: #fff;
     }
-    .category-btn {
+    .category-btn, .filter-btn {
       padding: 10px 20px;
       background-color: #333;
       border-radius: 20px;
@@ -30,14 +30,14 @@
       text-decoration: none;
       display: inline-block;
     }
-    .category-btn:hover {
+    .category-btn:hover,
+    .filter-btn:hover {
       background-color: #ff4da6;
     }
     .search-input {
       padding: 6px 12px;
       border-radius: 20px;
       border: 2px solid #444;
-      outline: none;
       font-size: 13px;
       background-color: #fff;
       color: #333;
@@ -73,20 +73,6 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
-    }
-    .filter-btn {
-      padding: 10px 20px;
-      background-color: #333;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #fff;
-      cursor: pointer;
-      border: none;
-      transition: background-color 0.2s;
-    }
-    .filter-btn:hover {
-      background-color: #ff4da6;
     }
     .category-bar-hidden {
       display: none;
@@ -141,44 +127,72 @@
   </style>
   <script>
     let currentCategory = '';
-    const categoryNames = {
-      'MV': 'MV & SPECIAL CLIP',
-      'LIVE': 'LIVE / COVER SONG / DANCE',
-      'MUSIC': 'MUSIC SHOW PERFORMANCE',
-      'FESTIVAL': 'FESTIVAL / EVENT STAGE',
-      'FANCAM': 'FANCAM & STAGE FOCUS',
-      'RECORDING': 'RECORDING / STUDIO BEHIND',
-      'PRACTICE': 'DANCE PRACTICE / FANCHANT',
-      'TV': 'TV SHOW',
-      'YOUTUBE': 'YOUTUBE CONTENTS',
-      'REALITY': 'REALITY (Original Content)',
-      'RADIO': 'RADIO / PODCAST',
-      'LIVE_STREAM': 'LIVE STREAM',
-      'INTERVIEW': 'MAGAZINE INTERVIEW',
-      'BEHIND': 'BEHIND CLIPS',
-      'CHALLENGE': 'CHALLENGE',
-      'ETC': 'ETC'
-    };
+
+    function extractDate(text) {
+      const match = text.match(/\((\d{4})-(\d{2})-(\d{2})\)/);
+      return match ? new Date(match[1], match[2] - 1, match[3]) : new Date(0);
+    }
+
+    function sortCardsByDate(container) {
+      const cards = Array.from(container.querySelectorAll('.card'));
+      cards.sort((a, b) => {
+        const dateA = extractDate(a.querySelector('.card-title').textContent);
+        const dateB = extractDate(b.querySelector('.card-title').textContent);
+        return dateB - dateA;
+      });
+      cards.forEach(card => container.appendChild(card));
+    }
 
     function showFilters(code) {
       currentCategory = code;
       document.getElementById('subFilters').style.display = 'flex';
       document.getElementById('categoryBar').classList.add('category-bar-hidden');
-      document.getElementById('mainTitle').textContent = categoryNames[code] || code;
+      document.getElementById('mainTitle').textContent = code;
       document.querySelector('.social-icons').classList.add('hidden');
       document.querySelectorAll('.card-container').forEach(container => {
         container.style.display = container.dataset.category === code ? 'flex' : 'none';
       });
+      const container = document.querySelector(`.card-container[data-category="${code}"]`);
+      if (container) sortCardsByDate(container);
       history.pushState({ category: code }, '', `#${code}`);
     }
 
     function filterVideos(type, value) {
-      const cards = document.querySelectorAll(`.card-container[data-category="${currentCategory}"] .card`);
+      const container = document.querySelector(`.card-container[data-category="${currentCategory}"]`);
+      const cards = Array.from(container.querySelectorAll('.card'));
       cards.forEach(card => {
         const match = card.dataset[type] === value;
         card.style.display = match ? 'block' : 'none';
       });
     }
+
+    function filterBySearch(term) {
+      const searchTerm = term.toLowerCase();
+      document.querySelectorAll('.card-container').forEach(container => {
+        let anyVisible = false;
+        container.querySelectorAll('.card').forEach(card => {
+          const title = card.querySelector('.card-title').textContent.toLowerCase();
+          const match = title.includes(searchTerm);
+          card.style.display = match ? 'block' : 'none';
+          if (match) anyVisible = true;
+        });
+        container.style.display = anyVisible ? 'flex' : 'none';
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('searchInput').addEventListener('input', (e) => {
+        filterBySearch(e.target.value);
+      });
+      document.getElementById('subSearchInput').addEventListener('input', (e) => {
+        const container = document.querySelector(`.card-container[data-category="${currentCategory}"]`);
+        const term = e.target.value.toLowerCase();
+        container.querySelectorAll('.card').forEach(card => {
+          const title = card.querySelector('.card-title').textContent.toLowerCase();
+          card.style.display = title.includes(term) ? 'block' : 'none';
+        });
+      });
+    });
 
     window.onpopstate = function () {
       document.getElementById('subFilters').style.display = 'none';
@@ -259,7 +273,7 @@
     </div>
     <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" />
   </div>
-  <div class="card-container" data-category="RADIO">
+<div class="card-container" data-category="RADIO">
   <a href="https://www.youtube.com/watch?v=ISsi7sLXI8g" target="_blank" class="card" data-category="RADIO" data-member="아이들" data-year="2025">
   <img src="https://i.ytimg.com/vi/ISsi7sLXI8g/hqdefault.jpg" alt="아이들 - 이은지의 가요광장">
   <div class="card-title">[이은지의 가요광장]  with 아이들  | KBS 250520(화) 방송 (2025-05-30)</div>
@@ -293,3 +307,4 @@
 </div>
 </body>
 </html>
+
