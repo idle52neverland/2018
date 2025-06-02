@@ -17,7 +17,7 @@
       font-size: 28px;
       color: #fff;
     }
-    .category-btn {
+    .category-btn, .filter-btn {
       padding: 10px 20px;
       background-color: #333;
       border-radius: 20px;
@@ -27,10 +27,8 @@
       cursor: pointer;
       border: none;
       transition: background-color 0.2s;
-      text-decoration: none;
-      display: inline-block;
     }
-    .category-btn:hover {
+    .category-btn:hover, .filter-btn:hover {
       background-color: #ff4da6;
     }
     .search-input {
@@ -74,20 +72,6 @@
       justify-content: center;
       gap: 10px;
     }
-    .filter-btn {
-      padding: 10px 20px;
-      background-color: #333;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #fff;
-      cursor: pointer;
-      border: none;
-      transition: background-color 0.2s;
-    }
-    .filter-btn:hover {
-      background-color: #ff4da6;
-    }
     .category-bar-hidden {
       display: none;
     }
@@ -100,11 +84,11 @@
     }
     .card-container {
       display: none;
-      margin: 20px auto;
-      max-width: 1200px;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 16px;
+      margin: 20px auto;
+      max-width: 1600px;
     }
     .card {
       background-color: #222;
@@ -126,23 +110,14 @@
     .card:hover {
       transform: scale(1.03);
     }
-    @media (min-width: 601px) {
+    @media (min-width: 1025px) {
       .card-container {
         grid-template-columns: repeat(5, 1fr);
       }
     }
-    @media (max-width: 600px) {
+    @media (max-width: 1024px) {
       .card-container {
         grid-template-columns: repeat(3, 1fr);
-      }
-      .category-row {
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-      }
-      .category-btn {
-        width: 90%;
-        max-width: 280px;
       }
     }
   </style>
@@ -167,104 +142,82 @@
       'ETC': 'ETC'
     };
 
-    function sortCardsByDate(container) {
-      const cards = Array.from(container.querySelectorAll('.card'));
-      cards.sort((a, b) => {
-        const dateA = a.querySelector('.card-title')?.textContent?.match(/\((\d{4}-\d{2}-\d{2})\)/);
-        const dateB = b.querySelector('.card-title')?.textContent?.match(/\((\d{4}-\d{2}-\d{2})\)/);
-        return new Date(dateB?.[1]) - new Date(dateA?.[1]);
-      });
-      cards.forEach(card => container.appendChild(card));
-    }
-
     function showFilters(code) {
       currentCategory = code;
+      const container = document.querySelector(`.card-container[data-category="${code}"]`);
+      if (container) {
+        const sorted = Array.from(container.children).sort((a, b) => {
+          const da = a.querySelector('.card-title')?.textContent || '';
+          const db = b.querySelector('.card-title')?.textContent || '';
+          return db.localeCompare(da);
+        });
+        container.innerHTML = '';
+        sorted.forEach(el => container.appendChild(el));
+      }
+
       document.getElementById('subFilters').style.display = 'flex';
       document.getElementById('categoryBar').classList.add('category-bar-hidden');
       document.getElementById('mainTitle').textContent = categoryNames[code] || code;
       document.querySelector('.social-icons').classList.add('hidden');
       document.querySelectorAll('.card-container').forEach(container => {
-        if (container.dataset.category === code) {
-          container.style.display = 'grid';
-          sortCardsByDate(container);
-          container.querySelectorAll('.card').forEach(card => card.style.display = 'block');
-        } else {
-          container.style.display = 'none';
-        }
+        container.style.display = container.dataset.category === code ? 'grid' : 'none';
       });
       history.pushState({ category: code }, '', `#${code}`);
     }
 
     function filterVideos(type, value) {
       const cards = document.querySelectorAll(`.card-container[data-category="${currentCategory}"] .card`);
+      const filtered = [];
       cards.forEach(card => {
         const match = card.dataset[type] === value;
         card.style.display = match ? 'block' : 'none';
+        if (match) filtered.push(card);
       });
+      filtered.sort((a, b) => b.querySelector('.card-title').textContent.localeCompare(a.querySelector('.card-title').textContent));
       const container = document.querySelector(`.card-container[data-category="${currentCategory}"]`);
-      sortCardsByDate(container);
+      container.innerHTML = '';
+      filtered.forEach(el => container.appendChild(el));
     }
 
-    window.onpopstate = function () {
-      document.getElementById('subFilters').style.display = 'none';
-      document.getElementById('categoryBar').classList.remove('category-bar-hidden');
-      document.getElementById('mainTitle').textContent = 'I-DLE 몰아보기';
-      document.querySelector('.social-icons').classList.remove('hidden');
-      document.querySelectorAll('.card-container').forEach(container => {
-        container.style.display = 'none';
+    document.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.substring(1);
+      if (hash && categoryNames[hash]) {
+        showFilters(hash);
+      }
+
+      document.getElementById('searchInput').addEventListener('input', function () {
+        const keyword = this.value.toLowerCase();
+        document.querySelectorAll('.card-container').forEach(container => {
+          const matches = Array.from(container.querySelectorAll('.card')).filter(card => card.querySelector('.card-title').textContent.toLowerCase().includes(keyword));
+          matches.sort((a, b) => b.querySelector('.card-title').textContent.localeCompare(a.querySelector('.card-title').textContent));
+          container.innerHTML = '';
+          matches.forEach(card => container.appendChild(card));
+          container.style.display = matches.length ? 'grid' : 'none';
+        });
       });
-    };
-   window.addEventListener('DOMContentLoaded', () => {
-  if (location.hash) {
-    history.replaceState({}, '', location.pathname);
-  }
-  document.querySelectorAll('.card-container').forEach(container => {
-    container.style.display = 'none';
-  });
-});
-    document.getElementById('searchInput').addEventListener('input', function () {
-  const query = this.value.toLowerCase();
-  document.querySelectorAll('.card-container').forEach(container => {
-    const cards = Array.from(container.querySelectorAll('.card'));
-    const matched = cards.filter(card => {
-      const title = card.querySelector('.card-title').textContent.toLowerCase();
-      return title.includes(query);
+
+      document.getElementById('subSearchInput').addEventListener('input', function () {
+        const keyword = this.value.toLowerCase();
+        const container = document.querySelector(`.card-container[data-category="${currentCategory}"]`);
+        const matches = Array.from(container.querySelectorAll('.card')).filter(card => card.querySelector('.card-title').textContent.toLowerCase().includes(keyword));
+        matches.sort((a, b) => b.querySelector('.card-title').textContent.localeCompare(a.querySelector('.card-title').textContent));
+        container.innerHTML = '';
+        matches.forEach(card => container.appendChild(card));
+      });
     });
 
-    matched.sort((a, b) => {
-      const dateA = a.querySelector('.card-title').textContent.match(/\((\d{4}-\d{2}-\d{2})\)/);
-      const dateB = b.querySelector('.card-title').textContent.match(/\((\d{4}-\d{2}-\d{2})\)/);
-      return new Date(dateB?.[1]) - new Date(dateA?.[1]);
-    });
-
-    container.innerHTML = '';
-    matched.forEach(card => container.appendChild(card));
-    container.style.display = matched.length > 0 ? 'grid' : 'none';
-  });
-});
-
-document.getElementById('subSearchInput').addEventListener('input', function () {
-  const query = this.value.toLowerCase();
-  const container = document.querySelector(`.card-container[data-category="${currentCategory}"]`);
-  if (!container) return;
-
-  const cards = Array.from(container.querySelectorAll('.card'));
-  const matched = cards.filter(card => {
-    const title = card.querySelector('.card-title').textContent.toLowerCase();
-    return title.includes(query);
-  });
-
-  matched.sort((a, b) => {
-    const dateA = a.querySelector('.card-title').textContent.match(/\((\d{4}-\d{2}-\d{2})\)/);
-    const dateB = b.querySelector('.card-title').textContent.match(/\((\d{4}-\d{2}-\d{2})\)/);
-    return new Date(dateB?.[1]) - new Date(dateA?.[1]);
-  });
-
-  container.innerHTML = '';
-  matched.forEach(card => container.appendChild(card));
-  container.style.display = matched.length > 0 ? 'grid' : 'none';
-});
-
+    window.onpopstate = function (event) {
+      if (event.state && event.state.category) {
+        showFilters(event.state.category);
+      } else {
+        currentCategory = '';
+        document.getElementById('subFilters').style.display = 'none';
+        document.getElementById('categoryBar').classList.remove('category-bar-hidden');
+        document.getElementById('mainTitle').textContent = 'I-DLE 몰아보기';
+        document.querySelector('.social-icons').classList.remove('hidden');
+        document.querySelectorAll('.card-container').forEach(container => container.style.display = 'none');
+      }
+    }
   </script>
 </head>
 <body>
