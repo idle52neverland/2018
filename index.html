@@ -98,6 +98,24 @@
       gap: 12px;
       margin-bottom: 10px;
     }
+    .card {
+      display: inline-block;
+      width: 300px;
+      margin: 10px;
+      background: #222;
+      border-radius: 10px;
+      overflow: hidden;
+      text-align: left;
+      text-decoration: none;
+      color: #fff;
+    }
+    .card img {
+      width: 100%;
+    }
+    .card-title {
+      padding: 10px;
+      font-size: 14px;
+    }
     @media (max-width: 600px) {
       .category-row {
         flex-direction: column;
@@ -143,7 +161,19 @@
         title.textContent = categoryNames[code] || code;
         icons.classList.add('hidden');
         history.pushState({ category: code }, '', `#${code}`);
+        filterVideos('category', code);
       }
+    }
+
+    function filterVideos(type, value) {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        if (card.dataset[type] && card.dataset[type].includes(value)) {
+          card.style.display = 'inline-block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
     }
 
     window.onpopstate = function () {
@@ -158,6 +188,42 @@
         icons.classList.remove('hidden');
       }
     };
+
+    const youtubeData = [
+      {
+        "title": "[FULL] 함께해서 더 배로 즐거웠던 시간💖 아이들(여자)아이들, 짜짜즈(ZO ZAZZ) 보는 라디오 | 두시탈출 컬투쇼 | 250527",
+        "videoId": "o9Shq4el_0S",
+        "date": "2025-05-30T19:21:22Z",
+        "thumbnail": "https://i.ytimg.com/vi/o9Shq4el_0S/hqdefault.jpg"
+      },
+      {
+        "title": "[FULL] 모든 것을 쏟아낸다💦 오롯이 아이라는 이름으로 빛날 눈금치🌟아이들 미연&우기🌟와 함께하는 브카🎧💜 | 이석훈의 브런치카페",
+        "videoId": "4-jhQXdvL2s",
+        "date": "2025-05-30T19:21:51Z",
+        "thumbnail": "https://i.ytimg.com/vi/4-jhQXdvL2s/hqdefault.jpg"
+      }
+    ];
+
+    function renderYouTubeCards(data) {
+      const container = document.getElementById('cardContainer');
+      container.innerHTML = data.map(item => {
+        const memberMatch = item.title.match(/미연|민니|소연|우기|슈화/g);
+        const member = memberMatch ? memberMatch.join(', ') : '아이들';
+        const year = item.date.slice(0, 4);
+        const dateStr = item.date.slice(0, 10);
+        return `
+          <a href="https://www.youtube.com/watch?v=${item.videoId}" target="_blank" class="card"
+             data-category="YOUTUBE" data-member="${member}" data-year="${year}">
+            <img src="${item.thumbnail}" alt="${member} 영상">
+            <div class="card-title">${item.title} (${dateStr})</div>
+          </a>
+        `;
+      }).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderYouTubeCards(youtubeData);
+    });
   </script>
 </head>
 <body>
@@ -224,7 +290,8 @@
       <button class="filter-btn" onclick="filterVideos('member','우기')">우기</button>
       <button class="filter-btn" onclick="filterVideos('member','슈화')">슈화</button>
     </div>
-    <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" />
+    <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" oninput="searchWithinCategory()" />
   </div>
+  <div id="cardContainer"></div>
 </body>
 </html>
