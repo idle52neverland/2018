@@ -221,14 +221,51 @@
       <img src="https://cdn-icons-png.flaticon.com/512/3669/3669986.png" alt="Weverse">
     </a>
   </div>
-  <div id="categoryBar">
-    <!-- ... 생략된 버튼 영역 동일 ... -->
+  <div class="category-row">
+      <button class="category-btn" onclick="showFilters('MV')">MV & SPECIAL CLIP</button>
+      <button class="category-btn" onclick="showFilters('LIVE')">LIVE / COVER SONG / DANCE</button>
+      <button class="category-btn" onclick="showFilters('MUSIC')">MUSIC SHOW PERFORMANCE</button>
+      <button class="category-btn" onclick="showFilters('FESTIVAL')">FESTIVAL / EVENT STAGE</button>
+    </div>
+    <div class="category-row">
+      <button class="category-btn" onclick="showFilters('FANCAM')">FANCAM & STAGE FOCUS</button>
+      <button class="category-btn" onclick="showFilters('RECORDING')">RECORDING / STUDIO BEHIND</button>
+      <button class="category-btn" onclick="showFilters('PRACTICE')">DANCE PRACTICE / FANCHANT</button>
+    </div>
+    <div class="category-row">
+      <button class="category-btn" onclick="showFilters('TV')">TV SHOW</button>
+      <button class="category-btn" onclick="showFilters('YOUTUBE')">YOUTUBE CONTENTS</button>
+      <button class="category-btn" onclick="showFilters('REALITY')">REALITY (Original Content)</button>
+      <button class="category-btn" onclick="showFilters('RADIO')">RADIO / PODCAST</button>
+      <button class="category-btn" onclick="showFilters('LIVE_STREAM')">LIVE STREAM</button>
+    </div>
+    <div class="category-row">
+      <button class="category-btn" onclick="showFilters('INTERVIEW')">MAGAZINE INTERVIEW</button>
+      <button class="category-btn" onclick="showFilters('BEHIND')">BEHIND CLIPS</button>
+      <button class="category-btn" onclick="showFilters('CHALLENGE')">CHALLENGE</button>
+      <button class="category-btn" onclick="showFilters('ETC')">ETC</button>
+    </div>
+    <input type="text" id="searchInput" class="search-input" placeholder="search" />
   </div>
   <div class="sub-filters" id="subFilters">
-    <!-- ... 생략된 필터 영역 동일 ... -->
-  </div>
-  <div class="card-container" data-category="RADIO">
-    <!-- 카드들 출력 위치 -->
+    <div class="filter-group">
+      <button class="filter-btn" onclick="filterVideos('year','2018')">2018</button>
+      <button class="filter-btn" onclick="filterVideos('year','2019')">2019</button>
+      <button class="filter-btn" onclick="filterVideos('year','2020')">2020</button>
+      <button class="filter-btn" onclick="filterVideos('year','2021')">2021</button>
+      <button class="filter-btn" onclick="filterVideos('year','2022')">2022</button>
+      <button class="filter-btn" onclick="filterVideos('year','2023')">2023</button>
+      <button class="filter-btn" onclick="filterVideos('year','2024')">2024</button>
+      <button class="filter-btn" onclick="filterVideos('year','2025')">2025</button>
+    </div>
+    <div class="filter-group">
+      <button class="filter-btn" onclick="filterVideos('member','미연')">미연</button>
+      <button class="filter-btn" onclick="filterVideos('member','민니')">민니</button>
+      <button class="filter-btn" onclick="filterVideos('member','소연')">소연</button>
+      <button class="filter-btn" onclick="filterVideos('member','우기')">우기</button>
+      <button class="filter-btn" onclick="filterVideos('member','슈화')">슈화</button>
+    </div>
+    <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" />
   </div>
 </body>
 </html>
