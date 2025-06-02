@@ -167,11 +167,7 @@
 
     function sortCardsByDate(container) {
       const cards = Array.from(container.querySelectorAll('.card'));
-      cards.sort((a, b) => {
-        const dateA = extractDate(a.querySelector('.card-title').textContent);
-        const dateB = extractDate(b.querySelector('.card-title').textContent);
-        return dateB - dateA;
-      });
+      cards.sort((a, b) => extractDate(b.querySelector('.card-title').textContent) - extractDate(a.querySelector('.card-title').textContent));
       cards.forEach(card => container.appendChild(card));
     }
 
@@ -235,6 +231,7 @@
     });
 
     window.onpopstate = function (e) {
+      const hash = location.hash.replace('#', '');
       if (e.state && e.state.category) {
         showFilters(e.state.category, true);
         if (e.state.filterType && e.state.filterValue) {
@@ -242,6 +239,8 @@
         } else if (e.state.search) {
           filterBySearch(e.state.search);
         }
+      } else if (hash && categoryNames[hash]) {
+        showFilters(hash, true);
       } else {
         document.getElementById('subFilters').style.display = 'none';
         document.getElementById('categoryBar').classList.remove('category-bar-hidden');
@@ -256,7 +255,8 @@
   </script>
 </head>
 <body>
-<!-- body 내용은 그대로 유지됨 -->
+
+
 
 
 
