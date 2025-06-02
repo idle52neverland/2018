@@ -222,6 +222,49 @@
     container.style.display = 'none';
   });
 });
+    document.getElementById('searchInput').addEventListener('input', function () {
+  const query = this.value.toLowerCase();
+  document.querySelectorAll('.card-container').forEach(container => {
+    const cards = Array.from(container.querySelectorAll('.card'));
+    const matched = cards.filter(card => {
+      const title = card.querySelector('.card-title').textContent.toLowerCase();
+      return title.includes(query);
+    });
+
+    matched.sort((a, b) => {
+      const dateA = a.querySelector('.card-title').textContent.match(/\((\d{4}-\d{2}-\d{2})\)/);
+      const dateB = b.querySelector('.card-title').textContent.match(/\((\d{4}-\d{2}-\d{2})\)/);
+      return new Date(dateB?.[1]) - new Date(dateA?.[1]);
+    });
+
+    container.innerHTML = '';
+    matched.forEach(card => container.appendChild(card));
+    container.style.display = matched.length > 0 ? 'grid' : 'none';
+  });
+});
+
+document.getElementById('subSearchInput').addEventListener('input', function () {
+  const query = this.value.toLowerCase();
+  const container = document.querySelector(`.card-container[data-category="${currentCategory}"]`);
+  if (!container) return;
+
+  const cards = Array.from(container.querySelectorAll('.card'));
+  const matched = cards.filter(card => {
+    const title = card.querySelector('.card-title').textContent.toLowerCase();
+    return title.includes(query);
+  });
+
+  matched.sort((a, b) => {
+    const dateA = a.querySelector('.card-title').textContent.match(/\((\d{4}-\d{2}-\d{2})\)/);
+    const dateB = b.querySelector('.card-title').textContent.match(/\((\d{4}-\d{2}-\d{2})\)/);
+    return new Date(dateB?.[1]) - new Date(dateA?.[1]);
+  });
+
+  container.innerHTML = '';
+  matched.forEach(card => container.appendChild(card));
+  container.style.display = matched.length > 0 ? 'grid' : 'none';
+});
+
   </script>
 </head>
 <body>
