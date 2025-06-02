@@ -106,9 +106,6 @@
       margin: 20px auto;
       max-width: 1200px;
     }
-    .card-container.active {
-      display: flex;
-    }
     .card {
       background-color: #222;
       border-radius: 12px;
@@ -170,7 +167,7 @@
       document.getElementById('mainTitle').textContent = categoryNames[code] || code;
       document.querySelector('.social-icons').classList.add('hidden');
       document.querySelectorAll('.card-container').forEach(container => {
-        container.classList.toggle('active', container.dataset.category === code);
+        container.style.display = container.dataset.category === code ? 'flex' : 'none';
       });
       history.pushState({ category: code }, '', `#${code}`);
     }
@@ -189,17 +186,9 @@
       document.getElementById('mainTitle').textContent = 'I-DLE 몰아보기';
       document.querySelector('.social-icons').classList.remove('hidden');
       document.querySelectorAll('.card-container').forEach(container => {
-        container.classList.remove('active');
+        container.style.display = 'none';
       });
     };
-
-    // 페이지 첫 진입 시 URL에 카테고리 있으면 자동으로 해당 카테고리 보여줌
-    window.addEventListener('DOMContentLoaded', () => {
-      const hash = window.location.hash.replace('#', '');
-      if (categoryNames[hash]) {
-        showFilters(hash);
-      }
-    });
   </script>
 </head>
 <body>
@@ -221,7 +210,8 @@
       <img src="https://cdn-icons-png.flaticon.com/512/3669/3669986.png" alt="Weverse">
     </a>
   </div>
-  <div class="category-row">
+  <div id="categoryBar">
+    <div class="category-row">
       <button class="category-btn" onclick="showFilters('MV')">MV & SPECIAL CLIP</button>
       <button class="category-btn" onclick="showFilters('LIVE')">LIVE / COVER SONG / DANCE</button>
       <button class="category-btn" onclick="showFilters('MUSIC')">MUSIC SHOW PERFORMANCE</button>
