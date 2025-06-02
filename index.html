@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>I-DLE 몰아보기</title>
   <style>
     body {
@@ -17,7 +17,7 @@
       font-size: 28px;
       color: #fff;
     }
-    .category-btn, .filter-btn {
+    .category-btn {
       padding: 10px 20px;
       background-color: #333;
       border-radius: 20px;
@@ -30,7 +30,7 @@
       text-decoration: none;
       display: inline-block;
     }
-    .category-btn:hover, .filter-btn:hover {
+    .category-btn:hover {
       background-color: #ff4da6;
     }
     .search-input {
@@ -74,6 +74,20 @@
       justify-content: center;
       gap: 10px;
     }
+    .filter-btn {
+      padding: 10px 20px;
+      background-color: #333;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.2s;
+    }
+    .filter-btn:hover {
+      background-color: #ff4da6;
+    }
     .category-bar-hidden {
       display: none;
     }
@@ -87,19 +101,17 @@
     .card-container {
       display: none;
       flex-wrap: wrap;
-      justify-content: flex-start;
+      justify-content: center;
       gap: 16px;
       margin: 20px auto;
       max-width: 1200px;
-      align-items: stretch;
     }
     .card {
       background-color: #222;
       border-radius: 12px;
       overflow: hidden;
       text-align: left;
-      width: calc(20% - 16px);
-      min-width: 180px;
+      width: 300px;
       transition: transform 0.2s;
     }
     .card img {
@@ -115,21 +127,16 @@
     .card:hover {
       transform: scale(1.03);
     }
-    @media (max-width: 768px) {
-      .card {
-        width: calc(33.33% - 16px);
+    @media (max-width: 600px) {
+      .category-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
       }
-    }
-    @media (max-width: 480px) {
-      .card {
-        width: 100%;
+      .category-btn {
+        width: 90%;
+        max-width: 280px;
       }
-    }
-    #noResultMessage {
-      display: none;
-      color: #ccc;
-      font-size: 14px;
-      margin-top: 20px;
     }
   </style>
   <script>
@@ -159,127 +166,27 @@
       document.getElementById('categoryBar').classList.add('category-bar-hidden');
       document.getElementById('mainTitle').textContent = categoryNames[code] || code;
       document.querySelector('.social-icons').classList.add('hidden');
-
       document.querySelectorAll('.card-container').forEach(container => {
         container.style.display = container.dataset.category === code ? 'flex' : 'none';
       });
-
-      document.getElementById('noResultMessage').style.display = 'none';
       history.pushState({ category: code }, '', `#${code}`);
     }
 
     function filterVideos(type, value) {
-      const cards = Array.from(document.querySelectorAll(`.card-container[data-category="${currentCategory}"] .card`));
+      const cards = document.querySelectorAll(`.card-container[data-category="${currentCategory}"] .card`);
       cards.forEach(card => {
-        card.style.display = card.dataset[type] === value ? 'block' : 'none';
+        const match = card.dataset[type] === value;
+        card.style.display = match ? 'block' : 'none';
       });
     }
 
-    function searchCards(input, containerSelector) {
-  const query = input.value.trim().toLowerCase();
-  const noResult = document.getElementById('noResultMessage');
-  const container = document.querySelector(containerSelector);
-  const cards = Array.from(container.querySelectorAll('.card'));
-
-  if (!query) {
-    cards.forEach(card => {
-      card.style.display = 'block';
-      card.style.visibility = 'visible';
-      card.style.opacity = '1';
-      card.style.position = 'relative';
-    });
-    container.style.display = 'flex';
-    noResult.style.display = 'none';
-    return;
-  }
-
-  document.querySelectorAll('.card-container').forEach(c => c.style.display = 'none');
-  let matchedCards = cards.filter(card =>
-    card.querySelector('.card-title').textContent.toLowerCase().includes(query)
-  );
-
-  matchedCards.sort((a, b) => b.dataset.year.localeCompare(a.dataset.year));
-  cards.forEach(card => (card.style.display = 'none'));
-  matchedCards.forEach(card => (card.style.display = 'block'));
-
-  if (matchedCards.length > 0) {
-    container.style.display = 'flex';
-    noResult.style.display = 'none';
-  } else {
-    cards.forEach(card => {
-      card.style.display = 'block';
-      card.style.visibility = 'visible';
-      card.style.opacity = '1';
-      card.style.position = 'relative';
-    });
-    container.style.display = 'flex';
-    noResult.style.display = 'none';
-  }
-});
-    
-    container.style.display = 'flex';
-    noResult.style.display = 'none';
-    return;
-  }
-
-  document.querySelectorAll('.card-container').forEach(c => c.style.display = 'none');
-  let matchedCards = cards.filter(card =>
-    card.querySelector('.card-title').textContent.toLowerCase().includes(query)
-  );
-
-  matchedCards.sort((a, b) => b.dataset.year.localeCompare(a.dataset.year));
-  cards.forEach(card => (card.style.display = 'none'));
-  matchedCards.forEach(card => (card.style.display = 'block'));
-
-  if (matchedCards.length > 0) {
-    container.style.display = 'flex';
-    noResult.style.display = 'none';
-  } else {
-  cards.forEach(card => {
-  card.removeAttribute('style');
-});
-  container.removeAttribute('style');
-  noResult.style.display = 'none';
-  return;
-  }
-
-  /* 기존 noResult 처리 제거됨 */
-  //
-    noResult.style.display = 'block';
-  }
-}
-
-      
-      }
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      if (!location.hash) {
-        document.querySelectorAll('.card-container').forEach(c => c.style.display = 'none');
-      }
-    });
-
-    window.onpopstate = function (event) {
-      if (event.state && event.state.category) {
-        showFilters(event.state.category);
-      } else {
-        currentCategory = '';
-        document.getElementById('subFilters').style.display = 'none';
-        document.getElementById('categoryBar').classList.remove('category-bar-hidden');
-        document.getElementById('mainTitle').textContent = 'I-DLE 몰아보기';
-        document.querySelector('.social-icons').classList.remove('hidden');
-        document.querySelectorAll('.card-container').forEach(c => c.style.display = 'none');
-        document.getElementById('noResultMessage').style.display = 'none';
-      }
-    };
-
-    window.onload = () => {
-      document.getElementById('searchInput').addEventListener('input', function () {
-        searchCards(this, 'body');
-      });
-
-      document.getElementById('subSearchInput').addEventListener('input', function () {
-        searchCards(this, `.card-container[data-category="${currentCategory}"]`);
+    window.onpopstate = function () {
+      document.getElementById('subFilters').style.display = 'none';
+      document.getElementById('categoryBar').classList.remove('category-bar-hidden');
+      document.getElementById('mainTitle').textContent = 'I-DLE 몰아보기';
+      document.querySelector('.social-icons').classList.remove('hidden');
+      document.querySelectorAll('.card-container').forEach(container => {
+        container.style.display = 'none';
       });
     };
   </script>
@@ -352,7 +259,6 @@
     </div>
     <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" />
   </div>
-
   <div class="card-container" data-category="RADIO">
   <a href="https://www.youtube.com/watch?v=ISsi7sLXI8g" target="_blank" class="card" data-category="RADIO" data-member="아이들" data-year="2025">
   <img src="https://i.ytimg.com/vi/ISsi7sLXI8g/hqdefault.jpg" alt="아이들 - 이은지의 가요광장">
