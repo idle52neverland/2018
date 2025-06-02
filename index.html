@@ -106,6 +106,9 @@
       margin: 20px auto;
       max-width: 1200px;
     }
+    .card-container.active {
+      display: flex;
+    }
     .card {
       background-color: #222;
       border-radius: 12px;
@@ -167,7 +170,7 @@
       document.getElementById('mainTitle').textContent = categoryNames[code] || code;
       document.querySelector('.social-icons').classList.add('hidden');
       document.querySelectorAll('.card-container').forEach(container => {
-        container.style.display = container.dataset.category === code ? 'flex' : 'none';
+        container.classList.toggle('active', container.dataset.category === code);
       });
       history.pushState({ category: code }, '', `#${code}`);
     }
@@ -186,9 +189,17 @@
       document.getElementById('mainTitle').textContent = 'I-DLE 몰아보기';
       document.querySelector('.social-icons').classList.remove('hidden');
       document.querySelectorAll('.card-container').forEach(container => {
-        container.style.display = 'none';
+        container.classList.remove('active');
       });
     };
+
+    // 페이지 첫 진입 시 URL에 카테고리 있으면 자동으로 해당 카테고리 보여줌
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (categoryNames[hash]) {
+        showFilters(hash);
+      }
+    });
   </script>
 </head>
 <body>
@@ -217,30 +228,7 @@
     <!-- ... 생략된 필터 영역 동일 ... -->
   </div>
   <div class="card-container" data-category="RADIO">
-    <a href="https://youtu.be/ISsi7sLXI8g" target="_blank" class="card" data-category="RADIO / PODCAST" data-member="아이들" data-year="2025">
-      <img src="https://i.ytimg.com/vi/ISsi7sLXI8g/hqdefault.jpg" alt="아이들 - [이은지의 가요광장]  with 아이들  | KBS 2...">
-      <div class="card-title">[이은지의 가요광장]  with 아이들  | KBS 250520(화) 방송 (2025-05-30)</div>
-    </a>
-    <a href="https://youtu.be/AKbHvJDWLC8" target="_blank" class="card" data-category="RADIO / PODCAST" data-member="민니" data-year="2025">
-      <img src="https://i.ytimg.com/vi/AKbHvJDWLC8/hqdefault.jpg" alt="민니 - 이은지의 가요광장 with 민니((여자)아이들)...">
-      <div class="card-title">이은지의 가요광장 with 민니((여자)아이들) KBS 250130(목) 방송 (2025-05-30)</div>
-    </a>
-    <a href="https://youtu.be/jsr9XqQh-C8" target="_blank" class="card" data-category="RADIO / PODCAST" data-member="민니" data-year="2025">
-      <img src="https://i.ytimg.com/vi/jsr9XqQh-C8/hqdefault.jpg" alt="민니 - Cause I’m HER!!💗 다른 누구도 아닌 솔로가...">
-      <div class="card-title">[FULL] Cause I’m HER!!💗 다른 누구도 아닌 솔로가수 민니(MINNIE) 보는 라디오 | 웬디의 영스트리트 | 250127 (2025-05-30)</div>
-    </a>
-    <a href="https://youtu.be/5rLPgvdUnJ4" target="_blank" class="card" data-category="RADIO / PODCAST" data-member="민니" data-year="2025">
-      <img src="https://i.ytimg.com/vi/5rLPgvdUnJ4/hqdefault.jpg" alt="민니 - who shot ya?🔫 내 심장을 저격한 민니(MINNI...">
-      <div class="card-title">[FULL] who shot ya?🔫 내 심장을 저격한 민니(MINNIE) 보는 라디오 | 두시탈출 컬투쇼 | 250126 (2025-05-30)</div>
-    </a>
-    <a href="https://youtu.be/OorZpjSm7QE" target="_blank" class="card" data-category="RADIO / PODCAST" data-member="민니" data-year="2025">
-      <img src="https://i.ytimg.com/vi/OorZpjSm7QE/hqdefault.jpg" alt="민니 - 볼륨 초대석 : 최효정의 비밀정원 with 민니...">
-      <div class="card-title">볼륨 초대석 : 최효정의 비밀정원 with 민니 (MINNIE) full ver. / [오마이걸 효정의 볼륨을 높여요] | KBS 250123 방송 (2025-05-30)</div>
-    </a>
-    <a href="https://youtu.be/inaLcT_gOS8" target="_blank" class="card" data-category="RADIO / PODCAST" data-member="아이들" data-year="2025">
-      <img src="https://i.ytimg.com/vi/inaLcT_gOS8/hqdefault.jpg" alt="아이들 - 함께해서 두 배로 즐거웠던 시간🥳 아이...">
-      <div class="card-title">[FULL] 함께해서 두 배로 즐거웠던 시간🥳 아이들(idle), 조째즈(ZO ZAZZ) 보는 라디오 | 두시탈출 컬투쇼 | 250527 (2025-05-30)</div>
-    </a>
+    <!-- 카드들 출력 위치 -->
   </div>
 </body>
 </html>
