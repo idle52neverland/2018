@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const res = await fetch(file);
     const html = await res.text();
     document.getElementById(id).innerHTML = html;
+    if (id === "subFilters") {
+      document.dispatchEvent(new Event("filtersLoaded"));
+    }
   };
 
   loadHTML("socialIcons", "social.html");
