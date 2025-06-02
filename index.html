@@ -128,6 +128,25 @@
   <script>
     let currentCategory = '';
 
+    const categoryNames = {
+      MV: "MV & SPECIAL CLIP",
+      LIVE: "LIVE / COVER SONG / DANCE",
+      MUSIC: "MUSIC SHOW PERFORMANCE",
+      FESTIVAL: "FESTIVAL / EVENT STAGE",
+      FANCAM: "FANCAM & STAGE FOCUS",
+      RECORDING: "RECORDING / STUDIO BEHIND",
+      PRACTICE: "DANCE PRACTICE / FANCHANT",
+      TV: "TV SHOW",
+      YOUTUBE: "YOUTUBE CONTENTS",
+      REALITY: "REALITY (Original Content)",
+      RADIO: "RADIO / PODCAST",
+      LIVE_STREAM: "LIVE STREAM",
+      INTERVIEW: "MAGAZINE INTERVIEW",
+      BEHIND: "BEHIND CLIPS",
+      CHALLENGE: "CHALLENGE",
+      ETC: "ETC"
+    };
+
     function extractDate(text) {
       const match = text.match(/\((\d{4})-(\d{2})-(\d{2})\)/);
       return match ? new Date(match[1], match[2] - 1, match[3]) : new Date(0);
@@ -147,7 +166,7 @@
       currentCategory = code;
       document.getElementById('subFilters').style.display = 'flex';
       document.getElementById('categoryBar').classList.add('category-bar-hidden');
-      document.getElementById('mainTitle').textContent = code;
+      document.getElementById('mainTitle').textContent = categoryNames[code] || code;
       document.querySelector('.social-icons').classList.add('hidden');
       document.querySelectorAll('.card-container').forEach(container => {
         container.style.display = container.dataset.category === code ? 'flex' : 'none';
@@ -206,6 +225,7 @@
   </script>
 </head>
 <body>
+
   <h1 id="mainTitle">I-DLE 몰아보기</h1>
   <div class="social-icons">
     <a href="https://www.youtube.com/@official_i_dle" target="_blank">
