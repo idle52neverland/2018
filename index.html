@@ -113,10 +113,6 @@
     .card:hover {
       transform: scale(1.03);
     }
-    .no-result {
-      color: #ccc;
-      margin: 20px;
-    }
     @media (max-width: 600px) {
       .category-row {
         flex-direction: column;
@@ -168,7 +164,6 @@
         const match = card.dataset[type] === value;
         card.style.display = match ? 'block' : 'none';
       });
-      updateCardVisibility(container);
     }
 
     function filterBySearch(term) {
@@ -182,24 +177,7 @@
           if (match) anyVisible = true;
         });
         container.style.display = anyVisible ? 'flex' : 'none';
-        updateCardVisibility(container);
       });
-    }
-
-    function updateCardVisibility(container) {
-      const cards = Array.from(container.querySelectorAll('.card'));
-      const anyVisible = cards.some(card => card.style.display !== 'none');
-      let msg = container.querySelector('.no-result');
-      if (!anyVisible) {
-        if (!msg) {
-          msg = document.createElement('div');
-          msg.className = 'no-result';
-          msg.textContent = '표시할 영상이 없습니다.';
-          container.appendChild(msg);
-        }
-      } else if (msg) {
-        msg.remove();
-      }
     }
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -213,9 +191,7 @@
           const title = card.querySelector('.card-title').textContent.toLowerCase();
           card.style.display = title.includes(term) ? 'block' : 'none';
         });
-        updateCardVisibility(container);
       });
-      showFilters('RADIO');
     });
 
     window.onpopstate = function () {
@@ -250,7 +226,28 @@
   </div>
   <div id="categoryBar">
     <div class="category-row">
+      <button class="category-btn" onclick="showFilters('MV')">MV & SPECIAL CLIP</button>
+      <button class="category-btn" onclick="showFilters('LIVE')">LIVE / COVER SONG / DANCE</button>
+      <button class="category-btn" onclick="showFilters('MUSIC')">MUSIC SHOW PERFORMANCE</button>
+      <button class="category-btn" onclick="showFilters('FESTIVAL')">FESTIVAL / EVENT STAGE</button>
+    </div>
+    <div class="category-row">
+      <button class="category-btn" onclick="showFilters('FANCAM')">FANCAM & STAGE FOCUS</button>
+      <button class="category-btn" onclick="showFilters('RECORDING')">RECORDING / STUDIO BEHIND</button>
+      <button class="category-btn" onclick="showFilters('PRACTICE')">DANCE PRACTICE / FANCHANT</button>
+    </div>
+    <div class="category-row">
+      <button class="category-btn" onclick="showFilters('TV')">TV SHOW</button>
+      <button class="category-btn" onclick="showFilters('YOUTUBE')">YOUTUBE CONTENTS</button>
+      <button class="category-btn" onclick="showFilters('REALITY')">REALITY (Original Content)</button>
       <button class="category-btn" onclick="showFilters('RADIO')">RADIO / PODCAST</button>
+      <button class="category-btn" onclick="showFilters('LIVE_STREAM')">LIVE STREAM</button>
+    </div>
+    <div class="category-row">
+      <button class="category-btn" onclick="showFilters('INTERVIEW')">MAGAZINE INTERVIEW</button>
+      <button class="category-btn" onclick="showFilters('BEHIND')">BEHIND CLIPS</button>
+      <button class="category-btn" onclick="showFilters('CHALLENGE')">CHALLENGE</button>
+      <button class="category-btn" onclick="showFilters('ETC')">ETC</button>
     </div>
     <input type="text" id="searchInput" class="search-input" placeholder="search" />
   </div>
@@ -258,38 +255,56 @@
     <div class="filter-group">
       <button class="filter-btn" onclick="filterVideos('year','2025')">2025</button>
       <button class="filter-btn" onclick="filterVideos('year','2024')">2024</button>
+      <button class="filter-btn" onclick="filterVideos('year','2023')">2023</button>
+      <button class="filter-btn" onclick="filterVideos('year','2022')">2022</button>
+      <button class="filter-btn" onclick="filterVideos('year','2021')">2021</button>
+      <button class="filter-btn" onclick="filterVideos('year','2020')">2020</button>
+      <button class="filter-btn" onclick="filterVideos('year','2019')">2019</button>
+      <button class="filter-btn" onclick="filterVideos('year','2018')">2018</button>
+      <button class="filter-btn" onclick="filterVideos('year','2016')">PRE-DEBUT</button>
     </div>
     <div class="filter-group">
+      <button class="filter-btn" onclick="filterVideos('member','미연')">미연</button>
       <button class="filter-btn" onclick="filterVideos('member','민니')">민니</button>
+      <button class="filter-btn" onclick="filterVideos('member','소연')">소연</button>
+      <button class="filter-btn" onclick="filterVideos('member','우기')">우기</button>
+      <button class="filter-btn" onclick="filterVideos('member','슈화')">슈화</button>
       <button class="filter-btn" onclick="filterVideos('member','아이들')">아이들</button>
     </div>
     <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" />
   </div>
-  <div class="card-container" data-category="RADIO">
-    <a href="https://www.youtube.com/watch?v=ISsi7sLXI8g" target="_blank" class="card" data-category="RADIO" data-member="아이들" data-year="2025">
-      <img src="https://i.ytimg.com/vi/ISsi7sLXI8g/hqdefault.jpg" alt="아이들 - 이은지의 가요광장">
-      <div class="card-title">[이은지의 가요광장] with 아이들 | KBS 250520(화) 방송 (2025-05-30)</div>
-    </a>
-    <a href="https://www.youtube.com/watch?v=AKbHvJDWLC8" target="_blank" class="card" data-category="RADIO" data-member="민니" data-year="2025">
-      <img src="https://i.ytimg.com/vi/AKbHvJDWLC8/hqdefault.jpg" alt="민니 - 이은지의 가요광장">
-      <div class="card-title">이은지의 가요광장 with 민니((여자)아이들) KBS 250130(목) 방송 (2025-05-30)</div>
-    </a>
-    <a href="https://www.youtube.com/watch?v=jsr9XqQh-C8" target="_blank" class="card" data-category="RADIO" data-member="민니" data-year="2025">
-      <img src="https://i.ytimg.com/vi/jsr9XqQh-C8/hqdefault.jpg" alt="민니 - 영스트리트">
-      <div class="card-title">[FULL] Cause I’m HER!!💗 민니(MINNIE) | 웬디의 영스트리트 | 250127 (2025-05-30)</div>
-    </a>
-    <a href="https://www.youtube.com/watch?v=5rLPgvdUnJ4" target="_blank" class="card" data-category="RADIO" data-member="민니" data-year="2025">
-      <img src="https://i.ytimg.com/vi/5rLPgvdUnJ4/hqdefault.jpg" alt="민니 - 컬투쇼">
-      <div class="card-title">[FULL] 내 심장을 저격한 민니(MINNIE) | 두시탈출 컬투쇼 | 250126 (2025-05-30)</div>
-    </a>
-    <a href="https://www.youtube.com/watch?v=OorZpjSm7QE" target="_blank" class="card" data-category="RADIO" data-member="민니" data-year="2025">
-      <img src="https://i.ytimg.com/vi/OorZpjSm7QE/hqdefault.jpg" alt="민니 - 볼륨 초대석">
-      <div class="card-title">볼륨 초대석 : 최효정의 비밀정원 with 민니 (MINNIE) | KBS 250123 방송 (2025-05-30)</div>
-    </a>
-    <a href="https://www.youtube.com/watch?v=inaLcT_gOS8" target="_blank" class="card" data-category="RADIO" data-member="아이들" data-year="2025">
-      <img src="https://i.ytimg.com/vi/inaLcT_gOS8/hqdefault.jpg" alt="아이들 - 컬투쇼">
-      <div class="card-title">[FULL] 아이들(idle), 조째즈(ZO ZAZZ) | 두시탈출 컬투쇼 | 250527 (2025-05-30)</div>
-    </a>
-  </div>
+<div class="card-container" data-category="RADIO">
+  <a href="https://www.youtube.com/watch?v=ISsi7sLXI8g" target="_blank" class="card" data-category="RADIO" data-member="아이들" data-year="2025">
+  <img src="https://i.ytimg.com/vi/ISsi7sLXI8g/hqdefault.jpg" alt="아이들 - 이은지의 가요광장">
+  <div class="card-title">[이은지의 가요광장]  with 아이들  | KBS 250520(화) 방송 (2025-05-30)</div>
+</a>
+
+<a href="https://www.youtube.com/watch?v=AKbHvJDWLC8" target="_blank" class="card" data-category="RADIO" data-member="민니" data-year="2025">
+  <img src="https://i.ytimg.com/vi/AKbHvJDWLC8/hqdefault.jpg" alt="민니 - 이은지의 가요광장">
+  <div class="card-title">이은지의 가요광장 with 민니((여자)아이들) KBS 250130(목) 방송 (2025-05-30)</div>
+</a>
+
+<a href="https://www.youtube.com/watch?v=jsr9XqQh-C8" target="_blank" class="card" data-category="RADIO" data-member="민니" data-year="2025">
+  <img src="https://i.ytimg.com/vi/jsr9XqQh-C8/hqdefault.jpg" alt="민니 - 영스트리트">
+  <div class="card-title">[FULL] Cause I’m HER!!💗 다른 누구도 아닌 솔로가수 민니(MINNIE) 보는 라디오 | 웬디의 영스트리트 | 250127 (2025-05-30)</div>
+</a>
+
+<a href="https://www.youtube.com/watch?v=5rLPgvdUnJ4" target="_blank" class="card" data-category="RADIO" data-member="민니" data-year="2025">
+  <img src="https://i.ytimg.com/vi/5rLPgvdUnJ4/hqdefault.jpg" alt="민니 - 컬투쇼">
+  <div class="card-title">[FULL] who shot ya?🔫 내 심장을 저격한 민니(MINNIE) 보는 라디오 | 두시탈출 컬투쇼 | 250126 (2025-05-30)</div>
+</a>
+
+<a href="https://www.youtube.com/watch?v=OorZpjSm7QE" target="_blank" class="card" data-category="RADIO" data-member="민니" data-year="2025">
+  <img src="https://i.ytimg.com/vi/OorZpjSm7QE/hqdefault.jpg" alt="민니 - 볼륨 초대석">
+  <div class="card-title">볼륨 초대석 : 최효정의 비밀정원 with 민니 (MINNIE) full ver. / [오마이걸 효정의 볼륨을 높여요] | KBS 250123 방송 (2025-05-30)</div>
+</a>
+
+<a href="https://www.youtube.com/watch?v=inaLcT_gOS8" target="_blank" class="card" data-category="RADIO" data-member="아이들" data-year="2025">
+  <img src="https://i.ytimg.com/vi/inaLcT_gOS8/hqdefault.jpg" alt="아이들 - 컬투쇼">
+  <div class="card-title">[FULL] 함께해서 두 배로 즐거웠던 시간🥳 아이들(idle), 조째즈(ZO ZAZZ) 보는 라디오 | 두시탈출 컬투쇼 | 250527 (2025-05-30)</div>
+</a>
+
+</div>
 </body>
 </html>
+
