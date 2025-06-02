@@ -250,10 +250,10 @@
       if (hash && categoryNames[hash]) {
         showFilters(hash, true);
       }
-      document.getElementById('searchInput').addEventListener('input', (e) => {
+      document.getElementById('searchInput')?.addEventListener('input', (e) => {
         filterBySearch(e.target.value);
       });
-      document.getElementById('subSearchInput').addEventListener('input', (e) => {
+      document.getElementById('subSearchInput')?.addEventListener('input', (e) => {
         const container = document.querySelector(`.card-container[data-category="${currentCategory}"]`);
         const term = e.target.value.toLowerCase();
         container.querySelectorAll('.card').forEach(card => {
@@ -282,22 +282,13 @@
 <body>
 
 <h1 id="mainTitle">I-DLE 몰아보기</h1>
+
 <div class="social-icons">
-  <a href="https://www.youtube.com/@official_i_dle" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
-  </a>
-  <a href="https://x.com/official_i_dle" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X">
-  </a>
-  <a href="https://instagram.com/i_dle_official" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram">
-  </a>
-  <a href="https://tiktok.com/@official_i_dle" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
-  </a>
-  <a href="https://weverse.io/i-dle" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/3669/3669986.png" alt="Weverse">
-  </a>
+  <a href="https://www.youtube.com/@official_i_dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
+  <a href="https://x.com/official_i_dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X"></a>
+  <a href="https://instagram.com/i_dle_official" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram"></a>
+  <a href="https://tiktok.com/@official_i_dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
+  <a href="https://weverse.io/i-dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3669/3669986.png" alt="Weverse"></a>
 </div>
 
 <div id="categoryBar">
@@ -327,12 +318,14 @@
   </div>
   <div class="search-bar">
     <input type="text" id="searchInput" class="search-input" placeholder="search">
+  </div>
+</div>
+
+<div class="sub-filters" id="subFilters">
+  <div class="search-bar">
     <button class="nav-btn" onclick="goBackToCategories()">뒤로가기</button>
     <button class="nav-btn" onclick="window.location.href = '/'">홈</button>
   </div>
-</div>
-  
-<div class="sub-filters" id="subFilters">
   <div class="filter-group">
     <button class="filter-btn" onclick="filterVideos('year','2025')">2025</button>
     <button class="filter-btn" onclick="filterVideos('year','2024')">2024</button>
@@ -354,6 +347,7 @@
   </div>
   <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" />
 </div>
+
 
 
 
