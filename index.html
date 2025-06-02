@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>I-DLE 몰아보기</title>
   <style>
     body {
@@ -27,6 +27,8 @@
       cursor: pointer;
       border: none;
       transition: background-color 0.2s;
+      text-decoration: none;
+      display: inline-block;
     }
     .category-btn:hover, .filter-btn:hover {
       background-color: #ff4da6;
@@ -84,17 +86,20 @@
     }
     .card-container {
       display: none;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      flex-wrap: wrap;
+      justify-content: flex-start;
       gap: 16px;
       margin: 20px auto;
-      max-width: 1600px;
+      max-width: 1200px;
+      align-items: stretch;
     }
     .card {
       background-color: #222;
       border-radius: 12px;
       overflow: hidden;
       text-align: left;
+      width: calc(20% - 16px);
+      min-width: 180px;
       transition: transform 0.2s;
     }
     .card img {
@@ -110,15 +115,21 @@
     .card:hover {
       transform: scale(1.03);
     }
-    @media (min-width: 1025px) {
-      .card-container {
-        grid-template-columns: repeat(5, 1fr);
+    @media (max-width: 768px) {
+      .card {
+        width: calc(33.33% - 16px);
       }
     }
-    @media (max-width: 1024px) {
-      .card-container {
-        grid-template-columns: repeat(3, 1fr);
+    @media (max-width: 480px) {
+      .card {
+        width: 100%;
       }
+    }
+    #noResultMessage {
+      display: none;
+      color: #ccc;
+      font-size: 14px;
+      margin-top: 20px;
     }
   </style>
   <script>
@@ -144,71 +155,61 @@
 
     function showFilters(code) {
       currentCategory = code;
-      const container = document.querySelector(`.card-container[data-category="${code}"]`);
-      if (container) {
-        const sorted = Array.from(container.children).sort((a, b) => {
-          const da = a.querySelector('.card-title')?.textContent || '';
-          const db = b.querySelector('.card-title')?.textContent || '';
-          return db.localeCompare(da);
-        });
-        container.innerHTML = '';
-        sorted.forEach(el => container.appendChild(el));
-      }
-
       document.getElementById('subFilters').style.display = 'flex';
       document.getElementById('categoryBar').classList.add('category-bar-hidden');
       document.getElementById('mainTitle').textContent = categoryNames[code] || code;
       document.querySelector('.social-icons').classList.add('hidden');
+
       document.querySelectorAll('.card-container').forEach(container => {
-        container.style.display = container.dataset.category === code ? 'grid' : 'none';
+        container.style.display = container.dataset.category === code ? 'flex' : 'none';
       });
+
+      document.getElementById('noResultMessage').style.display = 'none';
       history.pushState({ category: code }, '', `#${code}`);
     }
 
     function filterVideos(type, value) {
-      const cards = document.querySelectorAll(`.card-container[data-category="${currentCategory}"] .card`);
-      const filtered = [];
+      const cards = Array.from(document.querySelectorAll(`.card-container[data-category="${currentCategory}"] .card`));
       cards.forEach(card => {
-        const match = card.dataset[type] === value;
-        card.style.display = match ? 'block' : 'none';
-        if (match) filtered.push(card);
+        card.style.display = card.dataset[type] === value ? 'block' : 'none';
       });
-      filtered.sort((a, b) => b.querySelector('.card-title').textContent.localeCompare(a.querySelector('.card-title').textContent));
-      const container = document.querySelector(`.card-container[data-category="${currentCategory}"]`);
-      container.innerHTML = '';
-      filtered.forEach(el => container.appendChild(el));
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const hash = window.location.hash.substring(1);
-      if (hash && categoryNames[hash]) {
-        showFilters(hash);
+    function searchCards(input, containerSelector) {
+      const query = input.value.trim().toLowerCase();
+      document.querySelectorAll('.card-container').forEach(c => c.style.display = 'none');
+      const noResult = document.getElementById('noResultMessage');
+
+      if (!query) {
+        noResult.style.display = 'none';
+        return;
       }
 
-      document.getElementById('searchInput').addEventListener('input', function () {
-        const keyword = this.value.trim().toLowerCase();
-        document.querySelectorAll('.card-container').forEach(container => {
-          const cards = Array.from(container.querySelectorAll('.card'));
-          const filtered = cards.filter(card => card.querySelector('.card-title').textContent.toLowerCase().includes(keyword));
-          filtered.sort((a, b) => b.querySelector('.card-title').textContent.localeCompare(a.querySelector('.card-title').textContent));
-          container.innerHTML = '';
-          filtered.forEach(card => container.appendChild(card));
-          container.style.display = filtered.length > 0 ? 'grid' : 'none';
-        });
-      });
+      const cards = Array.from(document.querySelectorAll(`${containerSelector} .card`));
+      let matchedCards = cards.filter(card =>
+        card.querySelector('.card-title').textContent.toLowerCase().includes(query)
+      );
 
-      document.getElementById('subSearchInput').addEventListener('input', function () {
-        const keyword = this.value.trim().toLowerCase();
-        const container = document.querySelector(`.card-container[data-category="${currentCategory}"]`);
-        const cards = Array.from(container.querySelectorAll('.card'));
-        const filtered = cards.filter(card => card.querySelector('.card-title').textContent.toLowerCase().includes(keyword));
-        filtered.sort((a, b) => b.querySelector('.card-title').textContent.localeCompare(a.querySelector('.card-title').textContent));
-        container.innerHTML = '';
-        filtered.forEach(card => container.appendChild(card));
-      });
+      matchedCards.sort((a, b) => b.dataset.year.localeCompare(a.dataset.year));
+      cards.forEach(card => (card.style.display = 'none'));
+      matchedCards.forEach(card => (card.style.display = 'block'));
+
+      if (matchedCards.length > 0) {
+        const parent = matchedCards[0].closest('.card-container');
+        parent.style.display = 'flex';
+        noResult.style.display = 'none';
+      } else {
+        noResult.style.display = 'block';
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      if (!location.hash) {
+        document.querySelectorAll('.card-container').forEach(c => c.style.display = 'none');
+      }
     });
 
-          window.onpopstate = function (event) {
+    window.onpopstate = function (event) {
       if (event.state && event.state.category) {
         showFilters(event.state.category);
       } else {
@@ -217,13 +218,23 @@
         document.getElementById('categoryBar').classList.remove('category-bar-hidden');
         document.getElementById('mainTitle').textContent = 'I-DLE 몰아보기';
         document.querySelector('.social-icons').classList.remove('hidden');
-        document.querySelectorAll('.card-container').forEach(container => container.style.display = 'none');
+        document.querySelectorAll('.card-container').forEach(c => c.style.display = 'none');
+        document.getElementById('noResultMessage').style.display = 'none';
       }
-    }
+    };
+
+    window.onload = () => {
+      document.getElementById('searchInput').addEventListener('input', function () {
+        searchCards(this, 'body');
+      });
+
+      document.getElementById('subSearchInput').addEventListener('input', function () {
+        searchCards(this, `.card-container[data-category="${currentCategory}"]`);
+      });
+    };
   </script>
 </head>
 <body>
-
   <h1 id="mainTitle">I-DLE 몰아보기</h1>
   <div class="social-icons">
     <a href="https://www.youtube.com/@official_i_dle" target="_blank">
@@ -291,37 +302,14 @@
     </div>
     <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" />
   </div>
+
   <div class="card-container" data-category="RADIO">
-  <a href="https://www.youtube.com/watch?v=ISsi7sLXI8g" target="_blank" class="card" data-category="RADIO" data-member="아이들" data-year="2025">
-  <img src="https://i.ytimg.com/vi/ISsi7sLXI8g/hqdefault.jpg" alt="아이들 - 이은지의 가요광장">
-  <div class="card-title">[이은지의 가요광장]  with 아이들  | KBS 250520(화) 방송 (2025-05-30)</div>
-</a>
+    <a href="https://www.youtube.com/watch?v=ISsi7sLXI8g" target="_blank" class="card" data-category="RADIO" data-member="아이들" data-year="2025">
+      <img src="https://i.ytimg.com/vi/ISsi7sLXI8g/hqdefault.jpg" alt="아이들 - 이은지의 가요광장">
+      <div class="card-title">[이은지의 가요광장] with 아이들 | KBS 250520(화) 방송 (2025-05-30)</div>
+    </a>
+  </div>
 
-<a href="https://www.youtube.com/watch?v=AKbHvJDWLC8" target="_blank" class="card" data-category="RADIO" data-member="민니" data-year="2025">
-  <img src="https://i.ytimg.com/vi/AKbHvJDWLC8/hqdefault.jpg" alt="민니 - 이은지의 가요광장">
-  <div class="card-title">이은지의 가요광장 with 민니((여자)아이들) KBS 250130(목) 방송 (2025-05-30)</div>
-</a>
-
-<a href="https://www.youtube.com/watch?v=jsr9XqQh-C8" target="_blank" class="card" data-category="RADIO" data-member="민니" data-year="2025">
-  <img src="https://i.ytimg.com/vi/jsr9XqQh-C8/hqdefault.jpg" alt="민니 - 영스트리트">
-  <div class="card-title">[FULL] Cause I’m HER!!💗 다른 누구도 아닌 솔로가수 민니(MINNIE) 보는 라디오 | 웬디의 영스트리트 | 250127 (2025-05-30)</div>
-</a>
-
-<a href="https://www.youtube.com/watch?v=5rLPgvdUnJ4" target="_blank" class="card" data-category="RADIO" data-member="민니" data-year="2025">
-  <img src="https://i.ytimg.com/vi/5rLPgvdUnJ4/hqdefault.jpg" alt="민니 - 컬투쇼">
-  <div class="card-title">[FULL] who shot ya?🔫 내 심장을 저격한 민니(MINNIE) 보는 라디오 | 두시탈출 컬투쇼 | 250126 (2025-05-30)</div>
-</a>
-
-<a href="https://www.youtube.com/watch?v=OorZpjSm7QE" target="_blank" class="card" data-category="RADIO" data-member="민니" data-year="2025">
-  <img src="https://i.ytimg.com/vi/OorZpjSm7QE/hqdefault.jpg" alt="민니 - 볼륨 초대석">
-  <div class="card-title">볼륨 초대석 : 최효정의 비밀정원 with 민니 (MINNIE) full ver. / [오마이걸 효정의 볼륨을 높여요] | KBS 250123 방송 (2025-05-30)</div>
-</a>
-
-<a href="https://www.youtube.com/watch?v=inaLcT_gOS8" target="_blank" class="card" data-category="RADIO" data-member="아이들" data-year="2025">
-  <img src="https://i.ytimg.com/vi/inaLcT_gOS8/hqdefault.jpg" alt="아이들 - 컬투쇼">
-  <div class="card-title">[FULL] 함께해서 두 배로 즐거웠던 시간🥳 아이들(idle), 조째즈(ZO ZAZZ) 보는 라디오 | 두시탈출 컬투쇼 | 250527 (2025-05-30)</div>
-</a>
-
-</div>
+  <p id="noResultMessage">검색 결과가 없습니다.</p>
 </body>
 </html>
