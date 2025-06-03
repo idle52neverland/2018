@@ -48,7 +48,7 @@ function showFilters(category) {
   allCardsContainer.appendChild(container);
 
   sorted.slice(0, 6).forEach(card => {
-    container.appendChild(card.cloneNode(true));
+    container.appendChild(card);
   });
 
   applyFilters();
@@ -82,35 +82,22 @@ function filterVideos(type, value) {
 function applyFilters() {
   const query = searchInput.value.toLowerCase();
 
-  if (!currentCategory && query) {
-    allCardsContainer.innerHTML = "";
-    const tempContainer = document.createElement("div");
-    tempContainer.className = "card-container";
-    tempContainer.style.display = "flex";
-    allCardsContainer.appendChild(tempContainer);
+  const container = document.querySelector(".card-container[data-category='" + currentCategory + "']") ||
+                    document.querySelector(".card-container");
 
-    const filtered = allCards.filter(card => {
-      const title = card.querySelector(".card-title").innerText.toLowerCase();
-      return title.includes(query);
-    });
+  if (!container) return;
 
-    filtered.forEach(card => tempContainer.appendChild(card.cloneNode(true)));
-  } else if (currentCategory) {
-    const container = document.querySelector(".card-container[data-category='" + currentCategory + "']");
-    if (!container) return;
+  Array.from(container.children).forEach(card => {
+    const title = card.querySelector(".card-title").innerText.toLowerCase();
+    const year = card.dataset.year;
+    const member = card.dataset.member;
 
-    Array.from(container.children).forEach(card => {
-      const title = card.querySelector(".card-title").innerText.toLowerCase();
-      const year = card.dataset.year;
-      const member = card.dataset.member;
+    const matchesQuery = !query || title.includes(query);
+    const matchesYear = !currentFilters.year || currentFilters.year === year;
+    const matchesMember = !currentFilters.member || currentFilters.member === member;
 
-      const matchesQuery = !query || title.includes(query);
-      const matchesYear = !currentFilters.year || currentFilters.year === year;
-      const matchesMember = !currentFilters.member || currentFilters.member === member;
-
-      card.style.display = (matchesQuery && matchesYear && matchesMember) ? "block" : "none";
-    });
-  }
+    card.style.display = (matchesQuery && matchesYear && matchesMember) ? "block" : "none";
+  });
 }
 
 function displayInitialCards() {
@@ -127,7 +114,7 @@ function displayInitialCards() {
   });
 
   sorted.slice(0, 6).forEach(card => {
-    container.appendChild(card.cloneNode(true));
+    container.appendChild(card);
   });
 }
 
@@ -163,6 +150,8 @@ const cardHTML = `
   <img src="https://i.ytimg.com/vi/YNp9IR8EkTY/hqdefault.jpg" alt="아이들 - [EN/JP] 내가 댄스배틀을 어떻게 해..">
   <div class="card-title">[EN/JP] 내가 댄스배틀을 어떻게 해.. (2021-12-22)</div>
 </a>
+
+
 `;
 
 document.addEventListener("DOMContentLoaded", () => {
