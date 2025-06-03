@@ -275,3 +275,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
   container.innerHTML = cardsHTML;
 });
+
+function showFilters(category) {
+  document.getElementById("mainTitle").innerText = category;
+  document.getElementById("categoryBar").classList.add("category-bar-hidden");
+  document.getElementById("subFilters").style.display = "flex";
+
+  const containers = document.querySelectorAll(".card-container");
+  containers.forEach(c => {
+    if (c.dataset.category === category) {
+      c.style.display = "flex";
+    } else {
+      c.style.display = "none";
+    }
+  });
+}
+
+function filterVideos(type, value) {
+  const currentCategory = document.getElementById("mainTitle").innerText;
+  const currentContainer = [...document.querySelectorAll(".card-container")].find(
+    c => c.dataset.category === currentCategory
+  );
+  if (!currentContainer) return;
+
+  const cards = currentContainer.querySelectorAll(".card");
+  cards.forEach(card => {
+    const cardValue = card.dataset[type];
+    if (cardValue === value) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+}
+
+function goBackToCategories() {
+  document.getElementById("mainTitle").innerText = "I-DLE 몰아보기";
+  document.getElementById("categoryBar").classList.remove("category-bar-hidden");
+  document.getElementById("subFilters").style.display = "none";
+
+  document.querySelectorAll(".card-container").forEach(c => {
+    c.style.display = "none";
+  });
+
+  document.querySelectorAll(".card").forEach(c => {
+    c.style.display = "block";
+  });
+
+  document.getElementById("subSearchInput").value = "";
+}
+
