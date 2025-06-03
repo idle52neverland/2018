@@ -1,80 +1,134 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const allCardsContainer = document.getElementById("allCards");
-  let currentCategory = null;
-  let currentCards = [];
+const allCardsContainer = document.getElementById("allCards");
+let allCards = [];
+let currentCategory = "";
+let currentCards = [];
 
-  const allCards = [
-    // 실제 카드: MV-SPECIAL CLIP
-    {
-      category: "MV-SPECIAL CLIP",
-      member: "아이들",
-      year: "2025",
-      title: "i-dle (아이들) 'Good Thing' Official Music Video (2025-05-19)",
-      url: "https://www.youtube.com/watch?v=hAONx6nuEgI",
-      thumbnail: "https://i.ytimg.com/vi/hAONx6nuEgI/hqdefault.jpg",
-      alt: "아이들 - i-dle (아이들) 'Good Thing' Official Music Video"
-    }
-  ];
+window.showFilters = function (category) {
+  currentCategory = category;
+  document.getElementById("mainTitle").style.display = "none";
+  document.querySelector(".category-title").textContent = category;
+  document.querySelector(".category-title").style.display = "block";
+  document.getElementById("filterArea").style.display = "flex";
 
-  // 최신순 정렬 (기본)
-  allCards.sort((a, b) => {
-    const getDate = str => str.match(/\((\d{4}-\d{2}-\d{2})\)/)?.[1] || "0000-00-00";
-    return new Date(getDate(b.title)) - new Date(getDate(a.title));
-  });
+  allCardsContainer.innerHTML = "";
+  allCardsContainer.style.display = "flex";
 
-  window.showFilters = function (category) {
-    currentCategory = category;
-    document.getElementById("mainTitle").style.display = "none";
-    document.querySelector(".category-title").textContent = category;
-    document.querySelector(".category-title").style.display = "block";
+  currentCards = allCards.filter(card => card.category === category);
+  renderCards(currentCards);
+};
 
-    const filterArea = document.querySelector(".filter-buttons");
-    filterArea.style.display = "flex";
+window.filterVideos = function (filter) {
+  const filtered = currentCards.filter(card =>
+    card.title.includes(filter) ||
+    card.member.includes(filter) ||
+    card.year.includes(filter)
+  );
+  renderCards(filtered);
+};
 
-    allCardsContainer.innerHTML = "";
-    allCardsContainer.style.display = "flex";
+window.handleSearch = function () {
+  const keyword = document.getElementById("searchInput").value.toLowerCase();
+  const filtered = currentCards.filter(card =>
+    card.title.toLowerCase().includes(keyword) ||
+    card.member.toLowerCase().includes(keyword) ||
+    card.year.includes(keyword)
+  );
+  renderCards(filtered);
+};
 
-    currentCards = allCards.filter(card => card.category === category);
-    renderCards(currentCards);
-  };
+window.goBack = function () {
+  document.getElementById("mainTitle").style.display = "block";
+  document.querySelector(".category-title").style.display = "none";
+  document.getElementById("filterArea").style.display = "none";
+  allCardsContainer.innerHTML = "";
+  allCardsContainer.style.display = "none";
+};
 
-    currentCards = allCards.filter(card => card.category === category);
-    renderCards(currentCards);
-  };
+window.goHome = function () {
+  document.getElementById("searchInput").value = "";
+  goBack();
+};
 
-  window.filterVideos = function (tag) {
-    const filtered = currentCards.filter(card => card.year === tag || card.member === tag);
-    renderCards(filtered);
-  };
+function renderCards(cards) {
+  allCardsContainer.innerHTML = cards.map(card => `
+    <a href="${card.link}" target="_blank" class="card" data-category="${card.category}" data-member="${card.member}" data-year="${card.year}">
+      <img src="${card.thumbnail}" alt="${card.alt}" />
+      <div class="card-title">${card.title}</div>
+    </a>
+  `).join("");
+}
 
-  window.handleSearch = function () {
-    const keyword = document.getElementById("searchInput").value.trim().toLowerCase();
-    const filtered = currentCards.filter(card => card.title.toLowerCase().includes(keyword));
-    renderCards(filtered);
-  };
-
-  function renderCards(cards) {
-    allCardsContainer.innerHTML = "";
-    allCardsContainer.style.display = "flex";
-
-    if (cards.length === 0) {
-      allCardsContainer.innerHTML = "<p style='color: #888;'>아직 영상이 없습니다.</p>";
-      return;
-    }
-
-    cards.forEach(data => {
-      const card = document.createElement("a");
-      card.href = data.url;
-      card.target = "_blank";
-      card.className = "card";
-      card.setAttribute("data-category", data.category);
-      card.setAttribute("data-member", data.member);
-      card.setAttribute("data-year", data.year);
-      card.innerHTML = `
-        <img src="${data.thumbnail}" alt="${data.alt}">
-        <div class="card-title">${data.title}</div>
-      `;
-      allCardsContainer.appendChild(card);
-    });
+allCards = [
+  {
+    link: "https://www.youtube.com/watch?v=hAONx6nuEgI",
+    category: "MV-SPECIAL CLIP",
+    member: "아이들",
+    year: "2025",
+    thumbnail: "https://i.ytimg.com/vi/hAONx6nuEgI/hqdefault.jpg",
+    alt: "아이들 - i-dle (아이들) 'Good Thing' Official Music Video",
+    title: "i-dle (아이들) 'Good Thing' Official Music Video (2025-05-19)"
+  },
+  {
+    link: "https://www.youtube.com/watch?v=SuMnpTc8zoU",
+    category: "LIVE-COVER-DANCE",
+    member: "아이들",
+    year: "2022",
+    thumbnail: "https://i.ytimg.com/vi/SuMnpTc8zoU/hqdefault.jpg",
+    alt: "아이들 - (여자)아이들((G)I-DLE) - '말리지 마' LIVE CLIP",
+    title: "(여자)아이들((G)I-DLE) - '말리지 마' LIVE CLIP (2022-04-07)"
+  },
+  {
+    link: "https://www.youtube.com/watch?v=B_4WoSrUuZA",
+    category: "MUSIC SHOW PERFORMANCE",
+    member: "아이들",
+    year: "2025",
+    thumbnail: "https://i.ytimg.com/vi/B_4WoSrUuZA/hqdefault.jpg",
+    alt: "아이들 - i-dle (아이들) - Good Thing | SBS 250601 방송",
+    title: "i-dle (아이들) - Good Thing | SBS 250601 방송 (2025-06-01)"
+  },
+  {
+    link: "https://www.youtube.com/watch?v=4H3T8MEnsdg",
+    category: "FESTIVAL EVENT STAGE",
+    member: "아이들",
+    year: "2025",
+    thumbnail: "https://i.ytimg.com/vi/4H3T8MEnsdg/hqdefault.jpg",
+    alt: "아이들 - i-dle (아이들) 'TOMBOY' @ MYONGJI UNIVERSITY",
+    title: "i-dle (아이들) 'TOMBOY' @ MYONGJI UNIVERSITY (2025-05-28)"
+  },
+  {
+    link: "https://www.youtube.com/watch?v=lgDo7ZUoyZ8",
+    category: "FANCAM-STAGE FOCUS",
+    member: "아이들",
+    year: "2025",
+    thumbnail: "https://i.ytimg.com/vi/lgDo7ZUoyZ8/hqdefault.jpg",
+    alt: "아이들 - [MPD직캠] 아이들 직캠 8K 'Good Thing' (i-dle FanCam) | @MCOUNTDOWN_2025.5.22",
+    title: "[MPD직캠] 아이들 직캠 8K 'Good Thing' (i-dle FanCam) | @MCOUNTDOWN_2025.5.22 (2025-05-22)"
+  },
+  {
+    link: "https://www.youtube.com/watch?v=Ly5SxYH5OhI",
+    category: "RECORDING STUDIO BEHIND",
+    member: "아이들",
+    year: "2025",
+    thumbnail: "https://i.ytimg.com/vi/Ly5SxYH5OhI/hqdefault.jpg",
+    alt: "아이들 - i-dle (아이들) 'Good Thing' Recording BehindㅣSUB",
+    title: "i-dle (아이들) 'Good Thing' Recording BehindㅣSUB (2025-05-27)"
+  },
+  {
+    link: "https://www.youtube.com/watch?v=R9UsmrVEWYY",
+    category: "DANCE PRACTICE-FANCHANT",
+    member: "아이들",
+    year: "2022",
+    thumbnail: "https://i.ytimg.com/vi/R9UsmrVEWYY/hqdefault.jpg",
+    alt: "아이들 - (여자)아이들((G)I-DLE) - 'Nxde' (Choreography Practice Video)",
+    title: "(여자)아이들((G)I-DLE) - 'Nxde' (Choreography Practice Video) (2022-10-23)"
+  },
+  {
+    link: "https://www.youtube.com/watch?v=Hd8m6Ly7xFk",
+    category: "TV SHOW",
+    member: "소연",
+    year: "2022",
+    thumbnail: "https://i.ytimg.com/vi/Hd8m6Ly7xFk/hqdefault.jpg",
+    alt: "소연 - [방과후설렘] 서낳괴 전소연이 서바이벌 프로듀서가 되면 벌어지는 일",
+    title: "[방과후설렘] 서낳괴 전소연이 서바이벌 프로듀서가 되면 벌어지는 일 mp4. (2022-02-24)"
   }
-});
+];
