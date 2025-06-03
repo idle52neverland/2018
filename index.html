@@ -163,6 +163,11 @@
 </head>
 <body>
 
+  <div id="searchBox" style="margin: 20px 0;">
+  <input type="text" id="searchInput" placeholder="전체 영상 검색" style="padding: 8px; width: 250px; border-radius: 8px;" />
+  <ul id="autocompleteList" style="list-style:none; padding:0; margin:10px auto; max-width:300px; text-align:left; color:#fff;"></ul>
+</div>
+  
 <h1 id="mainTitle">I-DLE 몰아보기</h1>
 
 <div class="social-icons">
@@ -174,10 +179,7 @@
 </div>
 
 <div id="categoryBar">
-  <div id="searchBox" style="margin: 20px 0;">
-  <input type="text" id="searchInput" placeholder="전체 영상 검색" style="padding: 8px; width: 250px;" />
-  <ul id="autocompleteList" style="list-style:none; padding:0; margin:5px auto; max-width:300px; text-align:left;"></ul>
-</div>
+  
   <div class="category-row">
     <button class="category-btn" onclick="showFilters('MV / SPECIAL CLIP')">MV / SPECIAL CLIP</button>
     <button class="category-btn" onclick="showFilters('LIVE / COVER SONG / DANCE')">LIVE / COVER SONG / DANCE</button>
