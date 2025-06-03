@@ -16,6 +16,7 @@
       padding: 30px 0 10px;
       font-size: 28px;
       color: #fff;
+      display: block;
     }
     .category-section {
       display: flex;
@@ -39,17 +40,54 @@
     .category-btn:hover {
       background-color: #555;
     }
+    .top-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin: 15px 0;
+    }
+    .top-bar input {
+      padding: 6px 10px;
+      border-radius: 20px;
+      border: none;
+      width: 200px;
+    }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+    }
+    .card {
+      background-color: #222;
+      border-radius: 10px;
+      overflow: hidden;
+      width: 180px;
+      text-align: left;
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+    }
+    .card-title {
+      font-size: 13px;
+      padding: 6px;
+    }
     @media (max-width: 768px) {
-      .category-btn {
-        width: 90%;
-        font-size: 16px;
-        margin: 5px 0;
+      .card {
+        width: 45%;
       }
     }
   </style>
 </head>
 <body>
   <div id="mainTitle">I-DLE 몰아보기</div>
+
+  <div class="top-bar">
+    <input type="text" id="searchInput" placeholder="전체 영상 검색...">
+  </div>
 
   <div class="category-section">
     <a class="category-btn" href="category.html?category=MV-SPECIAL CLIP">MV-SPECIAL CLIP</a>
@@ -69,5 +107,40 @@
     <a class="category-btn" href="category.html?category=CHALLENGE">CHALLENGE</a>
     <a class="category-btn" href="category.html?category=ETC">ETC</a>
   </div>
+
+  <div class="card-container" id="allCards"></div>
+
+  <script src="cards.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // 전체 카드 표시 (모든 카테고리 카드 포함)
+      const all = allCards || [];
+      const container = document.getElementById("allCards");
+      all.forEach(data => {
+        const card = document.createElement("a");
+        card.href = data.link;
+        card.target = "_blank";
+        card.className = "card";
+        card.setAttribute("data-category", data.category);
+        card.setAttribute("data-member", data.member);
+        card.setAttribute("data-year", data.year);
+        card.innerHTML = `
+          <img src="${data.thumbnail}" alt="${data.alt}">
+          <div class="card-title">${data.title}</div>
+        `;
+        container.appendChild(card);
+      });
+
+      const searchInput = document.getElementById("searchInput");
+      searchInput.addEventListener("input", function () {
+        const keyword = this.value.toLowerCase();
+        const cards = document.querySelectorAll(".card");
+        cards.forEach(card => {
+          const title = card.querySelector(".card-title").textContent.toLowerCase();
+          card.style.display = title.includes(keyword) ? "block" : "none";
+        });
+      });
+    });
+  </script>
 </body>
 </html>
