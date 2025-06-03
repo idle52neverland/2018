@@ -184,16 +184,47 @@
 <h1 id="mainTitle">I-DLE 몰아보기</h1>
 <h1 id="categoryTitle" class="category-title"></h1>
 
-<!-- 카테고리 버튼 바로 아래로 이동한 검색 세트 -->
+<div id="categoryBar">
+  <div class="category-row">
+    <button class="category-btn" onclick="showFilters('MV / SPECIAL CLIP')">MV / SPECIAL CLIP</button>
+    <button class="category-btn" onclick="showFilters('LIVE / COVER SONG / DANCE')">LIVE / COVER SONG / DANCE</button>
+    <button class="category-btn" onclick="showFilters('MUSIC SHOW PERFORMANCE')">MUSIC SHOW PERFORMANCE</button>
+    <button class="category-btn" onclick="showFilters('FESTIVAL / EVENT STAGE')">FESTIVAL / EVENT STAGE</button>
+  </div>
+  <div class="category-row">
+    <button class="category-btn" onclick="showFilters('FANCAM / STAGE FOCUS')">FANCAM / STAGE FOCUS</button>
+    <button class="category-btn" onclick="showFilters('RECORDING / STUDIO BEHIND')">RECORDING / STUDIO BEHIND</button>
+    <button class="category-btn" onclick="showFilters('DANCE PRACTICE / FANCHANT')">DANCE PRACTICE / FANCHANT</button>
+  </div>
+  <div class="category-row">
+    <button class="category-btn" onclick="showFilters('TV SHOW')">TV SHOW</button>
+    <button class="category-btn" onclick="showFilters('YOUTUBE CONTENTS')">YOUTUBE CONTENTS</button>
+    <button class="category-btn" onclick="showFilters('REALITY (Original Content)')">REALITY (Original Content)</button>
+    <button class="category-btn" onclick="showFilters('RADIO / PODCAST')">RADIO / PODCAST</button>
+    <button class="category-btn" onclick="showFilters('LIVE STREAM')">LIVE STREAM</button>
+  </div>
+  <div class="category-row">
+    <button class="category-btn" onclick="showFilters('MAGAZINE / INTERVIEW')">MAGAZINE / INTERVIEW</button>
+    <button class="category-btn" onclick="showFilters('BEHIND CLIPS')">BEHIND CLIPS</button>
+    <button class="category-btn" onclick="showFilters('CHALLENGE')">CHALLENGE</button>
+    <button class="category-btn" onclick="showFilters('ETC')">ETC</button>
+  </div>
+</div>
+
+
 <div class="search-bar" id="mainSearchBar">
   <button class="nav-btn" onclick="goBackToCategories()">
-    <img src="https://cdn-icons-png.flaticon.com/512/93/93634.png" alt="뒤로가기" style="width:20px; height:20px; filter: brightness(0) invert(1); vertical-align: middle;">
+    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="뒤로가기" style="width:20px; height:20px; filter: brightness(0) invert(1); vertical-align: middle;">
   </button>
-  <button class="nav-btn" onclick="location.reload()">
+  <button class="nav-btn" onclick="goBackToCategories()">
     <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="홈" style="width:20px; height:20px; filter: brightness(0) invert(1); vertical-align: middle;">
   </button>
   <input type="text" id="searchInput" class="search-input" placeholder="search">
 </div>
+
+
+<!-- 카테고리 버튼 바로 아래로 이동한 검색 세트 -->
+
 
 <!-- 나머지 구조는 그대로 유지 (카테고리 바, 필터, 카드 등) -->
 
