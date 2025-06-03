@@ -80,14 +80,23 @@
       font-size: 13px;
       padding: 6px;
       color: #fff;
-      text-decoration: none;
+      text-decoration: none !important;
     }
     .card-title:hover {
-      text-decoration: none;
+      text-decoration: none !important;
     }
     @media (max-width: 768px) {
       .card {
         width: 45%;
+      }
+    }
+    @media (min-width: 1025px) {
+      .card-container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .card {
+        width: 18%;
       }
     }
     .sns-icons {
