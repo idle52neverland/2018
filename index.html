@@ -15,6 +15,7 @@
     #mainTitle {
       padding: 30px 0 10px;
       font-size: 28px;
+      color: #fff;
     }
     .category-btn, .filter-btn {
       padding: 10px 20px;
@@ -26,8 +27,11 @@
       cursor: pointer;
       border: none;
       transition: background-color 0.2s;
+      text-decoration: none;
+      display: inline-block;
     }
-    .category-btn:hover, .filter-btn:hover {
+    .category-btn:hover,
+    .filter-btn:hover {
       background-color: #ff4da6;
     }
     .search-bar {
@@ -35,7 +39,8 @@
       justify-content: center;
       align-items: center;
       gap: 10px;
-      margin: 20px 0;
+      margin: 15px auto 10px;
+      max-width: 800px;
     }
     .search-input {
       padding: 6px 12px;
@@ -44,17 +49,25 @@
       font-size: 13px;
       background-color: #fff;
       color: #333;
+      flex-grow: 1;
+    }
+    .search-input::placeholder {
+      color: #888;
     }
     .nav-btn {
       padding: 6px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
       background-color: transparent;
       border: none;
       cursor: pointer;
     }
     .nav-btn img {
-      width: 24px;
-      height: 24px;
-      filter: brightness(0.8) grayscale(1);
+      width: 20px;
+      height: 20px;
+      filter: brightness(0) invert(1);
     }
     .social-icons {
       display: flex;
@@ -66,6 +79,20 @@
       width: 24px;
       height: 24px;
       filter: brightness(0) invert(1);
+    }
+    .sub-filters {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin: 20px auto;
+      max-width: 1000px;
+    }
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
     }
     .category-row {
       display: flex;
@@ -93,20 +120,34 @@
     .card img {
       width: 100%;
       height: auto;
+      display: block;
     }
     .card-title {
       padding: 10px;
       font-size: 14px;
       color: #fff;
+      text-decoration: none;
     }
     .card:hover {
       transform: scale(1.03);
+    }
+    a.card {
+      text-decoration: none;
+    }
+    @media (min-width: 601px) {
+      .card {
+        width: calc(20% - 13px);
+      }
     }
     @media (max-width: 600px) {
       .category-row {
         flex-direction: column;
         align-items: center;
         gap: 8px;
+      }
+      .category-btn {
+        width: 90%;
+        max-width: 280px;
       }
       .card {
         width: calc(50% - 8px);
@@ -130,6 +171,18 @@
   <a href="https://weverse.io/i-dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3669/3669986.png" alt="Weverse"></a>
 </div>
 
+<!-- Main Search -->
+<div class="search-bar" id="mainSearchBar">
+  <button class="nav-btn" onclick="goBackToCategories()">
+    <img src="https://cdn-icons-png.flaticon.com/512/271/271220.png" alt="뒤로가기">
+  </button>
+  <button class="nav-btn" onclick="goHome()">
+    <img src="https://cdn-icons-png.flaticon.com/512/1946/1946433.png" alt="홈">
+  </button>
+  <input type="text" id="searchInput" class="search-input" placeholder="전체 영상 검색">
+</div>
+
+<!-- 카테고리 버튼 영역 -->
 <div id="categoryBar">
   <div class="category-row">
     <button class="category-btn" onclick="showFilters('MV / SPECIAL CLIP')">MV / SPECIAL CLIP</button>
@@ -157,34 +210,17 @@
   </div>
 </div>
 
-<!-- 홈화면용 전체 검색창 -->
-<div id="globalSearchBar" class="search-bar">
-  <button class="nav-btn" onclick="goBackToCategories()">
-    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="뒤로가기">
-  </button>
-  <button class="nav-btn" onclick="location.reload()">
-    <img src="https://cdn-icons-png.flaticon.com/512/69/69524.png" alt="홈">
-  </button>
-  <input type="text" id="searchInput" class="search-input" placeholder="전체에서 검색">
-</div>
-
-<!-- 카테고리 진입 후 필터+카테고리 전용 검색창 -->
-<div class="sub-filters" id="subFilters" style="display:none;">
-  <div class="search-bar">
-    <button class="nav-btn" onclick="goBackToCategories()">
-      <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="뒤로가기">
-    </button>
-    <button class="nav-btn" onclick="location.reload()">
-      <img src="https://cdn-icons-png.flaticon.com/512/69/69524.png" alt="홈">
-    </button>
-    <input type="text" id="subSearchInput" class="search-input" placeholder="카테고리 내 검색">
-  </div>
+<div class="sub-filters" id="subFilters">
   <div class="filter-group">
     <button class="filter-btn" onclick="filterVideos('year','2025')">2025</button>
     <button class="filter-btn" onclick="filterVideos('year','2024')">2024</button>
     <button class="filter-btn" onclick="filterVideos('year','2023')">2023</button>
     <button class="filter-btn" onclick="filterVideos('year','2022')">2022</button>
     <button class="filter-btn" onclick="filterVideos('year','2021')">2021</button>
+    <button class="filter-btn" onclick="filterVideos('year','2020')">2020</button>
+    <button class="filter-btn" onclick="filterVideos('year','2019')">2019</button>
+    <button class="filter-btn" onclick="filterVideos('year','2018')">2018</button>
+    <button class="filter-btn" onclick="filterVideos('year','2016')">PRE-DEBUT</button>
   </div>
   <div class="filter-group">
     <button class="filter-btn" onclick="filterVideos('member','미연')">미연</button>
@@ -199,7 +235,6 @@
 <div id="allCards"></div>
 
 <script src="cards.js"></script>
-<script src="filter.js"></script>
 
 </body>
 </html>
