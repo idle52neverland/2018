@@ -27,7 +27,13 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("mainTitle").style.display = "none";
     document.querySelector(".category-title").textContent = category;
     document.querySelector(".category-title").style.display = "block";
-    document.querySelector(".filter-buttons").style.display = "flex";
+
+    // 이동: 필터버튼을 카드 컨테이너 안으로 넣기
+    const filterArea = document.querySelector(".filter-buttons");
+    allCardsContainer.innerHTML = "";
+    allCardsContainer.style.display = "flex";
+    allCardsContainer.appendChild(filterArea);
+    filterArea.style.display = "flex";
 
     currentCards = allCards.filter(card => card.category === category);
     renderCards(currentCards);
