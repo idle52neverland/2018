@@ -46,14 +46,17 @@
       margin-bottom: 10px;
     }
     .filter-btn {
-      padding: 8px 14px;
-      margin: 4px;
-      border-radius: 20px;
+      padding: 10px 20px;
       background-color: #333;
-      color: #fff;
-      border: none;
-      cursor: pointer;
+      border-radius: 20px;
       font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.2s;
+      text-decoration: none;
+      margin: 4px;
     }
     .filter-btn.active {
       background-color: #fff;
@@ -107,29 +110,10 @@
         max-width: none;
       }
     }
-    .sns-icons {
-      position: absolute;
-      top: 80px;
-      right: 10px;
-    }
-    .sns-icons img {
-      width: 20px;
-      height: 20px;
-      margin-left: 6px;
-      filter: grayscale(100%);
-    }
   </style>
 </head>
 <body>
   <div id="mainTitle">I-DLE 몰아보기</div>
-
-  <div class="sns-icons">
-    <a href="https://youtube.com/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png" alt="YouTube"></a>
-    <a href="https://x.com/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx--v1.png" alt="X"></a>
-    <a href="https://instagram.com/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram"></a>
-    <a href="https://www.tiktok.com/@(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/tiktok--v1.png" alt="TikTok"></a>
-    <a href="https://weverse.io/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/w.png" alt="Weverse"></a>
-  </div>
 
   <div class="filter-section">
     <div class="filter-group" id="yearFilters"></div>
