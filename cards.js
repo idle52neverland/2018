@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const cardsHTML = `
 
-<div class="card-container" data-category="RADIO">
+<div class="card-container" data-category="RADIO / PODCAST">
 <a href="https://www.youtube.com/watch?v=inaLcT_gOS8" target="_blank" class="card" data-category="RADIO" data-member="아이들" data-year="2025">
   <img src="https://i.ytimg.com/vi/inaLcT_gOS8/hqdefault.jpg" alt="아이들 - 컬투쇼">
   <div class="card-title">[FULL] 함께해서 두 배로 즐거웠던 시간🥳 아이들(idle), 조째즈(ZO ZAZZ) 보는 라디오 | 두시탈출 컬투쇼(2025-05-27)</div>
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </div>
 
 
-<div class="card-container" data-category="MV">
+<div class="card-container" data-category="MV & SPECIAL CLIP ">
   <a href="https://www.youtube.com/watch?v=8KpvPHcXr1c" target="_blank" class="card" data-category="MV" data-member="민니" data-year="2025">
     <img src="https://i.ytimg.com/vi/8KpvPHcXr1c/hqdefault.jpg" alt="민니 - Blind Eyes Red MV">
     <div class="card-title">민니(MINNIE) - 'Blind Eyes Red' Official Music Video (2025-02-27)</div>
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </div>
 
 
-<div class="card-container" data-category="INTERVIEW">
+<div class="card-container" data-category="MAGAZINE & INTERVIEW">
   <a href="https://www.youtube.com/watch?v=NSD0BJIdCjw" target="_blank" class="card" data-category="INTERVIEW" data-member="아이들" data-year="2025">
     <img src="https://i.ytimg.com/vi/NSD0BJIdCjw/hqdefault.jpg" alt="아이들 - K-pop Stars i-dle Dish On 8th Mini Album [We are] (Exclusive)">
     <div class="card-title">K-pop Stars i-dle Dish On 8th Mini Album [We are] (Exclusive) (2025-05-19)</div>
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </div>
 
 
-<div class="card-container" data-category="LIVE">
+<div class="card-container" data-category="LIVE STREAM">
   <a href="https://www.youtube.com/watch?v=p2UeSrQHn_c" target="_blank" class="card" data-category="LIVE" data-member="민니" data-year="2022">
     <img src="https://i.ytimg.com/vi/p2UeSrQHn_c/hqdefault.jpg" alt="민니 - [리무진서비스] EP01. (여자)아이들 민니">
     <div class="card-title">[리무진서비스] EP01. (여자)아이들 민니 | (G)I-DLE MINNIE | Senorita, 구애, 신호등, Lost Stars | TH/EN (2022-02-22)</div>
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
   </a>
 </div>
 
-<div class="card-container" data-category="MUSIC">
+<div class="card-container" data-category="MUSIC SHOW PERFORMANCE">
   <a href="https://www.youtube.com/watch?v=D8P4C_of6r8" target="_blank" class="card" data-category="MUSIC" data-member="아이들" data-year="2025">
     <img src="https://i.ytimg.com/vi/D8P4C_of6r8/hqdefault.jpg" alt="아이들 - Good Thing - I-dle [뮤직뱅크]">
     <div class="card-title">Good Thing - I-dle (아이들) [뮤직뱅크/Music Bank] | KBS 250523 방송 (2025-05-23)</div>
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
   </a>
 </div>
 
-<div class="card-container" data-category="FESTIVAL">
+<div class="card-container" data-category="FESTIVAL / EVENT STAGE">
   <a href="https://www.youtube.com/watch?v=8bguFz5ns3w" target="_blank" class="card" data-category="FESTIVAL / EVENT STAGE" data-member="아이들" data-year="2025">
     <img src="https://i.ytimg.com/vi/8bguFz5ns3w/hqdefault.jpg" alt="아이들 - Girlfriend 한양대">
     <div class="card-title">i-dle (아이들) 'Girlfriend' @ HANYANG UNIVERSITY ERICA (2025-05-30)</div>
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
   </a>
 </div>
 
-<div class="card-container" data-category="FANCAM">
+<div class="card-container" data-category="FANCAM & STAGE FOCUS">
   <a href="https://www.youtube.com/watch?v=cTmfYOlilQA" target="_blank" class="card" data-category="FANCAM & STAGE FOCUS" data-member="민니" data-year="2025">
     <img src="https://i.ytimg.com/vi/cTmfYOlilQA/hqdefault.jpg" alt="민니 - 직캠 Good Thing">
     <div class="card-title">[MPD직캠] 아이들 민니 직캠 4K 'Good Thing' (i-dle MINNIE FanCam) | @MCOUNTDOWN_2025.5.22 (2025-05-22)</div>
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
   </a>
 </div>
 
-<div class="card-container" data-category="RECORDING">
+<div class="card-container" data-category="RECORDING / STUDIO BEHIND">
   <a href="https://www.youtube.com/watch?v=Ly5SxYH5OhI" target="_blank" class="card" data-category="RECORDING / STUDIO BEHIND" data-member="아이들" data-year="2025">
     <img src="https://i.ytimg.com/vi/Ly5SxYH5OhI/hqdefault.jpg" alt="아이들 - Good Thing Recording Behind">
     <div class="card-title">i-dle (아이들) 'Good Thing' Recording BehindㅣSUB (2025-05-27)</div>
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
   </a>
 </div>
 
-<div class="card-container" data-category="DANCE">
+<div class="card-container" data-category="DANCE PRACTICE / FANCHANT">
   <a href="https://www.youtube.com/watch?v=qDg3uR7exAU" target="_blank" class="card" data-category="DANCE PRACTICE / FANCHANT" data-member="민니" data-year="2025">
     <img src="https://i.ytimg.com/vi/qDg3uR7exAU/hqdefault.jpg" alt="민니 - HER 안무연습">
     <div class="card-title">민니(MINNIE) - 'HER' Choreography Practice Video (2025-01-27)</div>
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
   </a>
 </div>
 
-<div class="card-container" data-category="TV">
+<div class="card-container" data-category="TV SHOW">
   <a href="https://www.youtube.com/watch?v=rzJb3LQzBlU" target="_blank" class="card" data-category="TV" data-member="소연" data-year="2023">
     <img src="https://i.ytimg.com/vi/rzJb3LQzBlU/hqdefault.jpg" alt="소연 - 방과후 설렘2">
     <div class="card-title">[방과후 설렘2 - 소년판타지] ＂안되면 가수 안 할 거야?🔥＂ 프로듀서 전소연에게 평가에 임하는 태도 지적을 받은 문재영, MBC 230406 방송 (2023-04-07)</div>
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
   </a>
 </div>
 
-<div class="card-container" data-category="YOUTUBE">
+<div class="card-container" data-category="YOUTUBE CONTENTS">
   <a href="https://www.youtube.com/watch?v=sJFegjopCRA" target="_blank" class="card" data-category="YOUTUBE CONTENTS" data-member="아이들" data-year="2025">
     <img src="https://i.ytimg.com/vi/sJFegjopCRA/hqdefault.jpg" alt="아이들 - 조현아의 평범한 목요일 밤">
     <div class="card-title">[ENG SUB] 십년지기 동생과 또 다른 동생의 대환장 달팽이관 공격 👂🏻🙉 l EP11 l 조현아의 평범한 목요일 밤 (2025-05-29)</div>
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
   </a>
 </div>
 
-<div class="card-container" data-category="REALITY">
+<div class="card-container" data-category="REALITY (Original Content)">
   <a href="https://www.youtube.com/watch?v=C1ITPFPt1do" target="_blank" class="card" data-category="REALITY (Original Content)" data-member="아이들" data-year="2023">
     <img src="https://i.ytimg.com/vi/C1ITPFPt1do/hqdefault.jpg" alt="아이들 - (G)맘대로 아이들 특별편성">
     <div class="card-title">[(G)맘대로 아이들] ★특별편성★ | 네가 알던 내가 아냐 (ENG/CHN) | (G)I-DLE INSIDE | (여자)아이들 ((G)I-DLE) (2023-08-23)</div>
@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
   </a>
 </div>
 
-<div class="card-container" data-category="LIVE">
+<div class="card-container" data-category="LIVE STREAM">
   <a href="https://www.youtube.com/watch?v=Us-a7eK01Uk" target="_blank" class="card" data-category="LIVE STREAM" data-member="아이들" data-year="2025">
     <img src="https://i.ytimg.com/vi/Us-a7eK01Uk/hqdefault.jpg" alt="아이들 - 위버스 라이브 요약본 250215">
     <div class="card-title">8년 차 부부 댕댕이자매 | 250215 위버스 라이브 요약본 (2025-02-16)</div>
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
   </a>
 </div>
 
-<div class="card-container" data-category="BEHIND">
+<div class="card-container" data-category="BEHIND CLIPS">
   <a href="https://www.youtube.com/watch?v=cQ19LQPTH4k" target="_blank" class="card" data-category="BEHIND CLIPS" data-member="아이들" data-year="2024">
     <img src="https://i.ytimg.com/vi/cQ19LQPTH4k/hqdefault.jpg" alt="아이들 - I-TALK #171 'Klaxon' MV 비하인드">
     <div class="card-title">(여자)아이들((G)I-DLE) - I-TALK #171 : '클락션 (Klaxon)' M/V 촬영 비하인드 PART 1 (ENG/CHN) (2024-07-25)</div>
