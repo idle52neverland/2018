@@ -324,4 +324,55 @@ function goBackToCategories() {
 
   document.getElementById("subSearchInput").value = "";
 }
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("searchInput");
+  const autocompleteList = document.getElementById("autocompleteList");
+
+  if (searchInput) {
+    searchInput.addEventListener("input", function () {
+      const value = searchInput.value.toLowerCase();
+      const allCards = document.querySelectorAll(".card");
+      const seen = new Set();
+
+      autocompleteList.innerHTML = "";
+
+      allCards.forEach(card => {
+        const title = card.querySelector(".card-title").innerText.toLowerCase();
+
+        // 카드 필터링
+        if (title.includes(value)) {
+          card.style.display = "block";
+
+          // 자동완성 항목 추가
+          if (!seen.has(title) && value.length >= 2) {
+            const li = document.createElement("li");
+            li.innerText = card.querySelector(".card-title").innerText;
+            li.style.cursor = "pointer";
+            li.style.padding = "5px";
+            li.style.backgroundColor = "#222";
+            li.style.borderBottom = "1px solid #444";
+            li.addEventListener("click", () => {
+              searchInput.value = li.innerText;
+              autocompleteList.innerHTML = "";
+              triggerSearch(li.innerText.toLowerCase());
+            });
+            autocompleteList.appendChild(li);
+            seen.add(title);
+          }
+
+        } else {
+          card.style.display = "none";
+        }
+      });
+    });
+  }
+
+  function triggerSearch(value) {
+    const allCards = document.querySelectorAll(".card");
+    allCards.forEach(card => {
+      const title = card.querySelector(".card-title").innerText.toLowerCase();
+      card.style.display = title.includes(value) ? "block" : "none";
+    });
+  }
+});
 
