@@ -15,20 +15,11 @@ let currentCategory = "";
 let currentFilters = { year: null, member: null };
 let allCards = [];
 
-function createCardContainer(category) {
-  let container = document.querySelector(`.card-container[data-category="${category}"]`);
-  if (!container) {
-    container = document.createElement("div");
-    container.className = "card-container";
-    container.dataset.category = category;
-    allCardsContainer.appendChild(container);
-  }
-  return container;
+function normalize(str) {
+  return str.replace(/\s+/g, ' ').trim();
 }
 
 function showFilters(category) {
-  const normalize = (str) => str.replace(/\s+/g, ' ').trim();
-
   currentCategory = category;
   mainTitle.style.display = "none";
   categoryTitle.innerText = category;
@@ -40,7 +31,9 @@ function showFilters(category) {
 
   allCardsContainer.innerHTML = "";
 
-  const matched = allCards.filter(card => normalize(card.dataset.category) === normalize(category));
+  const matched = allCards.filter(card =>
+    normalize(card.dataset.category) === normalize(category)
+  );
 
   const sorted = matched.sort((a, b) => {
     const da = a.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
@@ -56,39 +49,6 @@ function showFilters(category) {
 
   sorted.slice(0, 6).forEach(card => {
     container.appendChild(card.cloneNode(true));
-  });
-
-  applyFilters();
-}
-  const normalize = (str) => str.replace(/\s+/g, ' ').trim();
-
-  currentCategory = category;
-  mainTitle.style.display = "none";
-  categoryTitle.innerText = category;
-  categoryTitle.style.display = "block";
-  categoryBar.classList.add("category-bar-hidden");
-  subFilters.style.display = "flex";
-  searchWrapper.style.display = "flex";
-  socialIcons.classList.add("hidden");
-
-  allCardsContainer.innerHTML = "";
-
-  const matched = allCards.filter(card => normalize(card.dataset.category) === normalize(category));
-
-  const sorted = matched.sort((a, b) => {
-    const da = a.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
-    const db = b.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
-    return db && da ? new Date(db[1]) - new Date(da[1]) : 0;
-  });
-
-  const tempContainer = document.createElement("div");
-  tempContainer.className = "card-container";
-  tempContainer.dataset.category = category;
-  tempContainer.style.display = "flex";
-  allCardsContainer.appendChild(tempContainer);
-
-  sorted.slice(0, 6).forEach(card => {
-    tempContainer.appendChild(card.cloneNode(true));
   });
 
   applyFilters();
@@ -136,11 +96,10 @@ function applyFilters() {
 
     filtered.forEach(card => tempContainer.appendChild(card.cloneNode(true)));
   } else if (currentCategory) {
-    const container = document.querySelector(`.card-container[data-category="${currentCategory}"]`);
+    const container = document.querySelector(".card-container[data-category='" + currentCategory + "']");
     if (!container) return;
 
-    const cards = Array.from(container.children);
-    cards.forEach(card => {
+    Array.from(container.children).forEach(card => {
       const title = card.querySelector(".card-title").innerText.toLowerCase();
       const year = card.dataset.year;
       const member = card.dataset.member;
@@ -156,10 +115,10 @@ function applyFilters() {
 
 function displayInitialCards() {
   allCardsContainer.innerHTML = "";
-  const tempContainer = document.createElement("div");
-  tempContainer.className = "card-container";
-  tempContainer.style.display = "flex";
-  allCardsContainer.appendChild(tempContainer);
+  const container = document.createElement("div");
+  container.className = "card-container";
+  container.style.display = "flex";
+  allCardsContainer.appendChild(container);
 
   const sorted = [...allCards].sort((a, b) => {
     const da = a.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
@@ -168,7 +127,7 @@ function displayInitialCards() {
   });
 
   sorted.slice(0, 6).forEach(card => {
-    tempContainer.appendChild(card.cloneNode(true));
+    container.appendChild(card.cloneNode(true));
   });
 }
 
@@ -205,7 +164,6 @@ const cardHTML = `
   <div class="card-title">[EN/JP] 내가 댄스배틀을 어떻게 해.. (2021-12-22)</div>
 </a>
 `;
-
 
 document.addEventListener("DOMContentLoaded", () => {
   const temp = document.createElement("div");
