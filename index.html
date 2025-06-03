@@ -14,10 +14,10 @@
     }
 
     #mainTitle, .category-title {
-  padding: 30px 0 10px;
-  font-size: 28px;
-  color: #fff;
-  font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+      padding: 30px 0 10px;
+      font-size: 28px;
+      color: #fff;
+      font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
     }
 
     .category-title {
@@ -26,17 +26,24 @@
 
     .category-buttons {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       gap: 10px;
       padding: 10px 20px;
     }
 
+    .category-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
     .category-btn {
-  padding: 10px 16px;
-  background-color: #333;
-  border-radius: 20px;
-  font-size: 16px;
+      padding: 10px 16px;
+      background-color: #333;
+      border-radius: 20px;
+      font-size: 16px;
       font-weight: 600;
       color: #fff;
       cursor: pointer;
@@ -73,10 +80,18 @@
 
     .filter-buttons {
       display: none;
-      justify-content: center;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 10px;
       margin: 10px 0;
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 10px;
     }
 
     .filter-btn {
@@ -145,6 +160,11 @@
       .top-search input {
         width: 160px;
       }
+
+      .category-row {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
@@ -157,51 +177,35 @@
     <a href="https://weverse.io/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/w.png" alt="Weverse"></a>
   </div>
 
-  <div id="mainTitle"><span style="font-weight: bold;">I-DLE</span> <span style="font-weight: bold;">몰아보기</span></div>
+  <div id="mainTitle">I-DLE <strong>몰아보기</strong></div>
   <div class="category-title"></div>
 
   <div class="category-buttons">
-  <div class="category-row">
-    <button class="category-btn" onclick="showFilters('MV-SPECIAL CLIP')">MV-SPECIAL CLIP</button>
-    <button class="category-btn" onclick="showFilters('LIVE-COVER-DANCE')">LIVE-COVER-DANCE</button>
-    <button class="category-btn" onclick="showFilters('MUSIC SHOW PERFORMANCE')">MUSIC SHOW PERFORMANCE</button>
-    <button class="category-btn" onclick="showFilters('FESTIVAL EVENT STAGE')">FESTIVAL EVENT STAGE</button>
+    <div class="category-row">
+      <button class="category-btn" onclick="showFilters('MV-SPECIAL CLIP')">MV-SPECIAL CLIP</button>
+      <button class="category-btn" onclick="showFilters('LIVE-COVER-DANCE')">LIVE-COVER-DANCE</button>
+      <button class="category-btn" onclick="showFilters('MUSIC SHOW PERFORMANCE')">MUSIC SHOW PERFORMANCE</button>
+      <button class="category-btn" onclick="showFilters('FESTIVAL EVENT STAGE')">FESTIVAL EVENT STAGE</button>
+    </div>
+    <div class="category-row">
+      <button class="category-btn" onclick="showFilters('FANCAM-STAGE FOCUS')">FANCAM-STAGE FOCUS</button>
+      <button class="category-btn" onclick="showFilters('RECORDING STUDIO BEHIND')">RECORDING STUDIO BEHIND</button>
+      <button class="category-btn" onclick="showFilters('DANCE PRACTICE-FANCHANT')">DANCE PRACTICE-FANCHANT</button>
+    </div>
+    <div class="category-row">
+      <button class="category-btn" onclick="showFilters('TV SHOW')">TV SHOW</button>
+      <button class="category-btn" onclick="showFilters('YOUTUBE CONTENTS')">YOUTUBE CONTENTS</button>
+      <button class="category-btn" onclick="showFilters('ORIGINAL CONTENTS')">ORIGINAL CONTENTS</button>
+      <button class="category-btn" onclick="showFilters('RADIO PODCAST')">RADIO PODCAST</button>
+      <button class="category-btn" onclick="showFilters('LIVE STREAM')">LIVE STREAM</button>
+    </div>
+    <div class="category-row">
+      <button class="category-btn" onclick="showFilters('MAGAZINE INTERVIEW')">MAGAZINE INTERVIEW</button>
+      <button class="category-btn" onclick="showFilters('BEHIND CLIPS')">BEHIND CLIPS</button>
+      <button class="category-btn" onclick="showFilters('CHALLENGE')">CHALLENGE</button>
+      <button class="category-btn" onclick="showFilters('ETC')">ETC</button>
+    </div>
   </div>
-  <div class="category-row">
-    <button class="category-btn" onclick="showFilters('FANCAM-STAGE FOCUS')">FANCAM-STAGE FOCUS</button>
-    <button class="category-btn" onclick="showFilters('RECORDING STUDIO BEHIND')">RECORDING STUDIO BEHIND</button>
-    <button class="category-btn" onclick="showFilters('DANCE PRACTICE-FANCHANT')">DANCE PRACTICE-FANCHANT</button>
-  </div>
-  <div class="category-row">
-    <button class="category-btn" onclick="showFilters('TV SHOW')">TV SHOW</button>
-    <button class="category-btn" onclick="showFilters('YOUTUBE CONTENTS')">YOUTUBE CONTENTS</button>
-    <button class="category-btn" onclick="showFilters('ORIGINAL CONTENTS')">ORIGINAL CONTENTS</button>
-    <button class="category-btn" onclick="showFilters('RADIO PODCAST')">RADIO PODCAST</button>
-    <button class="category-btn" onclick="showFilters('LIVE STREAM')">LIVE STREAM</button>
-  </div>
-  <div class="category-row">
-    <button class="category-btn" onclick="showFilters('MAGAZINE INTERVIEW')">MAGAZINE INTERVIEW</button>
-    <button class="category-btn" onclick="showFilters('BEHIND CLIPS')">BEHIND CLIPS</button>
-    <button class="category-btn" onclick="showFilters('CHALLENGE')">CHALLENGE</button>
-    <button class="category-btn" onclick="showFilters('ETC')">ETC</button>
-  </div>
-</div>
-<style>
-  .category-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-
-  @media (max-width: 768px) {
-    .category-row {
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-</style>
 
   <div class="top-search">
     <button onclick="goBack()"><img src="https://img.icons8.com/ios-filled/50/ffffff/left.png" alt="뒤로가기"></button>
@@ -230,15 +234,6 @@
       <button class="filter-btn" onclick="filterVideos('아이들')">아이들</button>
     </div>
   </div>
-  <style>
-    .filter-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-  </style>
 
   <div id="allCards" class="card-container"></div>
 
