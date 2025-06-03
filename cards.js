@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const container = document.getElementById("allCards");
 
   const cardsHTML = `
-</a>
 
 <div class="card-container" data-category="RADIO">
 <a href="https://www.youtube.com/watch?v=inaLcT_gOS8" target="_blank" class="card" data-category="RADIO" data-member="아이들" data-year="2025">
