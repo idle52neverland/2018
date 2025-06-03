@@ -121,7 +121,7 @@
   </div>
 
   <div class="top-bar">
-    <button onclick="history.back()"><img src="https://cdn-icons-png.flaticon.com/512/271/271220.png" alt="뒤로가기"></button>
+    <button onclick="handleBack()"><img src="https://cdn-icons-png.flaticon.com/512/271/271220.png" alt="뒤로가기"></button>
     <button onclick="location.href='index.html'"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png" alt="홈"></button>
     <input type="text" id="searchInput" placeholder="카테고리 내 검색...">
   </div>
@@ -130,6 +130,8 @@
 
   <script src="cards.js"></script>
   <script>
+    let stateStack = [];
+
     document.addEventListener("DOMContentLoaded", function () {
       const params = new URLSearchParams(window.location.search);
       const category = params.get("category");
@@ -147,6 +149,8 @@
         if (currentMember) filtered = filtered.filter(c => c.member === currentMember);
         if (keyword) filtered = filtered.filter(c => c.title.toLowerCase().includes(keyword));
         filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        stateStack.push({ year: currentYear, member: currentMember, keyword });
 
         filtered.forEach(data => {
           const card = document.createElement("a");
@@ -207,6 +211,27 @@
 
       renderCards();
     });
+
+    function handleBack() {
+      if (stateStack.length > 1) {
+        stateStack.pop(); // Remove current state
+        const prev = stateStack.pop(); // Get previous state
+        currentYear = prev.year;
+        currentMember = prev.member;
+        document.getElementById("searchInput").value = prev.keyword;
+        document.querySelectorAll("#yearFilters .filter-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll("#memberFilters .filter-btn").forEach(b => b.classList.remove("active"));
+        if (currentYear) {
+          [...document.querySelectorAll("#yearFilters .filter-btn")].find(b => b.textContent === currentYear)?.classList.add("active");
+        }
+        if (currentMember) {
+          [...document.querySelectorAll("#memberFilters .filter-btn")].find(b => b.textContent === currentMember)?.classList.add("active");
+        }
+        renderCards();
+      } else {
+        history.back();
+      }
+    }
   </script>
 </body>
 </html>
