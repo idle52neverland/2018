@@ -1,5 +1,3 @@
-// cards.js
-
 const allCardsContainer = document.getElementById("allCards");
 const mainTitle = document.getElementById("mainTitle");
 const categoryTitle = document.getElementById("categoryTitle");
@@ -77,7 +75,7 @@ function applyFilters() {
   const query = searchInput.value.toLowerCase();
 
   if (!currentCategory && query) {
-    // 홈 화면에서 전체 검색 시: 모든 카드 단일 컨테이너로 보여줌
+    // 홈 화면 전체 검색
     allCardsContainer.innerHTML = "";
     const tempContainer = document.createElement("div");
     tempContainer.className = "card-container";
@@ -113,9 +111,8 @@ function applyFilters() {
 
 searchInput.addEventListener("input", applyFilters);
 
-// 카드 생성용 HTML 문자열 (네가 준 모든 카드 포함됨)
+// 카드 HTML
 const cardHTML = `
-
 <div class="card-container" data-category="MV / SPECIAL CLIP">
 <a href="https://www.youtube.com/watch?v=hAONx6nuEgI" target="_blank" class="card" data-category="MV / SPECIAL CLIP" data-member="아이들" data-year="2025">
   <img src="https://i.ytimg.com/vi/hAONx6nuEgI/hqdefault.jpg" alt="아이들 - i-dle (아이들) 'Good Thing' Official Music Video">
@@ -383,24 +380,27 @@ const cardHTML = `
   <div class="card-title">유연이 말하는 아이들(i-dle) 전소연 SBN 🖤 (2025-05-31)</div>
 </a>
 </div>
-
-
-
 `;
 
 document.addEventListener("DOMContentLoaded", () => {
-  allCardsContainer.innerHTML = cardHTML;
-  allCards = Array.from(document.querySelectorAll(".card"));
-  allCards.sort((a, b) => {
+  // 초기 카드 삽입
+  const temp = document.createElement("div");
+  temp.innerHTML = cardHTML.trim();
+  const cards = Array.from(temp.children);
+
+  // 정렬
+  cards.sort((a, b) => {
     const da = a.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
     const db = b.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
     return db && da ? new Date(db[1]) - new Date(da[1]) : 0;
   });
 
-  allCards.forEach(card => {
+  // 삽입
+  cards.forEach(card => {
     const category = card.dataset.category;
     const container = createCardContainer(category);
     container.appendChild(card);
+    allCards.push(card);
   });
 });
 
