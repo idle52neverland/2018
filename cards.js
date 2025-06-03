@@ -28,12 +28,15 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".category-title").textContent = category;
     document.querySelector(".category-title").style.display = "block";
 
-    // 이동: 필터버튼을 카드 컨테이너 안으로 넣기
     const filterArea = document.querySelector(".filter-buttons");
+    filterArea.style.display = "flex";
+
     allCardsContainer.innerHTML = "";
     allCardsContainer.style.display = "flex";
-    allCardsContainer.appendChild(filterArea);
-    filterArea.style.display = "flex";
+
+    currentCards = allCards.filter(card => card.category === category);
+    renderCards(currentCards);
+  };
 
     currentCards = allCards.filter(card => card.category === category);
     renderCards(currentCards);
