@@ -25,7 +25,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
-      padding: 10px;
+      padding: 80px 10px 10px; /* SNS 아이콘과 겹치지 않게 위쪽 패딩 증가 */
     }
     .category-btn {
       padding: 10px 20px;
@@ -50,10 +50,15 @@
       margin: 20px 0;
     }
     .top-bar input {
-      padding: 6px 10px;
-      border-radius: 20px;
+      padding: 10px 14px;
+      border-radius: 24px;
       border: none;
-      width: 200px;
+      width: 240px;
+      font-size: 15px;
+    }
+    .top-bar button img {
+      width: 20px;
+      height: 20px;
     }
     .card-container {
       display: flex;
@@ -147,8 +152,8 @@
   </div>
 
   <div class="top-bar">
-    <button onclick="history.back()"><img src="https://cdn-icons-png.flaticon.com/512/271/271220.png" alt="뒤로가기" style="width:16px; height:16px;"></button>
-    <button onclick="location.href='index.html'"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png" alt="홈" style="width:16px; height:16px;"></button>
+    <button onclick="history.back()"><img src="https://cdn-icons-png.flaticon.com/512/271/271220.png" alt="뒤로가기"></button>
+    <button onclick="location.href='index.html'"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png" alt="홈"></button>
     <input type="text" id="searchInput" placeholder="전체 영상 검색...">
   </div>
 
