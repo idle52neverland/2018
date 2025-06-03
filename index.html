@@ -17,6 +17,12 @@
       font-size: 28px;
       color: #fff;
     }
+    .category-title {
+      display: none;
+      padding: 30px 0 10px;
+      font-size: 24px;
+      color: #fff;
+    }
     .category-btn, .filter-btn {
       padding: 10px 20px;
       background-color: #333;
@@ -42,18 +48,19 @@
       margin-top: 10px;
     }
     .search-input {
-      padding: 6px 12px;
+      padding: 6px 10px;
       border-radius: 20px;
       border: 2px solid #444;
       font-size: 13px;
       background-color: #fff;
       color: #333;
+      width: 180px;
     }
     .search-input::placeholder {
       color: #888;
     }
     .nav-btn {
-      padding: 6px 12px;
+      padding: 6px 10px;
       border-radius: 20px;
       font-size: 13px;
       font-weight: 600;
@@ -68,15 +75,15 @@
     .social-icons {
       display: flex;
       justify-content: flex-end;
-      gap: 10px;
-      margin: 0 20px 10px;
+      gap: 8px;
+      margin: 5px 20px 5px;
     }
     .social-icons.hidden {
       display: none;
     }
     .social-icons a img {
-      width: 24px;
-      height: 24px;
+      width: 18px;
+      height: 18px;
       filter: brightness(0) invert(1);
     }
     .sub-filters {
@@ -138,7 +145,7 @@
     }
     @media (min-width: 601px) {
       .card {
-        width: calc(20% - 13px);
+        width: calc(33.33% - 12px);
       }
     }
     @media (max-width: 600px) {
@@ -155,22 +162,35 @@
         width: calc(50% - 8px);
       }
       .search-bar {
-        flex-direction: column;
-        gap: 8px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        gap: 6px;
       }
     }
   </style>
 </head>
 <body>
 
-<h1 id="mainTitle">I-DLE 몰아보기</h1>
-
-<div class="social-icons">
+<div class="social-icons" id="socialIcons">
   <a href="https://www.youtube.com/@official_i_dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
   <a href="https://x.com/official_i_dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X"></a>
   <a href="https://instagram.com/i_dle_official" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram"></a>
   <a href="https://tiktok.com/@official_i_dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
   <a href="https://weverse.io/i-dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3669/3669986.png" alt="Weverse"></a>
+</div>
+
+<h1 id="mainTitle">I-DLE 몰아보기</h1>
+<h1 id="categoryTitle" class="category-title"></h1>
+
+<div class="search-bar" id="mainSearchBar">
+  <button class="nav-btn" onclick="goBackToCategories()">
+    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="뒤로가기" style="width:20px; height:20px; filter: brightness(0) invert(1); vertical-align: middle;">
+  </button>
+  <button class="nav-btn" onclick="goBackToCategories()">
+    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="홈" style="width:20px; height:20px; filter: brightness(0) invert(1); vertical-align: middle;">
+  </button>
+  <input type="text" id="searchInput" class="search-input" placeholder="search">
 </div>
 
 <div id="categoryBar">
@@ -198,18 +218,9 @@
     <button class="category-btn" onclick="showFilters('CHALLENGE')">CHALLENGE</button>
     <button class="category-btn" onclick="showFilters('ETC')">ETC</button>
   </div>
-  <div class="search-bar">
-    <input type="text" id="searchInput" class="search-input" placeholder="search">
-  </div>
 </div>
 
 <div class="sub-filters" id="subFilters">
-  <div class="search-bar">
-    <button class="nav-btn" onclick="goBackToCategories()">
-      <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="뒤로가기" style="width:20px; height:20px; filter: brightness(0) invert(1); vertical-align: middle;">
-    </button>
-    <input type="text" id="subSearchInput" class="search-input" placeholder="search in category" />
-  </div>
   <div class="filter-group">
     <button class="filter-btn" onclick="filterVideos('year','2025')">2025</button>
     <button class="filter-btn" onclick="filterVideos('year','2024')">2024</button>
@@ -234,6 +245,3 @@
 <div id="allCards"></div>
 
 <script src="cards.js"></script>
-
-</body>
-</html>
