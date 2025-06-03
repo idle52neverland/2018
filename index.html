@@ -239,6 +239,24 @@
 
 <div id="allCards"></div>
 
+  <script>
+document.getElementById("searchInput").addEventListener("input", function () {
+  const keyword = this.value.toLowerCase();
+  const allCards = document.querySelectorAll(".card");
+
+  allCards.forEach(card => {
+    const title = card.querySelector(".card-title").innerText.toLowerCase();
+    const member = card.dataset.member.toLowerCase();
+    const year = card.dataset.year;
+
+    if (title.includes(keyword) || member.includes(keyword) || year.includes(keyword)) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+});
+</script>
 <script src="cards.js"></script>
 
 </body>
