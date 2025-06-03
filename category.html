@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>카테고리 보기 - I-DLE 몰아보기</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+    }
+    #mainTitle {
+      padding: 30px 0 10px;
+      font-size: 28px;
+      color: #fff;
+      display: none;
+    }
+    .category-title {
+      padding: 30px 0 10px;
+      font-size: 24px;
+      color: #fff;
+    }
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .filter-btn {
+      padding: 6px 14px;
+      background-color: #333;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+    }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+    }
+    .card {
+      background-color: #222;
+      border-radius: 10px;
+      overflow: hidden;
+      width: 180px;
+      text-align: left;
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+    }
+    .card-title {
+      font-size: 13px;
+      padding: 6px;
+    }
+    @media (max-width: 768px) {
+      .card {
+        width: 45%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="mainTitle">I-DLE 몰아보기</div>
+  <div class="category-title" id="categoryTitle"></div>
+
+  <div class="filter-buttons" id="filterArea">
+    <button class="filter-btn" onclick="filterVideos('2025')">2025</button>
+    <button class="filter-btn" onclick="filterVideos('2024')">2024</button>
+    <button class="filter-btn" onclick="filterVideos('2023')">2023</button>
+    <button class="filter-btn" onclick="filterVideos('2022')">2022</button>
+    <button class="filter-btn" onclick="filterVideos('2021')">2021</button>
+    <button class="filter-btn" onclick="filterVideos('2020')">2020</button>
+    <button class="filter-btn" onclick="filterVideos('2019')">2019</button>
+    <button class="filter-btn" onclick="filterVideos('2018')">2018</button>
+    <button class="filter-btn" onclick="filterVideos('PRE-DEBUT')">PRE-DEBUT</button>
+    <button class="filter-btn" onclick="filterVideos('미연')">미연</button>
+    <button class="filter-btn" onclick="filterVideos('민니')">민니</button>
+    <button class="filter-btn" onclick="filterVideos('소연')">소연</button>
+    <button class="filter-btn" onclick="filterVideos('우기')">우기</button>
+    <button class="filter-btn" onclick="filterVideos('슈화')">슈화</button>
+    <button class="filter-btn" onclick="filterVideos('아이들')">아이들</button>
+  </div>
+
+  <div class="card-container" id="allCards"></div>
+
+  <script src="cards.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get("category");
+    if (category) {
+      showFilters(category);
+    }
+  </script>
+</body>
+</html>
