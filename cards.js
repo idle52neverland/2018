@@ -394,3 +394,7 @@ window.filterVideos = filterVideos;
 </a>
 </div>
 
+window.showFilters = showFilters;
+window.goBackToCategories = goBackToCategories;
+window.goHome = goHome; // 이 줄이 필요합니다
+window.filterVideos = filterVideos;
