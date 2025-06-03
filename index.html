@@ -17,6 +17,8 @@
       font-size: 28px;
       color: #fff;
       display: block;
+      position: relative;
+      z-index: 2;
     }
     .category-section {
       display: flex;
@@ -80,10 +82,10 @@
       font-size: 13px;
       padding: 6px;
       color: #fff;
-      text-decoration: none !important;
+      text-decoration: none;
     }
     .card-title:hover {
-      text-decoration: none !important;
+      text-decoration: none;
     }
     @media (max-width: 768px) {
       .card {
@@ -101,7 +103,7 @@
     }
     .sns-icons {
       position: absolute;
-      top: 20px;
+      top: 80px;
       right: 10px;
     }
     .sns-icons img {
@@ -113,6 +115,8 @@
   </style>
 </head>
 <body>
+  <div id="mainTitle">I-DLE 몰아보기</div>
+
   <div class="sns-icons">
     <a href="https://youtube.com/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png" alt="YouTube"></a>
     <a href="https://x.com/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx--v1.png" alt="X"></a>
@@ -120,8 +124,6 @@
     <a href="https://www.tiktok.com/@(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/tiktok--v1.png" alt="TikTok"></a>
     <a href="https://weverse.io/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/w.png" alt="Weverse"></a>
   </div>
-
-  <div id="mainTitle">I-DLE 몰아보기</div>
 
   <div class="category-section">
     <a class="category-btn" href="category.html?category=MV-SPECIAL CLIP">MV-SPECIAL CLIP</a>
