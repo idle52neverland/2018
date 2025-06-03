@@ -122,6 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+window.showFilters = showFilters;
+window.goBackToCategories = goBackToCategories;
+window.filterVideos = filterVideos;
 
 <div class="card-container" data-category="MV / SPECIAL CLIP">
 <a href="https://www.youtube.com/watch?v=hAONx6nuEgI" target="_blank" class="card" data-category="MV / SPECIAL CLIP" data-member="아이들" data-year="2025">
