@@ -48,6 +48,39 @@ function showFilters(category) {
     return db && da ? new Date(db[1]) - new Date(da[1]) : 0;
   });
 
+  const container = document.createElement("div");
+  container.className = "card-container";
+  container.dataset.category = category;
+  container.style.display = "flex";
+  allCardsContainer.appendChild(container);
+
+  sorted.slice(0, 6).forEach(card => {
+    container.appendChild(card.cloneNode(true));
+  });
+
+  applyFilters();
+}
+  const normalize = (str) => str.replace(/\s+/g, ' ').trim();
+
+  currentCategory = category;
+  mainTitle.style.display = "none";
+  categoryTitle.innerText = category;
+  categoryTitle.style.display = "block";
+  categoryBar.classList.add("category-bar-hidden");
+  subFilters.style.display = "flex";
+  searchWrapper.style.display = "flex";
+  socialIcons.classList.add("hidden");
+
+  allCardsContainer.innerHTML = "";
+
+  const matched = allCards.filter(card => normalize(card.dataset.category) === normalize(category));
+
+  const sorted = matched.sort((a, b) => {
+    const da = a.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
+    const db = b.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
+    return db && da ? new Date(db[1]) - new Date(da[1]) : 0;
+  });
+
   const tempContainer = document.createElement("div");
   tempContainer.className = "card-container";
   tempContainer.dataset.category = category;
