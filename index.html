@@ -13,9 +13,39 @@
       text-align: center;
     }
     #mainTitle {
-      padding: 30px 0 10px;
+      padding: 15px 0 5px;
       font-size: 28px;
       color: #fff;
+    }
+    .sns-icons {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+    }
+    .sns-icons img {
+      width: 16px;
+      height: 16px;
+    }
+    .nav-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+    .nav-controls img {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+    .nav-controls input {
+      padding: 6px 10px;
+      border-radius: 20px;
+      border: none;
+      width: 200px;
+      font-size: 13px;
     }
     .category-btn {
       padding: 10px 20px;
@@ -94,9 +124,23 @@
   </style>
 </head>
 <body>
+  <div class="sns-icons">
+    <a href="#"><img src="Youtube.jpg" alt="YouTube"></a>
+    <a href="#"><img src="Instagram.jpg" alt="Instagram"></a>
+    <a href="#"><img src="TikTok.jpg" alt="TikTok"></a>
+    <a href="#"><img src="Weverse.png" alt="Weverse"></a>
+    <a href="#"><img src="X(구.Twitter).jpg" alt="X"></a>
+  </div>
+
   <div id="mainTitle">I-DLE 몰아보기</div>
 
   <div id="categoryButtons"></div>
+
+  <div class="nav-controls">
+    <img src="https://cdn-icons-png.flaticon.com/512/271/271220.png" alt="뒤로가기" onclick="history.back()">
+    <img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png" alt="홈" onclick="window.location.href='index.html'">
+    <input type="text" id="searchInput" placeholder="영상 검색...">
+  </div>
 
   <div class="card-container" id="homepageCards"></div>
   <button id="loadMore">더보기</button>
@@ -110,12 +154,16 @@
     document.addEventListener("DOMContentLoaded", function () {
       const container = document.getElementById("homepageCards");
       const loadMoreBtn = document.getElementById("loadMore");
+      const searchInput = document.getElementById("searchInput");
 
       allSorted = allCards.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
 
       function renderHomepageCards() {
-        const nextCards = allSorted.slice(homepageShown, homepageShown + cardsPerPage);
-        nextCards.forEach(data => {
+        container.innerHTML = '';
+        const searchTerm = searchInput.value.toLowerCase();
+        const filtered = allSorted.filter(card => card.title.toLowerCase().includes(searchTerm));
+        const shownCards = filtered.slice(0, homepageShown + cardsPerPage);
+        shownCards.forEach(data => {
           const card = document.createElement("a");
           card.href = data.link;
           card.target = "_blank";
@@ -129,11 +177,16 @@
           `;
           container.appendChild(card);
         });
-        homepageShown += nextCards.length;
-        loadMoreBtn.style.display = homepageShown < allSorted.length ? "block" : "none";
+        homepageShown += cardsPerPage;
+        loadMoreBtn.style.display = (homepageShown < filtered.length) ? "block" : "none";
       }
 
-      document.getElementById("loadMore").addEventListener("click", renderHomepageCards);
+      loadMoreBtn.addEventListener("click", renderHomepageCards);
+      searchInput.addEventListener("input", function () {
+        homepageShown = 0;
+        renderHomepageCards();
+      });
+
       renderHomepageCards();
     });
   </script>
