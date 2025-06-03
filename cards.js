@@ -1,22 +1,24 @@
-
 const allCardsContainer = document.getElementById("allCards");
 const mainTitle = document.getElementById("mainTitle");
 const categoryTitle = document.getElementById("categoryTitle");
 const categoryBar = document.getElementById("categoryBar");
 const subFilters = document.getElementById("subFilters");
 const searchInput = document.getElementById("searchInput");
-const searchBar = document.getElementById("mainSearchBar");
-const socialIcons = document.getElementById("socialIcons");
 const searchWrapper = document.getElementById("searchWrapper");
-const backButton = document.getElementById("backButton");
-const homeButton = document.getElementById("homeButton");
 
 let currentCategory = "";
 let currentFilters = { year: null, member: null };
 let allCards = [];
 
-function normalize(str) {
-  return str.replace(/\s+/g, ' ').trim();
+function createCardContainer(category) {
+  let container = document.querySelector(`.card-container[data-category="${category}"]`);
+  if (!container) {
+    container = document.createElement("div");
+    container.className = "card-container";
+    container.dataset.category = category;
+    allCardsContainer.appendChild(container);
+  }
+  return container;
 }
 
 function showFilters(category) {
@@ -27,31 +29,21 @@ function showFilters(category) {
   categoryBar.classList.add("category-bar-hidden");
   subFilters.style.display = "flex";
   searchWrapper.style.display = "flex";
-  socialIcons.classList.add("hidden");
+
+  // 필터링된 최신 6개만 표시
+  const categoryCards = allCards.filter(card => card.dataset.category === category);
+  const sorted = categoryCards.sort((a, b) => {
+    const dateA = a.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
+    const dateB = b.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
+    return dateB && dateA ? new Date(dateB[1]) - new Date(dateA[1]) : 0;
+  });
+  const latestSix = sorted.slice(0, 6);
 
   allCardsContainer.innerHTML = "";
-
-  const matched = allCards.filter(card =>
-    normalize(card.dataset.category) === normalize(category)
-  );
-
-  const sorted = matched.sort((a, b) => {
-    const da = a.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
-    const db = b.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
-    return db && da ? new Date(db[1]) - new Date(da[1]) : 0;
-  });
-
   const container = document.createElement("div");
   container.className = "card-container";
-  container.dataset.category = category;
-  container.style.display = "flex";
   allCardsContainer.appendChild(container);
-
-  sorted.slice(0, 6).forEach(card => {
-    container.appendChild(card);
-  });
-
-  applyFilters();
+  latestSix.forEach(card => container.appendChild(card));
 }
 
 function goBackToCategories() {
@@ -64,14 +56,25 @@ function goBackToCategories() {
   categoryBar.classList.remove("category-bar-hidden");
   subFilters.style.display = "none";
   searchWrapper.style.display = "flex";
-  socialIcons.classList.remove("hidden");
 
-  displayInitialCards();
+  renderHomeCards();
 }
 
-function goHome() {
-  goBackToCategories();
-  window.scrollTo({ top: 0, behavior: "smooth" });
+function renderHomeCards() {
+  allCardsContainer.innerHTML = "";
+  const sorted = allCards.sort((a, b) => {
+    const da = a.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
+    const db = b.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
+    return db && da ? new Date(db[1]) - new Date(da[1]) : 0;
+  });
+  const top6 = sorted.slice(0, 6);
+
+  const tempContainer = document.createElement("div");
+  tempContainer.className = "card-container";
+  tempContainer.style.display = "flex";
+  allCardsContainer.appendChild(tempContainer);
+
+  top6.forEach(card => tempContainer.appendChild(card));
 }
 
 function filterVideos(type, value) {
@@ -81,13 +84,7 @@ function filterVideos(type, value) {
 
 function applyFilters() {
   const query = searchInput.value.toLowerCase();
-
-  const container = document.querySelector(".card-container[data-category='" + currentCategory + "']") ||
-                    document.querySelector(".card-container");
-
-  if (!container) return;
-
-  Array.from(container.children).forEach(card => {
+  const filtered = allCards.filter(card => {
     const title = card.querySelector(".card-title").innerText.toLowerCase();
     const year = card.dataset.year;
     const member = card.dataset.member;
@@ -96,30 +93,20 @@ function applyFilters() {
     const matchesYear = !currentFilters.year || currentFilters.year === year;
     const matchesMember = !currentFilters.member || currentFilters.member === member;
 
-    card.style.display = (matchesQuery && matchesYear && matchesMember) ? "block" : "none";
+    return matchesQuery && matchesYear && matchesMember;
   });
-}
 
-function displayInitialCards() {
   allCardsContainer.innerHTML = "";
   const container = document.createElement("div");
   container.className = "card-container";
-  container.style.display = "flex";
   allCardsContainer.appendChild(container);
 
-  const sorted = [...allCards].sort((a, b) => {
-    const da = a.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
-    const db = b.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
-    return db && da ? new Date(db[1]) - new Date(da[1]) : 0;
-  });
-
-  sorted.slice(0, 6).forEach(card => {
-    container.appendChild(card);
-  });
+  filtered.forEach(card => container.appendChild(card));
 }
 
 searchInput.addEventListener("input", applyFilters);
 
+// 카드 HTML
 const cardHTML = `
 <a href="https://www.youtube.com/watch?v=IF23qT7CYUc" target="_blank" class="card" data-category="MUSIC SHOW PERFORMANCE" data-member="아이들" data-year="2025">
   <img src="https://i.ytimg.com/vi/IF23qT7CYUc/hqdefault.jpg" alt="아이들 - Girlfriend - I-dle (아이들) [뮤직뱅크/Music Bank] | KBS 250523 방송">
@@ -155,18 +142,14 @@ const cardHTML = `
 `;
 
 document.addEventListener("DOMContentLoaded", () => {
-  const temp = document.createElement("div");
-  temp.innerHTML = cardHTML.trim();
-  const cardElements = temp.querySelectorAll(".card");
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = cardHTML;
+  const rawCards = tempDiv.querySelectorAll(".card");
 
-  cardElements.forEach(card => {
-    allCards.push(card);
-  });
-
-  displayInitialCards();
+  allCards = Array.from(rawCards);
+  renderHomeCards();
 });
 
 window.showFilters = showFilters;
 window.goBackToCategories = goBackToCategories;
-window.goHome = goHome;
 window.filterVideos = filterVideos;
