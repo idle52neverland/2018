@@ -27,8 +27,11 @@
       cursor: pointer;
       border: none;
       transition: background-color 0.2s;
+      text-decoration: none;
+      display: inline-block;
     }
-    .category-btn:hover, .filter-btn:hover {
+    .category-btn:hover,
+    .filter-btn:hover {
       background-color: #ff4da6;
     }
     .search-bar {
@@ -36,7 +39,7 @@
       justify-content: center;
       align-items: center;
       gap: 10px;
-      margin-top: 10px;
+      margin: 10px 0;
     }
     .search-input {
       padding: 6px 12px;
@@ -61,6 +64,20 @@
     }
     .nav-btn:hover {
       background-color: #ff4da6;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin: 0 20px 10px;
+    }
+    .social-icons.hidden {
+      display: none;
+    }
+    .social-icons a img {
+      width: 24px;
+      height: 24px;
+      filter: brightness(0) invert(1);
     }
     .sub-filters {
       display: none;
@@ -111,6 +128,7 @@
       padding: 10px;
       font-size: 14px;
       color: #fff;
+      text-decoration: none;
     }
     .card:hover {
       transform: scale(1.03);
@@ -147,8 +165,12 @@
 
 <h1 id="mainTitle">I-DLE 몰아보기</h1>
 
-<div class="search-bar">
-  <input type="text" id="searchInput" class="search-input" placeholder="전체 영상 검색">
+<div class="social-icons">
+  <a href="https://www.youtube.com/@official_i_dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
+  <a href="https://x.com/official_i_dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X"></a>
+  <a href="https://instagram.com/i_dle_official" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram"></a>
+  <a href="https://tiktok.com/@official_i_dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
+  <a href="https://weverse.io/i-dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3669/3669986.png" alt="Weverse"></a>
 </div>
 
 <div id="categoryBar">
@@ -178,13 +200,12 @@
   </div>
 </div>
 
+<!-- 옮긴 검색창 -->
+<div class="search-bar">
+  <input type="text" id="subSearchInput" class="search-input" placeholder="카테고리 내 검색어 입력" />
+</div>
+
 <div class="sub-filters" id="subFilters">
-  <div class="search-bar">
-    <button class="nav-btn" onclick="goBackToCategories()">
-      <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="뒤로가기" style="width:20px; height:20px; filter: brightness(0) invert(1); vertical-align: middle;">
-    </button>
-    <input type="text" id="subSearchInput" class="search-input" placeholder="카테고리 내 검색어 입력" />
-  </div>
   <div class="filter-group">
     <button class="filter-btn" onclick="filterVideos('year','2025')">2025</button>
     <button class="filter-btn" onclick="filterVideos('year','2024')">2024</button>
@@ -209,67 +230,29 @@
 <div id="allCards"></div>
 
 <script src="cards.js"></script>
+
 <script>
-  document.getElementById("searchInput").addEventListener("input", function () {
-    const query = this.value.toLowerCase();
-    document.querySelectorAll(".card").forEach(card => {
-      const text = card.innerText.toLowerCase();
-      card.style.display = text.includes(query) ? "block" : "none";
-    });
-  });
-
   document.getElementById("subSearchInput").addEventListener("input", function () {
-    const query = this.value.toLowerCase();
+    const value = this.value.trim().toLowerCase();
     const currentCategory = document.getElementById("mainTitle").innerText;
-    const currentContainer = [...document.querySelectorAll(".card-container")].find(
-      c => c.dataset.category === currentCategory
-    );
-    if (!currentContainer) return;
-    const cards = currentContainer.querySelectorAll(".card");
-    cards.forEach(card => {
-      const text = card.innerText.toLowerCase();
-      card.style.display = text.includes(query) ? "block" : "none";
+    const containers = document.querySelectorAll(".card-container");
+
+    containers.forEach(container => {
+      const isActive = container.dataset.category === currentCategory || currentCategory === "I-DLE 몰아보기";
+      const cards = container.querySelectorAll(".card");
+      let matchCount = 0;
+
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        const match = text.includes(value);
+        card.style.display = match ? "block" : "none";
+        if (match) matchCount++;
+      });
+
+      container.style.display = isActive && matchCount > 0 ? "flex" : "none";
     });
   });
-
-  function showFilters(category) {
-    document.getElementById("mainTitle").innerText = category;
-    document.getElementById("categoryBar").classList.add("category-bar-hidden");
-    document.getElementById("subFilters").style.display = "flex";
-
-    const containers = document.querySelectorAll(".card-container");
-    containers.forEach(c => {
-      c.style.display = c.dataset.category === category ? "flex" : "none";
-    });
-  }
-
-  function filterVideos(type, value) {
-    const currentCategory = document.getElementById("mainTitle").innerText;
-    const currentContainer = [...document.querySelectorAll(".card-container")].find(
-      c => c.dataset.category === currentCategory
-    );
-    if (!currentContainer) return;
-    const cards = currentContainer.querySelectorAll(".card");
-    cards.forEach(card => {
-      const cardValue = card.dataset[type];
-      card.style.display = cardValue === value ? "block" : "none";
-    });
-  }
-
-  function goBackToCategories() {
-    document.getElementById("mainTitle").innerText = "I-DLE 몰아보기";
-    document.getElementById("categoryBar").classList.remove("category-bar-hidden");
-    document.getElementById("subFilters").style.display = "none";
-
-    document.querySelectorAll(".card-container").forEach(c => {
-      c.style.display = "none";
-    });
-    document.querySelectorAll(".card").forEach(c => {
-      c.style.display = "block";
-    });
-    document.getElementById("searchInput").value = "";
-    document.getElementById("subSearchInput").value = "";
-  }
 </script>
+
 </body>
 </html>
