@@ -13,7 +13,7 @@
       text-align: center;
     }
     #mainTitle {
-      padding: 30px 0 10px;
+      padding: 60px 0 10px;
       font-size: 28px;
       color: #fff;
       display: block;
@@ -45,7 +45,7 @@
       justify-content: center;
       align-items: center;
       gap: 10px;
-      margin: 15px 0;
+      margin: 20px 0;
     }
     .top-bar input {
       padding: 6px 10px;
@@ -66,6 +66,11 @@
       overflow: hidden;
       width: 180px;
       text-align: left;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
     }
     .card img {
       width: 100%;
@@ -74,20 +79,25 @@
     .card-title {
       font-size: 13px;
       padding: 6px;
+      color: #fff;
+      text-decoration: none;
+    }
+    .card-title:hover {
+      text-decoration: none;
     }
     @media (max-width: 768px) {
       .card {
         width: 45%;
       }
     }
-      .sns-icons {
+    .sns-icons {
       position: absolute;
-      top: 10px;
+      top: 20px;
       right: 10px;
     }
     .sns-icons img {
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
       margin-left: 6px;
       filter: grayscale(100%);
     }
@@ -95,19 +105,14 @@
 </head>
 <body>
   <div class="sns-icons">
-  <a href="https://youtube.com/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png" alt="YouTube"></a>
-  <a href="https://x.com/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx--v1.png" alt="X"></a>
-  <a href="https://instagram.com/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram"></a>
-  <a href="https://www.tiktok.com/@(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/tiktok--v1.png" alt="TikTok"></a>
-  <a href="https://weverse.io/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/w.png" alt="Weverse"></a>
-</div>
-  <div id="mainTitle">I-DLE 몰아보기</div>
-
-  <div class="top-bar">
-    <button onclick="history.back()"><img src="https://cdn-icons-png.flaticon.com/512/271/271220.png" alt="뒤로가기" style="width:16px; height:16px;"></button>
-    <button onclick="location.href='index.html'"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png" alt="홈" style="width:16px; height:16px;"></button>
-    <input type="text" id="searchInput" placeholder="전체 영상 검색...">
+    <a href="https://youtube.com/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png" alt="YouTube"></a>
+    <a href="https://x.com/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx--v1.png" alt="X"></a>
+    <a href="https://instagram.com/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram"></a>
+    <a href="https://www.tiktok.com/@(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/tiktok--v1.png" alt="TikTok"></a>
+    <a href="https://weverse.io/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/w.png" alt="Weverse"></a>
   </div>
+
+  <div id="mainTitle">I-DLE 몰아보기</div>
 
   <div class="category-section">
     <a class="category-btn" href="category.html?category=MV-SPECIAL CLIP">MV-SPECIAL CLIP</a>
@@ -128,14 +133,20 @@
     <a class="category-btn" href="category.html?category=ETC">ETC</a>
   </div>
 
+  <div class="top-bar">
+    <button onclick="history.back()"><img src="https://cdn-icons-png.flaticon.com/512/271/271220.png" alt="뒤로가기" style="width:16px; height:16px;"></button>
+    <button onclick="location.href='index.html'"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png" alt="홈" style="width:16px; height:16px;"></button>
+    <input type="text" id="searchInput" placeholder="전체 영상 검색...">
+  </div>
+
   <div class="card-container" id="allCards"></div>
 
   <script src="cards.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // 전체 카드 표시 (모든 카테고리 카드 포함)
       const all = allCards || [];
       const container = document.getElementById("allCards");
+      all.sort((a, b) => new Date(b.date) - new Date(a.date));
       all.forEach(data => {
         const card = document.createElement("a");
         card.href = data.link;
