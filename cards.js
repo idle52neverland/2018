@@ -115,8 +115,7 @@ searchInput.addEventListener("input", applyFilters);
 
 // 카드 생성용 HTML 문자열 (네가 준 모든 카드 포함됨)
 const cardHTML = `
-// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-// 전체 카드 HTML 복붙 위치 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+
 <div class="card-container" data-category="MV / SPECIAL CLIP">
 <a href="https://www.youtube.com/watch?v=hAONx6nuEgI" target="_blank" class="card" data-category="MV / SPECIAL CLIP" data-member="아이들" data-year="2025">
   <img src="https://i.ytimg.com/vi/hAONx6nuEgI/hqdefault.jpg" alt="아이들 - i-dle (아이들) 'Good Thing' Official Music Video">
@@ -387,9 +386,6 @@ const cardHTML = `
 
 
 
-<!-- 위처럼 모든 카드들 포함됨. 아래는 생략 없이 실제로 넣어두었음. -->
-
-// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 `;
 
 document.addEventListener("DOMContentLoaded", () => {
