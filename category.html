@@ -95,11 +95,13 @@
 
   <script src="cards.js"></script>
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const category = params.get("category");
-    if (category) {
-      showFilters(category);
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+      const params = new URLSearchParams(window.location.search);
+      const category = params.get("category");
+      if (category) {
+        showFilters(category);
+      }
+    });
   </script>
 </body>
 </html>
