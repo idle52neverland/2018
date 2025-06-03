@@ -20,15 +20,12 @@
       position: relative;
       z-index: 2;
     }
-    .category-section {
-      display: none;
-    }
     .top-bar {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 12px;
-      margin: 30px 0 10px;
+      margin: 10px 0;
     }
     .top-bar input {
       padding: 12px 16px;
@@ -40,6 +37,27 @@
     .top-bar button img {
       width: 24px;
       height: 24px;
+    }
+    .filter-section {
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    .filter-group {
+      margin-bottom: 10px;
+    }
+    .filter-btn {
+      padding: 8px 14px;
+      margin: 4px;
+      border-radius: 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .filter-btn.active {
+      background-color: #fff;
+      color: #111;
     }
     .card-container {
       display: flex;
@@ -113,6 +131,11 @@
     <a href="https://weverse.io/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/w.png" alt="Weverse"></a>
   </div>
 
+  <div class="filter-section">
+    <div class="filter-group" id="yearFilters"></div>
+    <div class="filter-group" id="memberFilters"></div>
+  </div>
+
   <div class="top-bar">
     <button onclick="history.back()"><img src="https://cdn-icons-png.flaticon.com/512/271/271220.png" alt="뒤로가기"></button>
     <button onclick="location.href='index.html'"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png" alt="홈"></button>
@@ -126,37 +149,79 @@
     document.addEventListener("DOMContentLoaded", function () {
       const params = new URLSearchParams(window.location.search);
       const category = params.get("category");
-      const titleElement = document.getElementById("mainTitle");
-      titleElement.textContent = category;
+      document.getElementById("mainTitle").textContent = category;
 
       const container = document.getElementById("categoryCards");
-      const filtered = allCards.filter(card => card.category === category);
-      filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+      let currentYear = null;
+      let currentMember = null;
 
-      filtered.forEach(data => {
-        const card = document.createElement("a");
-        card.href = data.link;
-        card.target = "_blank";
-        card.className = "card";
-        card.setAttribute("data-category", data.category);
-        card.setAttribute("data-member", data.member);
-        card.setAttribute("data-year", data.year);
-        card.innerHTML = `
-          <img src="${data.thumbnail}" alt="${data.alt}">
-          <div class="card-title">${data.title}</div>
-        `;
-        container.appendChild(card);
-      });
+      function renderCards() {
+        const keyword = document.getElementById("searchInput").value.toLowerCase();
+        container.innerHTML = "";
+        let filtered = allCards.filter(card => card.category === category);
+        if (currentYear) filtered = filtered.filter(c => c.year === currentYear);
+        if (currentMember) filtered = filtered.filter(c => c.member === currentMember);
+        if (keyword) filtered = filtered.filter(c => c.title.toLowerCase().includes(keyword));
+        filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      const searchInput = document.getElementById("searchInput");
-      searchInput.addEventListener("input", function () {
-        const keyword = this.value.toLowerCase();
-        const cards = document.querySelectorAll(".card");
-        cards.forEach(card => {
-          const title = card.querySelector(".card-title").textContent.toLowerCase();
-          card.style.display = title.includes(keyword) ? "block" : "none";
+        filtered.forEach(data => {
+          const card = document.createElement("a");
+          card.href = data.link;
+          card.target = "_blank";
+          card.className = "card";
+          card.setAttribute("data-category", data.category);
+          card.setAttribute("data-member", data.member);
+          card.setAttribute("data-year", data.year);
+          card.innerHTML = `
+            <img src="${data.thumbnail}" alt="${data.alt}">
+            <div class="card-title">${data.title}</div>
+          `;
+          container.appendChild(card);
         });
+      }
+
+      document.getElementById("searchInput").addEventListener("input", renderCards);
+
+      const years = ["2025","2024","2023","2022","2021","2020","2019","2018","PRE-DEBUT"];
+      const members = ["미연","민니","소연","우기","슈화","아이들"];
+
+      years.forEach(year => {
+        const btn = document.createElement("button");
+        btn.className = "filter-btn";
+        btn.textContent = year;
+        btn.onclick = () => {
+          if (currentYear === year) {
+            currentYear = null;
+            btn.classList.remove("active");
+          } else {
+            currentYear = year;
+            document.querySelectorAll("#yearFilters .filter-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+          }
+          renderCards();
+        };
+        document.getElementById("yearFilters").appendChild(btn);
       });
+
+      members.forEach(member => {
+        const btn = document.createElement("button");
+        btn.className = "filter-btn";
+        btn.textContent = member;
+        btn.onclick = () => {
+          if (currentMember === member) {
+            currentMember = null;
+            btn.classList.remove("active");
+          } else {
+            currentMember = member;
+            document.querySelectorAll("#memberFilters .filter-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+          }
+          renderCards();
+        };
+        document.getElementById("memberFilters").appendChild(btn);
+      });
+
+      renderCards();
     });
   </script>
 </body>
