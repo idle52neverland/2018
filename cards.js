@@ -8,6 +8,9 @@ const subFilters = document.getElementById("subFilters");
 const searchInput = document.getElementById("searchInput");
 const searchBar = document.getElementById("mainSearchBar");
 const socialIcons = document.getElementById("socialIcons");
+const searchWrapper = document.getElementById("searchWrapper");
+const backButton = document.getElementById("backButton");
+const homeButton = document.getElementById("homeButton");
 
 let currentCategory = "";
 let currentFilters = { year: null, member: null };
@@ -31,7 +34,7 @@ function showFilters(category) {
   categoryTitle.style.display = "block";
   categoryBar.classList.add("category-bar-hidden");
   subFilters.style.display = "flex";
-  searchBar.style.display = "flex";
+  searchWrapper.style.display = "flex";
   socialIcons.classList.add("hidden");
 
   document.querySelectorAll(".card-container").forEach((el) => {
@@ -50,7 +53,7 @@ function goBackToCategories() {
   categoryTitle.style.display = "none";
   categoryBar.classList.remove("category-bar-hidden");
   subFilters.style.display = "none";
-  searchBar.style.display = "flex";
+  searchWrapper.style.display = "flex";
   socialIcons.classList.remove("hidden");
 
   document.querySelectorAll(".card-container").forEach((el) => {
