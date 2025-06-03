@@ -172,13 +172,15 @@
 
   <h1 id="mainTitle">I-DLE 몰아보기</h1>
 
-  <div class="search-bar" id="mainSearchBar">
-    <button class="nav-btn"><img src="back.png" style="width:20px; height:20px;"></button>
-    <button class="nav-btn"><img src="home.png" style="width:20px; height:20px;"></button>
-    <input type="text" class="search-input" placeholder="search">
-  </div>
+  
 
-  <div id="categoryBar">
+  <div class="search-bar" id="mainSearchBar">
+  <button class="nav-btn" onclick="goBackToCategories()"><img src="back.png" style="width:20px; height:20px;"></button>
+  <button class="nav-btn" onclick="goBackToCategories()"><img src="home.png" style="width:20px; height:20px;"></button>
+  <input type="text" class="search-input" placeholder="search">
+</div>
+
+<div id="categoryBar">
     <div class="category-row">
   <button class="category-btn" onclick="showFilters('MV / SPECIAL CLIP')">MV / SPECIAL CLIP</button>
   <button class="category-btn" onclick="showFilters('LIVE / COVER SONG / DANCE')">LIVE / COVER SONG / DANCE</button>
@@ -207,8 +209,8 @@
 
   <div class="sub-filters" id="subFilters">
     <div class="search-bar">
-      <button class="nav-btn"><img src="back.png" style="width:20px; height:20px;"></button>
-      <button class="nav-btn"><img src="home.png" style="width:20px; height:20px;"></button>
+      <button class="nav-btn" onclick="goBackToCategories()"><img src="back.png" style="width:20px; height:20px;"></button>
+      <button class="nav-btn" onclick="goBackToCategories()"><img src="home.png" style="width:20px; height:20px;"></button>
       <input type="text" class="search-input" placeholder="search in category">
     </div>
     <!-- filters follow -->
