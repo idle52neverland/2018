@@ -48,7 +48,8 @@
       font-size: 13px;
       background-color: #fff;
       color: #333;
-      width: 70%;
+      width: 60%;
+      max-width: 280px;
     }
     .search-input::placeholder {
       color: #888;
@@ -157,15 +158,23 @@
         width: calc(50% - 8px);
       }
       .search-bar {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
         gap: 8px;
+      }
+
+      .search-input {
+        width: 60%;
+        max-width: 280px;
       }
     }
   </style>
 </head>
 <body>
 
-<!-- SNS ICONS: 오른쪽 상단 -->
+<!-- SNS ICONS -->
 <div class="social-icons">
   <a href="https://www.youtube.com/@official_i_dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
   <a href="https://x.com/official_i_dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X"></a>
@@ -203,7 +212,7 @@
   </div>
 </div>
 
-<!-- 검색창 (카테고리 아래 위치) -->
+<!-- 검색창 -->
 <div class="search-bar">
   <button class="nav-btn" onclick="goBackToCategories()">
     <img src="https://cdn-icons-png.flaticon.com/512/271/271220.png" alt="Back" style="width:20px; height:20px; filter: brightness(0.6);">
@@ -214,7 +223,7 @@
   <input type="text" id="searchInput" class="search-input" placeholder="search">
 </div>
 
-<!-- 서브필터 -->
+<!-- 서브 필터 -->
 <div class="sub-filters" id="subFilters">
   <div class="search-bar">
     <button class="nav-btn" onclick="goBackToCategories()">
