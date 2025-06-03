@@ -17,13 +17,20 @@
       font-size: 28px;
       color: #fff;
       display: block;
+      position: relative;
+      z-index: 2;
+    }
+    .category-title {
+      padding: 10px 0;
+      font-size: 24px;
+      color: #fff;
     }
     .category-section {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
-      padding: 10px;
+      padding: 100px 10px 10px;
     }
     .category-btn {
       padding: 10px 20px;
@@ -44,14 +51,19 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 10px;
-      margin: 15px 0;
+      gap: 12px;
+      margin: 30px 0 10px;
     }
     .top-bar input {
-      padding: 6px 10px;
-      border-radius: 20px;
+      padding: 12px 16px;
+      border-radius: 26px;
       border: none;
-      width: 200px;
+      width: 260px;
+      font-size: 16px;
+    }
+    .top-bar button img {
+      width: 24px;
+      height: 24px;
     }
     .card-container {
       display: flex;
@@ -64,8 +76,13 @@
       background-color: #222;
       border-radius: 10px;
       overflow: hidden;
-      width: 180px;
       text-align: left;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
     }
     .card img {
       width: 100%;
@@ -74,69 +91,73 @@
     .card-title {
       font-size: 13px;
       padding: 6px;
+      color: #fff;
+      text-decoration: none !important;
+    }
+    .card-title:hover {
+      text-decoration: none;
     }
     @media (max-width: 768px) {
       .card {
-        width: 45%;
+        width: 45vw;
       }
     }
-      .sns-icons {
+    @media (min-width: 1025px) {
+      .card-container {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .card {
+        width: calc(100% / 5 - 12px);
+        max-width: none;
+      }
+    }
+    .sns-icons {
       position: absolute;
-      top: 10px;
+      top: 80px;
       right: 10px;
     }
     .sns-icons img {
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
       margin-left: 6px;
       filter: grayscale(100%);
     }
   </style>
 </head>
 <body>
-  <div class="sns-icons">
-  <a href="https://youtube.com/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png" alt="YouTube"></a>
-  <a href="https://x.com/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx--v1.png" alt="X"></a>
-  <a href="https://instagram.com/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram"></a>
-  <a href="https://www.tiktok.com/@(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/tiktok--v1.png" alt="TikTok"></a>
-  <a href="https://weverse.io/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/w.png" alt="Weverse"></a>
-</div>
   <div id="mainTitle">I-DLE 몰아보기</div>
 
+  <div class="sns-icons">
+    <a href="https://youtube.com/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png" alt="YouTube"></a>
+    <a href="https://x.com/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx--v1.png" alt="X"></a>
+    <a href="https://instagram.com/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram"></a>
+    <a href="https://www.tiktok.com/@(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/tiktok--v1.png" alt="TikTok"></a>
+    <a href="https://weverse.io/(G)I-DLE" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/w.png" alt="Weverse"></a>
+  </div>
+
+  <div class="category-title" id="categoryTitle"></div>
+
   <div class="top-bar">
-    <button onclick="history.back()"><img src="https://cdn-icons-png.flaticon.com/512/271/271220.png" alt="뒤로가기" style="width:16px; height:16px;"></button>
-    <button onclick="location.href='index.html'"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png" alt="홈" style="width:16px; height:16px;"></button>
-    <input type="text" id="searchInput" placeholder="전체 영상 검색...">
+    <button onclick="history.back()"><img src="https://cdn-icons-png.flaticon.com/512/271/271220.png" alt="뒤로가기"></button>
+    <button onclick="location.href='index.html'"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png" alt="홈"></button>
+    <input type="text" id="searchInput" placeholder="카테고리 내 검색...">
   </div>
 
-  <div class="category-section">
-    <a class="category-btn" href="category.html?category=MV-SPECIAL CLIP">MV-SPECIAL CLIP</a>
-    <a class="category-btn" href="category.html?category=LIVE-COVER-DANCE">LIVE-COVER-DANCE</a>
-    <a class="category-btn" href="category.html?category=MUSIC SHOW PERFORMANCE">MUSIC SHOW PERFORMANCE</a>
-    <a class="category-btn" href="category.html?category=FESTIVAL EVENT STAGE">FESTIVAL EVENT STAGE</a>
-    <a class="category-btn" href="category.html?category=FANCAM-STAGE FOCUS">FANCAM-STAGE FOCUS</a>
-    <a class="category-btn" href="category.html?category=RECORDING STUDIO BEHIND">RECORDING STUDIO BEHIND</a>
-    <a class="category-btn" href="category.html?category=DANCE PRACTICE-FANCHANT">DANCE PRACTICE-FANCHANT</a>
-    <a class="category-btn" href="category.html?category=TV SHOW">TV SHOW</a>
-    <a class="category-btn" href="category.html?category=YOUTUBE CONTENTS">YOUTUBE CONTENTS</a>
-    <a class="category-btn" href="category.html?category=ORIGINAL CONTENTS">ORIGINAL CONTENTS</a>
-    <a class="category-btn" href="category.html?category=RADIO PODCAST">RADIO PODCAST</a>
-    <a class="category-btn" href="category.html?category=LIVE STREAM">LIVE STREAM</a>
-    <a class="category-btn" href="category.html?category=MAGAZINE INTERVIEW">MAGAZINE INTERVIEW</a>
-    <a class="category-btn" href="category.html?category=BEHIND CLIPS">BEHIND CLIPS</a>
-    <a class="category-btn" href="category.html?category=CHALLENGE">CHALLENGE</a>
-    <a class="category-btn" href="category.html?category=ETC">ETC</a>
-  </div>
-
-  <div class="card-container" id="allCards"></div>
+  <div class="card-container" id="categoryCards"></div>
 
   <script src="cards.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // 전체 카드 표시 (모든 카테고리 카드 포함)
-      const all = allCards || [];
-      const container = document.getElementById("allCards");
-      all.forEach(data => {
+      const params = new URLSearchParams(window.location.search);
+      const category = params.get("category");
+      document.getElementById("categoryTitle").textContent = category;
+
+      const filtered = allCards.filter(c => c.category === category);
+      const container = document.getElementById("categoryCards");
+      filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+      filtered.forEach(data => {
         const card = document.createElement("a");
         card.href = data.link;
         card.target = "_blank";
