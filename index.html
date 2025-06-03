@@ -17,7 +17,16 @@
       font-size: 28px;
       color: #fff;
     }
-    .category-btn, .filter-btn {
+
+    .category-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .category-btn {
       padding: 10px 20px;
       background-color: #333;
       border-radius: 20px;
@@ -26,215 +35,87 @@
       color: #fff;
       cursor: pointer;
       border: none;
-      transition: background-color 0.2s;
-      text-decoration: none;
-      display: inline-block;
+      transition: background-color 0.3s;
     }
-    .category-btn:hover,
-    .filter-btn:hover {
-      background-color: #ff4da6;
+
+    .category-btn:hover {
+      background-color: #555;
     }
-    .search-bar {
+
+    .search-container {
+      margin: 20px auto 30px;
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 10px;
-      margin: 15px auto 10px;
-      max-width: 800px;
     }
-    .search-input {
-      padding: 6px 12px;
-      border-radius: 20px;
-      border: 2px solid #444;
-      font-size: 13px;
-      background-color: #fff;
-      color: #333;
-      flex-grow: 1;
-    }
-    .search-input::placeholder {
-      color: #888;
-    }
-    .nav-btn {
-      padding: 6px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #fff;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-    }
-    .nav-btn img {
-      width: 20px;
-      height: 20px;
-      filter: brightness(0) invert(1);
-    }
-    .social-icons {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      margin: 0 20px 10px;
-    }
-    .social-icons a img {
+
+    .search-container img {
       width: 24px;
       height: 24px;
-      filter: brightness(0) invert(1);
+      cursor: pointer;
     }
-    .sub-filters {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      margin: 20px auto;
-      max-width: 1000px;
-    }
-    .filter-group {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-    }
-    .category-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-    .card-container {
-      display: none;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
-      margin: 20px auto;
-      max-width: 1200px;
-    }
-    .card {
-      background-color: #222;
-      border-radius: 12px;
-      overflow: hidden;
-      text-align: left;
-      transition: transform 0.2s;
-      text-decoration: none;
-    }
-    .card img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .card-title {
-      padding: 10px;
+
+    #mainSearch {
+      width: 70%;
+      padding: 10px 15px;
       font-size: 14px;
-      color: #fff;
-      text-decoration: none;
+      border-radius: 20px;
+      border: none;
     }
-    .card:hover {
-      transform: scale(1.03);
+
+    .social-icons {
+      position: absolute;
+      top: 20px;
+      right: 30px;
     }
-    a.card {
-      text-decoration: none;
-    }
-    @media (min-width: 601px) {
-      .card {
-        width: calc(20% - 13px);
-      }
-    }
-    @media (max-width: 600px) {
-      .category-row {
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-      }
-      .category-btn {
-        width: 90%;
-        max-width: 280px;
-      }
-      .card {
-        width: calc(50% - 8px);
-      }
-      .search-bar {
-        flex-direction: column;
-        gap: 8px;
-      }
+
+    .social-icons img {
+      width: 20px;
+      height: 20px;
+      margin-left: 15px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
+  <h1 id="mainTitle">I-DLE 몰아보기</h1>
 
-<h1 id="mainTitle">I-DLE 몰아보기</h1>
-
-<div class="social-icons">
-  <a href="https://www.youtube.com/@official_i_dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
-  <a href="https://x.com/official_i_dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X"></a>
-  <a href="https://instagram.com/i_dle_official" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram"></a>
-  <a href="https://tiktok.com/@official_i_dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
-  <a href="https://weverse.io/i-dle" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3669/3669986.png" alt="Weverse"></a>
-</div>
-
-<!-- Main Search -->
-<div class="search-bar" id="mainSearchBar">
-  <button class="nav-btn" onclick="goBackToCategories()">
-    <img src="https://cdn-icons-png.flaticon.com/512/271/271220.png" alt="뒤로가기">
-  </button>
-  <button class="nav-btn" onclick="goHome()">
-    <img src="https://cdn-icons-png.flaticon.com/512/1946/1946433.png" alt="홈">
-  </button>
-  <input type="text" id="searchInput" class="search-input" placeholder="전체 영상 검색">
-</div>
-
-<!-- 카테고리 버튼 영역 -->
-<div id="categoryBar">
-  <div class="category-row">
-    <button class="category-btn" onclick="showFilters('MV / SPECIAL CLIP')">MV / SPECIAL CLIP</button>
-    <button class="category-btn" onclick="showFilters('LIVE / COVER SONG / DANCE')">LIVE / COVER SONG / DANCE</button>
-    <button class="category-btn" onclick="showFilters('MUSIC SHOW PERFORMANCE')">MUSIC SHOW PERFORMANCE</button>
-    <button class="category-btn" onclick="showFilters('FESTIVAL / EVENT STAGE')">FESTIVAL / EVENT STAGE</button>
+  <!-- SNS 아이콘 -->
+  <div class="social-icons">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/menu.png" alt="menu">
+    <img src="https://img.icons8.com/ios-glyphs/30/ffffff/delete-sign.png" alt="close">
+    <img src="https://img.icons8.com/ios-glyphs/30/ffffff/instagram-new.png" alt="instagram">
+    <img src="https://img.icons8.com/ios-glyphs/30/ffffff/tiktok.png" alt="tiktok">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/record.png" alt="record">
   </div>
-  <div class="category-row">
-    <button class="category-btn" onclick="showFilters('FANCAM / STAGE FOCUS')">FANCAM / STAGE FOCUS</button>
-    <button class="category-btn" onclick="showFilters('RECORDING / STUDIO BEHIND')">RECORDING / STUDIO BEHIND</button>
-    <button class="category-btn" onclick="showFilters('DANCE PRACTICE / FANCHANT')">DANCE PRACTICE / FANCHANT</button>
-  </div>
-  <div class="category-row">
-    <button class="category-btn" onclick="showFilters('TV SHOW')">TV SHOW</button>
-    <button class="category-btn" onclick="showFilters('YOUTUBE CONTENTS')">YOUTUBE CONTENTS</button>
-    <button class="category-btn" onclick="showFilters('REALITY (Original Content)')">REALITY (Original Content)</button>
-    <button class="category-btn" onclick="showFilters('RADIO / PODCAST')">RADIO / PODCAST</button>
-    <button class="category-btn" onclick="showFilters('LIVE STREAM')">LIVE STREAM</button>
-  </div>
-  <div class="category-row">
-    <button class="category-btn" onclick="showFilters('MAGAZINE / INTERVIEW')">MAGAZINE / INTERVIEW</button>
-    <button class="category-btn" onclick="showFilters('BEHIND CLIPS')">BEHIND CLIPS</button>
-    <button class="category-btn" onclick="showFilters('CHALLENGE')">CHALLENGE</button>
-    <button class="category-btn" onclick="showFilters('ETC')">ETC</button>
-  </div>
-</div>
 
-<div class="sub-filters" id="subFilters">
-  <div class="filter-group">
-    <button class="filter-btn" onclick="filterVideos('year','2025')">2025</button>
-    <button class="filter-btn" onclick="filterVideos('year','2024')">2024</button>
-    <button class="filter-btn" onclick="filterVideos('year','2023')">2023</button>
-    <button class="filter-btn" onclick="filterVideos('year','2022')">2022</button>
-    <button class="filter-btn" onclick="filterVideos('year','2021')">2021</button>
-    <button class="filter-btn" onclick="filterVideos('year','2020')">2020</button>
-    <button class="filter-btn" onclick="filterVideos('year','2019')">2019</button>
-    <button class="filter-btn" onclick="filterVideos('year','2018')">2018</button>
-    <button class="filter-btn" onclick="filterVideos('year','2016')">PRE-DEBUT</button>
+  <!-- 카테고리 버튼 -->
+  <div class="category-buttons">
+    <button class="category-btn">MV / SPECIAL CLIP</button>
+    <button class="category-btn">LIVE / COVER SONG / DANCE</button>
+    <button class="category-btn">MUSIC SHOW PERFORMANCE</button>
+    <button class="category-btn">FESTIVAL / EVENT STAGE</button>
+    <button class="category-btn">FANCAM / STAGE FOCUS</button>
+    <button class="category-btn">RECORDING / STUDIO BEHIND</button>
+    <button class="category-btn">DANCE PRACTICE / FANCHANT</button>
+    <button class="category-btn">TV SHOW</button>
+    <button class="category-btn">YOUTUBE CONTENTS</button>
+    <button class="category-btn">REALITY (Original Content)</button>
+    <button class="category-btn">RADIO / PODCAST</button>
+    <button class="category-btn">LIVE STREAM</button>
+    <button class="category-btn">MAGAZINE / INTERVIEW</button>
+    <button class="category-btn">BEHIND CLIPS</button>
+    <button class="category-btn">CHALLENGE</button>
+    <button class="category-btn">ETC</button>
   </div>
-  <div class="filter-group">
-    <button class="filter-btn" onclick="filterVideos('member','미연')">미연</button>
-    <button class="filter-btn" onclick="filterVideos('member','민니')">민니</button>
-    <button class="filter-btn" onclick="filterVideos('member','소연')">소연</button>
-    <button class="filter-btn" onclick="filterVideos('member','우기')">우기</button>
-    <button class="filter-btn" onclick="filterVideos('member','슈화')">슈화</button>
-    <button class="filter-btn" onclick="filterVideos('member','아이들')">아이들</button>
+
+  <!-- 검색창 -->
+  <div class="search-container">
+    <img src="https://img.icons8.com/ios-glyphs/30/ffffff/left.png" alt="back">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/home.png" alt="home">
+    <input type="text" id="mainSearch" placeholder="전체 영상 검색">
   </div>
-</div>
-
-<div id="allCards"></div>
-
-<script src="cards.js"></script>
 
 </body>
 </html>
