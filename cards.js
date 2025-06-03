@@ -58,10 +58,10 @@ function goBackToCategories() {
   socialIcons.classList.remove("hidden");
 
   document.querySelectorAll(".card-container").forEach((el) => {
-    el.style.display = "flex";
+    el.style.display = "none";
   });
 
-  applyFilters();
+  displayInitialCards(); // 홈으로 돌아가면 최신 6개 다시 표시
 }
 
 function goHome() {
@@ -111,9 +111,26 @@ function applyFilters() {
   }
 }
 
+function displayInitialCards() {
+  allCardsContainer.innerHTML = "";
+  const tempContainer = document.createElement("div");
+  tempContainer.className = "card-container";
+  tempContainer.style.display = "flex";
+  allCardsContainer.appendChild(tempContainer);
+
+  const sorted = [...allCards].sort((a, b) => {
+    const da = a.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
+    const db = b.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
+    return db && da ? new Date(db[1]) - new Date(da[1]) : 0;
+  });
+
+  sorted.slice(0, 6).forEach(card => {
+    tempContainer.appendChild(card.cloneNode(true));
+  });
+}
+
 searchInput.addEventListener("input", applyFilters);
 
-// 카드 HTML (너가 준 카드 2개)
 const cardHTML = `
 <a href="https://www.youtube.com/watch?v=hAONx6nuEgI" target="_blank" class="card" data-category="MV / SPECIAL CLIP" data-member="아이들" data-year="2025">
   <img src="https://i.ytimg.com/vi/hAONx6nuEgI/hqdefault.jpg" alt="아이들 - i-dle (아이들) 'Good Thing' Official Music Video">
@@ -127,17 +144,9 @@ const cardHTML = `
 `;
 
 document.addEventListener("DOMContentLoaded", () => {
-  // 카드 HTML을 삽입하고 정렬
   const temp = document.createElement("div");
   temp.innerHTML = cardHTML.trim();
   const cards = Array.from(temp.children);
-
-  // 날짜 기준 내림차순 정렬
-  cards.sort((a, b) => {
-    const da = a.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
-    const db = b.querySelector(".card-title").innerText.match(/\((\d{4}-\d{2}-\d{2})\)/);
-    return db && da ? new Date(db[1]) - new Date(da[1]) : 0;
-  });
 
   cards.forEach(card => {
     const category = card.dataset.category;
@@ -145,9 +154,10 @@ document.addEventListener("DOMContentLoaded", () => {
     container.appendChild(card);
     allCards.push(card);
   });
+
+  displayInitialCards(); 
 });
 
-// 전역 함수 등록
 window.showFilters = showFilters;
 window.goBackToCategories = goBackToCategories;
 window.goHome = goHome;
