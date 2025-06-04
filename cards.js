@@ -130,7 +130,7 @@ allCards = [
     thumbnail: "https://i.ytimg.com/vi/Hd8m6Ly7xFk/hqdefault.jpg",
     alt: "소연 - [방과후설렘] 서낳괴 전소연이 서바이벌 프로듀서가 되면 벌어지는 일",
     title: "[방과후설렘] 서낳괴 전소연이 서바이벌 프로듀서가 되면 벌어지는 일 mp4. (2022-02-24)"
-  }
+  },
   {
   "link": "https://www.youtube.com/watch?v=PtB5JoGXUQ8",
   "category": "MV-SPECIAL CLIP",
