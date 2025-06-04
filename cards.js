@@ -535,7 +535,7 @@ allCards = [
   year: "PRE-DEBUT",
   thumbnail: "https://i.ytimg.com/vi/MbHVHQstS9w/hqdefault.jpg",
   alt: "아이들 - 아이돌 연습생이 노래를 들어 달라고 한다면? 반전 목소리네 꼭 데뷔했으면 좋겠다 | 세상의 온도 | (2018-02-27)",
-  title: "아이돌 연습생이 노래를 들어 달라고 한다면? 반전 목소리네 꼭 데뷔했으면 좋겠다 | 세상의 온도 |우기 (2018-02-27)"
+  title: "아이돌 연습생이 노래를 들어 달라고 한다면? 반전 목소리네 꼭 데뷔했으면 좋겠다 | 세상의 온도 | (2018-02-27)"
 },
 {
   link: "https://youtu.be/WUK4X97Fzzc?si=B8VMYxdtHp4DYPix",
@@ -545,7 +545,282 @@ allCards = [
   thumbnail: "https://i.ytimg.com/vi/WUK4X97Fzzc/hqdefault.jpg",
   alt: "아이들 - (이거 대박!!!) 홍대 뒤집어진 신인 걸그룹 댄스 실화?! 씨엘부터 방탄까지 [댄스버스킹] (여자)아이들 Dance Busking - (G)I-DLE (@Hongdae) (2018-04-15)",
   title: "(이거 대박!!!) 홍대 뒤집어진 신인 걸그룹 댄스 실화?! 씨엘부터 방탄까지 [댄스버스킹] (여자)아이들 Dance Busking - (G)I-DLE (@Hongdae) (2018-04-15)"
-}
+},
+// 결과 1 ~ 8
+{
+  link: "https://www.youtube.com/watch?v=08ATpBqlAIk",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2019",
+  thumbnail: "https://i.ytimg.com/vi/08ATpBqlAIk/hqdefault.jpg",
+  alt: "아이들 - [MV] (G)I-DLE((여자)아이들) _ Blow Your Mind (2019-02-19)",
+  title: "[MV] (G)I-DLE((여자)아이들) _ Blow Your Mind (2019-02-19)"
+},
+{
+  link: "https://www.youtube.com/watch?v=fokjzgQ8qG8",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2019",
+  thumbnail: "https://i.ytimg.com/vi/fokjzgQ8qG8/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들 X 샌프란, 그 마지막 이야기!  | [To NEVERLAND] Ep.6 (G)I-DLE's Last Day in SF (ENG SUB) (2019-02-19)",
+  title: "(여자)아이들 X 샌프란, 그 마지막 이야기!  | [To NEVERLAND] Ep.6 (G)I-DLE's Last Day in SF (ENG SUB) (2019-02-19)"
+},
+{
+  link: "https://www.youtube.com/watch?v=uKsWDFBm41A",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2019",
+  thumbnail: "https://i.ytimg.com/vi/uKsWDFBm41A/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들의 샌프란 인싸여행 코스 뿌시기! | [To NEVERLAND] Ep.5 | (G)I-DLE's Colorful Adventure in SF! (2019-02-12)",
+  title: "(여자)아이들의 샌프란 인싸여행 코스 뿌시기! | [To NEVERLAND] Ep.5 | (G)I-DLE's Colorful Adventure in SF! (2019-02-12)"
+},
+{
+  link: "https://www.youtube.com/watch?v=IWq6mswwLCo",
+  category: "ORIGINAL CONTENTS",
+  member: "우기",
+  year: "2019",
+  thumbnail: "https://i.ytimg.com/vi/IWq6mswwLCo/hqdefault.jpg",
+  alt: "우기 - (여자)아이들 우기X슈화 감독 데뷔?!❤ | [To NEVERLAND] Ep.4 (G)I-DLE Record Their Own Memories! (ENG SUB) (2019-02-05)",
+  title: "(여자)아이들 우기X슈화 감독 데뷔?!❤ | [To NEVERLAND] Ep.4 (G)I-DLE Record Their Own Memories! (ENG SUB) (2019-02-05)"
+},
+{
+  link: "https://www.youtube.com/watch?v=dZzp19OuhdY",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2019",
+  thumbnail: "https://i.ytimg.com/vi/dZzp19OuhdY/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들의 프라이빗 파뤼에 초대합니다! | [To NEVERLAND] Ep.3 Welcome to (G)I-DLE's Private Party! (ENG SUB) (2019-01-29)",
+  title: "(여자)아이들의 프라이빗 파뤼에 초대합니다! | [To NEVERLAND] Ep.3 Welcome to (G)I-DLE's Private Party! (ENG SUB) (2019-01-29)"
+},
+{
+  link: "https://www.youtube.com/watch?v=Q_rF6iUghJY",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2019",
+  thumbnail: "https://i.ytimg.com/vi/Q_rF6iUghJY/hqdefault.jpg",
+  alt: "아이들 - 미쿡 브런치 먹방 가자! (여자)아이들 본격 샌프란 투어 | [To NEVERLAND] Ep.2 (G)I-DLE's Mukbang & Tour in SF(ENG SUB) (2019-01-22)",
+  title: "미쿡 브런치 먹방 가자! (여자)아이들 본격 샌프란 투어 | [To NEVERLAND] Ep.2 (G)I-DLE's Mukbang & Tour in SF(ENG SUB) (2019-01-22)"
+},
+{
+  link: "https://www.youtube.com/watch?v=_I_UlUSrrUo",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2019",
+  thumbnail: "https://i.ytimg.com/vi/_I_UlUSrrUo/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들 첫 리얼리티 in 샌프란시스코! | [To NEVERLAND] Ep.1 (G)I-DLE in San Francisco! (ENG SUB) (2019-01-15)",
+  title: "(여자)아이들 첫 리얼리티 in 샌프란시스코! | [To NEVERLAND] Ep.1 (G)I-DLE in San Francisco! (ENG SUB) (2019-01-15)"
+},
+{
+  link: "https://www.youtube.com/watch?v=XupFmVjL-Wo",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2019",
+  thumbnail: "https://i.ytimg.com/vi/XupFmVjL-Wo/hqdefault.jpg",
+  alt: "아이들 - [To NEVERLAND] Teaser | (여자)아이들((G)I-DLE) 첫 리얼리티! (ENG SUB) (2019-01-08)",
+  title: "[To NEVERLAND] Teaser | (여자)아이들((G)I-DLE) 첫 리얼리티! (ENG SUB) (2019-01-08)"
+},
+// 결과 1 ~ 22
+{
+  link: "https://www.youtube.com/watch?v=KceEp8y5HC4",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/KceEp8y5HC4/hqdefault.jpg",
+  alt: "아이들 - i-dle (아이들) 'Girlfriend' Choreography Video (2025-06-02)",
+  title: "i-dle (아이들) 'Girlfriend' Choreography Video (2025-06-02)"
+},
+{
+  link: "https://www.youtube.com/watch?v=5MrJBrR_sfo",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/5MrJBrR_sfo/hqdefault.jpg",
+  alt: "아이들 - i-dle (아이들) 'Good Thing' Choreography Practice Video (2025-05-26)",
+  title: "i-dle (아이들) 'Good Thing' Choreography Practice Video (2025-05-26)"
+},
+{
+  link: "https://www.youtube.com/watch?v=qDg3uR7exAU",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "민니",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/qDg3uR7exAU/hqdefault.jpg",
+  alt: "민니 - 민니(MINNIE) - 'HER' Choreography Practice Video (2025-01-27)",
+  title: "민니(MINNIE) - 'HER' Choreography Practice Video (2025-01-27)"
+},
+{
+  link: "https://www.youtube.com/watch?v=hLntT4a_O58",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "아이들",
+  year: "2024",
+  thumbnail: "https://i.ytimg.com/vi/hLntT4a_O58/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들((G)I-DLE) - '클락션 (Klaxon)' Choreography Practice Video (2024-07-13)",
+  title: "(여자)아이들((G)I-DLE) - '클락션 (Klaxon)' Choreography Practice Video (2024-07-13)"
+},
+{
+  link: "https://www.youtube.com/watch?v=dyFGwGFerAc",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "우기",
+  year: "2024",
+  thumbnail: "https://i.ytimg.com/vi/dyFGwGFerAc/hqdefault.jpg",
+  alt: "우기 - 우기(YUQI) - 'FREAK' Choreography Practice Video (2024-04-29)",
+  title: "우기(YUQI) - 'FREAK' Choreography Practice Video (2024-04-29)"
+},
+{
+  link: "https://www.youtube.com/watch?v=J3TANTDWmTQ",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "아이들",
+  year: "2024",
+  thumbnail: "https://i.ytimg.com/vi/J3TANTDWmTQ/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들((G)I-DLE) - 'Super Lady' Dance Practice Video (With Kirsten) Teaser (2024-01-26)",
+  title: "(여자)아이들((G)I-DLE) - 'Super Lady' Dance Practice Video (With Kirsten) Teaser (2024-01-26)"
+},
+{
+  link: "https://www.youtube.com/watch?v=pKCaXYYwGjw",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "아이들",
+  year: "2023",
+  thumbnail: "https://i.ytimg.com/vi/pKCaXYYwGjw/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들((G)I-DLE) - '퀸카 (Queencard)' Choreography Practice Video (2023-05-21)",
+  title: "(여자)아이들((G)I-DLE) - '퀸카 (Queencard)' Choreography Practice Video (2023-05-21)"
+},
+{
+  link: "https://www.youtube.com/watch?v=R9UsmrVEWYY",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "아이들",
+  year: "2022",
+  thumbnail: "https://i.ytimg.com/vi/R9UsmrVEWYY/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들((G)I-DLE) - 'Nxde' (Choreography Practice Video) (2022-10-23)",
+  title: "(여자)아이들((G)I-DLE) - 'Nxde' (Choreography Practice Video) (2022-10-23)"
+},
+{
+  link: "https://www.youtube.com/watch?v=Si5pQHRRH5w",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "아이들",
+  year: "2022",
+  thumbnail: "https://i.ytimg.com/vi/Si5pQHRRH5w/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들((G)I-DLE) - 'MY BAG' (Choreography Practice Video) (2022-03-28)",
+  title: "(여자)아이들((G)I-DLE) - 'MY BAG' (Choreography Practice Video) (2022-03-28)"
+},
+{
+  link: "https://www.youtube.com/watch?v=CKSQjJDQTaQ",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "아이들",
+  year: "2022",
+  thumbnail: "https://i.ytimg.com/vi/CKSQjJDQTaQ/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들((G)I-DLE) - 'TOMBOY' (Choreography Practice Video) (2022-03-24)",
+  title: "(여자)아이들((G)I-DLE) - 'TOMBOY' (Choreography Practice Video) (2022-03-24)"
+},
+{
+  link: "https://www.youtube.com/watch?v=o0MM7TIpilE",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "소연",
+  year: "2021",
+  thumbnail: "https://i.ytimg.com/vi/o0MM7TIpilE/hqdefault.jpg",
+  alt: "소연 - 전소연(JEON SOYEON) - '삠삠 (BEAM BEAM)' Choreography Video (CEO Ver.) (2021-08-01)",
+  title: "전소연(JEON SOYEON) - '삠삠 (BEAM BEAM)' Choreography Video (CEO Ver.) (2021-08-01)"
+},
+{
+  link: "https://www.youtube.com/watch?v=6YGOq65MZpw",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "소연",
+  year: "2021",
+  thumbnail: "https://i.ytimg.com/vi/6YGOq65MZpw/hqdefault.jpg",
+  alt: "소연 - 전소연(JEON SOYEON) - '삠삠 (BEAM BEAM)' Choreography Video (2021-07-12)",
+  title: "전소연(JEON SOYEON) - '삠삠 (BEAM BEAM)' Choreography Video (2021-07-12)"
+},
+{
+  link: "https://www.youtube.com/watch?v=cwKYh2geaik",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "아이들",
+  year: "2021",
+  thumbnail: "https://i.ytimg.com/vi/cwKYh2geaik/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들((G)I-DLE) - '화(火花)(HWAA)' (Choreography Practice Video) (2021-01-19)",
+  title: "(여자)아이들((G)I-DLE) - '화(火花)(HWAA)' (Choreography Practice Video) (2021-01-19)"
+},
+{
+  link: "https://www.youtube.com/watch?v=naRRqAGIAqQ",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "아이들",
+  year: "2020",
+  thumbnail: "https://i.ytimg.com/vi/naRRqAGIAqQ/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들((G)I-DLE) - '덤디덤디 (DUMDi DUMDi)' (Choreography Practice Video) (2020-08-10)",
+  title: "(여자)아이들((G)I-DLE) - '덤디덤디 (DUMDi DUMDi)' (Choreography Practice Video) (2020-08-10)"
+},
+{
+  link: "https://www.youtube.com/watch?v=KqE4UK5sfHA",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "아이들",
+  year: "2020",
+  thumbnail: "https://i.ytimg.com/vi/KqE4UK5sfHA/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들((G)I-DLE) - 'Oh my god' (Special Choreography Video) (2020-04-20)",
+  title: "(여자)아이들((G)I-DLE) - 'Oh my god' (Special Choreography Video) (2020-04-20)"
+},
+{
+  link: "https://www.youtube.com/watch?v=wLlKktf0ZWE",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "아이들",
+  year: "2020",
+  thumbnail: "https://i.ytimg.com/vi/wLlKktf0ZWE/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들((G)I-DLE) - 'Oh my god' (Choreography Practice Video) (2020-04-12)",
+  title: "(여자)아이들((G)I-DLE) - 'Oh my god' (Choreography Practice Video) (2020-04-12)"
+},
+{
+  link: "https://www.youtube.com/watch?v=FRYY-OxzRTU",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "아이들",
+  year: "2019",
+  thumbnail: "https://i.ytimg.com/vi/FRYY-OxzRTU/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들((G)I-DLE) - 'LION' (Choreography Practice Video) (2019-11-27)",
+  title: "(여자)아이들((G)I-DLE) - 'LION' (Choreography Practice Video) (2019-11-27)"
+},
+{
+  link: "https://www.youtube.com/watch?v=SBtF_e6XWnc",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "아이들",
+  year: "2019",
+  thumbnail: "https://i.ytimg.com/vi/SBtF_e6XWnc/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들((G)I-DLE) - '싫다고 말해 (Nightmare Ver.)' (Halloween Ver. Choreography Video) (2019-10-29)",
+  title: "(여자)아이들((G)I-DLE) - '싫다고 말해 (Nightmare Ver.)' (Halloween Ver. Choreography Video) (2019-10-29)"
+},
+{
+  link: "https://www.youtube.com/watch?v=PzSCnRCpM_c",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "아이들",
+  year: "2019",
+  thumbnail: "https://i.ytimg.com/vi/PzSCnRCpM_c/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들((G)I-DLE) - 'Uh-Oh' (Choreography Practice Video) (2019-06-30)",
+  title: "(여자)아이들((G)I-DLE) - 'Uh-Oh' (Choreography Practice Video) (2019-06-30)"
+},
+{
+  link: "https://www.youtube.com/watch?v=rhBa2_-qw00",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "아이들",
+  year: "2019",
+  thumbnail: "https://i.ytimg.com/vi/rhBa2_-qw00/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들((G)I-DLE) - 'Senorita' (Choreography Practice Video) (2019-03-04)",
+  title: "(여자)아이들((G)I-DLE) - 'Senorita' (Choreography Practice Video) (2019-03-04)"
+},
+{
+  link: "https://www.youtube.com/watch?v=EGuuBE7xjBk",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "아이들",
+  year: "2018",
+  thumbnail: "https://i.ytimg.com/vi/EGuuBE7xjBk/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들((G)I-DLE) - '한(一)(HANN(Alone))' (Choreography Practice Video) (2018-08-20)",
+  title: "(여자)아이들((G)I-DLE) - '한(一)(HANN(Alone))' (Choreography Practice Video) (2018-08-20)"
+},
+{
+  link: "https://www.youtube.com/watch?v=Fhk4Qzj_QpM",
+  category: "DANCE PRACTICE-FANCHANT",
+  member: "아이들",
+  year: "2018",
+  thumbnail: "https://i.ytimg.com/vi/Fhk4Qzj_QpM/hqdefault.jpg",
+  alt: "아이들 - (여자)아이들((G)I-DLE) - 'LATATA' (Choreography Practice Video) (2018-05-10)",
+  title: "(여자)아이들((G)I-DLE) - 'LATATA' (Choreography Practice Video) (2018-05-10)"
+},
+
+
+
 
 
 
