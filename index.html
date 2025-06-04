@@ -231,5 +231,59 @@
   <button id="loadMoreBtn">더보기</button>
 
   <script src="cards.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const all = allCards || [];
+      const container = document.getElementById("allCards");
+      const loadMoreBtn = document.getElementById("loadMoreBtn");
+      const searchInput = document.getElementById("searchInput");
+      let currentIndex = 0;
+      const batchSize = 30;
+
+      function extractDateFromTitle(title) {
+        const match = title.match(/\((\d{4}-\d{2}-\d{2})\)/);
+        return match ? match[1] : "2000-01-01";
+      }
+
+      all.sort((a, b) => {
+        const dateA = extractDateFromTitle(a.title);
+        const dateB = extractDateFromTitle(b.title);
+        return new Date(dateB) - new Date(dateA);
+      });
+
+      function renderCards(cards = all.slice(currentIndex, currentIndex + batchSize)) {
+        cards.forEach(data => {
+          const card = document.createElement("a");
+          card.href = data.link;
+          card.target = "_blank";
+          card.className = "card";
+          card.setAttribute("data-category", data.category);
+          card.setAttribute("data-member", data.member);
+          card.setAttribute("data-year", data.year);
+
+          card.innerHTML = `
+            <img src="${data.thumbnail}" alt="${data.alt}">
+            <div class="card-title">${data.title}</div>
+          `;
+          container.appendChild(card);
+        });
+
+        currentIndex += batchSize;
+        loadMoreBtn.style.display = currentIndex >= all.length ? "none" : "block";
+      }
+
+      renderCards();
+
+      loadMoreBtn.addEventListener("click", () => renderCards());
+
+      searchInput.addEventListener("input", function () {
+        const keyword = this.value.toLowerCase();
+        const filtered = all.filter(card => card.title.toLowerCase().includes(keyword));
+        container.innerHTML = "";
+        currentIndex = 0;
+        renderCards(filtered);
+      });
+    });
+  </script>
 </body>
 </html>
