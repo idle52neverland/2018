@@ -77,7 +77,7 @@ allCards = [
     alt: "아이들 - (여자)아이들((G)I-DLE) - '말리지 마' LIVE CLIP",
     title: "(여자)아이들((G)I-DLE) - '말리지 마' LIVE CLIP (2022-04-07)"
   },
- [
+ 
   {
     "link": "https://www.youtube.com/watch?v=hAONx6nuEgI",
     "category": "MV-SPECIAL CLIP",
@@ -357,7 +357,7 @@ allCards = [
     "alt": "아이들 - (여자)아이들((G)I-DLE) - 'LATATA' Official Music Video (2018-05-02)",
     "title": "(여자)아이들((G)I-DLE) - 'LATATA' Official Music Video (2018-05-02)"
   }
-];
+
  const seenLinks = new Set();
   allCards = allCards.filter(card => {
     if (seenLinks.has(card.link)) return false;
