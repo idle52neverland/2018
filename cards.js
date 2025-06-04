@@ -818,6 +818,116 @@ allCards = [
   alt: "아이들 - (여자)아이들((G)I-DLE) - 'LATATA' (Choreography Practice Video) (2018-05-10)",
   title: "(여자)아이들((G)I-DLE) - 'LATATA' (Choreography Practice Video) (2018-05-10)"
 },
+// 결과 1 ~ 12
+{
+  link: "https://www.youtube.com/live/sPz8C3MSdVs?si=OIhJ0u3nGWe_CLZ4",
+  category: "LIVE STREAM",
+  member: "아이들",
+  year: "2020",
+  thumbnail: "https://i.ytimg.com/vi/sPz8C3MSdVs/hqdefault.jpg",
+  alt: "아이들 - [I-LIVE] So Sweet~ Happy Valentine's Day! (2020-02-15)",
+  title: "[I-LIVE] So Sweet~ Happy Valentine's Day! (2020-02-15)"
+},
+{
+  link: "https://www.youtube.com/live/T8_fTZl1TkA?si=ULkkGh4FNL0hbVJ1",
+  category: "LIVE STREAM",
+  member: "소연",
+  year: "2020",
+  thumbnail: "https://i.ytimg.com/vi/T8_fTZl1TkA/hqdefault.jpg",
+  alt: "소연 - [I-LIVE] 소연이의 롤 게임 방송! (2020-03-23)",
+  title: "[I-LIVE] 소연이의 롤 게임 방송! (2020-03-23)"
+},
+{
+  link: "https://www.youtube.com/live/HeHnq1tgFyg?si=ZcMEhm1_jh11e3HK",
+  category: "LIVE STREAM",
+  member: "소연",
+  year: "2020",
+  thumbnail: "https://i.ytimg.com/vi/HeHnq1tgFyg/hqdefault.jpg",
+  alt: "소연 - [I-LIVE] 소연이의 롤 게임 방송! (2020-03-23)",
+  title: "[I-LIVE] 소연이의 롤 게임 방송! (2020-03-23)"
+},
+{
+  link: "https://youtu.be/yVD4glcIS7o?si=TrssYFqv4PWqjPLC",
+  category: "LIVE STREAM",
+  member: "아이들",
+  year: "2020",
+  thumbnail: "https://i.ytimg.com/vi/yVD4glcIS7o/hqdefault.jpg",
+  alt: "아이들 - [I-LIVE] (여자)아이들 데뷔 2주년 기념일 하이라이트 01 (2020-05-02)",
+  title: "[I-LIVE] (여자)아이들 데뷔 2주년 기념일 하이라이트 01 (2020-05-02)"
+},
+{
+  link: "https://www.youtube.com/live/M0mFoGBRu14?si=kn6lGRQeiZSbY7pu",
+  category: "LIVE STREAM",
+  member: "아이들",
+  year: "2020",
+  thumbnail: "https://i.ytimg.com/vi/M0mFoGBRu14/hqdefault.jpg",
+  alt: "아이들 - [I-LIVE] (여자)아이들 데뷔 2주년 기념일 🎂 (2020-05-02)",
+  title: "[I-LIVE] (여자)아이들 데뷔 2주년 기념일 🎂 (2020-05-02)"
+},
+{
+  link: "https://www.youtube.com/live/qTdMKpWxYeE?si=P2_2TrchuLNREBjR",
+  category: "LIVE STREAM",
+  member: "소연",
+  year: "2020",
+  thumbnail: "https://i.ytimg.com/vi/qTdMKpWxYeE/hqdefault.jpg",
+  alt: "소연 - [I-LIVE] 소연이의 롤 게임 방송! 🎮🕹 (2020-11-11)",
+  title: "[I-LIVE] 소연이의 롤 게임 방송! 🎮🕹 (2020-11-11)"
+},
+{
+  link: "https://youtu.be/srepY5GVRhU?si=QqFmUf_ZXlzl4dU1",
+  category: "LIVE STREAM",
+  member: "아이들",
+  year: "2021",
+  thumbnail: "https://i.ytimg.com/vi/srepY5GVRhU/hqdefault.jpg",
+  alt: "아이들 - 'Windy Burger Grand Open!' - 하이라이트 09 1부 레드 카펫!🥳👏🥳 (2021-07-06)",
+  title: "'Windy Burger Grand Open!' - 하이라이트 09 1부 레드 카펫!🥳👏🥳 (2021-07-06)"
+},
+{
+  link: "https://www.youtube.com/live/m8rHmMDTRRE?si=XrUmnSORDJELBhRF",
+  category: "LIVE STREAM",
+  member: "아이들",
+  year: "2021",
+  thumbnail: "https://i.ytimg.com/vi/m8rHmMDTRRE/hqdefault.jpg",
+  alt: "아이들 - JEON SOYEON - 'Windy Burger Grand Open!' 라이브 방송 (2021-07-06)",
+  title: "JEON SOYEON - 'Windy Burger Grand Open!' 라이브 방송 (2021-07-06)"
+},
+{
+  link: "https://www.youtube.com/live/ka1uS3ORmxk?si=SV-pQEpOQ7oOrS35",
+  category: "LIVE STREAM",
+  member: "아이들",
+  year: "2022",
+  thumbnail: "https://i.ytimg.com/vi/ka1uS3ORmxk/hqdefault.jpg",
+  alt: "아이들 - [I-LIVE] 4랑하는 네버랜드💜 (여자)아이들 데뷔 4주년 됐어요🎂🎉 (2022-05-02)",
+  title: "[I-LIVE] 4랑하는 네버랜드💜 (여자)아이들 데뷔 4주년 됐어요🎂🎉 (2022-05-02)"
+},
+{
+  link: "https://www.youtube.com/live/aBg10lRqyRA?si=cTZFW35YMA3XVUWZ",
+  category: "LIVE STREAM",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/aBg10lRqyRA/hqdefault.jpg",
+  alt: "아이들 - i-dle (아이들) 7th ANNIVERSARY PARTY with NEVERLAND 🎆 (2025-05-02)",
+  title: "i-dle (아이들) 7th ANNIVERSARY PARTY with NEVERLAND 🎆 (2025-05-02)"
+},
+{
+  link: "https://www.youtube.com/live/x3vs_eA3jZA?si=XFE3ONm09w6zKVSP",
+  category: "LIVE STREAM",
+  member: "아이들",
+  year: "2023",
+  thumbnail: "https://i.ytimg.com/vi/x3vs_eA3jZA/hqdefault.jpg",
+  alt: "아이들 - [I-LIVE] 🎉 (G)I-DLE 5TH ANNIVERSARY PARTY with Pajamas 🎂🎉 (2023-05-01)",
+  title: "[I-LIVE] 🎉 (G)I-DLE 5TH ANNIVERSARY PARTY with Pajamas 🎂🎉 (2023-05-01)"
+},
+{
+  link: "https://www.youtube.com/live/DbuBqLl1IyQ?si=ipfvDu14KT5Um80X",
+  category: "LIVE STREAM",
+  member: "아이들",
+  year: "2024",
+  thumbnail: "https://i.ytimg.com/vi/DbuBqLl1IyQ/hqdefault.jpg",
+  alt: "아이들 - [I-LIVE] 🎉 (G)I-DLE 6TH ANNIVERSARY PARTY 💜 (2024-05-02)",
+  title: "[I-LIVE] 🎉 (G)I-DLE 6TH ANNIVERSARY PARTY 💜 (2024-05-02)"
+},
+
 
 
 
