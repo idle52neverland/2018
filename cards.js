@@ -527,7 +527,7 @@ allCards = [
   thumbnail: "https://i.ytimg.com/vi/pKMhyV1HiqE/hqdefault.jpg",
   alt: "아이들 - [(G)맘대로 아이들] TEASER ★2023 컴백 세미나★ (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-03-17)",
   title: "[(G)맘대로 아이들] TEASER ★2023 컴백 세미나★ (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-03-17)"
-}
+},
   {
   link: "https://youtu.be/MbHVHQstS9w?si=B1pxfhMoshPo-Icg",
   category: "YOUTUBE CONTENTS",
