@@ -528,16 +528,15 @@ allCards = [
   alt: "아이들 - [(G)맘대로 아이들] TEASER ★2023 컴백 세미나★ (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-03-17)",
   title: "[(G)맘대로 아이들] TEASER ★2023 컴백 세미나★ (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-03-17)"
 },
-  {
+{
   link: "https://youtu.be/MbHVHQstS9w?si=B1pxfhMoshPo-Icg",
   category: "YOUTUBE CONTENTS",
-  member: "아이들",
+  member: "우기",
   year: "2018",
   thumbnail: "https://i.ytimg.com/vi/MbHVHQstS9w/hqdefault.jpg",
   alt: "아이들 - 아이돌 연습생이 노래를 들어 달라고 한다면? 반전 목소리네 꼭 데뷔했으면 좋겠다 | 세상의 온도 | (2018-02-27)",
   title: "아이돌 연습생이 노래를 들어 달라고 한다면? 반전 목소리네 꼭 데뷔했으면 좋겠다 | 세상의 온도 | (2018-02-27)"
 }
-
 
 
 
