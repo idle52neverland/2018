@@ -13,54 +13,79 @@
       text-align: center;
     }
     #mainTitle {
-      padding: 30px 0 10px;
+      padding: 15px 0 5px;
       font-size: 28px;
       color: #fff;
       display: block;
       position: relative;
       z-index: 2;
     }
-    .top-bar {
+    .category-section {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      align-items: center;
-      gap: 12px;
-      margin: 10px 0;
+      gap: 10px;
+      padding: 80px 10px 10px;
     }
-    .top-bar input {
-      padding: 12px 16px;
-      border-radius: 26px;
-      border: none;
-      width: 260px;
-      font-size: 16px;
-    }
-    .top-bar button img {
-      width: 24px;
-      height: 24px;
-    }
-    .filter-section {
-      margin-top: 20px;
-      margin-bottom: 10px;
-    }
-    .filter-group {
-      margin-bottom: 10px;
-    }
-    .filter-btn {
+    .category-btn {
       padding: 10px 20px;
       background-color: #333;
       border-radius: 20px;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
       color: #fff;
       cursor: pointer;
       border: none;
       transition: background-color 0.2s;
       text-decoration: none;
-      margin: 4px;
     }
-    .filter-btn.active {
+    .category-btn:hover {
+      background-color: #555;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .top-bar input {
+      padding: 12px 16px;
+      border-radius: 24px;
+      border: none;
+      width: 260px;
+      font-size: 16px;
+    }
+    .top-bar button {
       background-color: #fff;
-      color: #111;
+      border: none;
+      border-radius: 50%;
+      padding: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .top-bar button img {
+      width: 24px;
+      height: 24px;
+    }
+    @media (max-width: 768px) {
+      .top-bar input {
+        width: 180px;
+      }
+      .sns-icons {
+        position: relative;
+        top: auto;
+        right: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px auto;
+        width: 100%;
+      }
+      .card {
+        width: 45vw;
+      }
     }
     .card-container {
       display: flex;
@@ -94,22 +119,6 @@
     .card-title:hover {
       text-decoration: none;
     }
-    #loadMore {
-      margin: 20px auto;
-      padding: 10px 20px;
-      font-size: 14px;
-      font-weight: bold;
-      background-color: #444;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-    @media (max-width: 768px) {
-      .card {
-        width: 45vw;
-      }
-    }
     @media (min-width: 1025px) {
       .card-container {
         max-width: 100%;
@@ -121,58 +130,77 @@
         max-width: none;
       }
     }
+    .sns-icons {
+      position: absolute;
+      top: 80px;
+      right: 100px;
+    }
+    .sns-icons img {
+      width: 20px;
+      height: 20px;
+      margin-left: 6px;
+      filter: grayscale(100%);
+    }
+    #loadMoreBtn {
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #444;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      display: block;
+    }
   </style>
 </head>
 <body>
   <div id="mainTitle">I-DLE 몰아보기</div>
 
-  <div class="filter-section">
-    <div class="filter-group" id="yearFilters"></div>
-    <div class="filter-group" id="memberFilters"></div>
+  <div class="category-section">
+    <a class="category-btn" href="category.html?category=MV-SPECIAL CLIP">MV-SPECIAL CLIP</a>
+    <a class="category-btn" href="category.html?category=LIVE-COVER-DANCE">LIVE-COVER-DANCE</a>
+    <a class="category-btn" href="category.html?category=MUSIC SHOW PERFORMANCE">MUSIC SHOW PERFORMANCE</a>
+    <a class="category-btn" href="category.html?category=FESTIVAL EVENT STAGE">FESTIVAL EVENT STAGE</a>
+    <a class="category-btn" href="category.html?category=FANCAM-STAGE FOCUS">FANCAM-STAGE FOCUS</a>
+    <a class="category-btn" href="category.html?category=RECORDING STUDIO BEHIND">RECORDING STUDIO BEHIND</a>
+    <a class="category-btn" href="category.html?category=DANCE PRACTICE-FANCHANT">DANCE PRACTICE-FANCHANT</a>
+    <a class="category-btn" href="category.html?category=TV SHOW">TV SHOW</a>
+    <a class="category-btn" href="category.html?category=YOUTUBE CONTENTS">YOUTUBE CONTENTS</a>
+    <a class="category-btn" href="category.html?category=ORIGINAL CONTENTS">ORIGINAL CONTENTS</a>
+    <a class="category-btn" href="category.html?category=RADIO PODCAST">RADIO PODCAST</a>
+    <a class="category-btn" href="category.html?category=LIVE STREAM">LIVE STREAM</a>
+    <a class="category-btn" href="category.html?category=MAGAZINE INTERVIEW">MAGAZINE INTERVIEW</a>
+    <a class="category-btn" href="category.html?category=BEHIND CLIPS">BEHIND CLIPS</a>
+    <a class="category-btn" href="category.html?category=CHALLENGE">CHALLENGE</a>
+    <a class="category-btn" href="category.html?category=ETC">ETC</a>
   </div>
 
   <div class="top-bar">
-    <button onclick="handleBack()"><img src="https://cdn-icons-png.flaticon.com/512/271/271220.png" alt="뒤로가기"></button>
-    <button onclick="location.href='index.html'"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png" alt="홈"></button>
-    <input type="text" id="searchInput" placeholder="카테고리 내 검색...">
+    <button onclick="history.back()"><img src="images/뒤로가기 버튼.jpg" alt="뒤로가기"></button>
+    <button onclick="location.href='index.html'"><img src="images/home.jpg" alt="홈"></button>
+    <input type="text" id="searchInput" placeholder="전체 영상 검색...">
   </div>
 
-  <div class="card-container" id="categoryCards"></div>
-  <button id="loadMore" style="display:none;">더보기</button>
+  <div class="card-container" id="allCards"></div>
+  <button id="loadMoreBtn">더보기</button>
 
   <script src="cards.js"></script>
   <script>
-    let stateStack = [];
-    let allFiltered = [];
-    let cardsShown = 0;
-    const cardsPerLoad = 30;
-
     document.addEventListener("DOMContentLoaded", function () {
-      const params = new URLSearchParams(window.location.search);
-      const category = params.get("category");
-      document.getElementById("mainTitle").textContent = category;
+      const all = allCards || [];
+      const container = document.getElementById("allCards");
+      const loadMoreBtn = document.getElementById("loadMoreBtn");
+      const searchInput = document.getElementById("searchInput");
+      let currentIndex = 0;
+      const batchSize = 30;
 
-      const container = document.getElementById("categoryCards");
-      const loadMoreBtn = document.getElementById("loadMore");
-      let currentYear = null;
-      let currentMember = null;
+      all.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      function renderCards(reset = false) {
-        const keyword = document.getElementById("searchInput").value.toLowerCase();
-        if (reset) {
-          cardsShown = 0;
-          container.innerHTML = "";
-        }
-        allFiltered = allCards.filter(card => card.category === category);
-        if (currentYear) allFiltered = allFiltered.filter(c => c.year === currentYear);
-        if (currentMember) allFiltered = allFiltered.filter(c => c.member === currentMember);
-        if (keyword) allFiltered = allFiltered.filter(c => c.title.toLowerCase().includes(keyword));
-        allFiltered.sort((a, b) => new Date(b.date) - new Date(a.date));
+      function renderCards() {
+        const endIndex = currentIndex + batchSize;
+        const slice = all.slice(currentIndex, endIndex);
 
-        stateStack.push({ year: currentYear, member: currentMember, keyword });
-
-        const nextCards = allFiltered.slice(cardsShown, cardsShown + cardsPerLoad);
-        nextCards.forEach(data => {
+        slice.forEach(data => {
           const card = document.createElement("a");
           card.href = data.link;
           card.target = "_blank";
@@ -186,61 +214,29 @@
           `;
           container.appendChild(card);
         });
-        cardsShown += nextCards.length;
-        loadMoreBtn.style.display = cardsShown < allFiltered.length ? "block" : "none";
+
+        currentIndex = endIndex;
+
+        if (currentIndex >= all.length) {
+          loadMoreBtn.style.display = "none";
+        } else {
+          loadMoreBtn.style.display = "block";
+        }
       }
 
-      document.getElementById("searchInput").addEventListener("input", () => renderCards(true));
-      loadMoreBtn.addEventListener("click", () => renderCards(false));
+      renderCards();
 
-      const years = ["2025","2024","2023","2022","2021","2020","2019","2018","PRE-DEBUT"];
-      const members = ["미연","민니","소연","우기","슈화","아이들"];
+      loadMoreBtn.addEventListener("click", renderCards);
 
-      years.forEach(year => {
-        const btn = document.createElement("button");
-        btn.className = "filter-btn";
-        btn.textContent = year;
-        btn.onclick = () => {
-          currentYear = currentYear === year ? null : year;
-          document.querySelectorAll("#yearFilters .filter-btn").forEach(b => b.classList.remove("active"));
-          if (currentYear) btn.classList.add("active");
-          renderCards(true);
-        };
-        document.getElementById("yearFilters").appendChild(btn);
+      searchInput.addEventListener("input", function () {
+        const keyword = this.value.toLowerCase();
+        const cards = document.querySelectorAll(".card");
+        cards.forEach(card => {
+          const title = card.querySelector(".card-title").textContent.toLowerCase();
+          card.style.display = title.includes(keyword) ? "block" : "none";
+        });
       });
-
-      members.forEach(member => {
-        const btn = document.createElement("button");
-        btn.className = "filter-btn";
-        btn.textContent = member;
-        btn.onclick = () => {
-          currentMember = currentMember === member ? null : member;
-          document.querySelectorAll("#memberFilters .filter-btn").forEach(b => b.classList.remove("active"));
-          if (currentMember) btn.classList.add("active");
-          renderCards(true);
-        };
-        document.getElementById("memberFilters").appendChild(btn);
-      });
-
-      renderCards(true);
     });
-
-    function handleBack() {
-      if (stateStack.length > 1) {
-        stateStack.pop();
-        const prev = stateStack.pop();
-        currentYear = prev.year;
-        currentMember = prev.member;
-        document.getElementById("searchInput").value = prev.keyword;
-        document.querySelectorAll("#yearFilters .filter-btn").forEach(b => b.classList.remove("active"));
-        document.querySelectorAll("#memberFilters .filter-btn").forEach(b => b.classList.remove("active"));
-        if (currentYear) document.querySelector(`#yearFilters .filter-btn:nth-child(${years.indexOf(currentYear)+1})`)?.classList.add("active");
-        if (currentMember) document.querySelector(`#memberFilters .filter-btn:nth-child(${members.indexOf(currentMember)+1})`)?.classList.add("active");
-        renderCards(true);
-      } else {
-        history.back();
-      }
-    }
   </script>
 </body>
 </html>
