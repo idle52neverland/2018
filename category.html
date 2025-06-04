@@ -154,32 +154,30 @@
   <div class="card-container" id="categoryCards"></div>
   <button id="loadMore" style="display:none;">더보기</button>
 
+  <script src="cards.js"></script>
   <script>
-    const script = document.createElement("script");
-    script.src = `cards.js?v=${Date.now()}`;
-    script.onload = function () {
-      let stateStack = [];
-      let allFiltered = [];
-      let cardsShown = 0;
-      const cardsPerLoad = 30;
+    let stateStack = [];
+    let allFiltered = [];
+    let cardsShown = 0;
+    const cardsPerLoad = 30;
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const params = new URLSearchParams(window.location.search);
+      const category = params.get("category");
+      document.getElementById("mainTitle").textContent = category;
+
+      const container = document.getElementById("categoryCards");
+      const loadMoreBtn = document.getElementById("loadMore");
       let currentYear = null;
       let currentMember = null;
-      let currentCategory = "";
-
-      const years = ["2025","2024","2023","2022","2021","2020","2019","2018","PRE-DEBUT"];
-      const members = ["미연","민니","소연","우기","슈화","아이들"];
 
       function renderCards(reset = false) {
         const keyword = document.getElementById("searchInput").value.toLowerCase();
-        const container = document.getElementById("categoryCards");
-        const loadMoreBtn = document.getElementById("loadMore");
-
         if (reset) {
           cardsShown = 0;
           container.innerHTML = "";
         }
-
-        allFiltered = allCards.filter(card => card.category === currentCategory);
+        allFiltered = allCards.filter(card => card.category === category);
         if (currentYear) allFiltered = allFiltered.filter(c => c.year === currentYear);
         if (currentMember) allFiltered = allFiltered.filter(c => c.member === currentMember);
         if (keyword) allFiltered = allFiltered.filter(c => c.title.toLowerCase().includes(keyword));
@@ -202,72 +200,61 @@
           `;
           container.appendChild(card);
         });
-
         cardsShown += nextCards.length;
         loadMoreBtn.style.display = cardsShown < allFiltered.length ? "block" : "none";
       }
 
-      function setupFilters() {
-        const yearWrap = document.getElementById("yearFilters");
-        const memberWrap = document.getElementById("memberFilters");
+      document.getElementById("searchInput").addEventListener("input", () => renderCards(true));
+      loadMoreBtn.addEventListener("click", () => renderCards(false));
 
-        years.forEach(year => {
-          const btn = document.createElement("button");
-          btn.className = "filter-btn";
-          btn.textContent = year;
-          btn.onclick = () => {
-            currentYear = currentYear === year ? null : year;
-            document.querySelectorAll("#yearFilters .filter-btn").forEach(b => b.classList.remove("active"));
-            if (currentYear) btn.classList.add("active");
-            renderCards(true);
-          };
-          yearWrap.appendChild(btn);
-        });
+      const years = ["2025","2024","2023","2022","2021","2020","2019","2018","PRE-DEBUT"];
+      const members = ["미연","민니","소연","우기","슈화","아이들"];
 
-        members.forEach(member => {
-          const btn = document.createElement("button");
-          btn.className = "filter-btn";
-          btn.textContent = member;
-          btn.onclick = () => {
-            currentMember = currentMember === member ? null : member;
-            document.querySelectorAll("#memberFilters .filter-btn").forEach(b => b.classList.remove("active"));
-            if (currentMember) btn.classList.add("active");
-            renderCards(true);
-          };
-          memberWrap.appendChild(btn);
-        });
-      }
-
-      document.addEventListener("DOMContentLoaded", function () {
-        const params = new URLSearchParams(window.location.search);
-        currentCategory = params.get("category") || "";
-        document.getElementById("mainTitle").textContent = currentCategory;
-
-        document.getElementById("searchInput").addEventListener("input", () => renderCards(true));
-        document.getElementById("loadMore").addEventListener("click", () => renderCards(false));
-
-        setupFilters();
-        renderCards(true);
+      years.forEach(year => {
+        const btn = document.createElement("button");
+        btn.className = "filter-btn";
+        btn.textContent = year;
+        btn.onclick = () => {
+          currentYear = currentYear === year ? null : year;
+          document.querySelectorAll("#yearFilters .filter-btn").forEach(b => b.classList.remove("active"));
+          if (currentYear) btn.classList.add("active");
+          renderCards(true);
+        };
+        document.getElementById("yearFilters").appendChild(btn);
       });
 
-      window.handleBack = function () {
-        if (stateStack.length > 1) {
-          stateStack.pop();
-          const prev = stateStack.pop();
-          currentYear = prev.year;
-          currentMember = prev.member;
-          document.getElementById("searchInput").value = prev.keyword;
-          document.querySelectorAll("#yearFilters .filter-btn").forEach(b => b.classList.remove("active"));
+      members.forEach(member => {
+        const btn = document.createElement("button");
+        btn.className = "filter-btn";
+        btn.textContent = member;
+        btn.onclick = () => {
+          currentMember = currentMember === member ? null : member;
           document.querySelectorAll("#memberFilters .filter-btn").forEach(b => b.classList.remove("active"));
-          if (currentYear) document.querySelector(`#yearFilters .filter-btn:nth-child(${years.indexOf(currentYear)+1})`)?.classList.add("active");
-          if (currentMember) document.querySelector(`#memberFilters .filter-btn:nth-child(${members.indexOf(currentMember)+1})`)?.classList.add("active");
+          if (currentMember) btn.classList.add("active");
           renderCards(true);
-        } else {
-          history.back();
-        }
-      };
-    };
-    document.body.appendChild(script);
+        };
+        document.getElementById("memberFilters").appendChild(btn);
+      });
+
+      renderCards(true);
+    });
+
+    function handleBack() {
+      if (stateStack.length > 1) {
+        stateStack.pop();
+        const prev = stateStack.pop();
+        currentYear = prev.year;
+        currentMember = prev.member;
+        document.getElementById("searchInput").value = prev.keyword;
+        document.querySelectorAll("#yearFilters .filter-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll("#memberFilters .filter-btn").forEach(b => b.classList.remove("active"));
+        if (currentYear) document.querySelector(`#yearFilters .filter-btn:nth-child(${years.indexOf(currentYear)+1})`)?.classList.add("active");
+        if (currentMember) document.querySelector(`#memberFilters .filter-btn:nth-child(${members.indexOf(currentMember)+1})`)?.classList.add("active");
+        renderCards(true);
+      } else {
+        history.back();
+      }
+    }
   </script>
 </body>
 </html>
