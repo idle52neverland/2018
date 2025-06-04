@@ -204,7 +204,16 @@
       let currentIndex = 0;
       const batchSize = 30;
 
-      all.sort((a, b) => new Date(b.date) - new Date(a.date));
+      function extractDateFromTitle(title) {
+        const match = title.match(/\((\d{4}-\d{2}-\d{2})\)/);
+        return match ? match[1] : "2000-01-01";
+      }
+
+      all.sort((a, b) => {
+        const dateA = extractDateFromTitle(a.title);
+        const dateB = extractDateFromTitle(b.title);
+        return new Date(dateB) - new Date(dateA);
+      });
 
       function renderCards() {
         const endIndex = currentIndex + batchSize;
@@ -227,11 +236,7 @@
 
         currentIndex = endIndex;
 
-        if (currentIndex >= all.length) {
-          loadMoreBtn.style.display = "none";
-        } else {
-          loadMoreBtn.style.display = "block";
-        }
+        loadMoreBtn.style.display = currentIndex >= all.length ? "none" : "block";
       }
 
       renderCards();
