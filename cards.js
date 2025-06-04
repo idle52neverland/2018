@@ -78,6 +78,315 @@ allCards = [
     title: "(여자)아이들((G)I-DLE) - '말리지 마' LIVE CLIP (2022-04-07)"
   },
   {
+  link: "https://www.youtube.com/watch?v=hAONx6nuEgI",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/hAONx6nuEgI/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=zKfs2EM8LQ4",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/zKfs2EM8LQ4/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=UTHqh7Vpa64",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/UTHqh7Vpa64/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=8KpvPHcXr1c",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/8KpvPHcXr1c/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=rTKqSmX9XhQ",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/rTKqSmX9XhQ/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=UqJIBItJeyg",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/UqJIBItJeyg/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=ZqU4oTDy3XE",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/ZqU4oTDy3XE/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=KAymeaEyPr8",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/KAymeaEyPr8/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=6f3RzjXPQwA",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/6f3RzjXPQwA/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=baaNwRAhHBo",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/baaNwRAhHBo/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=Iewisp9KYRw",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/Iewisp9KYRw/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=pCh3Kp6qxo8",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/pCh3Kp6qxo8/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=7HDeem-JaSY",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/7HDeem-JaSY/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=XZaBkbvteBc",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/XZaBkbvteBc/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=qRrV31S7oO0",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/qRrV31S7oO0/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=fCO7f0SmrDc",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/fCO7f0SmrDc/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=35lirBqwgTs",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/35lirBqwgTs/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=Jh4QFaPmdss",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/Jh4QFaPmdss/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=MqzX9JAZ08U",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/MqzX9JAZ08U/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=AE8yKldv_oo",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/AE8yKldv_oo/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=wxDHQT0iBKM",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/wxDHQT0iBKM/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=P62kgQCuxGE",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/P62kgQCuxGE/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=z3szNvgQxHo",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/z3szNvgQxHo/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=HPQ5mqovXHo",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/HPQ5mqovXHo/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=om3n2ni8luE",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/om3n2ni8luE/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=6oanIo_2Z4Q",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/6oanIo_2Z4Q/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=ypNJMDlJvY4",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/ypNJMDlJvY4/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=I66oFXdf0KU",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/I66oFXdf0KU/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=2cevbhEqQF4",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/2cevbhEqQF4/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=OKNXn2qCEws",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/OKNXn2qCEws/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+
+{
+  link: "https://www.youtube.com/watch?v=p4RIhcY7V3c",
+  category: "MV-SPECIAL CLIP",
+  member: "아이들",
+  year: "2025",
+  thumbnail: "https://i.ytimg.com/vi/p4RIhcY7V3c/hqdefault.jpg",
+  alt: "아이들 - 제목 입력",
+  title: "제목 입력 (2025-06-04)"
+},
+  {
     link: "https://www.youtube.com/watch?v=B_4WoSrUuZA",
     category: "MUSIC SHOW PERFORMANCE",
     member: "아이들",
