@@ -535,7 +535,7 @@ allCards = [
   year: "PRE-DEBUT",
   thumbnail: "https://i.ytimg.com/vi/MbHVHQstS9w/hqdefault.jpg",
   alt: "아이들 - 아이돌 연습생이 노래를 들어 달라고 한다면? 반전 목소리네 꼭 데뷔했으면 좋겠다 | 세상의 온도 | (2018-02-27)",
-  title: "아이돌 연습생이 노래를 들어 달라고 한다면? 반전 목소리네 꼭 데뷔했으면 좋겠다 | 세상의 온도 | (2018-02-27)"
+  title: "아이돌 연습생이 노래를 들어 달라고 한다면? 반전 목소리네 꼭 데뷔했으면 좋겠다 | 세상의 온도 |우기 (2018-02-27)"
 },
 {
   link: "https://youtu.be/WUK4X97Fzzc?si=B8VMYxdtHp4DYPix",
