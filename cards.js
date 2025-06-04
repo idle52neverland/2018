@@ -130,43 +130,7 @@ allCards = [
     thumbnail: "https://i.ytimg.com/vi/Hd8m6Ly7xFk/hqdefault.jpg",
     alt: "소연 - [방과후설렘] 서낳괴 전소연이 서바이벌 프로듀서가 되면 벌어지는 일",
     title: "[방과후설렘] 서낳괴 전소연이 서바이벌 프로듀서가 되면 벌어지는 일 mp4. (2022-02-24)"
-  },
-  {
-  "link": "https://www.youtube.com/watch?v=PtB5JoGXUQ8",
-  "category": "MV-SPECIAL CLIP",
-  "member": "아이들",
-  "year": "2018",
-  "thumbnail": "https://i.ytimg.com/vi/PtB5JoGXUQ8/hqdefault.jpg",
-  "alt": "아이들 - 20180602 001 (여자)아이들 입장 고양스타필드 팬사인회(180602) (2018-06-03)",
-  "title": "20180602 001 (여자)아이들 입장 고양스타필드 팬사인회(180602) (2018-06-03)"
-},
-{
-  "link": "https://www.youtube.com/watch?v=h97f1iv-kJU",
-  "category": "MV-SPECIAL CLIP",
-  "member": "소연",
-  "year": "2018",
-  "thumbnail": "https://i.ytimg.com/vi/h97f1iv-kJU/hqdefault.jpg",
-  "alt": "소연 - 20180602 002 (여자)아이들(소연) 팬사인중 고양스타필드 팬사인회(180602) (2018-06-03)",
-  "title": "20180602 002 (여자)아이들(소연) 팬사인중 고양스타필드 팬사인회(180602) (2018-06-03)"
-},
-{
-  "link": "https://www.youtube.com/watch?v=0kv1LxNnZGY",
-  "category": "MV-SPECIAL CLIP",
-  "member": "아이들",
-  "year": "2018",
-  "thumbnail": "https://i.ytimg.com/vi/0kv1LxNnZGY/hqdefault.jpg",
-  "alt": "아이들 - 20180602 004 (여자)아이들 마무리인사 고양스타필드 팬사인회(180602) (2018-06-03)",
-  "title": "20180602 004 (여자)아이들 마무리인사 고양스타필드 팬사인회(180602) (2018-06-03)"
-},
-{
-  "link": "https://www.youtube.com/watch?v=9M1XzHWv_gk",
-  "category": "MV-SPECIAL CLIP",
-  "member": "우기",
-  "year": "2018",
-  "thumbnail": "https://i.ytimg.com/vi/9M1XzHWv_gk/hqdefault.jpg",
-  "alt": "우기 - 20180602 003 (여자)아이들(우기) 팬사인중 고양스타필드 팬사인회(180602) (2018-06-04)",
-  "title": "20180602 003 (여자)아이들(우기) 팬사인중 고양스타필드 팬사인회(180602) (2018-06-04)"
-}
+  }  
 ];
  const seenLinks = new Set();
   allCards = allCards.filter(card => {
