@@ -167,7 +167,7 @@
   </div>
 
   <div class="category-section">
-    <!-- ...카테고리 버튼 생략... -->
+    <!-- 카테고리 버튼 생략 -->
   </div>
 
   <div class="top-bar">
@@ -212,7 +212,6 @@
           card.setAttribute("data-category", data.category);
           card.setAttribute("data-member", data.member);
           card.setAttribute("data-year", data.year);
-          card.setAttribute("data-title", data.title.toLowerCase());
 
           card.innerHTML = `
             <img src="${data.thumbnail}" alt="${data.alt}">
@@ -232,8 +231,11 @@
         const keyword = this.value.toLowerCase();
         const cards = document.querySelectorAll(".card");
         cards.forEach(card => {
-          const title = card.getAttribute("data-title") || "";
-          card.style.display = title.includes(keyword) ? "block" : "none";
+          const text = card.querySelector(".card-title").textContent.toLowerCase();
+          const member = card.getAttribute("data-member")?.toLowerCase() || "";
+          const year = card.getAttribute("data-year")?.toLowerCase() || "";
+          const combined = `${text} ${member} ${year}`;
+          card.style.display = combined.includes(keyword) ? "block" : "none";
         });
       });
     });
