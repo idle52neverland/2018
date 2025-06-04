@@ -133,14 +133,4 @@ allCards = [
   }
 ];
 
-  <script>
-    // 중복 카드 제거 처리
-    const seenLinks = new Set();
-    allCards = allCards.filter(card => {
-      if (seenLinks.has(card.link)) return false;
-      seenLinks.add(card.link);
-      return true;
-    });
-  </script>
-</body>
-</html>
+
