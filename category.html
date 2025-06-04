@@ -13,53 +13,26 @@
       text-align: center;
     }
     #mainTitle {
-      padding: 15px 0 5px;
+      padding: 30px 0 10px;
       font-size: 28px;
       color: #fff;
       display: block;
       position: relative;
       z-index: 2;
     }
-    .category-section {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      padding: 80px 10px 10px;
-    }
-    .category-btn {
-      padding: 10px 20px;
-      background-color: #333;
-      border-radius: 20px;
-      font-size: 15px;
-      font-weight: 600;
-      color: #fff;
-      cursor: pointer;
-      border: none;
-      transition: background-color 0.2s;
-      text-decoration: none;
-    }
-    .category-btn:hover {
-      background-color: #555;
-    }
     .top-bar {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 10px;
-      margin: 20px 0;
+      gap: 12px;
+      margin: 10px 0;
     }
     .top-bar input {
       padding: 12px 16px;
-      border-radius: 24px;
+      border-radius: 26px;
       border: none;
       width: 260px;
       font-size: 16px;
-    }
-    @media (max-width: 768px) {
-      .top-bar input {
-        width: 200px;
-      }
     }
     .top-bar button {
       background-color: #fff;
@@ -75,6 +48,30 @@
     .top-bar button img {
       width: 24px;
       height: 24px;
+    }
+    .filter-section {
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    .filter-group {
+      margin-bottom: 10px;
+    }
+    .filter-btn {
+      padding: 10px 20px;
+      background-color: #333;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.2s;
+      text-decoration: none;
+      margin: 4px;
+    }
+    .filter-btn.active {
+      background-color: #fff;
+      color: #111;
     }
     .card-container {
       display: flex;
@@ -108,17 +105,23 @@
     .card-title:hover {
       text-decoration: none;
     }
+    #loadMore {
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: bold;
+      background-color: #444;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
     @media (max-width: 768px) {
       .card {
         width: 45vw;
       }
-      .sns-icons {
-        position: relative;
-        top: auto;
-        right: auto;
-        display: flex;
-        justify-content: center;
-        margin-bottom: 10px;
+      .top-bar input {
+        width: 180px;
       }
     }
     @media (min-width: 1025px) {
@@ -132,79 +135,61 @@
         max-width: none;
       }
     }
-    .sns-icons {
-      position: absolute;
-      top: 80px;
-      right: 100px;
-    }
-    .sns-icons img {
-      width: 20px;
-      height: 20px;
-      margin-left: 6px;
-      filter: grayscale(100%);
-    }
-    #loadMoreBtn {
-      margin: 20px auto;
-      padding: 10px 20px;
-      background-color: #444;
-      color: #fff;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      display: block;
-    }
   </style>
 </head>
 <body>
   <div id="mainTitle">I-DLE 몰아보기</div>
 
-  <div class="sns-icons">
-    <a href="https://youtube.com/@official_i_dle" target="_blank"><img src="images/Youtube.jpg" alt="YouTube"></a>
-    <a href="https://x.com/official_i_dle" target="_blank"><img src="images/X(구.Twitter).jpg" alt="X"></a>
-    <a href="https://instagram.com/i_dle_official" target="_blank"><img src="images/Instagram.jpg" alt="Instagram"></a>
-    <a href="https://www.tiktok.com/@official_i_dle" target="_blank"><img src="images/TikTok.jpg" alt="TikTok"></a>
-    <a href="https://weverse.io/i-dle" target="_blank"><img src="images/Weverse.png" alt="Weverse"></a>
-  </div>
-
-  <div class="category-section">
-    <!-- 카테고리 버튼 생략 -->
+  <div class="filter-section">
+    <div class="filter-group" id="yearFilters"></div>
+    <div class="filter-group" id="memberFilters"></div>
   </div>
 
   <div class="top-bar">
-    <button onclick="history.back()"><img src="images/뒤로가기 버튼.jpg" alt="뒤로가기"></button>
+    <button onclick="handleBack()"><img src="images/뒤로가기 버튼.jpg" alt="뒤로가기"></button>
     <button onclick="location.href='index.html'"><img src="images/home.jpg" alt="홈"></button>
-    <input type="text" id="searchInput" placeholder="전체 영상 검색...">
+    <input type="text" id="searchInput" placeholder="카테고리 내 검색...">
   </div>
 
-  <div class="card-container" id="allCards"></div>
-  <button id="loadMoreBtn">더보기</button>
+  <div class="card-container" id="categoryCards"></div>
+  <button id="loadMore" style="display:none;">더보기</button>
 
   <script src="cards.js"></script>
   <script>
+    let stateStack = [];
+    let allFiltered = [];
+    let cardsShown = 0;
+    const cardsPerLoad = 30;
+
     document.addEventListener("DOMContentLoaded", function () {
-      const all = allCards || [];
-      const container = document.getElementById("allCards");
-      const loadMoreBtn = document.getElementById("loadMoreBtn");
-      const searchInput = document.getElementById("searchInput");
-      let currentIndex = 0;
-      const batchSize = 30;
+      const params = new URLSearchParams(window.location.search);
+      const category = params.get("category");
+      document.getElementById("mainTitle").textContent = category;
 
-      function extractDateFromTitle(title) {
-        const match = title.match(/\((\d{4}-\d{2}-\d{2})\)/);
-        return match ? match[1] : "2000-01-01";
-      }
+      const container = document.getElementById("categoryCards");
+      const loadMoreBtn = document.getElementById("loadMore");
+      let currentYear = null;
+      let currentMember = null;
 
-      all.sort((a, b) => {
-        const dateA = extractDateFromTitle(a.title);
-        const dateB = extractDateFromTitle(b.title);
-        return new Date(dateB) - new Date(dateA);
-      });
+      function renderCards(reset = false) {
+        const keyword = document.getElementById("searchInput").value.toLowerCase();
+        if (reset) {
+          cardsShown = 0;
+          container.innerHTML = "";
+        }
+        allFiltered = allCards.filter(card => card.category === category);
+        if (currentYear) allFiltered = allFiltered.filter(c => c.year === currentYear);
+        if (currentMember) allFiltered = allFiltered.filter(c => c.member === currentMember);
+        if (keyword) {
+          const terms = keyword.split(/\s+/);
+          allFiltered = allFiltered.filter(c => terms.every(term => c.title.toLowerCase().includes(term)));
+        }
+        allFiltered.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      function renderCards() {
-        const endIndex = currentIndex + batchSize;
-        const slice = all.slice(currentIndex, endIndex);
+        stateStack.push({ year: currentYear, member: currentMember, keyword });
 
-        slice.forEach(data => {
+        const nextCards = allFiltered.slice(cardsShown, cardsShown + cardsPerLoad);
+        nextCards.forEach(data => {
           const card = document.createElement("a");
           card.href = data.link;
           card.target = "_blank";
@@ -212,33 +197,67 @@
           card.setAttribute("data-category", data.category);
           card.setAttribute("data-member", data.member);
           card.setAttribute("data-year", data.year);
-
           card.innerHTML = `
             <img src="${data.thumbnail}" alt="${data.alt}">
             <div class="card-title">${data.title}</div>
           `;
           container.appendChild(card);
         });
-
-        currentIndex = endIndex;
-        loadMoreBtn.style.display = currentIndex >= all.length ? "none" : "block";
+        cardsShown += nextCards.length;
+        loadMoreBtn.style.display = cardsShown < allFiltered.length ? "block" : "none";
       }
 
-      renderCards();
-      loadMoreBtn.addEventListener("click", renderCards);
+      document.getElementById("searchInput").addEventListener("input", () => renderCards(true));
+      loadMoreBtn.addEventListener("click", () => renderCards(false));
 
-      searchInput.addEventListener("input", function () {
-        const keyword = this.value.toLowerCase();
-        const cards = document.querySelectorAll(".card");
-        cards.forEach(card => {
-          const text = card.querySelector(".card-title").textContent.toLowerCase();
-          const member = card.getAttribute("data-member")?.toLowerCase() || "";
-          const year = card.getAttribute("data-year")?.toLowerCase() || "";
-          const combined = `${text} ${member} ${year}`;
-          card.style.display = combined.includes(keyword) ? "block" : "none";
-        });
+      const years = ["2025","2024","2023","2022","2021","2020","2019","2018","PRE-DEBUT"];
+      const members = ["미연","민니","소연","우기","슈화","아이들"];
+
+      years.forEach(year => {
+        const btn = document.createElement("button");
+        btn.className = "filter-btn";
+        btn.textContent = year;
+        btn.onclick = () => {
+          currentYear = currentYear === year ? null : year;
+          document.querySelectorAll("#yearFilters .filter-btn").forEach(b => b.classList.remove("active"));
+          if (currentYear) btn.classList.add("active");
+          renderCards(true);
+        };
+        document.getElementById("yearFilters").appendChild(btn);
       });
+
+      members.forEach(member => {
+        const btn = document.createElement("button");
+        btn.className = "filter-btn";
+        btn.textContent = member;
+        btn.onclick = () => {
+          currentMember = currentMember === member ? null : member;
+          document.querySelectorAll("#memberFilters .filter-btn").forEach(b => b.classList.remove("active"));
+          if (currentMember) btn.classList.add("active");
+          renderCards(true);
+        };
+        document.getElementById("memberFilters").appendChild(btn);
+      });
+
+      renderCards(true);
     });
+
+    function handleBack() {
+      if (stateStack.length > 1) {
+        stateStack.pop();
+        const prev = stateStack.pop();
+        currentYear = prev.year;
+        currentMember = prev.member;
+        document.getElementById("searchInput").value = prev.keyword;
+        document.querySelectorAll("#yearFilters .filter-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll("#memberFilters .filter-btn").forEach(b => b.classList.remove("active"));
+        if (currentYear) document.querySelector(`#yearFilters .filter-btn:nth-child(${years.indexOf(currentYear)+1})`)?.classList.add("active");
+        if (currentMember) document.querySelector(`#memberFilters .filter-btn:nth-child(${members.indexOf(currentMember)+1})`)?.classList.add("active");
+        renderCards(true);
+      } else {
+        history.back();
+      }
+    }
   </script>
 </body>
 </html>
