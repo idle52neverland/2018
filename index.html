@@ -194,11 +194,8 @@
   <div class="card-container" id="allCards"></div>
   <button id="loadMoreBtn">더보기</button>
 
- 
- <script>
-  const script = document.createElement("script");
-  script.src = `cards.js?v=${Date.now()}`;
-  script.onload = function () {
+  <script src="cards.js"></script>
+  <script>
     document.addEventListener("DOMContentLoaded", function () {
       const all = allCards || [];
       const container = document.getElementById("allCards");
@@ -250,9 +247,6 @@
         });
       });
     });
-  };
-  document.body.appendChild(script);
-</script>
+  </script>
 </body>
 </html>
-
