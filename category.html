@@ -154,8 +154,10 @@
   <div class="card-container" id="categoryCards"></div>
   <button id="loadMore" style="display:none;">더보기</button>
 
-  <script src="cards.js"></script>
   <script>
+  const script = document.createElement("script");
+  script.src = `cards.js?v=${Date.now()}`;
+  script.onload = function () {
     let stateStack = [];
     let allFiltered = [];
     let cardsShown = 0;
@@ -239,7 +241,7 @@
       renderCards(true);
     });
 
-    function handleBack() {
+    window.handleBack = function () {
       if (stateStack.length > 1) {
         stateStack.pop();
         const prev = stateStack.pop();
@@ -254,7 +256,10 @@
       } else {
         history.back();
       }
-    }
-  </script>
+    };
+  };
+  document.body.appendChild(script);
+</script>
 </body>
 </html>
+
