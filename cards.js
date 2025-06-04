@@ -132,3 +132,13 @@ allCards = [
     title: "[방과후설렘] 서낳괴 전소연이 서바이벌 프로듀서가 되면 벌어지는 일 mp4. (2022-02-24)"
   }
 ];
+
+  <script>
+    // 중복 카드 제거 처리
+    const seenLinks = new Set();
+    allCards = allCards.filter(card => {
+      if (seenLinks.has(card.link)) return false;
+      seenLinks.add(card.link);
+      return true;
+    });
+  </script>
