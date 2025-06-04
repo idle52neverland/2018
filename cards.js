@@ -411,7 +411,6 @@ allCards = [
   alt: "아이들 - (여자)아이들((G)I-DLE) - 'LATATA' Official Music Video (2018-05-02)",
   title: "(여자)아이들((G)I-DLE) - 'LATATA' Official Music Video (2018-05-02)"
 },
-  // 결과 1 ~ 13
 {
   link: "https://www.youtube.com/watch?v=C1ITPFPt1do",
   category: "ORIGINAL CONTENTS",
