@@ -410,7 +410,127 @@ allCards = [
   thumbnail: "https://i.ytimg.com/vi/p4RIhcY7V3c/hqdefault.jpg",
   alt: "아이들 - (여자)아이들((G)I-DLE) - 'LATATA' Official Music Video (2018-05-02)",
   title: "(여자)아이들((G)I-DLE) - 'LATATA' Official Music Video (2018-05-02)"
+},
+  // 결과 1 ~ 13
+{
+  link: "https://www.youtube.com/watch?v=C1ITPFPt1do",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2023",
+  thumbnail: "https://i.ytimg.com/vi/C1ITPFPt1do/hqdefault.jpg",
+  alt: "아이들 - [(G)맘대로 아이들] ★특별편성★ | 네가 알던 내가 아냐 (ENG/CHN) | (G)I-DLE INSIDE | (여자)아이들 ((G)I-DLE) (2023-08-23)",
+  title: "[(G)맘대로 아이들] ★특별편성★ | 네가 알던 내가 아냐 (ENG/CHN) | (G)I-DLE INSIDE | (여자)아이들 ((G)I-DLE) (2023-08-23)"
+},
+{
+  link: "https://www.youtube.com/watch?v=4vY76usk3fk",
+  category: "ORIGINAL CONTENTS",
+  member: "슈화",
+  year: "2023",
+  thumbnail: "https://i.ytimg.com/vi/4vY76usk3fk/hqdefault.jpg",
+  alt: "슈화 - [(G)맘대로 아이들] ★특별편성★ | 슈화 없는(?) 슈화쇼 (ENG/CHN) | SHUHUA SHOW | (여자)아이들 ((G)I-DLE) (2023-08-16)",
+  title: "[(G)맘대로 아이들] ★특별편성★ | 슈화 없는(?) 슈화쇼 (ENG/CHN) | SHUHUA SHOW | (여자)아이들 ((G)I-DLE) (2023-08-16)"
+},
+{
+  link: "https://www.youtube.com/watch?v=-eWlNDLUAkI",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2023",
+  thumbnail: "https://i.ytimg.com/vi/-eWlNDLUAkI/hqdefault.jpg",
+  alt: "아이들 - [(G)맘대로 아이들] ★특별편성★ | [속보] (여자)아이들, \"항시적으로 네버랜드 생각뿐\" (ENG/CHN) | (G)I-DLE NEWS | (여자)아이들 ((G)I-DLE) (2023-08-09)",
+  title: "[(G)맘대로 아이들] ★특별편성★ | [속보] (여자)아이들, \"항시적으로 네버랜드 생각뿐\" (ENG/CHN) | (G)I-DLE NEWS | (여자)아이들 ((G)I-DLE) (2023-08-09)"
+},
+{
+  link: "https://www.youtube.com/watch?v=rwtUR5moRgQ",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2023",
+  thumbnail: "https://i.ytimg.com/vi/rwtUR5moRgQ/hqdefault.jpg",
+  alt: "아이들 - [(G)맘대로 아이들] ★특별편성★ TEASER | 열렬한.성원에.힘입어.돌아왔읍니다...^^ (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-08-02)",
+  title: "[(G)맘대로 아이들] ★특별편성★ TEASER | 열렬한.성원에.힘입어.돌아왔읍니다...^^ (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-08-02)"
+},
+{
+  link: "https://www.youtube.com/watch?v=uvEYX0MSs1s",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2023",
+  thumbnail: "https://i.ytimg.com/vi/uvEYX0MSs1s/hqdefault.jpg",
+  alt: "아이들 - [(G)맘대로 아이들] EP.08 긴장해. 케이팝 기강 잡으러 온다. | 2023 컴백 세미나 (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-04-14)",
+  title: "[(G)맘대로 아이들] EP.08 긴장해. 케이팝 기강 잡으러 온다. | 2023 컴백 세미나 (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-04-14)"
+},
+{
+  link: "https://www.youtube.com/watch?v=ar1ZMNKDbKI",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2023",
+  thumbnail: "https://i.ytimg.com/vi/ar1ZMNKDbKI/hqdefault.jpg",
+  alt: "아이들 - [(G)맘대로 아이들] EP.07 특 시키면 일단 함 | 2023 컴백 세미나 (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-04-12)",
+  title: "[(G)맘대로 아이들] EP.07 특 시키면 일단 함 | 2023 컴백 세미나 (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-04-12)"
+},
+{
+  link: "https://www.youtube.com/watch?v=MfTv2OX4Nz4",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2023",
+  thumbnail: "https://i.ytimg.com/vi/MfTv2OX4Nz4/hqdefault.jpg",
+  alt: "아이들 - [(G)맘대로 아이들] EP.06 흥 없다면서요... | 2023 컴백 세미나 (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-04-07)",
+  title: "[(G)맘대로 아이들] EP.06 흥 없다면서요... | 2023 컴백 세미나 (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-04-07)"
+},
+{
+  link: "https://www.youtube.com/watch?v=PwsQ30b-A-k",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2023",
+  thumbnail: "https://i.ytimg.com/vi/PwsQ30b-A-k/hqdefault.jpg",
+  alt: "아이들 - [(G)맘대로 아이들] EP.05 다음 컴백의 운명은...?! | 2023 컴백 세미나 (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-04-05)",
+  title: "[(G)맘대로 아이들] EP.05 다음 컴백의 운명은...?! | 2023 컴백 세미나 (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-04-05)"
+},
+{
+  link: "https://www.youtube.com/watch?v=QFCP_VVQMgg",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2023",
+  thumbnail: "https://i.ytimg.com/vi/QFCP_VVQMgg/hqdefault.jpg",
+  alt: "아이들 - [(G)맘대로 아이들] EP.04 포지션 뺏으러 왔습니다. | 2023 컴백 세미나 (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-03-31)",
+  title: "[(G)맘대로 아이들] EP.04 포지션 뺏으러 왔습니다. | 2023 컴백 세미나 (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-03-31)"
+},
+{
+  link: "https://www.youtube.com/watch?v=r0MrzKxPqxw",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2023",
+  thumbnail: "https://i.ytimg.com/vi/r0MrzKxPqxw/hqdefault.jpg",
+  alt: "아이들 - [(G)맘대로 아이들] EP.03 대환장 주주총회 | 2023 컴백 세미나 (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-03-29)",
+  title: "[(G)맘대로 아이들] EP.03 대환장 주주총회 | 2023 컴백 세미나 (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-03-29)"
+},
+{
+  link: "https://www.youtube.com/watch?v=4bDBfsBCjFg",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2023",
+  thumbnail: "https://i.ytimg.com/vi/4bDBfsBCjFg/hqdefault.jpg",
+  alt: "아이들 - [(G)맘대로 아이들] EP.02 매니저 그만두겠습니다.. | 2023 컴백 세미나 (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-03-24)",
+  title: "[(G)맘대로 아이들] EP.02 매니저 그만두겠습니다.. | 2023 컴백 세미나 (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-03-24)"
+},
+{
+  link: "https://www.youtube.com/watch?v=HU6K3TV2AdQ",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2023",
+  thumbnail: "https://i.ytimg.com/vi/HU6K3TV2AdQ/hqdefault.jpg",
+  alt: "아이들 - [(G)맘대로 아이들] EP.01 이게...맞냐...? | 2023 컴백 세미나 (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-03-22)",
+  title: "[(G)맘대로 아이들] EP.01 이게...맞냐...? | 2023 컴백 세미나 (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-03-22)"
+},
+{
+  link: "https://www.youtube.com/watch?v=pKMhyV1HiqE",
+  category: "ORIGINAL CONTENTS",
+  member: "아이들",
+  year: "2023",
+  thumbnail: "https://i.ytimg.com/vi/pKMhyV1HiqE/hqdefault.jpg",
+  alt: "아이들 - [(G)맘대로 아이들] TEASER ★2023 컴백 세미나★ (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-03-17)",
+  title: "[(G)맘대로 아이들] TEASER ★2023 컴백 세미나★ (ENG/CHN) | (여자)아이들 ((G)I-DLE) (2023-03-17)"
 }
+
+
 
 
 ];
