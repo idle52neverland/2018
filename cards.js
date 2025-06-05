@@ -889,7 +889,7 @@ allCards = [
   year: "2021",
   thumbnail: "https://i.ytimg.com/vi/m8rHmMDTRRE/hqdefault.jpg",
   alt: "아이들 - JEON SOYEON - 'Windy Burger Grand Open!' 라이브 방송 (2021-07-06)",
-  title: "JEON SOYEON - 'Windy Burger Grand Open!' 라이브 방송 소연 (2021-07-06)"
+  title: "JEON SOYEON - 'Windy Burger Grand Open!' 라이브 방송 (2021-07-06)"
 },
 {
   link: "https://www.youtube.com/live/ka1uS3ORmxk?si=SV-pQEpOQ7oOrS35",
@@ -935,7 +935,7 @@ allCards = [
     "channel": "조현아의 평범한 목요일 밤",
     "thumbnail": "https://i.ytimg.com/vi/sJFegjopCRA/hqdefault.jpg",
     "alt": "아이들 - [ENG SUB] 십년지기 동생과 또 다른 동생의 대환장 달팽이관 공격 👂🏻🙉 l EP11 l 조현아의 평범한 목요일 밤",
-    "title": "[ENG SUB] 십년지기 동생과 또 다른 동생의 대환장 달팽이관 공격 👂🏻🙉 l EP11 l 조현아의 평범한 목요일 밤 미연,우기(2025-05-29)"
+    "title": "[ENG SUB] 십년지기 동생과 또 다른 동생의 대환장 달팽이관 공격 👂🏻🙉 l EP11 l 조현아의 평범한 목요일 밤 미연 우기 (2025-05-29)"
   }
 
 
