@@ -907,7 +907,7 @@ allCards = [
   year: "2025",
   thumbnail: "https://i.ytimg.com/vi/aBg10lRqyRA/hqdefault.jpg",
   alt: "아이들 - i-dle (아이들) 7th ANNIVERSARY PARTY with NEVERLAND 🎆 (2025-05-02)",
-  title: "i-dle (아이들) 7th ANNIVERSARY PARTY with NEVERLAND 🎆 (2025-05-02)"
+  title: "i-dle (아이들) 7th ANNIVERSARY PARTY with NEVERLAND 🎆7주년 (2025-05-02)"
 },
 {
   link: "https://www.youtube.com/live/x3vs_eA3jZA?si=XFE3ONm09w6zKVSP",
@@ -916,7 +916,7 @@ allCards = [
   year: "2023",
   thumbnail: "https://i.ytimg.com/vi/x3vs_eA3jZA/hqdefault.jpg",
   alt: "아이들 - [I-LIVE] 🎉 (G)I-DLE 5TH ANNIVERSARY PARTY with Pajamas 🎂🎉 (2023-05-01)",
-  title: "[I-LIVE] 🎉 (G)I-DLE 5TH ANNIVERSARY PARTY with Pajamas 🎂🎉 (2023-05-01)"
+  title: "[I-LIVE] 🎉 (G)I-DLE 5TH ANNIVERSARY PARTY with Pajamas 🎂🎉5주년 (2023-05-01)"
 },
 {
   link: "https://www.youtube.com/live/DbuBqLl1IyQ?si=ipfvDu14KT5Um80X",
@@ -925,9 +925,18 @@ allCards = [
   year: "2024",
   thumbnail: "https://i.ytimg.com/vi/DbuBqLl1IyQ/hqdefault.jpg",
   alt: "아이들 - [I-LIVE] 🎉 (G)I-DLE 6TH ANNIVERSARY PARTY 💜 (2024-05-02)",
-  title: "[I-LIVE] 🎉 (G)I-DLE 6TH ANNIVERSARY PARTY 💜 (2024-05-02)"
+  title: "[I-LIVE] 🎉 (G)I-DLE 6TH ANNIVERSARY PARTY 💜 6주년(2024-05-02)"
 },
-
+  {
+    "link": "https://www.youtube.com/watch?v=sJFegjopCRA",
+    "category": "YOUTUBE CONTENTS",
+    "member": "미연, 우기",
+    "year": "2025",
+    "channel": "조현아의 평범한 목요일 밤",
+    "thumbnail": "https://i.ytimg.com/vi/sJFegjopCRA/hqdefault.jpg",
+    "alt": "아이들 - [ENG SUB] 십년지기 동생과 또 다른 동생의 대환장 달팽이관 공격 👂🏻🙉 l EP11 l 조현아의 평범한 목요일 밤",
+    "title": "[ENG SUB] 십년지기 동생과 또 다른 동생의 대환장 달팽이관 공격 👂🏻🙉 l EP11 l 조현아의 평범한 목요일 밤 (2025-05-29)"
+  }
 
 
 
