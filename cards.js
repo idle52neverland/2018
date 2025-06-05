@@ -876,7 +876,7 @@ allCards = [
 {
   link: "https://youtu.be/srepY5GVRhU?si=QqFmUf_ZXlzl4dU1",
   category: "LIVE STREAM",
-  member: "아이들",
+  member: "소연",
   year: "2021",
   thumbnail: "https://i.ytimg.com/vi/srepY5GVRhU/hqdefault.jpg",
   alt: "아이들 - 'Windy Burger Grand Open!' - 하이라이트 09 1부 레드 카펫!🥳👏🥳 (2021-07-06)",
@@ -885,11 +885,11 @@ allCards = [
 {
   link: "https://www.youtube.com/live/m8rHmMDTRRE?si=XrUmnSORDJELBhRF",
   category: "LIVE STREAM",
-  member: "아이들",
+  member: "소연",
   year: "2021",
   thumbnail: "https://i.ytimg.com/vi/m8rHmMDTRRE/hqdefault.jpg",
   alt: "아이들 - JEON SOYEON - 'Windy Burger Grand Open!' 라이브 방송 (2021-07-06)",
-  title: "JEON SOYEON - 'Windy Burger Grand Open!' 라이브 방송 (2021-07-06)"
+  title: "JEON SOYEON - 'Windy Burger Grand Open!' 라이브 방송 소연 (2021-07-06)"
 },
 {
   link: "https://www.youtube.com/live/ka1uS3ORmxk?si=SV-pQEpOQ7oOrS35",
@@ -935,7 +935,7 @@ allCards = [
     "channel": "조현아의 평범한 목요일 밤",
     "thumbnail": "https://i.ytimg.com/vi/sJFegjopCRA/hqdefault.jpg",
     "alt": "아이들 - [ENG SUB] 십년지기 동생과 또 다른 동생의 대환장 달팽이관 공격 👂🏻🙉 l EP11 l 조현아의 평범한 목요일 밤",
-    "title": "[ENG SUB] 십년지기 동생과 또 다른 동생의 대환장 달팽이관 공격 👂🏻🙉 l EP11 l 조현아의 평범한 목요일 밤 (2025-05-29)"
+    "title": "[ENG SUB] 십년지기 동생과 또 다른 동생의 대환장 달팽이관 공격 👂🏻🙉 l EP11 l 조현아의 평범한 목요일 밤 미연,우기(2025-05-29)"
   }
 
 
