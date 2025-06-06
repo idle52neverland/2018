@@ -12,31 +12,10 @@
       color: #fff;
       text-align: center;
     }
-    .header-bar {
-      position: relative;
-      padding: 60px 20px 20px;
-    }
-    #mainTitle {
-      font-size: 28px;
-      color: #fff;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .sns-icons {
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      gap: 6px;
-    }
-    .sns-icons img {
-      width: 20px;
-      height: 20px;
-      filter: grayscale(100%);
-    }
     .video-player-container {
+      position: sticky;
+      top: 0;
+      z-index: 999;
       display: none;
       justify-content: center;
       align-items: center;
@@ -48,15 +27,35 @@
       max-width: 960px;
       height: 540px;
     }
-    .video-player-close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 32px;
-      color: white;
-      background: none;
-      border: none;
-      cursor: pointer;
+    @media (max-width: 768px) {
+      .video-player-container iframe {
+        height: 220px;
+      }
+    }
+    .header-bar {
+      position: relative;
+      padding: 40px 20px 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 10px;
+    }
+    #mainTitle {
+      font-size: 28px;
+      color: #fff;
+      margin-bottom: 10px;
+      position: static;
+      transform: none;
+    }
+    .sns-icons {
+      display: flex;
+      gap: 6px;
+    }
+    .sns-icons img {
+      width: 20px;
+      height: 20px;
+      filter: grayscale(100%);
     }
     .category-section {
       display: flex;
@@ -81,11 +80,7 @@
       color: #fff;
       cursor: pointer;
       border: none;
-      transition: background-color 0.2s;
       text-decoration: none;
-    }
-    .category-btn:hover {
-      background-color: #555;
     }
     .top-bar {
       display: flex;
@@ -153,28 +148,10 @@
       font-size: 13px;
       padding: 6px;
       color: #fff;
-      text-decoration: none !important;
     }
     @media (max-width: 768px) {
       .card {
         width: 45vw;
-      }
-      .header-bar {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: static;
-        padding: 40px 0 20px;
-      }
-      #mainTitle {
-        position: static;
-        transform: none;
-        margin-bottom: 10px;
-      }
-      .sns-icons {
-        position: static;
-        transform: none;
-        justify-content: center;
       }
     }
     @media (min-width: 1025px) {
@@ -195,6 +172,7 @@
   </style>
 </head>
 <body>
+
   <div class="header-bar">
     <div id="mainTitle">I-DLE 몰아보기</div>
     <div class="sns-icons">
