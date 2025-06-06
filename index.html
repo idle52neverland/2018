@@ -1,4 +1,3 @@
-<!-- 🔽 너가 준 전체 코드 그대로 + 모달 기능만 추가됨 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -15,7 +14,7 @@
     }
     .header-bar {
       position: relative;
-      padding: 60px 20px 60px;
+      padding: 60px 20px 20px;
     }
     #mainTitle {
       font-size: 28px;
@@ -36,6 +35,28 @@
       width: 20px;
       height: 20px;
       filter: grayscale(100%);
+    }
+    .video-player-container {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background-color: #000;
+    }
+    .video-player-container iframe {
+      width: 90%;
+      max-width: 960px;
+      height: 540px;
+    }
+    .video-player-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 32px;
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
     }
     .category-section {
       display: flex;
@@ -84,11 +105,7 @@
       .top-bar input {
         width: 200px;
       }
-      .category-section {
-        flex-direction: column;
-        align-items: center;
-      }
-      .category-line {
+      .category-section, .category-line {
         flex-direction: column;
         align-items: center;
       }
@@ -138,9 +155,6 @@
       color: #fff;
       text-decoration: none !important;
     }
-    .card-title:hover {
-      text-decoration: none;
-    }
     @media (max-width: 768px) {
       .card {
         width: 45vw;
@@ -164,14 +178,8 @@
       }
     }
     @media (min-width: 1025px) {
-      .card-container {
-        max-width: 100%;
-        margin: 0 auto;
-        padding: 20px;
-      }
       .card {
         width: calc(100% / 5 - 12px);
-        max-width: none;
       }
     }
     #loadMoreBtn {
@@ -183,35 +191,6 @@
       border-radius: 20px;
       cursor: pointer;
       display: block;
-    }
-
-    /* 📌 YouTube 모달 스타일 */
-    #videoModal {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.85);
-      justify-content: center;
-      align-items: center;
-    }
-    #videoModal iframe {
-      width: 90%;
-      max-width: 800px;
-      height: 450px;
-    }
-    #videoModal .close-btn {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 32px;
-      color: white;
-      background: none;
-      border: none;
-      cursor: pointer;
     }
   </style>
 </head>
@@ -227,12 +206,17 @@
     </div>
   </div>
 
+  <div class="video-player-container" id="videoPlayerContainer">
+    <button class="video-player-close" onclick="closeVideoPlayer()">×</button>
+    <iframe id="videoPlayerFrame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+
   <div class="category-section">
     <div class="category-line">
       <a class="category-btn" href="category.html?category=MV-SPECIAL CLIP">MV-SPECIAL CLIP</a>
       <a class="category-btn" href="category.html?category=RECORDING BEHIND">RECORDING BEHIND</a>
       <a class="category-btn" href="category.html?category=I-SEREIES">I-SEREIES</a>
-      <a class="category-btn" href="category.html?category=I-VARIETY">I-VARIETY</a>      
+      <a class="category-btn" href="category.html?category=I-VARIETY">I-VARIETY</a>
       <a class="category-btn" href="category.html?category=STAGE PERFORMANCE">STAGE PERFORMANCE</a>
       <a class="category-btn" href="category.html?category=LIVE-COVER-DANCE">LIVE-COVER-DANCE</a>
       <a class="category-btn" href="category.html?category=BEHIND CLIPS">BEHIND CLIPS</a>
@@ -257,24 +241,18 @@
   <div class="card-container" id="allCards"></div>
   <button id="loadMoreBtn">더보기</button>
 
-  <!-- 📌 유튜브 모달 팝업 -->
-  <div id="videoModal">
-    <button class="close-btn" onclick="closeModal()">×</button>
-    <iframe id="videoFrame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-  </div>
-
   <script src="cards.js"></script>
   <script>
     function openVideo(url) {
       const videoId = new URL(url).searchParams.get("v");
       const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-      document.getElementById("videoFrame").src = embedUrl;
-      document.getElementById("videoModal").style.display = "flex";
+      document.getElementById("videoPlayerFrame").src = embedUrl;
+      document.getElementById("videoPlayerContainer").style.display = "flex";
     }
 
-    function closeModal() {
-      document.getElementById("videoModal").style.display = "none";
-      document.getElementById("videoFrame").src = "";
+    function closeVideoPlayer() {
+      document.getElementById("videoPlayerFrame").src = "";
+      document.getElementById("videoPlayerContainer").style.display = "none";
     }
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -304,22 +282,18 @@
           card.setAttribute("data-member", data.member);
           card.setAttribute("data-year", data.year);
           card.addEventListener("click", () => openVideo(data.link));
-
           card.innerHTML = `
             <img src="${data.thumbnail}" alt="${data.alt}">
             <div class="card-title">${data.title}</div>
           `;
           container.appendChild(card);
         });
-
         currentIndex += batchSize;
         loadMoreBtn.style.display = currentIndex >= all.length ? "none" : "block";
       }
 
       renderCards();
-
       loadMoreBtn.addEventListener("click", () => renderCards());
-
       searchInput.addEventListener("input", function () {
         const keyword = this.value.toLowerCase();
         const filtered = all.filter(card => card.title.toLowerCase().includes(keyword));
