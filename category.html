@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>카테고리 페이지</title>
   <style>
     body {
@@ -31,15 +31,16 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 12px;
+      gap: 16px;
     }
     .filter-btn {
       background-color: #444;
       color: #fff;
       border: none;
       border-radius: 20px;
-      padding: 12px 22px;
+      padding: 10px 20px;
       font-size: 15px;
+      font-weight: 600;
       cursor: pointer;
       transition: background-color 0.2s, color 0.2s;
     }
@@ -60,6 +61,11 @@
       border: none;
       width: 260px;
       font-size: 16px;
+    }
+    @media (max-width: 768px) {
+      .top-bar input {
+        width: 200px;
+      }
     }
     .top-bar button {
       background-color: #fff;
@@ -183,19 +189,21 @@
   <script src="cards.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const params = new URLSearchParams(location.search);
-      const categoryParam = params.get("category");
-      document.getElementById("mainTitle").textContent = categoryParam;
-
       const container = document.getElementById("allCards");
       const loadMoreBtn = document.getElementById("loadMoreBtn");
       const searchInput = document.getElementById("searchInput");
       const videoPlayer = document.getElementById("videoPlayer");
       const videoContainer = document.getElementById("videoPlayerContainer");
+      const mainTitle = document.getElementById("mainTitle");
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const selectedCategory = urlParams.get("category");
+
+      mainTitle.textContent = selectedCategory || "카테고리";
+
       let currentIndex = 0;
       const batchSize = 30;
-
-      let all = (allCards || []).filter(card => card.category === categoryParam);
+      const all = (allCards || []).filter(card => card.category === selectedCategory);
 
       function extractDate(title) {
         const match = title.match(/\((\d{4}-\d{2}-\d{2})\)/);
@@ -231,7 +239,7 @@
         testIframe.onload = () => {
           document.body.removeChild(testIframe);
           videoPlayer.src = embedUrl;
-          videoContainer.style.display = "flex";
+          videoContainer.style.display = 'flex';
         };
       }
 
@@ -243,14 +251,17 @@
           card.setAttribute("data-category", data.category);
           card.setAttribute("data-member", data.member);
           card.setAttribute("data-year", data.year);
+
           card.innerHTML = `
             <img src="${data.thumbnail}" alt="${data.alt}">
             <div class="card-title">${data.title}</div>
           `;
+
           card.addEventListener("click", (e) => {
             e.preventDefault();
             loadVideo(data.link);
           });
+
           container.appendChild(card);
         });
 
@@ -258,31 +269,32 @@
         loadMoreBtn.style.display = currentIndex >= cards.length ? "none" : "block";
       }
 
-      function filterCards() {
-        const activeYears = Array.from(document.querySelectorAll('.filter-btn[data-type="year"].active')).map(b => b.textContent);
-        const activeMembers = Array.from(document.querySelectorAll('.filter-btn[data-type="member"].active')).map(b => b.textContent);
-        const keyword = searchInput.value.toLowerCase();
-
-        const filtered = all.filter(card => {
-          const yearMatch = activeYears.length === 0 || activeYears.includes(card.year);
-          const memberMatch = activeMembers.length === 0 || activeMembers.some(m => card.member.includes(m));
-          const titleMatch = card.title.toLowerCase().includes(keyword);
-          return yearMatch && memberMatch && titleMatch;
-        });
-
-        currentIndex = 0;
-        renderCards(filtered);
-      }
-
       renderCards(all);
 
-      loadMoreBtn.addEventListener("click", () => filterCards());
-      searchInput.addEventListener("input", filterCards);
+      loadMoreBtn.addEventListener("click", () => renderCards(all));
+
+      searchInput.addEventListener("input", function () {
+        const keyword = this.value.toLowerCase();
+        const filtered = all.filter(card => card.title.toLowerCase().includes(keyword));
+        currentIndex = 0;
+        renderCards(filtered);
+      });
 
       document.querySelectorAll('.filter-btn').forEach(button => {
-        button.addEventListener("click", function () {
-          this.classList.toggle("active");
-          filterCards();
+        button.addEventListener('click', () => {
+          button.classList.toggle('active');
+          const activeYears = Array.from(document.querySelectorAll('.filter-btn[data-type="year"].active')).map(b => b.textContent);
+          const activeMembers = Array.from(document.querySelectorAll('.filter-btn[data-type="member"].active')).map(b => b.textContent);
+
+          const filtered = all.filter(card => {
+            const cardMembers = card.member.split(',').map(m => m.trim());
+            const memberMatch = activeMembers.length === 0 || activeMembers.some(m => cardMembers.includes(m));
+            const yearMatch = activeYears.length === 0 || activeYears.includes(card.year);
+            return memberMatch && yearMatch;
+          });
+
+          currentIndex = 0;
+          renderCards(filtered);
         });
       });
 
