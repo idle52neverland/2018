@@ -16,7 +16,7 @@
       position: sticky;
       top: 0;
       z-index: 10;
-      display: flex;
+      display: none;
       flex-direction: column;
       align-items: center;
       background-color: #111;
@@ -181,9 +181,11 @@
   </style>
 </head>
 <body>
-  <div class="video-player-container">
-    <iframe id="videoPlayer" src="https://www.youtube.com/embed/hAONx6nuEgI?autoplay=1&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <div class="video-player-container" style="display: none;">
+    <iframe id="videoPlayer" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
+  <!-- 아래 내용은 유지됨 -->
+
   <div class="top-bar-wrapper">
     <div class="top-bar">
       <button onclick="history.back()"><img src="images/뒤로가기.jpg" alt="뒤로가기"></button>
