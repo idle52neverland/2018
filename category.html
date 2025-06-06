@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>I-DLE 몰아보기</title>
   <style>
     body {
@@ -13,31 +13,23 @@
       text-align: center;
     }
     .header-bar {
+      padding: 40px 20px 30px;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 60px 20px 30px;
     }
     #mainTitle {
       font-size: 28px;
       color: #fff;
-      margin: 0 auto;
     }
     .category-section {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
-      padding: 30px 10px 10px;
+      padding: 20px 10px 10px;
     }
-    .category-line {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-    .category-btn {
+    .category-btn, .filter-btn {
       padding: 10px 20px;
       background-color: #333;
       border-radius: 20px;
@@ -46,7 +38,11 @@
       color: #fff;
       cursor: pointer;
       border: none;
+      transition: background-color 0.2s;
       text-decoration: none;
+    }
+    .category-btn:hover, .filter-btn:hover {
+      background-color: #555;
     }
     .top-bar {
       display: flex;
@@ -61,6 +57,11 @@
       border: none;
       width: 260px;
       font-size: 16px;
+    }
+    @media (max-width: 768px) {
+      .top-bar input {
+        width: 200px;
+      }
     }
     .top-bar button {
       background-color: #fff;
@@ -77,19 +78,21 @@
       width: 24px;
       height: 24px;
     }
-    .video-player-container {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      display: none;
-      justify-content: center;
-      background-color: #111;
+    .filter-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
     }
-    .video-player-container iframe {
-      width: 90%;
-      max-width: 960px;
-      height: 440px;
-      pointer-events: auto;
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .filter-btn.active {
+      background-color: #888;
     }
     .card-container {
       display: flex;
@@ -105,7 +108,6 @@
       text-align: left;
       transition: transform 0.2s, box-shadow 0.2s;
       text-decoration: none;
-      cursor: pointer;
     }
     .card:hover {
       transform: scale(1.03);
@@ -119,36 +121,28 @@
       font-size: 13px;
       padding: 6px;
       color: #fff;
+      text-decoration: none !important;
     }
-    .card-buttons {
-      padding: 6px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .filter-btn {
-      background-color: #444;
-      color: #fff;
-      border: none;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 12px;
-      cursor: pointer;
+    .card-title:hover {
+      text-decoration: none;
     }
     @media (max-width: 768px) {
       .card {
         width: 45vw;
       }
-      .top-bar input {
-        width: 200px;
-      }
       .header-bar {
-        flex-direction: column;
+        padding: 30px 0 20px;
       }
     }
     @media (min-width: 1025px) {
+      .card-container {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 20px;
+      }
       .card {
         width: calc(100% / 5 - 12px);
+        max-width: none;
       }
     }
     #loadMoreBtn {
@@ -165,136 +159,139 @@
 </head>
 <body>
   <div class="header-bar">
-    <div id="mainTitle">I-DLE 몰아보기</div>
+    <div id="mainTitle"></div>
   </div>
 
-  <div class="category-section">
-    <div class="category-line">
-      <a class="category-btn" href="#">MV-SPECIAL CLIP</a>
-      <a class="category-btn" href="#">RECORDING BEHIND</a>
-      <a class="category-btn" href="#">I-SEREIES</a>
-      <a class="category-btn" href="#">I-VARIETY</a>
-      <a class="category-btn" href="#">STAGE PERFORMANCE</a>
-      <a class="category-btn" href="#">LIVE-COVER-DANCE</a>
-      <a class="category-btn" href="#">BEHIND CLIPS</a>
+  <div class="filter-section">
+    <div class="filter-row">
+      <button class="filter-btn" data-type="year">2025</button>
+      <button class="filter-btn" data-type="year">2024</button>
+      <button class="filter-btn" data-type="year">2023</button>
+      <button class="filter-btn" data-type="year">2022</button>
+      <button class="filter-btn" data-type="year">2021</button>
+      <button class="filter-btn" data-type="year">2020</button>
+      <button class="filter-btn" data-type="year">2019</button>
+      <button class="filter-btn" data-type="year">2018</button>
+      <button class="filter-btn" data-type="year">PRE-DEBUT</button>
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn" data-type="member">미연</button>
+      <button class="filter-btn" data-type="member">민니</button>
+      <button class="filter-btn" data-type="member">소연</button>
+      <button class="filter-btn" data-type="member">우기</button>
+      <button class="filter-btn" data-type="member">슈화</button>
+      <button class="filter-btn" data-type="member">아이들</button>
     </div>
   </div>
 
-  <div class="video-player-container" id="videoPlayerContainer">
-    <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
-  </div>
-
   <div class="top-bar">
-    <button onclick="history.back()"><img src="images/뒤로가기.jpg" alt="뒤로가기" /></button>
-    <button onclick="location.href='index.html'"><img src="images/홈.jpg" alt="홈" /></button>
-    <input type="text" id="searchInput" placeholder="전체 영상 검색..." />
+    <button id="backBtn"><img src="images/뒤로가기.jpg" alt="뒤로가기"></button>
+    <button onclick="location.href='index.html'"><img src="images/홈.jpg" alt="홈"></button>
+    <input type="text" id="searchInput" placeholder="전체 영상 검색...">
   </div>
 
   <div class="card-container" id="allCards"></div>
   <button id="loadMoreBtn">더보기</button>
 
+  <script src="cards.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const container = document.getElementById("allCards");
-      const loadMoreBtn = document.getElementById("loadMoreBtn");
       const searchInput = document.getElementById("searchInput");
-      const videoPlayer = document.getElementById("videoPlayer");
-      const videoContainer = document.getElementById("videoPlayerContainer");
+      const loadMoreBtn = document.getElementById("loadMoreBtn");
+      const filterBtns = document.querySelectorAll(".filter-btn");
+      const backBtn = document.getElementById("backBtn");
+      const query = new URLSearchParams(window.location.search);
+      const category = query.get("category");
+      document.getElementById("mainTitle").textContent = category || "I-DLE 몰아보기";
+
       let currentIndex = 0;
       const batchSize = 30;
-      let all = allCards || [];
+      let activeYears = new Set();
+      let activeMembers = new Set();
 
-      function extractDate(title) {
+      function extractDateFromTitle(title) {
         const match = title.match(/\((\d{4}-\d{2}-\d{2})\)/);
-        return match ? match[1] : '2000-01-01';
+        return match ? match[1] : "2000-01-01";
       }
 
-      all.sort((a, b) => new Date(extractDate(b.title)) - new Date(extractDate(a.title)));
+      const all = (allCards || []).filter(card => card.category === category);
+      all.sort((a, b) => new Date(extractDateFromTitle(b.title)) - new Date(extractDateFromTitle(a.title)));
 
-      function extractYouTubeId(url) {
-        const match = url.match(/[?&]v=([^&#]+)/);
-        return match ? match[1] : null;
+      function applyFilters() {
+        return all.filter(card => {
+          const yearMatch = activeYears.size === 0 || activeYears.has(card.year);
+          const memberMatch = activeMembers.size === 0 || activeMembers.has(card.member);
+          return yearMatch && memberMatch;
+        });
       }
 
-      function loadVideo(link) {
-        const videoId = extractYouTubeId(link);
-        const embedUrl = videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0` : null;
-
-        if (!videoId) {
-          window.open(link, '_blank');
-          return;
-        }
-
-        const testIframe = document.createElement('iframe');
-        testIframe.src = embedUrl;
-        testIframe.style.display = 'none';
-        document.body.appendChild(testIframe);
-
-        testIframe.onerror = () => {
-          document.body.removeChild(testIframe);
-          window.open(link, '_blank');
-        };
-
-        testIframe.onload = () => {
-          document.body.removeChild(testIframe);
-          videoPlayer.src = embedUrl;
-          videoContainer.style.display = 'flex';
-        };
-      }
-
-      function renderCards(cards) {
-        container.innerHTML = '';
-        cards.slice(0, currentIndex + batchSize).forEach(data => {
+      function renderCards(list) {
+        const end = currentIndex + batchSize;
+        const slice = list.slice(currentIndex, end);
+        slice.forEach(data => {
           const card = document.createElement("a");
+          card.href = data.link;
+          card.target = "_blank";
           card.className = "card";
           card.setAttribute("data-category", data.category);
           card.setAttribute("data-member", data.member);
           card.setAttribute("data-year", data.year);
-
-          card.innerHTML = `
-            <img src="${data.thumbnail}" alt="${data.alt}">
-            <div class="card-title">${data.title}</div>
-            <div class="card-buttons">
-              ${(data.member || '').split(',').map(m => `<button class="filter-btn" onclick="filterByMember('${m.trim()}')">${m.trim()}</button>`).join(' ')}
-            </div>
-          `;
-
-          card.addEventListener("click", (e) => {
-            e.preventDefault();
-            loadVideo(data.link);
-          });
-
+          card.innerHTML = `<img src="${data.thumbnail}" alt="${data.alt}"><div class="card-title">${data.title}</div>`;
           container.appendChild(card);
         });
-
         currentIndex += batchSize;
-        loadMoreBtn.style.display = currentIndex >= cards.length ? "none" : "block";
+        loadMoreBtn.style.display = currentIndex >= list.length ? "none" : "block";
       }
 
-      renderCards(all);
+      let filteredCards = applyFilters();
+      renderCards(filteredCards);
 
-      loadMoreBtn.addEventListener("click", () => renderCards(all));
+      loadMoreBtn.addEventListener("click", function () {
+        renderCards(filteredCards);
+      });
 
       searchInput.addEventListener("input", function () {
         const keyword = this.value.toLowerCase();
-        const filtered = all.filter(c => c.title.toLowerCase().includes(keyword));
+        const filtered = filteredCards.filter(card =>
+          keyword.split(/\s+/).every(word => card.title.toLowerCase().includes(word))
+        );
+        container.innerHTML = "";
         currentIndex = 0;
         renderCards(filtered);
       });
 
-      window.addEventListener("beforeunload", () => {
-        videoPlayer.src = "";
-      });
+      filterBtns.forEach(btn => {
+        btn.addEventListener("click", function () {
+          const type = btn.getAttribute("data-type");
+          const value = btn.textContent;
 
-      // ✅ 멤버 필터링 개선
-      window.filterByMember = function (selectedMember) {
-        currentIndex = 0;
-        const filtered = all.filter(card => {
-          const members = card.member.split(',').map(m => m.trim());
-          return members.includes(selectedMember);
+          if (btn.classList.contains("active")) {
+            btn.classList.remove("active");
+            if (type === "year") activeYears.delete(value);
+            if (type === "member") activeMembers.delete(value);
+          } else {
+            btn.classList.add("active");
+            if (type === "year") activeYears.add(value);
+            if (type === "member") activeMembers.add(value);
+          }
+
+          container.innerHTML = "";
+          currentIndex = 0;
+          filteredCards = applyFilters();
+          renderCards(filteredCards);
         });
-        renderCards(filtered);
-      };
+      });
+
+      backBtn.addEventListener("click", function () {
+        filterBtns.forEach(btn => btn.classList.remove("active"));
+        activeYears.clear();
+        activeMembers.clear();
+        container.innerHTML = "";
+        currentIndex = 0;
+        filteredCards = applyFilters();
+        renderCards(filteredCards);
+      });
     });
   </script>
 </body>
