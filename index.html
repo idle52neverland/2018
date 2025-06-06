@@ -27,7 +27,7 @@
     }
     .header-bar {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       padding: 60px 20px 30px;
       position: relative;
@@ -36,20 +36,8 @@
       font-size: 28px;
       color: #fff;
       margin: 0 auto;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .sns-icons {
-      display: flex;
-      gap: 6px;
-      position: absolute;
-      right: 40px;
-    }
-    .sns-icons img {
-      width: 20px;
-      height: 20px;
-      filter: grayscale(100%);
+      position: static;
+      transform: none;
     }
     .category-section {
       display: flex;
@@ -100,23 +88,9 @@
         text-align: center;
       }
       #mainTitle {
-        position: static;
-        transform: none;
         font-size: 24px;
         margin: 0;
         text-align: center;
-      }
-      .sns-icons {
-        position: static;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      .sns-icons img {
-        width: 18px;
-        height: 18px;
       }
       .top-bar input {
         width: 200px;
@@ -193,9 +167,11 @@
   </style>
 </head>
 <body>
- <div class="header-bar">More actions
+  <div class="header-bar">
     <div id="mainTitle">I-DLE 몰아보기</div>
-    <div class="sns-icons">
+  </div>
+      
+<div class="sns-icons">
       <a href="https://youtube.com/@official_i_dle" target="_blank"><img src="images/유튜브.jpg" alt="YouTube"></a>
       <a href="https://x.com/official_i_dle" target="_blank"><img src="images/엑스.jpg" alt="X"></a>
       <a href="https://instagram.com/i_dle_official" target="_blank"><img src="images/인스타그램.jpg" alt="Instagram"></a>
