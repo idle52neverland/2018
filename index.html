@@ -1,4 +1,16 @@
-.video-player-container iframe {
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I-DLE 몰아보기</title>
+  <style>
+    .video-player-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .video-player-container iframe {
       width: 90%;
       max-width: 960px;
       height: 440px;
@@ -156,7 +168,6 @@
   </style>
 </head>
 <body>
-  <div class="video-player-container" id="videoPlayer"></div>
   <div class="header-bar">
     <div id="mainTitle">I-DLE 몰아보기</div>
     <div class="sns-icons">
@@ -167,12 +178,13 @@
       <a href="https://weverse.io/i-dle" target="_blank"><img src="images/위버스.jpg" alt="Weverse"></a>
     </div>
   </div>
+
   <div class="category-section">
     <div class="category-line">
       <a class="category-btn" href="category.html?category=MV-SPECIAL CLIP">MV-SPECIAL CLIP</a>
       <a class="category-btn" href="category.html?category=RECORDING BEHIND">RECORDING BEHIND</a>
       <a class="category-btn" href="category.html?category=I-SEREIES">I-SEREIES</a>
-      <a class="category-btn" href="category.html?category=I-VARIETY">I-VARIETY</a>
+      <a class="category-btn" href="category.html?category=I-VARIETY">I-VARIETY</a>      
       <a class="category-btn" href="category.html?category=STAGE PERFORMANCE">STAGE PERFORMANCE</a>
       <a class="category-btn" href="category.html?category=LIVE-COVER-DANCE">LIVE-COVER-DANCE</a>
       <a class="category-btn" href="category.html?category=BEHIND CLIPS">BEHIND CLIPS</a>
@@ -187,77 +199,81 @@
       <a class="category-btn" href="category.html?category=ETC">ETC</a>
     </div>
   </div>
+
   <div class="top-bar">
     <button onclick="history.back()"><img src="images/뒤로가기.jpg" alt="뒤로가기"></button>
     <button onclick="location.href='index.html'"><img src="images/홈.jpg" alt="홈"></button>
     <input type="text" id="searchInput" placeholder="전체 영상 검색...">
   </div>
+
+  <div class="video-player-container" id="videoPlayerContainer" style="display:none;">
+    <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
+  </div>
+
   <div class="card-container" id="allCards"></div>
   <button id="loadMoreBtn">더보기</button>
+
   <script src="cards.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const all = allCards || [];
       const container = document.getElementById("allCards");
       const loadMoreBtn = document.getElementById("loadMoreBtn");
       const searchInput = document.getElementById("searchInput");
       const videoPlayer = document.getElementById("videoPlayer");
+      const videoContainer = document.getElementById("videoPlayerContainer");
       let currentIndex = 0;
       const batchSize = 30;
+      let all = allCards || [];
 
-      function extractDateFromTitle(title) {
-        const match = title.match(/\((\d{4}-\d{2}-\d{2})\)/);
-        return match ? match[1] : "2000-01-01";
+      function extractDate(title) {
+        const match = title.match(/\\((\\d{4}-\\d{2}-\\d{2})\\)/);
+        return match ? match[1] : '2000-01-01';
       }
 
-      all.sort((a, b) => {
-        const dateA = extractDateFromTitle(a.title);
-        const dateB = extractDateFromTitle(b.title);
-        return new Date(dateB) - new Date(dateA);
-      });
+      all.sort((a, b) => new Date(extractDate(b.title)) - new Date(extractDate(a.title)));
 
-      function playVideo(link) {
-        const videoId = link.split("v=")[1]?.split("&")[0];
-        if (videoId) {
-          videoPlayer.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allowfullscreen></iframe>`;
-          videoPlayer.style.display = "flex";
-        }
-      }
-
-      function renderCards(cards = all.slice(currentIndex, currentIndex + batchSize)) {
-        cards.forEach(data => {
-          const card = document.createElement("div");
+      function renderCards(cards) {
+        container.innerHTML = '';
+        cards.slice(0, currentIndex + batchSize).forEach(data => {
+          const card = document.createElement("a");
           card.className = "card";
           card.setAttribute("data-category", data.category);
           card.setAttribute("data-member", data.member);
           card.setAttribute("data-year", data.year);
-          card.addEventListener("click", () => playVideo(data.link));
+
           card.innerHTML = `
             <img src="${data.thumbnail}" alt="${data.alt}">
             <div class="card-title">${data.title}</div>
           `;
+
+          card.addEventListener("click", (e) => {
+            e.preventDefault();
+            const videoId = data.link.split("v=")[1];
+            videoPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            videoContainer.style.display = "flex";
+          });
+
           container.appendChild(card);
         });
+
         currentIndex += batchSize;
-        loadMoreBtn.style.display = currentIndex >= all.length ? "none" : "block";
+        if (currentIndex >= cards.length) loadMoreBtn.style.display = "none";
+        else loadMoreBtn.style.display = "block";
       }
 
-      renderCards();
+      renderCards(all);
 
-      loadMoreBtn.addEventListener("click", () => renderCards());
+      loadMoreBtn.addEventListener("click", () => renderCards(all));
 
       searchInput.addEventListener("input", function () {
         const keyword = this.value.toLowerCase();
-        const filtered = all.filter(card => card.title.toLowerCase().includes(keyword));
-        container.innerHTML = "";
+        const filtered = all.filter(c => c.title.toLowerCase().includes(keyword));
         currentIndex = 0;
         renderCards(filtered);
-        loadMoreBtn.style.display = "none";
       });
 
       window.addEventListener("beforeunload", () => {
-        videoPlayer.innerHTML = "";
-        videoPlayer.style.display = "none";
+        videoPlayer.src = "";
       });
     });
   </script>
