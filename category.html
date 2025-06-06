@@ -113,12 +113,6 @@
       padding: 6px;
       color: #fff;
     }
-    .card-buttons {
-      padding: 6px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
     #loadMoreBtn {
       margin: 20px auto;
       padding: 10px 20px;
@@ -171,6 +165,7 @@
   <div class="card-container" id="allCards"></div>
   <button id="loadMoreBtn">더보기</button>
 
+  <script src="cards.js"></script>
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const categoryParam = urlParams.get("category");
@@ -183,14 +178,11 @@
     const videoContainer = document.getElementById("videoPlayerContainer");
     let currentIndex = 0;
     const batchSize = 30;
-    let all = allCards.filter(card => card.category === categoryParam);
 
     function extractDate(title) {
       const match = title.match(/\((\d{4}-\d{2}-\d{2})\)/);
       return match ? match[1] : '2000-01-01';
     }
-
-    all.sort((a, b) => new Date(extractDate(b.title)) - new Date(extractDate(a.title)));
 
     function extractYouTubeId(url) {
       const match = url.match(/[?&]v=([^&#]+)/);
@@ -250,6 +242,8 @@
       loadMoreBtn.style.display = currentIndex >= cards.length ? "none" : "block";
     }
 
+    let all = allCards.filter(card => card.category === categoryParam);
+    all.sort((a, b) => new Date(extractDate(b.title)) - new Date(extractDate(a.title)));
     renderCards(all);
 
     loadMoreBtn.addEventListener("click", () => renderCards(all));
@@ -266,14 +260,15 @@
         const type = btn.dataset.type;
         const value = btn.textContent;
 
-        all = allCards.filter(card => {
+        const filtered = allCards.filter(card => {
           const inCategory = card.category === categoryParam;
           const matchYear = type !== "year" || card.year === value;
-          const matchMember = type !== "member" || card.member.split(/,|\/|X/).map(m => m.trim()).includes(value);
+          const matchMember = type !== "member" || (card.member || "").split(/,|\/|X/).map(m => m.trim()).includes(value);
           return inCategory && matchYear && matchMember;
         });
 
         currentIndex = 0;
+        all = filtered;
         renderCards(all);
       });
     });
