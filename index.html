@@ -1,3 +1,4 @@
+<!-- 🔽 너가 준 전체 코드 그대로 + 모달 기능만 추가됨 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -121,6 +122,7 @@
       text-align: left;
       transition: transform 0.2s, box-shadow 0.2s;
       text-decoration: none;
+      cursor: pointer;
     }
     .card:hover {
       transform: scale(1.03);
@@ -182,6 +184,35 @@
       cursor: pointer;
       display: block;
     }
+
+    /* 📌 YouTube 모달 스타일 */
+    #videoModal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+    }
+    #videoModal iframe {
+      width: 90%;
+      max-width: 800px;
+      height: 450px;
+    }
+    #videoModal .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 32px;
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -205,8 +236,8 @@
       <a class="category-btn" href="category.html?category=STAGE PERFORMANCE">STAGE PERFORMANCE</a>
       <a class="category-btn" href="category.html?category=LIVE-COVER-DANCE">LIVE-COVER-DANCE</a>
       <a class="category-btn" href="category.html?category=BEHIND CLIPS">BEHIND CLIPS</a>
-         </div>
-      <div class="category-line">
+    </div>
+    <div class="category-line">
       <a class="category-btn" href="category.html?category=MEDIA CONTENTS">MEDIA CONTENTS</a>
       <a class="category-btn" href="category.html?category=RADIO-PODCAST">RADIO-PODCAST</a>
       <a class="category-btn" href="category.html?category=INTERVIEW">INTERVIEW</a>
@@ -215,7 +246,7 @@
       <a class="category-btn" href="category.html?category=CHALLENGE">CHALLENGE</a>
       <a class="category-btn" href="category.html?category=ETC">ETC</a>
     </div>
-    </div>
+  </div>
 
   <div class="top-bar">
     <button onclick="history.back()"><img src="images/뒤로가기.jpg" alt="뒤로가기"></button>
@@ -226,8 +257,26 @@
   <div class="card-container" id="allCards"></div>
   <button id="loadMoreBtn">더보기</button>
 
+  <!-- 📌 유튜브 모달 팝업 -->
+  <div id="videoModal">
+    <button class="close-btn" onclick="closeModal()">×</button>
+    <iframe id="videoFrame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+
   <script src="cards.js"></script>
   <script>
+    function openVideo(url) {
+      const videoId = new URL(url).searchParams.get("v");
+      const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      document.getElementById("videoFrame").src = embedUrl;
+      document.getElementById("videoModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("videoModal").style.display = "none";
+      document.getElementById("videoFrame").src = "";
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
       const all = allCards || [];
       const container = document.getElementById("allCards");
@@ -249,13 +298,12 @@
 
       function renderCards(cards = all.slice(currentIndex, currentIndex + batchSize)) {
         cards.forEach(data => {
-          const card = document.createElement("a");
-          card.href = data.link;
-          card.target = "_blank";
+          const card = document.createElement("div");
           card.className = "card";
           card.setAttribute("data-category", data.category);
           card.setAttribute("data-member", data.member);
           card.setAttribute("data-year", data.year);
+          card.addEventListener("click", () => openVideo(data.link));
 
           card.innerHTML = `
             <img src="${data.thumbnail}" alt="${data.alt}">
