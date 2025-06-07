@@ -79,7 +79,7 @@ allCards = [
   },
   {
     link: "https://www.youtube.com/watch?v=qKvNB3YkxZ8",
-    category: "I-SEREIES",
+    category: "I-SERIES",
     member: "아이들",
     year: "2025",
     thumbnail: "https://i.ytimg.com/vi/qKvNB3YkxZ8/hqdefault.jpg",
