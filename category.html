@@ -13,36 +13,19 @@
       text-align: center;
     }
     .header-bar {
-      padding: 60px 0 20px;
+      padding: 60px 0 10px;
     }
     #mainTitle {
       font-size: 32px;
       color: #fff;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
     .filter-section {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 32px;
+      gap: 24px;
       margin-bottom: 30px;
-    }
-    .top-bar {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-    }
-    .top-bar input {
-      padding: 12px 16px;
-      border-radius: 26px;
-      border: none;
-      width: 260px;
-    }
-    .top-bar img {
-      width: 16px;
-      height: 16px;
-      cursor: pointer;
     }
     .filter-row {
       display: flex;
@@ -62,6 +45,25 @@
     .filter-btn.active {
       background-color: #ff4da6;
     }
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 30px;
+      margin-bottom: 40px;
+    }
+    .search-bar input {
+      padding: 12px 16px;
+      border-radius: 24px;
+      border: none;
+      width: 260px;
+    }
+    .search-bar img {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
     .card-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -77,6 +79,7 @@
       text-decoration: none;
       color: white;
       display: block;
+      cursor: pointer;
     }
     .card img {
       width: 100%;
@@ -86,6 +89,33 @@
     .card-title {
       font-size: 14px;
       padding: 10px;
+    }
+    #videoPlayerContainer {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+    }
+    #videoPlayer {
+      width: 90%;
+      height: 70vh;
+      border: none;
+      border-radius: 10px;
+    }
+    .close-button {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 28px;
+      color: #fff;
+      cursor: pointer;
+      z-index: 10000;
     }
     @media (max-width: 600px) {
       .card-container {
@@ -97,18 +127,23 @@
 <body>
   <div class="header-bar">
     <h2 id="mainTitle"></h2>
-    <div class="top-bar">
-      <img src="back.png" onclick="history.back()">
-      <img src="home.png" onclick="window.location.href='index.html'">
-      <input type="text" id="searchInput" placeholder="검색어를 입력하세요">
-    </div>
   </div>
   <div class="filter-section">
     <div class="filter-row" id="yearFilters"></div>
     <div class="filter-row" id="monthFilters"></div>
     <div class="filter-row" id="memberFilters"></div>
   </div>
+  <div class="search-bar">
+    <img src="images/뒤로가기.jpg" onclick="history.back()">
+    <img src="images/홈.jpg" onclick="window.location.href='index.html'">
+    <input type="text" id="searchInput" placeholder="검색어를 입력하세요">
+  </div>
   <div id="allCards" class="card-container"></div>
+
+  <div id="videoPlayerContainer">
+    <div class="close-button" onclick="closeVideo()">&times;</div>
+    <iframe id="videoPlayer" allowfullscreen></iframe>
+  </div>
 
   <script src="cards.js"></script>
   <script>
@@ -121,6 +156,10 @@
     const yearFilters = document.getElementById("yearFilters");
     const monthFilters = document.getElementById("monthFilters");
     const memberFilters = document.getElementById("memberFilters");
+    const videoContainer = document.getElementById("videoPlayerContainer");
+    const videoPlayer = document.getElementById("videoPlayer");
+
+    let currentVideoId = null;
 
     const years = ["2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "PRE-DEBUT"];
     const months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
@@ -172,12 +211,31 @@
 
       filtered.sort((a, b) => new Date(extractDate(b.title).date) - new Date(extractDate(a.title).date));
 
-      container.innerHTML = filtered.map(card => `
-        <a href="${card.link}" target="_blank" class="card" data-category="${card.category}" data-member="${card.member}" data-year="${card.year}">
-          <img src="${card.thumbnail}" alt="${card.alt}">
-          <div class="card-title">${card.title}</div>
-        </a>
-      `).join("");
+      container.innerHTML = filtered.map(card => {
+        const videoId = new URL(card.link).searchParams.get("v");
+        return `
+          <div class="card" data-category="${card.category}" data-member="${card.member}" data-year="${card.year}" onclick="playVideo('${videoId}')">
+            <img src="${card.thumbnail}" alt="${card.alt}">
+            <div class="card-title">${card.title}</div>
+          </div>
+        `;
+      }).join("");
+
+      // 영상 다시 로드
+      if (currentVideoId) playVideo(currentVideoId, true);
+    }
+
+    function playVideo(videoId, preserve = false) {
+      currentVideoId = videoId;
+      const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      videoPlayer.src = embedUrl;
+      videoContainer.style.display = 'flex';
+    }
+
+    function closeVideo() {
+      videoPlayer.src = "";
+      videoContainer.style.display = 'none';
+      currentVideoId = null;
     }
 
     createFilters(years, yearFilters, 'year');
