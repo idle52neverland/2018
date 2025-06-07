@@ -1,64 +1,4 @@
-const allCardsContainer = document.getElementById("allCards");
-let allCards = [];
-let currentCategory = "";
-let currentCards = [];
-
-window.showFilters = function (category) {
-  currentCategory = category;
-  document.getElementById("mainTitle").style.display = "none";
-  document.querySelector(".category-title").textContent = category;
-  document.querySelector(".category-title").style.display = "block";
-  document.getElementById("filterArea").style.display = "flex";
-
-  allCardsContainer.innerHTML = "";
-  allCardsContainer.style.display = "flex";
-
-  currentCards = allCards.filter(card => card.category === category);
-  renderCards(currentCards);
-};
-
-window.filterVideos = function (filter) {
-  const filtered = currentCards.filter(card =>
-    card.title.includes(filter) ||
-    card.member.includes(filter) ||
-    card.year.includes(filter)
-  );
-  renderCards(filtered);
-};
-
-window.handleSearch = function () {
-  const keyword = document.getElementById("searchInput").value.toLowerCase();
-  const filtered = currentCards.filter(card =>
-    card.title.toLowerCase().includes(keyword) ||
-    card.member.toLowerCase().includes(keyword) ||
-    card.year.includes(keyword)
-  );
-  renderCards(filtered);
-};
-
-window.goBack = function () {
-  document.getElementById("mainTitle").style.display = "block";
-  document.querySelector(".category-title").style.display = "none";
-  document.getElementById("filterArea").style.display = "none";
-  allCardsContainer.innerHTML = "";
-  allCardsContainer.style.display = "none";
-};
-
-window.goHome = function () {
-  document.getElementById("searchInput").value = "";
-  goBack();
-};
-
-function renderCards(cards) {
-  allCardsContainer.innerHTML = cards.map(card => `
-    <a href="${card.link}" target="_blank" class="card" data-category="${card.category}" data-member="${card.member}" data-year="${card.year}">
-      <img src="${card.thumbnail}" alt="${card.alt}" />
-      <div class="card-title">${card.title}</div>
-    </a>
-  `).join("");
-}
-
-allCards = [
+let allCards = [
   {
     link: "https://www.youtube.com/watch?v=hAONx6nuEgI",
     category: "MV-SPECIAL CLIP",
@@ -133,6 +73,7 @@ allCards = [
   }
 ];
 
+// 중복 제거
 const seenLinks = new Set();
 allCards = allCards.filter(card => {
   if (seenLinks.has(card.link)) return false;
