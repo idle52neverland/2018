@@ -1,141 +1,314 @@
-const allCardsContainer = document.getElementById("allCards");
-let allCards = [];
-let currentCategory = "";
-let currentCards = [];
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I-DLE 몰아보기</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+    }
+    .header-bar {
+      padding: 60px 0 20px;
+    }
+    #mainTitle {
+      font-size: 32px;
+      color: #fff;
+      margin-bottom: 40px;
+    }
+    .filter-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 30px;
+    }
+    .filter-section .filter-row:nth-child(1) {
+      margin-bottom: -10px;
+    }
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+    .filter-btn {
+      background-color: #444;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    .filter-btn.active {
+      background-color: #ff4da6;
+      color: #fff;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .top-bar input {
+      padding: 12px 16px;
+      border-radius: 24px;
+      border: none;
+      width: 260px;
+      font-size: 16px;
+    }
+    @media (max-width: 768px) {
+      .top-bar input {
+        width: 200px;
+      }
+    }
+    .top-bar button {
+      background-color: #fff;
+      border: none;
+      border-radius: 50%;
+      padding: 6px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .top-bar button img {
+      width: 24px;
+      height: 24px;
+    }
+    .video-player-container {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      display: none;
+      justify-content: center;
+      background-color: #111;
+    }
+    .video-player-container iframe {
+      width: 90%;
+      max-width: 960px;
+      height: 440px;
+    }
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      padding: 10px;
+    }
+    @media (min-width: 1024px) {
+      .card-container {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .card-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .card {
+      background-color: #222;
+      border-radius: 10px;
+      overflow: hidden;
+      text-align: left;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      cursor: pointer;
+      width: 100%;
+    }
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+    }
+    .card-title {
+      font-size: 13px;
+      padding: 6px;
+      color: #fff;
+    }
+    #loadMoreBtn {
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #444;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="header-bar">
+    <div id="mainTitle">카테고리 제목</div>
+  </div>
 
-window.showFilters = function (category) {
-  currentCategory = category;
-  document.getElementById("mainTitle").style.display = "none";
-  document.querySelector(".category-title").textContent = category;
-  document.querySelector(".category-title").style.display = "block";
-  document.getElementById("filterArea").style.display = "flex";
+  <div class="filter-section">
+    <div class="filter-row">
+      <button class="filter-btn" data-type="year">2025</button>
+      <button class="filter-btn" data-type="year">2024</button>
+      <button class="filter-btn" data-type="year">2023</button>
+      <button class="filter-btn" data-type="year">2022</button>
+      <button class="filter-btn" data-type="year">2021</button>
+      <button class="filter-btn" data-type="year">2020</button>
+      <button class="filter-btn" data-type="year">2019</button>
+      <button class="filter-btn" data-type="year">2018</button>
+      <button class="filter-btn" data-type="year">PRE-DEBUT</button>
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn" data-type="month" data-value="01">1월</button>
+      <button class="filter-btn" data-type="month" data-value="02">2월</button>
+      <button class="filter-btn" data-type="month" data-value="03">3월</button>
+      <button class="filter-btn" data-type="month" data-value="04">4월</button>
+      <button class="filter-btn" data-type="month" data-value="05">5월</button>
+      <button class="filter-btn" data-type="month" data-value="06">6월</button>
+      <button class="filter-btn" data-type="month" data-value="07">7월</button>
+      <button class="filter-btn" data-type="month" data-value="08">8월</button>
+      <button class="filter-btn" data-type="month" data-value="09">9월</button>
+      <button class="filter-btn" data-type="month" data-value="10">10월</button>
+      <button class="filter-btn" data-type="month" data-value="11">11월</button>
+      <button class="filter-btn" data-type="month" data-value="12">12월</button>
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn" data-type="member">미연</button>
+      <button class="filter-btn" data-type="member">민니</button>
+      <button class="filter-btn" data-type="member">소연</button>
+      <button class="filter-btn" data-type="member">우기</button>
+      <button class="filter-btn" data-type="member">슈화</button>
+      <button class="filter-btn" data-type="member">아이들</button>
+    </div>
+  </div>
 
-  allCardsContainer.innerHTML = "";
-  allCardsContainer.style.display = "flex";
+  <div class="top-bar">
+    <button onclick="history.back()"><img src="images/뒤로가기.jpg" alt="뒤로가기"></button>
+    <button onclick="location.href='index.html'"><img src="images/홈.jpg" alt="홈"></button>
+    <input type="text" id="searchInput" placeholder="카테고리 내 검색...">
+  </div>
 
-  currentCards = allCards.filter(card => card.category === category);
-  renderCards(currentCards);
-};
+  <div class="video-player-container" id="videoPlayerContainer">
+    <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
+  </div>
 
-window.filterVideos = function (filter) {
-  const filtered = currentCards.filter(card =>
-    card.title.includes(filter) ||
-    card.member.includes(filter) ||
-    card.year.includes(filter)
-  );
-  renderCards(filtered);
-};
+  <div class="card-container" id="allCards"></div>
+  <button id="loadMoreBtn">더보기</button>
 
-window.handleSearch = function () {
-  const keyword = document.getElementById("searchInput").value.toLowerCase();
-  const filtered = currentCards.filter(card =>
-    card.title.toLowerCase().includes(keyword) ||
-    card.member.toLowerCase().includes(keyword) ||
-    card.year.includes(keyword)
-  );
-  renderCards(filtered);
-};
+  <script src="cards.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const container = document.getElementById("allCards");
+      const loadMoreBtn = document.getElementById("loadMoreBtn");
+      const searchInput = document.getElementById("searchInput");
+      const videoPlayer = document.getElementById("videoPlayer");
+      const videoContainer = document.getElementById("videoPlayerContainer");
+      const mainTitle = document.getElementById("mainTitle");
 
-window.goBack = function () {
-  document.getElementById("mainTitle").style.display = "block";
-  document.querySelector(".category-title").style.display = "none";
-  document.getElementById("filterArea").style.display = "none";
-  allCardsContainer.innerHTML = "";
-  allCardsContainer.style.display = "none";
-};
+      const urlParams = new URLSearchParams(window.location.search);
+      const selectedCategory = urlParams.get("category");
 
-window.goHome = function () {
-  document.getElementById("searchInput").value = "";
-  goBack();
-};
+      mainTitle.textContent = selectedCategory || "카테고리";
 
-function renderCards(cards) {
-  allCardsContainer.innerHTML = cards.map(card => `
-    <a href="${card.link}" target="_blank" class="card" data-category="${card.category}" data-member="${card.member}" data-year="${card.year}">
-      <img src="${card.thumbnail}" alt="${card.alt}" />
-      <div class="card-title">${card.title}</div>
-    </a>
-  `).join("");
-}
+      let currentIndex = 0;
+      const batchSize = 30;
+      const all = (allCards || []).filter(card => card.category === selectedCategory);
 
-allCards = [
-  {
-    link: "https://www.youtube.com/watch?v=hAONx6nuEgI",
-    category: "MV-SPECIAL CLIP",
-    member: "아이들",
-    year: "2025",
-    thumbnail: "https://i.ytimg.com/vi/hAONx6nuEgI/hqdefault.jpg",
-    alt: "아이들 - i-dle (아이들) 'Good Thing' Official Music Video",
-    title: "i-dle (아이들) 'Good Thing' Official Music Video (2025-05-19)"
-  },
-  {
-    link: "https://www.youtube.com/watch?v=Rf0ajz4PrEg",
-    category: "RECORDING BEHIND",
-    member: "아이들",
-    year: "2025",
-    thumbnail: "https://i.ytimg.com/vi/Rf0ajz4PrEg/hqdefault.jpg",
-    alt: "아이들 - i-dle (아이들) 'Girlfriend' Recording BehindㅣSUB (2025-06-03)",
-    title: "i-dle (아이들) 'Girlfriend' Recording BehindㅣSUB (2025-06-03)"
-  },
-  {
-    link: "https://www.youtube.com/watch?v=qKvNB3YkxZ8",
-    category: "I-SEREIES",
-    member: "아이들",
-    year: "2025",
-    thumbnail: "https://i.ytimg.com/vi/qKvNB3YkxZ8/hqdefault.jpg",
-    alt: "아이들 - 아이들, 프로필부터 다시 시작해 볼까요? [네맘대로 아이들] EP. 1 | i-dle (아이들)ㅣSUB (2025-06-05)",
-    title: "아이들, 프로필부터 다시 시작해 볼까요? [네맘대로 아이들] EP. 1 | i-dle (아이들)ㅣSUB (2025-06-05)"
-  },
-  {
-    link: "https://www.youtube.com/watch?v=wlnE89SEC4U",
-    category: "LIVE-COVER-DANCE",
-    member: "아이들",
-    year: "2025",
-    thumbnail: "https://i.ytimg.com/vi/wlnE89SEC4U/hqdefault.jpg",
-    alt: "아이들 - [4K] 아이들(i-dle) “Good Thing” Band LIVE 전기 맞은 것처럼 계속 귓가에 맴돈다..⚡ [it’s KPOP LIVE 잇츠라이브] (2025-05-26)",
-    title: "[4K] 아이들(i-dle) “Good Thing” Band LIVE 전기 맞은 것처럼 계속 귓가에 맴돈다..⚡ [it’s KPOP LIVE 잇츠라이브] (2025-05-26)"
-  },
-  {
-    link: "https://www.youtube.com/watch?v=iXgtOKjLPEE",
-    category: "BEHIND CLIPS",
-    member: "아이들",
-    year: "2025",
-    thumbnail: "https://i.ytimg.com/vi/iXgtOKjLPEE/hqdefault.jpg",
-    alt: "아이들 - '컴백 인터뷰' i-dle (아이들) #엠카운트다운 EP.889 | Mnet 250522 방송 (2025-05-22)",
-    title: "'컴백 인터뷰' i-dle (아이들) #엠카운트다운 EP.889 | Mnet 250522 방송 (2025-05-22)"
-  },
-  {
-    link: "https://www.youtube.com/watch?v=IG2Ne-GLiMQ",
-    category: "MEDIA CONTENTS",
-    member: "민니",
-    year: "2025",
-    thumbnail: "https://i.ytimg.com/vi/IG2Ne-GLiMQ/hqdefault.jpg",
-    alt: "민니 - [ENG/ TH] 용타로 맹신 걸그룹 아이들 민니의 용타로점 결과는? | EP.32 (2025-06-04)",
-    title: "[ENG/ TH] 용타로 맹신 걸그룹 아이들 민니의 용타로점 결과는? | EP.32 (2025-06-04)"
-  },
-  {
-    link: "https://www.youtube.com/watch?v=AsjBiO1gsJs",
-    category: "RADIO-PODCAST",
-    member: "민니,미연",
-    year: "2025",
-    thumbnail: "https://i.ytimg.com/vi/AsjBiO1gsJs/hqdefault.jpg",
-    alt: "민니,미연 - [FULL] 다시 시작! 2막을 시작하다!!💞 완전체로 돌아온 아이들(i-dle)의 미연, 민니 보는 라디오 | 박소현의 러브게임 | 250601 (2025-06-01)",
-    title: "[FULL] 다시 시작! 2막을 시작하다!!💞 완전체로 돌아온 아이들(i-dle)의 미연, 민니 보는 라디오 | 박소현의 러브게임 | 250601 (2025-06-01)"
-  },
-  {
-    link: "https://www.youtube.com/watch?v=-xcOOq9bWYI",
-    category: "INTERVIEW",
-    member: "아이들",
-    year: "2025",
-    thumbnail: "https://i.ytimg.com/vi/-xcOOq9bWYI/hqdefault.jpg",
-    alt: "아이들 - 얘랑 더 친하다고?? 유치빤스 전쟁 시작된 아이들💔 소연, 미연, 민니, 우기, 슈화의 우정 쟁탈전ㅣ i-dle (아이들) 젤리 텔미 | COSMOPOLITAN KOREA (2025-05-28)",
-    title: "얘랑 더 친하다고?? 유치빤스 전쟁 시작된 아이들💔 소연, 미연, 민니, 우기, 슈화의 우정 쟁탈전ㅣ i-dle (아이들) 젤리 텔미 | COSMOPOLITAN KOREA (2025-05-28)"
-  }
-];
+      function extractDate(title) {
+        const match = title.match(/\((\d{4})-(\d{2})-(\d{2})\)/);
+        return match ? { year: match[1], month: match[2] } : { year: '', month: '' };
+      }
 
-const seenLinks = new Set();
-allCards = allCards.filter(card => {
-  if (seenLinks.has(card.link)) return false;
-  seenLinks.add(card.link);
-  return true;
-});
+      all.sort((a, b) => new Date(b.title.match(/\((.*?)\)/)[1]) - new Date(a.title.match(/\((.*?)\)/)[1]));
+
+      function renderCards(cards) {
+        container.innerHTML = '';
+        cards.slice(0, currentIndex + batchSize).forEach(data => {
+          const card = document.createElement("a");
+          card.className = "card";
+          card.setAttribute("data-category", data.category);
+          card.setAttribute("data-member", data.member);
+          card.setAttribute("data-year", data.year);
+
+          card.innerHTML = `
+            <img src="${data.thumbnail}" alt="${data.alt}">
+            <div class="card-title">${data.title}</div>
+          `;
+
+          card.addEventListener("click", (e) => {
+            e.preventDefault();
+            const match = data.link.match(/[?&]v=([^&#]+)/);
+            const videoId = match ? match[1] : null;
+            const embedUrl = videoId ? \`https://www.youtube.com/embed/\${videoId}?autoplay=1&rel=0\` : null;
+            if (embedUrl) {
+              videoPlayer.src = embedUrl;
+              videoContainer.style.display = 'flex';
+            } else {
+              window.open(data.link, '_blank');
+            }
+          });
+
+          container.appendChild(card);
+        });
+
+        currentIndex += batchSize;
+        loadMoreBtn.style.display = currentIndex >= cards.length ? "none" : "block";
+      }
+
+      renderCards(all);
+
+      loadMoreBtn.addEventListener("click", () => renderCards(all));
+
+      searchInput.addEventListener("input", function () {
+        const keyword = this.value.toLowerCase();
+        const filtered = all.filter(card => card.title.toLowerCase().includes(keyword));
+        currentIndex = 0;
+        renderCards(filtered);
+      });
+
+      document.querySelectorAll('.filter-btn').forEach(button => {
+        button.addEventListener('click', () => {
+          const type = button.getAttribute('data-type');
+          const value = button.getAttribute('data-value') || button.textContent;
+
+          // 동일 타입 버튼 active 해제 후 현재만 적용
+          document.querySelectorAll(`.filter-btn[data-type="${type}"]`).forEach(b => {
+            b.classList.remove('active');
+          });
+          button.classList.add('active');
+
+          const activeYears = Array.from(document.querySelectorAll('.filter-btn[data-type="year"].active')).map(b => b.textContent);
+          const activeMembers = Array.from(document.querySelectorAll('.filter-btn[data-type="member"].active')).map(b => b.textContent);
+          const activeMonths = Array.from(document.querySelectorAll('.filter-btn[data-type="month"].active')).map(b => b.getAttribute('data-value'));
+
+          const filtered = all.filter(card => {
+            const { year, month } = extractDate(card.title);
+            const memberList = card.member.split(',').map(m => m.trim());
+
+            const yearMatch = activeYears.length === 0 || activeYears.includes(year);
+            const monthMatch = activeMonths.length === 0 || activeMonths.includes(month);
+            const memberMatch = activeMembers.length === 0 || activeMembers.some(m => memberList.includes(m));
+
+            return yearMatch && monthMatch && memberMatch;
+          });
+
+          currentIndex = 0;
+          renderCards(filtered);
+        });
+      });
+
+      window.addEventListener("beforeunload", () => {
+        videoPlayer.src = "";
+      });
+    });
+  </script>
+</body>
+</html>
