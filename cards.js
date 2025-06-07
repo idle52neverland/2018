@@ -1,4 +1,4 @@
-let allCards = [
+const allCards = [
   {
     link: "https://www.youtube.com/watch?v=hAONx6nuEgI",
     category: "MV-SPECIAL CLIP",
