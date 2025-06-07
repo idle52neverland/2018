@@ -70,7 +70,7 @@ allCards = [
   },
   {
   link: "https://www.youtube.com/watch?v=Rf0ajz4PrEg",
-  category: "RECORDING STUDIO BEHIND",
+  category: "RECORDING BEHIND",
   member: "아이들",
   year: "2025",
   thumbnail: "https://i.ytimg.com/vi/Rf0ajz4PrEg/hqdefault.jpg",
