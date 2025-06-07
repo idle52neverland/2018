@@ -27,6 +27,9 @@
       gap: 32px;
       margin-bottom: 30px;
     }
+    .filter-section .filter-row:nth-child(1) {
+      margin-bottom: -10px;
+    }
     .filter-row {
       display: flex;
       flex-wrap: wrap;
@@ -164,6 +167,20 @@
       <button class="filter-btn" data-type="year">PRE-DEBUT</button>
     </div>
     <div class="filter-row">
+      <button class="filter-btn" data-type="month" data-value="01">1월</button>
+      <button class="filter-btn" data-type="month" data-value="02">2월</button>
+      <button class="filter-btn" data-type="month" data-value="03">3월</button>
+      <button class="filter-btn" data-type="month" data-value="04">4월</button>
+      <button class="filter-btn" data-type="month" data-value="05">5월</button>
+      <button class="filter-btn" data-type="month" data-value="06">6월</button>
+      <button class="filter-btn" data-type="month" data-value="07">7월</button>
+      <button class="filter-btn" data-type="month" data-value="08">8월</button>
+      <button class="filter-btn" data-type="month" data-value="09">9월</button>
+      <button class="filter-btn" data-type="month" data-value="10">10월</button>
+      <button class="filter-btn" data-type="month" data-value="11">11월</button>
+      <button class="filter-btn" data-type="month" data-value="12">12월</button>
+    </div>
+    <div class="filter-row">
       <button class="filter-btn" data-type="member">미연</button>
       <button class="filter-btn" data-type="member">민니</button>
       <button class="filter-btn" data-type="member">소연</button>
@@ -206,42 +223,11 @@
       const all = (allCards || []).filter(card => card.category === selectedCategory);
 
       function extractDate(title) {
-        const match = title.match(/\((\d{4}-\d{2}-\d{2})\)/);
-        return match ? match[1] : '2000-01-01';
+        const match = title.match(/\((\d{4})-(\d{2})-(\d{2})\)/);
+        return match ? { year: match[1], month: match[2] } : { year: '', month: '' };
       }
 
-      all.sort((a, b) => new Date(extractDate(b.title)) - new Date(extractDate(a.title)));
-
-      function extractYouTubeId(url) {
-        const match = url.match(/[?&]v=([^&#]+)/);
-        return match ? match[1] : null;
-      }
-
-      function loadVideo(link) {
-        const videoId = extractYouTubeId(link);
-        const embedUrl = videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0` : null;
-
-        if (!videoId) {
-          window.open(link, '_blank');
-          return;
-        }
-
-        const testIframe = document.createElement('iframe');
-        testIframe.src = embedUrl;
-        testIframe.style.display = 'none';
-        document.body.appendChild(testIframe);
-
-        testIframe.onerror = () => {
-          document.body.removeChild(testIframe);
-          window.open(link, '_blank');
-        };
-
-        testIframe.onload = () => {
-          document.body.removeChild(testIframe);
-          videoPlayer.src = embedUrl;
-          videoContainer.style.display = 'flex';
-        };
-      }
+      all.sort((a, b) => new Date(b.title.match(/\((.*?)\)/)[1]) - new Date(a.title.match(/\((.*?)\)/)[1]));
 
       function renderCards(cards) {
         container.innerHTML = '';
@@ -259,7 +245,15 @@
 
           card.addEventListener("click", (e) => {
             e.preventDefault();
-            loadVideo(data.link);
+            const match = data.link.match(/[?&]v=([^&#]+)/);
+            const videoId = match ? match[1] : null;
+            const embedUrl = videoId ? \`https://www.youtube.com/embed/\${videoId}?autoplay=1&rel=0\` : null;
+            if (embedUrl) {
+              videoPlayer.src = embedUrl;
+              videoContainer.style.display = 'flex';
+            } else {
+              window.open(data.link, '_blank');
+            }
           });
 
           container.appendChild(card);
@@ -282,15 +276,28 @@
 
       document.querySelectorAll('.filter-btn').forEach(button => {
         button.addEventListener('click', () => {
-          button.classList.toggle('active');
+          const type = button.getAttribute('data-type');
+          const value = button.getAttribute('data-value') || button.textContent;
+
+          // 동일 타입 버튼 active 해제 후 현재만 적용
+          document.querySelectorAll(`.filter-btn[data-type="${type}"]`).forEach(b => {
+            b.classList.remove('active');
+          });
+          button.classList.add('active');
+
           const activeYears = Array.from(document.querySelectorAll('.filter-btn[data-type="year"].active')).map(b => b.textContent);
           const activeMembers = Array.from(document.querySelectorAll('.filter-btn[data-type="member"].active')).map(b => b.textContent);
+          const activeMonths = Array.from(document.querySelectorAll('.filter-btn[data-type="month"].active')).map(b => b.getAttribute('data-value'));
 
           const filtered = all.filter(card => {
-            const cardMembers = card.member.split(',').map(m => m.trim());
-            const memberMatch = activeMembers.length === 0 || activeMembers.some(m => cardMembers.includes(m));
-            const yearMatch = activeYears.length === 0 || activeYears.includes(card.year);
-            return memberMatch && yearMatch;
+            const { year, month } = extractDate(card.title);
+            const memberList = card.member.split(',').map(m => m.trim());
+
+            const yearMatch = activeYears.length === 0 || activeYears.includes(year);
+            const monthMatch = activeMonths.length === 0 || activeMonths.includes(month);
+            const memberMatch = activeMembers.length === 0 || activeMembers.some(m => memberList.includes(m));
+
+            return yearMatch && monthMatch && memberMatch;
           });
 
           currentIndex = 0;
